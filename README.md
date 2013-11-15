@@ -69,7 +69,7 @@ After a image has been edited, the editor will call delegate's `imageEditor:didF
 
 ```
 
-Additionally, the optional delegate's `imageEditor:didFinishEdittingWithImage:` method is provided for when you want to catch the cancel callback.
+Additionally, the optional delegate's `imageEditorDidCancel:` method is provided for when you want to catch the cancel callback.
 
 For more detail,  please see `CLImageEditorDemo`.
 
