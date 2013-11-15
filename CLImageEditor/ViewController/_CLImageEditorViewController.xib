@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="_CLImageEditorViewController">
+            <connections>
+                <outlet property="_navigationBar" destination="JCh-Zj-sve" id="T8R-qQ-oUQ"/>
+                <outlet property="imageView" destination="GUt-hG-zmR" id="KuX-AY-FD8"/>
+                <outlet property="menuView" destination="F4n-jl-KSx" id="ReW-tn-Sil"/>
+                <outlet property="scrollView" destination="6gx-ro-Tem" id="unb-Tm-wBE"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="6gx-ro-Tem">
+                    <rect key="frame" x="0.0" y="65" width="320" height="423"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GUt-hG-zmR">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="21" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="txW-X2-yuT"/>
+                    </connections>
+                </scrollView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="F4n-jl-KSx">
+                    <rect key="frame" x="0.0" y="488" width="320" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                </scrollView>
+                <navigationBar contentMode="scaleToFill" id="JCh-Zj-sve">
+                    <rect key="frame" x="0.0" y="21" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="21" maxX="0.0" maxY="-21"/>
+                    <items>
+                        <navigationItem title="Title" id="o8S-64-L9B">
+                            <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vh9-bJ-6n5">
+                                <connections>
+                                    <action selector="pushedCloseBtn:" destination="-1" id="2tF-l5-00B"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="pYz-NL-HhI">
+                                <connections>
+                                    <action selector="pushedFinishBtn:" destination="-1" id="g6E-FE-0om"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="KuI-EM-Ofe"/>
+                    </connections>
+                </navigationBar>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,731 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD5C1E0418350DC400790989 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0318350DC400790989 /* Foundation.framework */; };
+		AD5C1E0618350DC400790989 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0518350DC400790989 /* CoreGraphics.framework */; };
+		AD5C1E0818350DC400790989 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0718350DC400790989 /* UIKit.framework */; };
+		AD5C1E0E18350DC400790989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E0C18350DC400790989 /* InfoPlist.strings */; };
+		AD5C1E1018350DC400790989 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E0F18350DC400790989 /* main.m */; };
+		AD5C1E1418350DC400790989 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E1318350DC400790989 /* AppDelegate.m */; };
+		AD5C1E1718350DC400790989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E1518350DC400790989 /* Main.storyboard */; };
+		AD5C1E1A18350DC400790989 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E1918350DC400790989 /* ViewController.m */; };
+		AD5C1E1C18350DC400790989 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E1B18350DC400790989 /* Images.xcassets */; };
+		AD5C1E2318350DC400790989 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E2218350DC400790989 /* XCTest.framework */; };
+		AD5C1E2418350DC500790989 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0318350DC400790989 /* Foundation.framework */; };
+		AD5C1E2518350DC500790989 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0718350DC400790989 /* UIKit.framework */; };
+		AD5C1E2D18350DC500790989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E2B18350DC500790989 /* InfoPlist.strings */; };
+		AD5C1E2F18350DC500790989 /* CLImageEditorDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E2E18350DC500790989 /* CLImageEditorDemoTests.m */; };
+		AD5C1E8A18350F1800790989 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E8918350F1800790989 /* default.jpg */; };
+		AD5C1EC9183510C200790989 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E8C183510C200790989 /* CLImageEditor.bundle */; };
+		AD5C1ECA183510C200790989 /* CLImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E8E183510C200790989 /* CLImageEditor.m */; };
+		AD5C1ECB183510C200790989 /* CLAdjustmentTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E92183510C200790989 /* CLAdjustmentTool.m */; };
+		AD5C1ECC183510C200790989 /* CLBlurTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E95183510C200790989 /* CLBlurTool.m */; };
+		AD5C1ECD183510C200790989 /* CLClippingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E98183510C200790989 /* CLClippingTool.m */; };
+		AD5C1ECE183510C200790989 /* CLBloomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E9C183510C200790989 /* CLBloomEffect.m */; };
+		AD5C1ECF183510C200790989 /* CLGloomEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E9E183510C200790989 /* CLGloomEffect.m */; };
+		AD5C1ED0183510C200790989 /* CLHighlightShadowEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EA0183510C200790989 /* CLHighlightShadowEffect.m */; };
+		AD5C1ED1183510C200790989 /* CLHueEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EA2183510C200790989 /* CLHueEffect.m */; };
+		AD5C1ED2183510C200790989 /* CLPixellateEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EA4183510C200790989 /* CLPixellateEffect.m */; };
+		AD5C1ED3183510C200790989 /* CLPosterizeEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EA6183510C200790989 /* CLPosterizeEffect.m */; };
+		AD5C1ED4183510C200790989 /* CLSpotEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EA8183510C200790989 /* CLSpotEffect.m */; };
+		AD5C1ED5183510C200790989 /* CLEffectBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EAA183510C200790989 /* CLEffectBase.m */; };
+		AD5C1ED6183510C200790989 /* CLEffectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EAC183510C200790989 /* CLEffectTool.m */; };
+		AD5C1ED7183510C200790989 /* CLFilterTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EAF183510C200790989 /* CLFilterTool.m */; };
+		AD5C1ED8183510C200790989 /* CLImageToolBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EB1183510C200790989 /* CLImageToolBase.m */; };
+		AD5C1ED9183510C200790989 /* CLImageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EB3183510C200790989 /* CLImageTools.m */; };
+		AD5C1EDA183510C200790989 /* CLRotateTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EB6183510C200790989 /* CLRotateTool.m */; };
+		AD5C1EDB183510C200790989 /* CLToneCurveTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EB9183510C200790989 /* CLToneCurveTool.m */; };
+		AD5C1EDC183510C200790989 /* CLClassList.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EBC183510C200790989 /* CLClassList.m */; };
+		AD5C1EDD183510C200790989 /* CLSplineInterpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EBE183510C200790989 /* CLSplineInterpolator.m */; };
+		AD5C1EDE183510C200790989 /* UIDevice+SystemVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EC0183510C200790989 /* UIDevice+SystemVersion.m */; };
+		AD5C1EDF183510C200790989 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EC2183510C200790989 /* UIImage+Utility.m */; };
+		AD5C1EE0183510C200790989 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EC4183510C200790989 /* UIView+Frame.m */; };
+		AD5C1EE1183510C200790989 /* _CLImageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EC7183510C200790989 /* _CLImageEditorViewController.m */; };
+		AD5C1EE2183510C200790989 /* _CLImageEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1EC8183510C200790989 /* _CLImageEditorViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AD5C1E2618350DC500790989 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD5C1DF818350DC400790989 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD5C1DFF18350DC400790989;
+			remoteInfo = CLImageEditorDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLImageEditorDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD5C1E0318350DC400790989 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AD5C1E0518350DC400790989 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AD5C1E0718350DC400790989 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AD5C1E0B18350DC400790989 /* CLImageEditorDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CLImageEditorDemo-Info.plist"; sourceTree = "<group>"; };
+		AD5C1E0D18350DC400790989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD5C1E0F18350DC400790989 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AD5C1E1118350DC400790989 /* CLImageEditorDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLImageEditorDemo-Prefix.pch"; sourceTree = "<group>"; };
+		AD5C1E1218350DC400790989 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AD5C1E1318350DC400790989 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AD5C1E1618350DC400790989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AD5C1E1818350DC400790989 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AD5C1E1918350DC400790989 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AD5C1E1B18350DC400790989 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AD5C1E2118350DC400790989 /* CLImageEditorDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLImageEditorDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD5C1E2218350DC400790989 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AD5C1E2A18350DC500790989 /* CLImageEditorDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CLImageEditorDemoTests-Info.plist"; sourceTree = "<group>"; };
+		AD5C1E2C18350DC500790989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD5C1E2E18350DC500790989 /* CLImageEditorDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLImageEditorDemoTests.m; sourceTree = "<group>"; };
+		AD5C1E8918350F1800790989 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
+		AD5C1E8C183510C200790989 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
+		AD5C1E8D183510C200790989 /* CLImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageEditor.h; sourceTree = "<group>"; };
+		AD5C1E8E183510C200790989 /* CLImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageEditor.m; sourceTree = "<group>"; };
+		AD5C1E91183510C200790989 /* CLAdjustmentTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLAdjustmentTool.h; sourceTree = "<group>"; };
+		AD5C1E92183510C200790989 /* CLAdjustmentTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLAdjustmentTool.m; sourceTree = "<group>"; };
+		AD5C1E94183510C200790989 /* CLBlurTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBlurTool.h; sourceTree = "<group>"; };
+		AD5C1E95183510C200790989 /* CLBlurTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBlurTool.m; sourceTree = "<group>"; };
+		AD5C1E97183510C200790989 /* CLClippingTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLClippingTool.h; sourceTree = "<group>"; };
+		AD5C1E98183510C200790989 /* CLClippingTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLClippingTool.m; sourceTree = "<group>"; };
+		AD5C1E9B183510C200790989 /* CLBloomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLBloomEffect.h; sourceTree = "<group>"; };
+		AD5C1E9C183510C200790989 /* CLBloomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLBloomEffect.m; sourceTree = "<group>"; };
+		AD5C1E9D183510C200790989 /* CLGloomEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGloomEffect.h; sourceTree = "<group>"; };
+		AD5C1E9E183510C200790989 /* CLGloomEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGloomEffect.m; sourceTree = "<group>"; };
+		AD5C1E9F183510C200790989 /* CLHighlightShadowEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLHighlightShadowEffect.h; sourceTree = "<group>"; };
+		AD5C1EA0183510C200790989 /* CLHighlightShadowEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLHighlightShadowEffect.m; sourceTree = "<group>"; };
+		AD5C1EA1183510C200790989 /* CLHueEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLHueEffect.h; sourceTree = "<group>"; };
+		AD5C1EA2183510C200790989 /* CLHueEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLHueEffect.m; sourceTree = "<group>"; };
+		AD5C1EA3183510C200790989 /* CLPixellateEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPixellateEffect.h; sourceTree = "<group>"; };
+		AD5C1EA4183510C200790989 /* CLPixellateEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPixellateEffect.m; sourceTree = "<group>"; };
+		AD5C1EA5183510C200790989 /* CLPosterizeEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPosterizeEffect.h; sourceTree = "<group>"; };
+		AD5C1EA6183510C200790989 /* CLPosterizeEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPosterizeEffect.m; sourceTree = "<group>"; };
+		AD5C1EA7183510C200790989 /* CLSpotEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSpotEffect.h; sourceTree = "<group>"; };
+		AD5C1EA8183510C200790989 /* CLSpotEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSpotEffect.m; sourceTree = "<group>"; };
+		AD5C1EA9183510C200790989 /* CLEffectBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEffectBase.h; sourceTree = "<group>"; };
+		AD5C1EAA183510C200790989 /* CLEffectBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEffectBase.m; sourceTree = "<group>"; };
+		AD5C1EAB183510C200790989 /* CLEffectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEffectTool.h; sourceTree = "<group>"; };
+		AD5C1EAC183510C200790989 /* CLEffectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEffectTool.m; sourceTree = "<group>"; };
+		AD5C1EAE183510C200790989 /* CLFilterTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFilterTool.h; sourceTree = "<group>"; };
+		AD5C1EAF183510C200790989 /* CLFilterTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFilterTool.m; sourceTree = "<group>"; };
+		AD5C1EB0183510C200790989 /* CLImageToolBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageToolBase.h; sourceTree = "<group>"; };
+		AD5C1EB1183510C200790989 /* CLImageToolBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageToolBase.m; sourceTree = "<group>"; };
+		AD5C1EB2183510C200790989 /* CLImageTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageTools.h; sourceTree = "<group>"; };
+		AD5C1EB3183510C200790989 /* CLImageTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageTools.m; sourceTree = "<group>"; };
+		AD5C1EB5183510C200790989 /* CLRotateTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRotateTool.h; sourceTree = "<group>"; };
+		AD5C1EB6183510C200790989 /* CLRotateTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRotateTool.m; sourceTree = "<group>"; };
+		AD5C1EB8183510C200790989 /* CLToneCurveTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLToneCurveTool.h; sourceTree = "<group>"; };
+		AD5C1EB9183510C200790989 /* CLToneCurveTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLToneCurveTool.m; sourceTree = "<group>"; };
+		AD5C1EBB183510C200790989 /* CLClassList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLClassList.h; sourceTree = "<group>"; };
+		AD5C1EBC183510C200790989 /* CLClassList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLClassList.m; sourceTree = "<group>"; };
+		AD5C1EBD183510C200790989 /* CLSplineInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSplineInterpolator.h; sourceTree = "<group>"; };
+		AD5C1EBE183510C200790989 /* CLSplineInterpolator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSplineInterpolator.m; sourceTree = "<group>"; };
+		AD5C1EBF183510C200790989 /* UIDevice+SystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+SystemVersion.h"; sourceTree = "<group>"; };
+		AD5C1EC0183510C200790989 /* UIDevice+SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SystemVersion.m"; sourceTree = "<group>"; };
+		AD5C1EC1183510C200790989 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
+		AD5C1EC2183510C200790989 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
+		AD5C1EC3183510C200790989 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		AD5C1EC4183510C200790989 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		AD5C1EC6183510C200790989 /* _CLImageEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CLImageEditorViewController.h; sourceTree = "<group>"; };
+		AD5C1EC7183510C200790989 /* _CLImageEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CLImageEditorViewController.m; sourceTree = "<group>"; };
+		AD5C1EC8183510C200790989 /* _CLImageEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _CLImageEditorViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AD5C1DFD18350DC400790989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5C1E0618350DC400790989 /* CoreGraphics.framework in Frameworks */,
+				AD5C1E0818350DC400790989 /* UIKit.framework in Frameworks */,
+				AD5C1E0418350DC400790989 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD5C1E1E18350DC400790989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5C1E2318350DC400790989 /* XCTest.framework in Frameworks */,
+				AD5C1E2518350DC500790989 /* UIKit.framework in Frameworks */,
+				AD5C1E2418350DC500790989 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AD5C1DF718350DC400790989 = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E8B183510C200790989 /* CLImageEditor */,
+				AD5C1E0918350DC400790989 /* CLImageEditorDemo */,
+				AD5C1E2818350DC500790989 /* CLImageEditorDemoTests */,
+				AD5C1E0218350DC400790989 /* Frameworks */,
+				AD5C1E0118350DC400790989 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AD5C1E0118350DC400790989 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */,
+				AD5C1E2118350DC400790989 /* CLImageEditorDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AD5C1E0218350DC400790989 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E0318350DC400790989 /* Foundation.framework */,
+				AD5C1E0518350DC400790989 /* CoreGraphics.framework */,
+				AD5C1E0718350DC400790989 /* UIKit.framework */,
+				AD5C1E2218350DC400790989 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD5C1E0918350DC400790989 /* CLImageEditorDemo */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E0A18350DC400790989 /* Supporting Files */,
+				AD5C1E1B18350DC400790989 /* Images.xcassets */,
+				AD5C1E8918350F1800790989 /* default.jpg */,
+				AD5C1E1218350DC400790989 /* AppDelegate.h */,
+				AD5C1E1318350DC400790989 /* AppDelegate.m */,
+				AD5C1E1518350DC400790989 /* Main.storyboard */,
+				AD5C1E1818350DC400790989 /* ViewController.h */,
+				AD5C1E1918350DC400790989 /* ViewController.m */,
+			);
+			path = CLImageEditorDemo;
+			sourceTree = "<group>";
+		};
+		AD5C1E0A18350DC400790989 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E0B18350DC400790989 /* CLImageEditorDemo-Info.plist */,
+				AD5C1E0C18350DC400790989 /* InfoPlist.strings */,
+				AD5C1E0F18350DC400790989 /* main.m */,
+				AD5C1E1118350DC400790989 /* CLImageEditorDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AD5C1E2818350DC500790989 /* CLImageEditorDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E2E18350DC500790989 /* CLImageEditorDemoTests.m */,
+				AD5C1E2918350DC500790989 /* Supporting Files */,
+			);
+			path = CLImageEditorDemoTests;
+			sourceTree = "<group>";
+		};
+		AD5C1E2918350DC500790989 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E2A18350DC500790989 /* CLImageEditorDemoTests-Info.plist */,
+				AD5C1E2B18350DC500790989 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AD5C1E8B183510C200790989 /* CLImageEditor */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E8C183510C200790989 /* CLImageEditor.bundle */,
+				AD5C1E8D183510C200790989 /* CLImageEditor.h */,
+				AD5C1E8E183510C200790989 /* CLImageEditor.m */,
+				AD5C1E8F183510C200790989 /* ImageTools */,
+				AD5C1EBA183510C200790989 /* Utils */,
+				AD5C1EC5183510C200790989 /* ViewController */,
+			);
+			path = CLImageEditor;
+			sourceTree = "<group>";
+		};
+		AD5C1E8F183510C200790989 /* ImageTools */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1EB2183510C200790989 /* CLImageTools.h */,
+				AD5C1EB3183510C200790989 /* CLImageTools.m */,
+				AD5C1EB0183510C200790989 /* CLImageToolBase.h */,
+				AD5C1EB1183510C200790989 /* CLImageToolBase.m */,
+				AD5C1EAD183510C200790989 /* CLFilterTool */,
+				AD5C1E90183510C200790989 /* CLAdjustmentTool */,
+				AD5C1E99183510C200790989 /* CLEffectTool */,
+				AD5C1E93183510C200790989 /* CLBlurTool */,
+				AD5C1E96183510C200790989 /* CLClippingTool */,
+				AD5C1EB4183510C200790989 /* CLRotateTool */,
+				AD5C1EB7183510C200790989 /* CLToneCurveTool */,
+			);
+			path = ImageTools;
+			sourceTree = "<group>";
+		};
+		AD5C1E90183510C200790989 /* CLAdjustmentTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E91183510C200790989 /* CLAdjustmentTool.h */,
+				AD5C1E92183510C200790989 /* CLAdjustmentTool.m */,
+			);
+			path = CLAdjustmentTool;
+			sourceTree = "<group>";
+		};
+		AD5C1E93183510C200790989 /* CLBlurTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E94183510C200790989 /* CLBlurTool.h */,
+				AD5C1E95183510C200790989 /* CLBlurTool.m */,
+			);
+			path = CLBlurTool;
+			sourceTree = "<group>";
+		};
+		AD5C1E96183510C200790989 /* CLClippingTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E97183510C200790989 /* CLClippingTool.h */,
+				AD5C1E98183510C200790989 /* CLClippingTool.m */,
+			);
+			path = CLClippingTool;
+			sourceTree = "<group>";
+		};
+		AD5C1E99183510C200790989 /* CLEffectTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E9A183510C200790989 /* CLEffect */,
+				AD5C1EA9183510C200790989 /* CLEffectBase.h */,
+				AD5C1EAA183510C200790989 /* CLEffectBase.m */,
+				AD5C1EAB183510C200790989 /* CLEffectTool.h */,
+				AD5C1EAC183510C200790989 /* CLEffectTool.m */,
+			);
+			path = CLEffectTool;
+			sourceTree = "<group>";
+		};
+		AD5C1E9A183510C200790989 /* CLEffect */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1E9B183510C200790989 /* CLBloomEffect.h */,
+				AD5C1E9C183510C200790989 /* CLBloomEffect.m */,
+				AD5C1E9D183510C200790989 /* CLGloomEffect.h */,
+				AD5C1E9E183510C200790989 /* CLGloomEffect.m */,
+				AD5C1E9F183510C200790989 /* CLHighlightShadowEffect.h */,
+				AD5C1EA0183510C200790989 /* CLHighlightShadowEffect.m */,
+				AD5C1EA1183510C200790989 /* CLHueEffect.h */,
+				AD5C1EA2183510C200790989 /* CLHueEffect.m */,
+				AD5C1EA3183510C200790989 /* CLPixellateEffect.h */,
+				AD5C1EA4183510C200790989 /* CLPixellateEffect.m */,
+				AD5C1EA5183510C200790989 /* CLPosterizeEffect.h */,
+				AD5C1EA6183510C200790989 /* CLPosterizeEffect.m */,
+				AD5C1EA7183510C200790989 /* CLSpotEffect.h */,
+				AD5C1EA8183510C200790989 /* CLSpotEffect.m */,
+			);
+			path = CLEffect;
+			sourceTree = "<group>";
+		};
+		AD5C1EAD183510C200790989 /* CLFilterTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1EAE183510C200790989 /* CLFilterTool.h */,
+				AD5C1EAF183510C200790989 /* CLFilterTool.m */,
+			);
+			path = CLFilterTool;
+			sourceTree = "<group>";
+		};
+		AD5C1EB4183510C200790989 /* CLRotateTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1EB5183510C200790989 /* CLRotateTool.h */,
+				AD5C1EB6183510C200790989 /* CLRotateTool.m */,
+			);
+			path = CLRotateTool;
+			sourceTree = "<group>";
+		};
+		AD5C1EB7183510C200790989 /* CLToneCurveTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1EB8183510C200790989 /* CLToneCurveTool.h */,
+				AD5C1EB9183510C200790989 /* CLToneCurveTool.m */,
+			);
+			path = CLToneCurveTool;
+			sourceTree = "<group>";
+		};
+		AD5C1EBA183510C200790989 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1EBB183510C200790989 /* CLClassList.h */,
+				AD5C1EBC183510C200790989 /* CLClassList.m */,
+				AD5C1EBD183510C200790989 /* CLSplineInterpolator.h */,
+				AD5C1EBE183510C200790989 /* CLSplineInterpolator.m */,
+				AD5C1EBF183510C200790989 /* UIDevice+SystemVersion.h */,
+				AD5C1EC0183510C200790989 /* UIDevice+SystemVersion.m */,
+				AD5C1EC1183510C200790989 /* UIImage+Utility.h */,
+				AD5C1EC2183510C200790989 /* UIImage+Utility.m */,
+				AD5C1EC3183510C200790989 /* UIView+Frame.h */,
+				AD5C1EC4183510C200790989 /* UIView+Frame.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AD5C1EC5183510C200790989 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AD5C1EC6183510C200790989 /* _CLImageEditorViewController.h */,
+				AD5C1EC7183510C200790989 /* _CLImageEditorViewController.m */,
+				AD5C1EC8183510C200790989 /* _CLImageEditorViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AD5C1DFF18350DC400790989 /* CLImageEditorDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD5C1E3218350DC500790989 /* Build configuration list for PBXNativeTarget "CLImageEditorDemo" */;
+			buildPhases = (
+				AD5C1DFC18350DC400790989 /* Sources */,
+				AD5C1DFD18350DC400790989 /* Frameworks */,
+				AD5C1DFE18350DC400790989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CLImageEditorDemo;
+			productName = CLImageEditorDemo;
+			productReference = AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AD5C1E2018350DC400790989 /* CLImageEditorDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD5C1E3518350DC500790989 /* Build configuration list for PBXNativeTarget "CLImageEditorDemoTests" */;
+			buildPhases = (
+				AD5C1E1D18350DC400790989 /* Sources */,
+				AD5C1E1E18350DC400790989 /* Frameworks */,
+				AD5C1E1F18350DC400790989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD5C1E2718350DC500790989 /* PBXTargetDependency */,
+			);
+			name = CLImageEditorDemoTests;
+			productName = CLImageEditorDemoTests;
+			productReference = AD5C1E2118350DC400790989 /* CLImageEditorDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AD5C1DF818350DC400790989 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = CALACULU;
+				TargetAttributes = {
+					AD5C1E2018350DC400790989 = {
+						TestTargetID = AD5C1DFF18350DC400790989;
+					};
+				};
+			};
+			buildConfigurationList = AD5C1DFB18350DC400790989 /* Build configuration list for PBXProject "CLImageEditorDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AD5C1DF718350DC400790989;
+			productRefGroup = AD5C1E0118350DC400790989 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AD5C1DFF18350DC400790989 /* CLImageEditorDemo */,
+				AD5C1E2018350DC400790989 /* CLImageEditorDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD5C1DFE18350DC400790989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5C1E1C18350DC400790989 /* Images.xcassets in Resources */,
+				AD5C1E0E18350DC400790989 /* InfoPlist.strings in Resources */,
+				AD5C1EE2183510C200790989 /* _CLImageEditorViewController.xib in Resources */,
+				AD5C1EC9183510C200790989 /* CLImageEditor.bundle in Resources */,
+				AD5C1E1718350DC400790989 /* Main.storyboard in Resources */,
+				AD5C1E8A18350F1800790989 /* default.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD5C1E1F18350DC400790989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5C1E2D18350DC500790989 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AD5C1DFC18350DC400790989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5C1ED1183510C200790989 /* CLHueEffect.m in Sources */,
+				AD5C1ED7183510C200790989 /* CLFilterTool.m in Sources */,
+				AD5C1E1A18350DC400790989 /* ViewController.m in Sources */,
+				AD5C1ED8183510C200790989 /* CLImageToolBase.m in Sources */,
+				AD5C1ED5183510C200790989 /* CLEffectBase.m in Sources */,
+				AD5C1EDC183510C200790989 /* CLClassList.m in Sources */,
+				AD5C1ED6183510C200790989 /* CLEffectTool.m in Sources */,
+				AD5C1EDF183510C200790989 /* UIImage+Utility.m in Sources */,
+				AD5C1EDE183510C200790989 /* UIDevice+SystemVersion.m in Sources */,
+				AD5C1E1418350DC400790989 /* AppDelegate.m in Sources */,
+				AD5C1ECB183510C200790989 /* CLAdjustmentTool.m in Sources */,
+				AD5C1E1018350DC400790989 /* main.m in Sources */,
+				AD5C1EDA183510C200790989 /* CLRotateTool.m in Sources */,
+				AD5C1ED0183510C200790989 /* CLHighlightShadowEffect.m in Sources */,
+				AD5C1ED2183510C200790989 /* CLPixellateEffect.m in Sources */,
+				AD5C1ECD183510C200790989 /* CLClippingTool.m in Sources */,
+				AD5C1ECA183510C200790989 /* CLImageEditor.m in Sources */,
+				AD5C1EDB183510C200790989 /* CLToneCurveTool.m in Sources */,
+				AD5C1EE0183510C200790989 /* UIView+Frame.m in Sources */,
+				AD5C1ECC183510C200790989 /* CLBlurTool.m in Sources */,
+				AD5C1EDD183510C200790989 /* CLSplineInterpolator.m in Sources */,
+				AD5C1ED9183510C200790989 /* CLImageTools.m in Sources */,
+				AD5C1EE1183510C200790989 /* _CLImageEditorViewController.m in Sources */,
+				AD5C1ECF183510C200790989 /* CLGloomEffect.m in Sources */,
+				AD5C1ED4183510C200790989 /* CLSpotEffect.m in Sources */,
+				AD5C1ED3183510C200790989 /* CLPosterizeEffect.m in Sources */,
+				AD5C1ECE183510C200790989 /* CLBloomEffect.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD5C1E1D18350DC400790989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5C1E2F18350DC500790989 /* CLImageEditorDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AD5C1E2718350DC500790989 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD5C1DFF18350DC400790989 /* CLImageEditorDemo */;
+			targetProxy = AD5C1E2618350DC500790989 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AD5C1E0C18350DC400790989 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD5C1E0D18350DC400790989 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AD5C1E1518350DC400790989 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD5C1E1618350DC400790989 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AD5C1E2B18350DC500790989 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD5C1E2C18350DC500790989 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AD5C1E3018350DC500790989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AD5C1E3118350DC500790989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AD5C1E3318350DC500790989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CLImageEditorDemo/CLImageEditorDemo-Prefix.pch";
+				INFOPLIST_FILE = "CLImageEditorDemo/CLImageEditorDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AD5C1E3418350DC500790989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CLImageEditorDemo/CLImageEditorDemo-Prefix.pch";
+				INFOPLIST_FILE = "CLImageEditorDemo/CLImageEditorDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AD5C1E3618350DC500790989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CLImageEditorDemo.app/CLImageEditorDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CLImageEditorDemo/CLImageEditorDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CLImageEditorDemoTests/CLImageEditorDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AD5C1E3718350DC500790989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CLImageEditorDemo.app/CLImageEditorDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CLImageEditorDemo/CLImageEditorDemo-Prefix.pch";
+				INFOPLIST_FILE = "CLImageEditorDemoTests/CLImageEditorDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AD5C1DFB18350DC400790989 /* Build configuration list for PBXProject "CLImageEditorDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD5C1E3018350DC500790989 /* Debug */,
+				AD5C1E3118350DC500790989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD5C1E3218350DC500790989 /* Build configuration list for PBXNativeTarget "CLImageEditorDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD5C1E3318350DC500790989 /* Debug */,
+				AD5C1E3418350DC500790989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AD5C1E3518350DC500790989 /* Build configuration list for PBXNativeTarget "CLImageEditorDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD5C1E3618350DC500790989 /* Debug */,
+				AD5C1E3718350DC500790989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AD5C1DF818350DC400790989 /* Project object */;
+}
