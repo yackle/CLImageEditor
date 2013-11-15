@@ -192,7 +192,8 @@
         _scrollView.minimumZoomScale = ratio;
         _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
         
-        [_scrollView setZoomScale:MAX(Rw, Rh) animated:animated];
+        [_scrollView setZoomScale:ratio animated:animated];
+        [self scrollViewDidZoom:_scrollView];
     });
 }
 
