@@ -16,11 +16,6 @@
 		AD5C1E1718350DC400790989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E1518350DC400790989 /* Main.storyboard */; };
 		AD5C1E1A18350DC400790989 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E1918350DC400790989 /* ViewController.m */; };
 		AD5C1E1C18350DC400790989 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E1B18350DC400790989 /* Images.xcassets */; };
-		AD5C1E2318350DC400790989 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E2218350DC400790989 /* XCTest.framework */; };
-		AD5C1E2418350DC500790989 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0318350DC400790989 /* Foundation.framework */; };
-		AD5C1E2518350DC500790989 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0718350DC400790989 /* UIKit.framework */; };
-		AD5C1E2D18350DC500790989 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E2B18350DC500790989 /* InfoPlist.strings */; };
-		AD5C1E2F18350DC500790989 /* CLImageEditorDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E2E18350DC500790989 /* CLImageEditorDemoTests.m */; };
 		AD5C1E8A18350F1800790989 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E8918350F1800790989 /* default.jpg */; };
 		AD5C1EC9183510C200790989 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E8C183510C200790989 /* CLImageEditor.bundle */; };
 		AD5C1ECA183510C200790989 /* CLImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E8E183510C200790989 /* CLImageEditor.m */; };
@@ -50,16 +45,6 @@
 		AD5C1EE2183510C200790989 /* _CLImageEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1EC8183510C200790989 /* _CLImageEditorViewController.xib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		AD5C1E2618350DC500790989 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AD5C1DF818350DC400790989 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD5C1DFF18350DC400790989;
-			remoteInfo = CLImageEditorDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLImageEditorDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5C1E0318350DC400790989 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,11 +60,7 @@
 		AD5C1E1818350DC400790989 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AD5C1E1918350DC400790989 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AD5C1E1B18350DC400790989 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AD5C1E2118350DC400790989 /* CLImageEditorDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLImageEditorDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5C1E2218350DC400790989 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		AD5C1E2A18350DC500790989 /* CLImageEditorDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CLImageEditorDemoTests-Info.plist"; sourceTree = "<group>"; };
-		AD5C1E2C18350DC500790989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AD5C1E2E18350DC500790989 /* CLImageEditorDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLImageEditorDemoTests.m; sourceTree = "<group>"; };
 		AD5C1E8918350F1800790989 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		AD5C1E8C183510C200790989 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		AD5C1E8D183510C200790989 /* CLImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageEditor.h; sourceTree = "<group>"; };
@@ -144,16 +125,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD5C1E1E18350DC400790989 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD5C1E2318350DC400790989 /* XCTest.framework in Frameworks */,
-				AD5C1E2518350DC500790989 /* UIKit.framework in Frameworks */,
-				AD5C1E2418350DC500790989 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -162,7 +133,6 @@
 			children = (
 				AD5C1E8B183510C200790989 /* CLImageEditor */,
 				AD5C1E0918350DC400790989 /* CLImageEditorDemo */,
-				AD5C1E2818350DC500790989 /* CLImageEditorDemoTests */,
 				AD5C1E0218350DC400790989 /* Frameworks */,
 				AD5C1E0118350DC400790989 /* Products */,
 			);
@@ -172,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */,
-				AD5C1E2118350DC400790989 /* CLImageEditorDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -210,24 +179,6 @@
 				AD5C1E0C18350DC400790989 /* InfoPlist.strings */,
 				AD5C1E0F18350DC400790989 /* main.m */,
 				AD5C1E1118350DC400790989 /* CLImageEditorDemo-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AD5C1E2818350DC500790989 /* CLImageEditorDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				AD5C1E2E18350DC500790989 /* CLImageEditorDemoTests.m */,
-				AD5C1E2918350DC500790989 /* Supporting Files */,
-			);
-			path = CLImageEditorDemoTests;
-			sourceTree = "<group>";
-		};
-		AD5C1E2918350DC500790989 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AD5C1E2A18350DC500790989 /* CLImageEditorDemoTests-Info.plist */,
-				AD5C1E2B18350DC500790989 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -397,24 +348,6 @@
 			productReference = AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AD5C1E2018350DC400790989 /* CLImageEditorDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AD5C1E3518350DC500790989 /* Build configuration list for PBXNativeTarget "CLImageEditorDemoTests" */;
-			buildPhases = (
-				AD5C1E1D18350DC400790989 /* Sources */,
-				AD5C1E1E18350DC400790989 /* Frameworks */,
-				AD5C1E1F18350DC400790989 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AD5C1E2718350DC500790989 /* PBXTargetDependency */,
-			);
-			name = CLImageEditorDemoTests;
-			productName = CLImageEditorDemoTests;
-			productReference = AD5C1E2118350DC400790989 /* CLImageEditorDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -423,11 +356,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = CALACULU;
-				TargetAttributes = {
-					AD5C1E2018350DC400790989 = {
-						TestTargetID = AD5C1DFF18350DC400790989;
-					};
-				};
 			};
 			buildConfigurationList = AD5C1DFB18350DC400790989 /* Build configuration list for PBXProject "CLImageEditorDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -443,7 +371,6 @@
 			projectRoot = "";
 			targets = (
 				AD5C1DFF18350DC400790989 /* CLImageEditorDemo */,
-				AD5C1E2018350DC400790989 /* CLImageEditorDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -459,14 +386,6 @@
 				AD5C1EC9183510C200790989 /* CLImageEditor.bundle in Resources */,
 				AD5C1E1718350DC400790989 /* Main.storyboard in Resources */,
 				AD5C1E8A18350F1800790989 /* default.jpg in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AD5C1E1F18350DC400790989 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD5C1E2D18350DC500790989 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,23 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD5C1E1D18350DC400790989 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD5C1E2F18350DC500790989 /* CLImageEditorDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AD5C1E2718350DC500790989 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD5C1DFF18350DC400790989 /* CLImageEditorDemo */;
-			targetProxy = AD5C1E2618350DC500790989 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AD5C1E0C18350DC400790989 /* InfoPlist.strings */ = {
@@ -540,14 +443,6 @@
 				AD5C1E1618350DC400790989 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AD5C1E2B18350DC500790989 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD5C1E2C18350DC500790989 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -586,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -619,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -655,48 +550,6 @@
 			};
 			name = Release;
 		};
-		AD5C1E3618350DC500790989 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CLImageEditorDemo.app/CLImageEditorDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CLImageEditorDemo/CLImageEditorDemo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CLImageEditorDemoTests/CLImageEditorDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		AD5C1E3718350DC500790989 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CLImageEditorDemo.app/CLImageEditorDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CLImageEditorDemo/CLImageEditorDemo-Prefix.pch";
-				INFOPLIST_FILE = "CLImageEditorDemoTests/CLImageEditorDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -716,14 +569,7 @@
 				AD5C1E3418350DC500790989 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		AD5C1E3518350DC500790989 /* Build configuration list for PBXNativeTarget "CLImageEditorDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AD5C1E3618350DC500790989 /* Debug */,
-				AD5C1E3718350DC500790989 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
