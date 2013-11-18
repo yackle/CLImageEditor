@@ -12,7 +12,7 @@ Installing
 
 The easiest way to use CLImageEditor is to copy all the files in the CLImageEditor group (or directory) into your app. Alternatively, you should be able to setup a git submodule and reference the files in your Xcode project.
 
-***** Or CocoaPods *****
+##### Or CocoaPods
 
 `pod 'CLImageEditor'`
 
