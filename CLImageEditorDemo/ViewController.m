@@ -51,18 +51,19 @@
         CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
         editor.delegate = self;
         
+        /*
         NSLog(@"%@", editor.toolInfo);
         NSLog(@"%@", editor.toolInfo.toolTreeDescription);
         
-        static int cnt = 0;
-        if(cnt++%2==0){
-            CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithTitle:@"Filter" recursive:NO];
-            tool.available = NO;
-        }
-        else{
-            CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLHueEffect" recursive:YES];
-            tool.available = NO;
-        }
+        CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLToneCurveTool" recursive:NO];
+        tool.available = NO;
+        
+        tool = [editor.toolInfo subToolInfoWithToolName:@"CLRotateTool" recursive:YES];
+        tool.available = NO;
+        
+        tool = [editor.toolInfo subToolInfoWithToolName:@"CLHueEffect" recursive:YES];
+        tool.available = NO;
+        */
         
         [self presentViewController:editor animated:YES completion:nil];
     }

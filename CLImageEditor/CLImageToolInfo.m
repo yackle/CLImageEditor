@@ -125,24 +125,4 @@
     return result;
 }
 
-- (CLImageToolInfo*)subToolInfoWithTitle:(NSString*)title recursive:(BOOL)recursive
-{
-    CLImageToolInfo *result = nil;
-    
-    for(CLImageToolInfo *sub in self.subtools){
-        if([sub.title isEqualToString:title]){
-            result = sub;
-            break;
-        }
-        if(recursive){
-            result = [sub subToolInfoWithTitle:title recursive:recursive];
-            if(result){
-                break;
-            }
-        }
-    }
-    
-    return result;
-}
-
 @end

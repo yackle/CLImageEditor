@@ -26,6 +26,5 @@
 - (NSArray*)sortedSubtools;
 
 - (CLImageToolInfo*)subToolInfoWithToolName:(NSString*)toolName recursive:(BOOL)recursive;
-- (CLImageToolInfo*)subToolInfoWithTitle:(NSString*)title recursive:(BOOL)recursive;
 
 @end

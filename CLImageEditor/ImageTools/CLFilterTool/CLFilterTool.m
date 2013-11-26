@@ -7,10 +7,10 @@
 
 #import "CLFilterTool.h"
 
+#import "CLClassList.h"
 #import "CLFilterBase.h"
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
-#import "CLClassList.h"
 #import "UIView+CLImageToolInfo.h"
 
 
@@ -88,7 +88,7 @@
     
     UIImage *iconThumnail = [_originalImage aspectFill:CGSizeMake(50, 50)];
     
-    for(CLImageToolInfo *info in self.toolInfo.subtools){
+    for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
             continue;
         }
