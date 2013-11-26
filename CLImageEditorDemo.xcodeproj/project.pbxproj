@@ -44,6 +44,7 @@
 		AD5C1EE2183510C200790989 /* _CLImageEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1EC8183510C200790989 /* _CLImageEditorViewController.xib */; };
 		ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */; };
 		ADFC0AA91844BC86003AE9C3 /* UIView+CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */; };
+		ADFC0AAF1844C6BC003AE9C3 /* CLFilterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0AAE1844C6BC003AE9C3 /* CLFilterBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,8 @@
 		ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageToolInfo.m; sourceTree = "<group>"; };
 		ADFC0AA71844BC86003AE9C3 /* UIView+CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CLImageToolInfo.h"; path = "UIComponents/UIView+CLImageToolInfo.h"; sourceTree = "<group>"; };
 		ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CLImageToolInfo.m"; path = "UIComponents/UIView+CLImageToolInfo.m"; sourceTree = "<group>"; };
+		ADFC0AAD1844C6BC003AE9C3 /* CLFilterBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFilterBase.h; sourceTree = "<group>"; };
+		ADFC0AAE1844C6BC003AE9C3 /* CLFilterBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFilterBase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,10 +208,10 @@
 		AD5C1E8F183510C200790989 /* ImageTools */ = {
 			isa = PBXGroup;
 			children = (
-				ADFC0AA61844BC6E003AE9C3 /* UIComponents */,
 				ADFC0A9C18447376003AE9C3 /* CLImageToolProtocol.h */,
 				AD5C1EB0183510C200790989 /* CLImageToolBase.h */,
 				AD5C1EB1183510C200790989 /* CLImageToolBase.m */,
+				ADFC0AA61844BC6E003AE9C3 /* UIComponents */,
 				AD5C1EAD183510C200790989 /* CLFilterTool */,
 				AD5C1E90183510C200790989 /* CLAdjustmentTool */,
 				AD5C1E99183510C200790989 /* CLEffectTool */,
@@ -285,6 +288,8 @@
 			children = (
 				AD5C1EAE183510C200790989 /* CLFilterTool.h */,
 				AD5C1EAF183510C200790989 /* CLFilterTool.m */,
+				ADFC0AAD1844C6BC003AE9C3 /* CLFilterBase.h */,
+				ADFC0AAE1844C6BC003AE9C3 /* CLFilterBase.m */,
 			);
 			path = CLFilterTool;
 			sourceTree = "<group>";
@@ -435,6 +440,7 @@
 				AD5C1ECC183510C200790989 /* CLBlurTool.m in Sources */,
 				AD5C1EDD183510C200790989 /* CLSplineInterpolator.m in Sources */,
 				AD5C1EE1183510C200790989 /* _CLImageEditorViewController.m in Sources */,
+				ADFC0AAF1844C6BC003AE9C3 /* CLFilterBase.m in Sources */,
 				AD5C1ECF183510C200790989 /* CLGloomEffect.m in Sources */,
 				AD5C1ED4183510C200790989 /* CLSpotEffect.m in Sources */,
 				AD5C1ED3183510C200790989 /* CLPosterizeEffect.m in Sources */,

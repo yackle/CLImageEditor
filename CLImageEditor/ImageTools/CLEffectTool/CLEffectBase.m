@@ -11,7 +11,6 @@
 
 #pragma mark-
 
-
 + (NSString*)defaultIconImagePath
 {
     return [NSString stringWithFormat:@"CLImageEditor.bundle/CLEffectTool/%@.png", NSStringFromClass([self class])];
