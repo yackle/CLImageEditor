@@ -51,11 +51,18 @@
         CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
         editor.delegate = self;
         
-        CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithTitle:@"Filter"];
-        tool.available = NO;
+        NSLog(@"%@", editor.toolInfo);
+        NSLog(@"%@", editor.toolInfo.toolTreeDescription);
         
-        tool = [editor.toolInfo subToolInfoWithToolName:@"CLEffectTool"];
-        tool.available = NO;
+        static int cnt = 0;
+        if(cnt++%2==0){
+            CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithTitle:@"Filter" recursive:NO];
+            tool.available = NO;
+        }
+        else{
+            CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLEffectTool" recursive:NO];
+            tool.available = NO;
+        }
         
         [self presentViewController:editor animated:YES completion:nil];
     }

@@ -22,11 +22,10 @@
 
 + (CLImageToolInfo*)toolInfoForToolClass:(Class<CLImageToolProtocol>)toolClass;
 
+- (NSString*)toolTreeDescription;
+- (NSArray*)sortedSubtools;
 
-- (CLImageToolInfo*)subToolInfoWithToolName:(NSString*)toolName;
 - (CLImageToolInfo*)subToolInfoWithToolName:(NSString*)toolName recursive:(BOOL)recursive;
-
-- (CLImageToolInfo*)subToolInfoWithTitle:(NSString*)title;
 - (CLImageToolInfo*)subToolInfoWithTitle:(NSString*)title recursive:(BOOL)recursive;
 
 @end

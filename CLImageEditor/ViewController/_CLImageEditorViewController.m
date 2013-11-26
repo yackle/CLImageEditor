@@ -147,16 +147,7 @@
     CGFloat x = 0;
     CGFloat W = 70;
     
-    NSArray *subtools = [self.toolInfo.subtools sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        CGFloat dockedNum1 = [obj1 dockedNumber];
-        CGFloat dockedNum2 = [obj2 dockedNumber];
-        
-        if(dockedNum1 < dockedNum2){ return NSOrderedAscending; }
-        else if(dockedNum1 > dockedNum2){ return NSOrderedDescending; }
-        return NSOrderedSame;
-    }];
-    
-    for(CLImageToolInfo *info in subtools){
+    for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
             continue;
         }
