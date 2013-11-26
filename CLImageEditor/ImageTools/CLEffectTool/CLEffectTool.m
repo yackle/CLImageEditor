@@ -11,6 +11,7 @@
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
 #import "CLClassList.h"
+#import "UIView+CLImageToolInfo.h"
 
 @interface CLEffectTool()
 @property (nonatomic, strong) UIView *selectedMenu;
@@ -20,8 +21,6 @@
 
 @implementation CLEffectTool
 {
-    NSArray *_effectClasses;
-    
     UIImage *_originalImage;
     UIImage *_thumnailImage;
     
@@ -29,23 +28,23 @@
     UIActivityIndicatorView *_indicatorView;
 }
 
-+ (NSArray*)effectList
++ (NSArray*)subtools
 {
-    static NSArray *list = nil;
-    if(list==nil){
-        NSMutableArray *tmp = [@[[CLEffectBase class]] mutableCopy];
-        [tmp addObjectsFromArray:[CLClassList subclassesOfClass:[CLEffectBase class]]];
-        
-        list = [tmp sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            CGFloat dockedNum1 = [obj1 dockedNumber];
-            CGFloat dockedNum2 = [obj2 dockedNumber];
-            
-            if(dockedNum1 < dockedNum2){ return NSOrderedAscending; }
-            else if(dockedNum1 > dockedNum2){ return NSOrderedDescending; }
-            return NSOrderedSame;
-        }];
+    NSMutableArray *array = [NSMutableArray array];
+    
+    CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:[CLEffectBase class]];
+    if(info){
+        [array addObject:info];
     }
-    return list;
+    
+    NSArray *list = [CLClassList subclassesOfClass:[CLEffectBase class]];
+    for(Class subtool in list){
+        info = [CLImageToolInfo toolInfoForToolClass:subtool];
+        if(info){
+            [array addObject:info];
+        }
+    }
+    return [array copy];
 }
 
 + (NSString*)defaultTitle
@@ -57,6 +56,8 @@
 {
     return ([UIDevice iosVersion] >= 5.0);
 }
+
+#pragma mark- 
 
 - (void)setup
 {
@@ -73,7 +74,6 @@
     _menuScroll.showsHorizontalScrollIndicator = NO;
     [self.editor.view addSubview:_menuScroll];
     
-    _effectClasses = [[self class] effectList];
     [self setEffectMenu];
     
     _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
@@ -127,36 +127,36 @@
     CGFloat W = 70;
     CGFloat x = 0;
     
-    for(NSInteger i=0; i<_effectClasses.count; ++i){
-        Class effect = _effectClasses[i];
+    for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
+        if(!info.available){
+            continue;
+        }
         
-        if([effect isSubclassOfClass:[CLEffectBase class]] && [effect isAvailable]){
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, W, _menuScroll.height)];
-            view.tag = i;
-            
-            UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
-            iconView.clipsToBounds = YES;
-            iconView.layer.cornerRadius = 5;
-            iconView.contentMode = UIViewContentModeScaleAspectFill;
-            iconView.image = [effect iconImage];
-            [view addSubview:iconView];
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
-            label.backgroundColor = [UIColor clearColor];
-            label.text = [effect title];;
-            label.font = [UIFont systemFontOfSize:10];
-            label.textAlignment = NSTextAlignmentCenter;
-            [view addSubview:label];
-            
-            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMenu:)];
-            [view addGestureRecognizer:gesture];
-            
-            [_menuScroll addSubview:view];
-            x += W;
-            
-            if(self.selectedMenu==nil){
-                self.selectedMenu = view;
-            }
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, W, _menuScroll.height)];
+        view.toolInfo = info;
+        
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
+        iconView.clipsToBounds = YES;
+        iconView.layer.cornerRadius = 5;
+        iconView.contentMode = UIViewContentModeScaleAspectFill;
+        iconView.image = info.iconImage;
+        [view addSubview:iconView];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = info.title;
+        label.font = [UIFont systemFontOfSize:10];
+        label.textAlignment = NSTextAlignmentCenter;
+        [view addSubview:label];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMenu:)];
+        [view addGestureRecognizer:gesture];
+        
+        [_menuScroll addSubview:view];
+        x += W;
+        
+        if(self.selectedMenu==nil){
+            self.selectedMenu = view;
         }
     }
     _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);
@@ -183,8 +183,8 @@
         _selectedMenu = selectedMenu;
         _selectedMenu.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
         
-        Class effectClass = _effectClasses[_selectedMenu.tag];
-        self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.scrollView imageViewFrame:self.editor.imageView.frame];
+        Class effectClass = NSClassFromString(_selectedMenu.toolInfo.toolName);
+        self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.scrollView imageViewFrame:self.editor.imageView.frame toolInfo:_selectedMenu.toolInfo];
     }
 }
 

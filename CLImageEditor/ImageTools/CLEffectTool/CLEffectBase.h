@@ -8,22 +8,21 @@
 #import <Foundation/Foundation.h>
 
 #import "UIDevice+SystemVersion.h"
+#import "CLImageToolProtocol.h"
+#import "CLImageToolInfo.h"
 
 static const CGFloat kCLEffectToolAnimationDuration = 0.2;
 
 
 @protocol CLEffectDelegate;
 
-@interface CLEffectBase : NSObject
+@interface CLEffectBase : NSObject<CLImageToolProtocol>
 
 @property (nonatomic, weak) id<CLEffectDelegate> delegate;
+@property (nonatomic, weak) CLImageToolInfo *toolInfo;
 
-+ (UIImage*)iconImage;
-+ (NSString*)title;
-+ (CGFloat)dockedNumber;
-+ (BOOL)isAvailable;
 
-- (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame;
+- (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame toolInfo:(CLImageToolInfo*)info;
 - (void)cleanup;
 
 - (BOOL)needsThumnailPreview;

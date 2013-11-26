@@ -60,7 +60,7 @@
             tool.available = NO;
         }
         else{
-            CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLEffectTool" recursive:NO];
+            CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLHueEffect" recursive:YES];
             tool.available = NO;
         }
         

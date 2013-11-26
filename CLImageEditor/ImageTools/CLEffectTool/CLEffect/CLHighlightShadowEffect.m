@@ -20,7 +20,7 @@
 
 #pragma mark-
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"Highlight";
 }
@@ -30,9 +30,9 @@
     return ([UIDevice iosVersion] >= 5.0);
 }
 
-- (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame;
+- (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame toolInfo:(CLImageToolInfo *)info
 {
-    self = [super init];
+    self = [super initWithSuperView:superview imageViewFrame:frame toolInfo:info];
     if(self){
         _containerView = [[UIView alloc] initWithFrame:superview.bounds];
         [superview addSubview:_containerView];

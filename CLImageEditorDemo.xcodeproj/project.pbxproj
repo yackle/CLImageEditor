@@ -43,6 +43,7 @@
 		AD5C1EE1183510C200790989 /* _CLImageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1EC7183510C200790989 /* _CLImageEditorViewController.m */; };
 		AD5C1EE2183510C200790989 /* _CLImageEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1EC8183510C200790989 /* _CLImageEditorViewController.xib */; };
 		ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */; };
+		ADFC0AA91844BC86003AE9C3 /* UIView+CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,8 @@
 		ADFC0A9C18447376003AE9C3 /* CLImageToolProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLImageToolProtocol.h; sourceTree = "<group>"; };
 		ADFC0A9D1844881F003AE9C3 /* CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageToolInfo.h; sourceTree = "<group>"; };
 		ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageToolInfo.m; sourceTree = "<group>"; };
+		ADFC0AA71844BC86003AE9C3 /* UIView+CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CLImageToolInfo.h"; path = "UIComponents/UIView+CLImageToolInfo.h"; sourceTree = "<group>"; };
+		ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CLImageToolInfo.m"; path = "UIComponents/UIView+CLImageToolInfo.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +205,7 @@
 		AD5C1E8F183510C200790989 /* ImageTools */ = {
 			isa = PBXGroup;
 			children = (
+				ADFC0AA61844BC6E003AE9C3 /* UIComponents */,
 				ADFC0A9C18447376003AE9C3 /* CLImageToolProtocol.h */,
 				AD5C1EB0183510C200790989 /* CLImageToolBase.h */,
 				AD5C1EB1183510C200790989 /* CLImageToolBase.m */,
@@ -330,6 +334,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		ADFC0AA61844BC6E003AE9C3 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				ADFC0AA71844BC86003AE9C3 /* UIView+CLImageToolInfo.h */,
+				ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */,
+			);
+			name = UIComponents;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -409,6 +422,7 @@
 				AD5C1EDE183510C200790989 /* UIDevice+SystemVersion.m in Sources */,
 				AD5C1E1418350DC400790989 /* AppDelegate.m in Sources */,
 				AD5C1ECB183510C200790989 /* CLAdjustmentTool.m in Sources */,
+				ADFC0AA91844BC86003AE9C3 /* UIView+CLImageToolInfo.m in Sources */,
 				AD5C1E1018350DC400790989 /* main.m in Sources */,
 				ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */,
 				AD5C1EDA183510C200790989 /* CLRotateTool.m in Sources */,

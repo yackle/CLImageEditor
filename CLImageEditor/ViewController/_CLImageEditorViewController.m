@@ -11,16 +11,7 @@
 #import "CLClassList.h"
 #import "UIView+Frame.h"
 #import "UIImage+Utility.h"
-
-
-
-@interface CLMenuPanel : UIView
-@property (nonatomic, strong) CLImageToolInfo *toolInfo;
-@end
-
-@implementation CLMenuPanel
-@end
-
+#import "UIView+CLImageToolInfo.h"
 
 
 @interface _CLImageEditorViewController()
@@ -152,7 +143,7 @@
             continue;
         }
         
-        CLMenuPanel *view = [[CLMenuPanel alloc] initWithFrame:CGRectMake(x, 0, W, W)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, W, W)];
         view.toolInfo = info;
         
         UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
@@ -302,7 +293,7 @@
 
 - (void)tappedMenuView:(UITapGestureRecognizer*)sender
 {
-    CLMenuPanel *view = (CLMenuPanel*)sender.view;
+    UIView *view = sender.view;
     
     view.alpha = 0.2;
     [UIView animateWithDuration:kCLImageToolAnimationDuration

@@ -11,13 +11,13 @@
 
 #pragma mark-
 
-+ (UIImage*)iconImage
+
++ (NSString*)defaultIconImagePath
 {
-    NSString *fileName = [NSString stringWithFormat:@"CLImageEditor.bundle/CLEffectTool/%@.png", NSStringFromClass([self class])];
-    return [UIImage imageNamed:fileName];
+    return [NSString stringWithFormat:@"CLImageEditor.bundle/CLEffectTool/%@.png", NSStringFromClass([self class])];
 }
 
-+ (CGFloat)dockedNumber
++ (CGFloat)defaultDockedNumber
 {
     // Effect tools are sorted according to the dockedNumber in tool bar.
     // Override point for tool bar customization
@@ -34,9 +34,12 @@
     return [effects indexOfObject:NSStringFromClass(self)];
 }
 
-#pragma mark- 
++ (NSArray*)subtools
+{
+    return nil;
+}
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"None";
 }
@@ -46,11 +49,13 @@
     return YES;
 }
 
-- (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame;
+#pragma mark-
+
+- (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame toolInfo:(CLImageToolInfo*)info
 {
     self = [super init];
     if(self){
-        
+        self.toolInfo = info;
     }
     return self;
 }
