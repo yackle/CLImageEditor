@@ -7,38 +7,33 @@
 
 #import "_CLImageEditorViewController.h"
 
-
-#import "CLImageTools.h"
+#import "CLImageToolBase.h"
+#import "CLClassList.h"
 #import "UIView+Frame.h"
 #import "UIImage+Utility.h"
 
 
-@interface CLMenuPanel : UIView
-{
-    
-}
-@property (nonatomic, strong) Class toolClass;
-@property (nonatomic, strong) NSString *title;
 
+@interface CLMenuPanel : UIView
+@property (nonatomic, strong) CLImageToolInfo *toolInfo;
 @end
 
 @implementation CLMenuPanel
-
 @end
 
 
 
-
-
-
-@interface _CLImageEditorViewController ()
+@interface _CLImageEditorViewController()
+<CLImageToolProtocol>
 @property (nonatomic, strong) CLImageToolBase *currentTool;
+@property (nonatomic, strong, readwrite) CLImageToolInfo *toolInfo;
 @end
 
 @implementation _CLImageEditorViewController
 {
     UIImage *_originalImage;
 }
+@synthesize toolInfo = _toolInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,6 +49,7 @@
     self = [self init];
     if (self){
         _originalImage = [image deepCopy];
+        self.toolInfo  = [CLImageToolInfo toolInfoForToolClass:[self class]];
     }
     return self;
 }
@@ -62,7 +58,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Edit";
+    self.title = self.toolInfo.title;
     
     if([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]){
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -100,36 +96,90 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- Properties
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    self.toolInfo.title = title;
+}
+
+#pragma mark- ImageTool setting
+
++ (NSString*)defaultIconImagePath
+{
+    return nil;
+}
+
++ (CGFloat)defaultDockedNumber
+{
+    return 0;
+}
+
++ (NSString*)defaultTitle
+{
+    return @"Edit";
+}
+
++ (BOOL)isAvailable
+{
+    return YES;
+}
+
++ (NSArray*)subtools
+{
+    NSArray *list = [CLClassList subclassesOfClass:[CLImageToolBase class]];
+    
+    NSMutableArray *array = [NSMutableArray array];
+    for(Class subtool in list){
+        CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:subtool];
+        if(info){
+            [array addObject:info];
+        }
+    }
+    return [array copy];
+}
+
+#pragma mark- 
+
 - (void)setMenuView
 {
     CGFloat x = 0;
     CGFloat W = 70;
     
-    NSArray *tools = [CLImageTools list];
+    NSArray *subtools = [self.toolInfo.subtools sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        CGFloat dockedNum1 = [obj1 dockedNumber];
+        CGFloat dockedNum2 = [obj2 dockedNumber];
+        
+        if(dockedNum1 < dockedNum2){ return NSOrderedAscending; }
+        else if(dockedNum1 > dockedNum2){ return NSOrderedDescending; }
+        return NSOrderedSame;
+    }];
     
-    for(Class tool in tools){
-        if([tool isSubclassOfClass:[CLImageToolBase class]] && [tool isAvailable]){
-            CLMenuPanel *view = [[CLMenuPanel alloc] initWithFrame:CGRectMake(x, 0, W, W)];
-            view.title = [tool title];
-            view.toolClass  = tool;
-            
-            UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
-            iconView.image = [tool iconImage];
-            [view addSubview:iconView];
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
-            label.backgroundColor = [UIColor clearColor];
-            label.text = [tool title];
-            label.font = [UIFont systemFontOfSize:10];
-            label.textAlignment = NSTextAlignmentCenter;
-            [view addSubview:label];
-            
-            UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMenuView:)];
-            [view addGestureRecognizer:gesture];
-            
-            [_menuView addSubview:view];
-            x += W;
+    for(CLImageToolInfo *info in subtools){
+        if(!info.available){
+            continue;
         }
+        
+        CLMenuPanel *view = [[CLMenuPanel alloc] initWithFrame:CGRectMake(x, 0, W, W)];
+        view.toolInfo = info;
+        
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
+        iconView.image = info.iconImage;
+        [view addSubview:iconView];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = info.title;
+        label.font = [UIFont systemFontOfSize:10];
+        label.textAlignment = NSTextAlignmentCenter;
+        [view addSubview:label];
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMenuView:)];
+        [view addGestureRecognizer:gesture];
+        
+        [_menuView addSubview:view];
+        x += W;
     }
     _menuView.contentSize = CGSizeMake(MAX(x, _menuView.frame.size.width+1), 0);
 }
@@ -249,7 +299,7 @@
     [self swapNavigationBarWithEditting:editting];
     
     if(self.currentTool){
-        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:[[self.currentTool class] title]];
+        UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
         item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
         [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
@@ -270,7 +320,7 @@
                      }
      ];
     
-    [self setupToolWithToolClass:view.toolClass];
+    [self setupToolWithToolInfo:view.toolInfo];
 }
 
 - (IBAction)pushedCancelBtn:(id)sender
@@ -301,14 +351,16 @@
     }];
 }
 
-- (void)setupToolWithToolClass:(Class)toolClass
+- (void)setupToolWithToolInfo:(CLImageToolInfo*)info
 {
     if(self.currentTool){ return; }
+    
+    Class toolClass = NSClassFromString(info.toolName);
     
     if(toolClass){
         id instance = [toolClass alloc];
         if(instance!=nil && [instance isKindOfClass:[CLImageToolBase class]]){
-            instance = [instance initWithImageEditor:self];
+            instance = [instance initWithImageEditor:self withToolInfo:info];
             self.currentTool = instance;
         }
     }

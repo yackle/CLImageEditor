@@ -7,7 +7,6 @@
 
 #import "CLFilterTool.h"
 
-#import <QuartzCore/QuartzCore.h>
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
 
@@ -37,7 +36,13 @@
     UIScrollView *_filterScroll;
 }
 
-+ (NSString*)title
+
++ (NSArray*)subtools
+{
+    return nil;
+}
+
++ (NSString*)defaultTitle
 {
     return @"Filter";
 }

@@ -9,22 +9,22 @@
 
 @implementation CLImageToolBase
 
-- (id)initWithImageEditor:(_CLImageEditorViewController*)editor
+- (id)initWithImageEditor:(_CLImageEditorViewController*)editor withToolInfo:(CLImageToolInfo*)info
 {
     self = [super init];
     if(self){
-        self.editor = editor;
+        self.editor   = editor;
+        self.toolInfo = info;
     }
     return self;
 }
 
-+ (UIImage*)iconImage
++ (NSString*)defaultIconImagePath
 {
-    NSString *fileName = [NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon.png", NSStringFromClass([self class])];
-    return [UIImage imageNamed:fileName];
+    return [NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon.png", NSStringFromClass([self class])];
 }
 
-+ (CGFloat)dockedNumber
++ (CGFloat)defaultDockedNumber
 {
     // Image tools are sorted according to the dockedNumber in tool bar.
     // Override point for tool bar customization
@@ -40,17 +40,22 @@
     return [tools indexOfObject:NSStringFromClass(self)];
 }
 
-#pragma mark-
-
-+ (NSString*)title
++ (NSArray*)subtools
 {
-    return @"None";
+    return nil;
+}
+
++ (NSString*)defaultTitle
+{
+    return @"DefaultTitle";
 }
 
 + (BOOL)isAvailable
 {
     return NO;
 }
+
+#pragma mark-
 
 - (void)setup
 {

@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 
 #pragma mark-
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"Blur & Focus";
 }

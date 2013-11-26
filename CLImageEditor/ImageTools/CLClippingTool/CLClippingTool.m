@@ -51,7 +51,7 @@
     UIScrollView *_menuScroll;
 }
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"Crop";
 }

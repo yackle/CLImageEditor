@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #import "_CLImageEditorViewController.h"
+#import "CLImageToolProtocol.h"
 
 
 static const CGFloat kCLImageToolAnimationDuration = 0.3;
@@ -15,19 +16,14 @@ static const CGFloat kCLImageToolFadeoutDuration   = 0.2;
 
 
 
-@interface CLImageToolBase : NSObject
+@interface CLImageToolBase : NSObject<CLImageToolProtocol>
 {
     
 }
 @property (nonatomic, weak) _CLImageEditorViewController *editor;
+@property (nonatomic, weak) CLImageToolInfo *toolInfo;
 
-+ (UIImage*)iconImage;
-+ (CGFloat)dockedNumber;
-+ (NSString*)title;
-+ (BOOL)isAvailable;
-
-
-- (id)initWithImageEditor:(_CLImageEditorViewController*)editor;
+- (id)initWithImageEditor:(_CLImageEditorViewController*)editor withToolInfo:(CLImageToolInfo*)info;
 
 - (void)setup;
 - (void)cleanup;

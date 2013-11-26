@@ -48,7 +48,7 @@
     return list;
 }
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"Effect";
 }

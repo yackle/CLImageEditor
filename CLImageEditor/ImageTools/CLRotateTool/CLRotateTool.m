@@ -36,7 +36,7 @@
     NSInteger _flipState2;
 }
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"Rotate";
 }

@@ -21,7 +21,7 @@
     UIActivityIndicatorView *_indicatorView;
 }
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"Adjustment";
 }

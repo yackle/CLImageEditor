@@ -51,6 +51,12 @@
         CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
         editor.delegate = self;
         
+        CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithTitle:@"Filter"];
+        tool.available = NO;
+        
+        tool = [editor.toolInfo subToolInfoWithToolName:@"CLEffectTool"];
+        tool.available = NO;
+        
         [self presentViewController:editor animated:YES completion:nil];
     }
     else{

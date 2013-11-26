@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CLImageToolInfo.h"
+
 @protocol CLImageEditorDelegate;
 
 @interface CLImageEditor : UIViewController
@@ -14,6 +16,7 @@
     
 }
 @property (nonatomic, weak) id<CLImageEditorDelegate> delegate;
+@property (nonatomic, readonly) CLImageToolInfo *toolInfo;
 
 - (id)initWithImage:(UIImage*)image;
 

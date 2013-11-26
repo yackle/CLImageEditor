@@ -55,7 +55,7 @@
 
 #pragma mark-
 
-+ (NSString*)title
++ (NSString*)defaultTitle
 {
     return @"ToneCurve";
 }
