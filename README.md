@@ -87,6 +87,37 @@ Icon images are included in `CLImageEditor.bundle`.  You can change the appearan
 Other features for theme settings not yet implemented.
 
 
+##### Menu customization
+
+Image tools can customize using `CLImageToolInfo`. CLImageEditor's `toolInfo` property has functions to access each tool's info. For example, `subToolInfoWithToolName:recursive:` method is used to get the tool info of a particular name.
+
+```  objc
+CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
+editor.delegate = self;
+
+CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLToneCurveTool" recursive:NO];
+```
+
+After getting a tool info, by changing its properties, you can customize the image tool on menu view.
+
+```  objc
+CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLToneCurveTool" recursive:NO];
+tool.title = @"TestTitle";
+tool.available = NO;     // if available is set to NO, it is removed from the menu view.
+tool.dockedNumber = -1;  // Bring to top
+//tool.iconImagePath = @"test.png";
+```
+
+* `dockedNumber` determine the menu item order. Note that it is simply used as a key for sorting.
+
+The list of tool names can be confirmed with the following code.
+
+```  objc
+NSLog(@"%@", editor.toolInfo);
+NSLog(@"%@", editor.toolInfo.toolTreeDescription);
+```
+
+
 License
 ---
 CLImageEditor is released under the MIT License, see [LICENSE](LICENSE).
