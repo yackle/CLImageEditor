@@ -7,8 +7,8 @@
 
 #import "CLAdjustmentTool.h"
 
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
+#import "../../Utils/UIImage+Utility.h"
+#import "../../Utils/UIView+Frame.h"
 
 @implementation CLAdjustmentTool
 {

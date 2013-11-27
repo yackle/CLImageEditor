@@ -7,11 +7,11 @@
 
 #import "CLFilterTool.h"
 
-#import "CLClassList.h"
 #import "CLFilterBase.h"
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
-#import "UIView+CLImageToolInfo.h"
+#import "../../Utils/CLClassList.h"
+#import "../../Utils/UIImage+Utility.h"
+#import "../../Utils/UIView+Frame.h"
+#import "../UIComponents/UIView+CLImageToolInfo.h"
 
 
 @implementation CLFilterTool

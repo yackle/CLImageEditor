@@ -20,5 +20,6 @@ Pod::Spec.new do |s|
   s.resources = "CLImageEditor/*.bundle", "CLImageEditor/ViewController/*.xib"
   
   s.requires_arc = true
+  s.frameworks   = 'CoreGraphics', 'CoreImage', 'Accelerate'
   
 end

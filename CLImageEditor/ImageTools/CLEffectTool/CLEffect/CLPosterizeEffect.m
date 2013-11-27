@@ -7,7 +7,7 @@
 
 #import "CLPosterizeEffect.h"
 
-#import "UIView+Frame.h"
+#import "../../../Utils/UIView+Frame.h"
 
 @implementation CLPosterizeEffect
 {

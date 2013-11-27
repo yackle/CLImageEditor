@@ -7,8 +7,8 @@
 
 #import "CLBlurTool.h"
 
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
+#import "../../Utils/UIView+Frame.h"
+#import "../../Utils/UIImage+Utility.h"
 
 
 typedef NS_ENUM(NSUInteger, CLBlurType)

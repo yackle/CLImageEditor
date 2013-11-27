@@ -7,11 +7,11 @@
 
 #import "_CLImageEditorViewController.h"
 
-#import "CLImageToolBase.h"
-#import "CLClassList.h"
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
-#import "UIView+CLImageToolInfo.h"
+#import "../ImageTools/CLImageToolBase.h"
+#import "../Utils/CLClassList.h"
+#import "../Utils/UIView+Frame.h"
+#import "../Utils/UIImage+Utility.h"
+#import "../ImageTools/UIComponents/UIView+CLImageToolInfo.h"
 
 
 @interface _CLImageEditorViewController()

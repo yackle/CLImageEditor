@@ -7,9 +7,8 @@
 
 #import "CLClippingTool.h"
 
-#import <QuartzCore/QuartzCore.h>
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
+#import "../../Utils/UIImage+Utility.h"
+#import "../../Utils/UIView+Frame.h"
 
 
 @interface CLRatio : NSObject

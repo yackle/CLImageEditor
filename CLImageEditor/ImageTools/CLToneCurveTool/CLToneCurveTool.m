@@ -7,9 +7,9 @@
 
 #import "CLToneCurveTool.h"
 
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
-#import "CLSplineInterpolator.h"
+#import "../../Utils/UIView+Frame.h"
+#import "../../Utils/UIImage+Utility.h"
+#import "../../Utils/CLSplineInterpolator.h"
 
 
 @protocol CLToneCurveGridDelegate;
