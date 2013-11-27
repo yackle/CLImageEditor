@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CLImageEditor"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "CLImageEditor provides basic image editing features to iPhone apps."
 
   s.homepage     = "https://github.com/yackle/CLImageEditor"
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/yackle/CLImageEditor.git", :tag => "v#{s.version}" }
 
   s.source_files  = 'CLImageEditor/*.{h,m,mm}', 'CLImageEditor/**/*.{h,m,mm}', 'CLImageEditor/ImageTools/**/*.{h,m,mm}', 'CLImageEditor/ImageTools/CLEffectTool/CLEffect/*.{h,m,mm}'
-  s.public_header_files = 'CLImageEditor/CLImageEditor.h'
+  s.public_header_files = 'CLImageEditor/CLImageEditor.h', 'CLImageEditor/CLImageToolInfo.h'
   
   s.resources = "CLImageEditor/*.bundle", "CLImageEditor/ViewController/*.xib"
   
