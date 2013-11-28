@@ -6,20 +6,28 @@ Pod::Spec.new do |s|
   s.summary      = "CLImageEditor provides basic image editing features to iPhone apps."
 
   s.homepage     = "https://github.com/yackle/CLImageEditor"
+  s.source       = { :git => "https://github.com/yackle/CLImageEditor.git", :tag => "v#{s.version}" }
   
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Sho Yakushiji" => "sho.yakushiji@gmail.com" }
 
 
   s.platform     = :ios, '5.0'
-  s.source       = { :git => "https://github.com/yackle/CLImageEditor.git", :tag => "v#{s.version}" }
-
-  s.source_files  = 'CLImageEditor/*.{h,m,mm}', 'CLImageEditor/**/*.{h,m,mm}', 'CLImageEditor/ImageTools/**/*.{h,m,mm}', 'CLImageEditor/ImageTools/CLEffectTool/CLEffect/*.{h,m,mm}'
-  s.public_header_files = 'CLImageEditor/CLImageEditor.h', 'CLImageEditor/CLImageToolInfo.h'
-  
-  s.resources = "CLImageEditor/*.bundle", "CLImageEditor/ViewController/*.xib"
-  
   s.requires_arc = true
   s.frameworks   = 'CoreGraphics', 'CoreImage', 'Accelerate'
+  
+  s.header_mappings_dir = "CLImageEditor"
+  s.default_subspec = "Core"
+  
+  s.subspec 'Core' do |core|
+    core.source_files  = 'CLImageEditor/*.{h,m,mm}', 'CLImageEditor/**/*.{h,m,mm}'
+    core.public_header_files = 'CLImageEditor/*.h'
+    core.resources = "CLImageEditor/*.bundle", "CLImageEditor/ViewController/*.xib"
+  end
+  
+  s.subspec 'Dev' do |dev|
+    dev.dependency 'CLImageEditor/Core'
+    dev.public_header_files = 'CLImageEditor/*/*.h', 'CLImageEditor/ImageTools/CLFilterTool/CLFilterBase.h', 'CLImageEditor/ImageTools/CLEffectTool/CLEffectBase.h'
+  end
   
 end

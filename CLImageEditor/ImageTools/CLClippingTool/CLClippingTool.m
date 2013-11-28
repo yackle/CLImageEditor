@@ -7,8 +7,8 @@
 
 #import "CLClippingTool.h"
 
-#import "../../Utils/UIImage+Utility.h"
-#import "../../Utils/UIView+Frame.h"
+#import "UIImage+Utility.h"
+#import "UIView+Frame.h"
 
 
 @interface CLRatio : NSObject

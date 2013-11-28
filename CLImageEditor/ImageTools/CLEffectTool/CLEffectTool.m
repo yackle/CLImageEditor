@@ -8,10 +8,10 @@
 #import "CLEffectTool.h"
 
 #import "CLEffectBase.h"
-#import "../../Utils/UIImage+Utility.h"
-#import "../../Utils/UIView+Frame.h"
-#import "../../Utils/CLClassList.h"
-#import "../UIComponents/UIView+CLImageToolInfo.h"
+#import "UIImage+Utility.h"
+#import "UIView+Frame.h"
+#import "CLClassList.h"
+#import "UIView+CLImageToolInfo.h"
 
 @interface CLEffectTool()
 @property (nonatomic, strong) UIView *selectedMenu;

@@ -7,7 +7,7 @@
 
 #import "CLSpotEffect.h"
 
-#import "../../../Utils/UIView+Frame.h"
+#import "UIView+Frame.h"
 
 
 

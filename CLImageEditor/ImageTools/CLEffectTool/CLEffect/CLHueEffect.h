@@ -5,7 +5,7 @@
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 
-#import "../CLEffectBase.h"
+#import "CLEffectBase.h"
 
 @interface CLHueEffect : CLEffectBase
 

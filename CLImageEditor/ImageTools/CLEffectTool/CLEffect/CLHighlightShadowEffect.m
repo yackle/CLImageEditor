@@ -7,7 +7,7 @@
 
 #import "CLHighlightShadowEffect.h"
 
-#import "../../../Utils/UIView+Frame.h"
+#import "UIView+Frame.h"
 
 @implementation CLHighlightShadowEffect
 {

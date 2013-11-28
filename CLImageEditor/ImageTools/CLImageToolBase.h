@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "../ViewController/_CLImageEditorViewController.h"
+#import "_CLImageEditorViewController.h"
 #import "CLImageToolProtocol.h"
 
 
