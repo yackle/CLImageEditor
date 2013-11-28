@@ -30,21 +30,7 @@
 
 + (NSArray*)subtools
 {
-    NSMutableArray *array = [NSMutableArray array];
-    
-    CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:[CLEffectBase class]];
-    if(info){
-        [array addObject:info];
-    }
-    
-    NSArray *list = [CLClassList subclassesOfClass:[CLEffectBase class]];
-    for(Class subtool in list){
-        info = [CLImageToolInfo toolInfoForToolClass:subtool];
-        if(info){
-            [array addObject:info];
-        }
-    }
-    return [array copy];
+    return [CLImageToolInfo toolsWithToolClass:[CLEffectBase class]];
 }
 
 + (NSString*)defaultTitle

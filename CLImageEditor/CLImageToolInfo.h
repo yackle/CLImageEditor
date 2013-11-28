@@ -21,6 +21,7 @@
 
 
 + (CLImageToolInfo*)toolInfoForToolClass:(Class<CLImageToolProtocol>)toolClass;
++ (NSArray*)toolsWithToolClass:(Class<CLImageToolProtocol>)toolClass;
 
 - (NSString*)toolTreeDescription;
 - (NSArray*)sortedSubtools;

@@ -119,6 +119,8 @@
 
 + (NSArray*)subtools
 {
+    return [CLImageToolInfo toolsWithToolClass:[CLImageToolBase class]];
+    /*
     NSArray *list = [CLClassList subclassesOfClass:[CLImageToolBase class]];
     
     NSMutableArray *array = [NSMutableArray array];
@@ -129,6 +131,7 @@
         }
     }
     return [array copy];
+     */
 }
 
 #pragma mark- 
