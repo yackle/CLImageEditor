@@ -62,12 +62,7 @@
 
 - (void)setup
 {
-    CGFloat minZoomScale = self.editor.scrollView.minimumZoomScale;
-    
-    self.editor.scrollView.maximumZoomScale = 0.95*minZoomScale;
-    self.editor.scrollView.minimumZoomScale = 0.95*minZoomScale;
-    
-    [self.editor.scrollView setZoomScale:self.editor.scrollView.minimumZoomScale animated:YES];
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     _menuContainer = [[UIView alloc] initWithFrame:self.editor.menuView.frame];
     _menuContainer.backgroundColor = self.editor.menuView.backgroundColor;
@@ -93,7 +88,7 @@
     
     [self setCropMenu];
     
-    _gridView = [[CLClippingPanel alloc] initWithSuperview:self.editor.scrollView frame:self.editor.imageView.frame];
+    _gridView = [[CLClippingPanel alloc] initWithSuperview:self.editor.imageView.superview frame:self.editor.imageView.frame];
     _gridView.backgroundColor = [UIColor clearColor];
     _gridView.bgColor = [self.editor.view.backgroundColor colorWithAlphaComponent:0.8];
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
@@ -108,7 +103,7 @@
 
 - (void)cleanup
 {
-    [self.editor resetZoomScaleWithAnimate:YES];
+    [self.editor resetZoomScaleWithAnimated:YES];
     [_gridView removeFromSuperview];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
@@ -122,7 +117,7 @@
 
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock
 {
-    CGFloat zoomScale = self.editor.scrollView.zoomScale;
+    CGFloat zoomScale = self.editor.imageView.width / self.editor.imageView.image.size.width;
     CGRect rct = _gridView.clippingRect;
     rct.size.width  /= zoomScale;
     rct.size.height /= zoomScale;

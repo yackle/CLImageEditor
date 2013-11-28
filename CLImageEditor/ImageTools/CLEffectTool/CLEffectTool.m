@@ -50,10 +50,7 @@
     _originalImage = self.editor.imageView.image;
     _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
-    CGFloat minZoomScale = self.editor.scrollView.minimumZoomScale;
-    self.editor.scrollView.maximumZoomScale = 0.95*minZoomScale;
-    self.editor.scrollView.minimumZoomScale = 0.95*minZoomScale;
-    [self.editor.scrollView setZoomScale:self.editor.scrollView.minimumZoomScale animated:YES];
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
     _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
@@ -74,7 +71,7 @@
     [self.selectedEffect cleanup];
     [_indicatorView removeFromSuperview];
     
-    [self.editor resetZoomScaleWithAnimate:YES];
+    [self.editor resetZoomScaleWithAnimated:YES];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
@@ -170,7 +167,7 @@
         _selectedMenu.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
         
         Class effectClass = NSClassFromString(_selectedMenu.toolInfo.toolName);
-        self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.scrollView imageViewFrame:self.editor.imageView.frame toolInfo:_selectedMenu.toolInfo];
+        self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.imageView.superview imageViewFrame:self.editor.imageView.frame toolInfo:_selectedMenu.toolInfo];
     }
 }
 

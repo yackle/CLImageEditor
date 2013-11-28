@@ -13,8 +13,8 @@
 <UIScrollViewDelegate, UIBarPositioningDelegate>
 {
     IBOutlet __weak UINavigationBar *_navigationBar;
+    IBOutlet __weak UIScrollView *_scrollView;
 }
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIImageView  *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *menuView;
 
@@ -22,11 +22,10 @@
 - (IBAction)pushedFinishBtn:(id)sender;
 
 
-
-
 - (id)initWithImage:(UIImage*)image;
 
-- (void)resetImageViewFrame;
-- (void)resetZoomScaleWithAnimate:(BOOL)animated;
+
+- (void)fixZoomScaleWithAnimated:(BOOL)animated;
+- (void)resetZoomScaleWithAnimated:(BOOL)animated;
 
 @end

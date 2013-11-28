@@ -48,10 +48,7 @@
 
 - (void)setup
 {
-    CGFloat minZoomScale = self.editor.scrollView.minimumZoomScale;
-    self.editor.scrollView.maximumZoomScale = 0.95*minZoomScale;
-    self.editor.scrollView.minimumZoomScale = 0.95*minZoomScale;
-    [self.editor.scrollView setZoomScale:self.editor.scrollView.minimumZoomScale animated:YES];
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     _initialTransform = self.editor.imageView.layer.transform;
     _initialRect = self.editor.imageView.frame;
@@ -59,7 +56,7 @@
     _flipState1 = 0;
     _flipState2 = 0;
     
-    _gridView = [[CLRotatePanel alloc] initWithSuperview:self.editor.scrollView frame:self.editor.imageView.frame];
+    _gridView = [[CLRotatePanel alloc] initWithSuperview:self.editor.imageView.superview frame:self.editor.imageView.frame];
     _gridView.backgroundColor = [UIColor clearColor];
     _gridView.bgColor = [self.editor.view.backgroundColor colorWithAlphaComponent:0.8];
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
@@ -87,7 +84,7 @@
     [_gridView removeFromSuperview];
     
     self.editor.imageView.layer.transform = _initialTransform;
-    [self.editor resetZoomScaleWithAnimate:YES];
+    [self.editor resetZoomScaleWithAnimated:YES];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{

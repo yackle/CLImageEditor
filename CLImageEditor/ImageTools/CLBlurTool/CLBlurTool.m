@@ -73,16 +73,13 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     _originalImage = self.editor.imageView.image;
     _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
-    CGFloat minZoomScale = self.editor.scrollView.minimumZoomScale;
-    self.editor.scrollView.maximumZoomScale = 0.95*minZoomScale;
-    self.editor.scrollView.minimumZoomScale = 0.95*minZoomScale;
-    [self.editor.scrollView setZoomScale:self.editor.scrollView.minimumZoomScale animated:YES];
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     _blurSlider = [self sliderWithValue:0.2 minimumValue:0 maximumValue:1];
     _blurSlider.superview.center = CGPointMake(self.editor.view.width/2, self.editor.menuView.top-30);
     
     _handlerView = [[UIView alloc] initWithFrame:self.editor.imageView.frame];
-    [self.editor.scrollView addSubview:_handlerView];
+    [self.editor.imageView.superview addSubview:_handlerView];
     [self setHandlerView];
     
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
@@ -103,7 +100,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 
 - (void)cleanup
 {
-    [self.editor resetZoomScaleWithAnimate:YES];
+    [self.editor resetZoomScaleWithAnimated:YES];
     [_blurSlider.superview removeFromSuperview];
     [_handlerView removeFromSuperview];
     
