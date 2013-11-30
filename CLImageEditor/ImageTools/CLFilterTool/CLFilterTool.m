@@ -8,7 +8,6 @@
 #import "CLFilterTool.h"
 
 #import "CLFilterBase.h"
-#import "CLClassList.h"
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
 #import "UIView+CLImageToolInfo.h"

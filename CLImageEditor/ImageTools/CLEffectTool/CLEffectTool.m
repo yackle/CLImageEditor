@@ -10,7 +10,6 @@
 #import "CLEffectBase.h"
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
-#import "CLClassList.h"
 #import "UIView+CLImageToolInfo.h"
 
 @interface CLEffectTool()

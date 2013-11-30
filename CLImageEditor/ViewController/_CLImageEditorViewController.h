@@ -7,15 +7,13 @@
 
 #import "CLImageEditor.h"
 
-#import "UIDevice+SystemVersion.h"
-
 @interface _CLImageEditorViewController : CLImageEditor
 <UIScrollViewDelegate, UIBarPositioningDelegate>
 {
     IBOutlet __weak UINavigationBar *_navigationBar;
     IBOutlet __weak UIScrollView *_scrollView;
 }
-@property (nonatomic, weak) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong) UIImageView  *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *menuView;
 
 - (IBAction)pushedCloseBtn:(id)sender;
