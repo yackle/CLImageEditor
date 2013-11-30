@@ -11,7 +11,7 @@
 #import "UIView+Frame.h"
 #import "UIImage+Utility.h"
 #import "UIView+CLImageToolInfo.h"
-
+#import "UIDevice+SystemVersion.h"
 
 
 #pragma mark- _CLViewState
@@ -205,11 +205,13 @@
                      animations:^{
                          _imageView.transform = CGAffineTransformIdentity;
                          
+                         CGFloat dy = ([UIDevice iosVersion]<7) ? [UIApplication sharedApplication].statusBarFrame.size.height : 0;
+                         
                          CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
                          CGFloat ratio = MIN(_scrollView.width / size.width, _scrollView.height / size.height);
                          CGFloat W = ratio * size.width;
                          CGFloat H = ratio * size.height;
-                         _imageView.frame = CGRectMake((_scrollView.width-W)/2 + _scrollView.left, (_scrollView.height-H)/2 + _scrollView.top, W, H);
+                         _imageView.frame = CGRectMake((_scrollView.width-W)/2 + _scrollView.left, (_scrollView.height-H)/2 + _scrollView.top + dy, W, H);
                          
                          _bgView.alpha = 1;
                          _navigationBar.transform = CGAffineTransformIdentity;
