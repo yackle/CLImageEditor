@@ -195,7 +195,7 @@
     [self.view insertSubview:_bgView atIndex:0];
     
     _bgView.backgroundColor = self.view.backgroundColor;
-    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [self.view.backgroundColor colorWithAlphaComponent:0];
     
     _bgView.alpha = 0;
     _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);

@@ -8,6 +8,7 @@
 #import "CLPixellateEffect.h"
 
 #import "UIView+Frame.h"
+#import "UIImage+Utility.h"
 
 @implementation CLPixellateEffect
 {
@@ -62,14 +63,85 @@
     CIImage *outputImage = [filter outputImage];
     CGImageRef cgImage = [context createCGImage:outputImage fromRect:[outputImage extent]];
     
+    CGRect clippingRect = [self clippingRectForTransparentSpace:cgImage];
     UIImage *result = [UIImage imageWithCGImage:cgImage];
     
     CGImageRelease(cgImage);
     
-    return result;
+    return [result crop:clippingRect];
 }
 
 #pragma mark-
+
+- (CGRect)clippingRectForTransparentSpace:(CGImageRef)inImage
+{
+    CGFloat left, right, top, bottom;
+    
+    CFDataRef m_DataRef = CGDataProviderCopyData(CGImageGetDataProvider(inImage));
+    UInt8 * m_PixelBuf = (UInt8 *) CFDataGetBytePtr(m_DataRef);
+    
+    int width = CGImageGetWidth(inImage);
+    int height = CGImageGetHeight(inImage);
+    
+    BOOL breakOut = NO;
+    for (int x = 0;breakOut==NO && x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            int loc = x + (y * width);
+            loc *= 4;
+            if (m_PixelBuf[loc + 3] != 0) {
+                left = x;
+                breakOut = YES;
+                break;
+            }
+        }
+    }
+    
+    breakOut = NO;
+    for (int y = 0;breakOut==NO && y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            int loc = x + (y * width);
+            loc *= 4;
+            if (m_PixelBuf[loc + 3] != 0) {
+                top = y;
+                breakOut = YES;
+                break;
+            }
+            
+        }
+    }
+    
+    breakOut = NO;
+    for (int y = height-1;breakOut==NO && y >= 0; --y) {
+        for (int x = width-1; x >= 0; --x) {
+            int loc = x + (y * width);
+            loc *= 4;
+            if (m_PixelBuf[loc + 3] != 0) {
+                bottom = y;
+                breakOut = YES;
+                break;
+            }
+            
+        }
+    }
+    
+    breakOut = NO;
+    for (int x = width-1;breakOut==NO && x >= 0; --x) {
+        for (int y = height-1; y >= 0; --y) {
+            int loc = x + (y * width);
+            loc *= 4;
+            if (m_PixelBuf[loc + 3] != 0) {
+                right = x;
+                breakOut = YES;
+                break;
+            }
+            
+        }
+    }
+    
+    CFRelease(m_DataRef);
+    
+    return CGRectMake(left, top, right-left, bottom-top);
+}
 
 - (UISlider*)sliderWithValue:(CGFloat)value minimumValue:(CGFloat)min maximumValue:(CGFloat)max
 {
