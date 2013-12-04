@@ -10,11 +10,17 @@ CLImageEditor provides basic image editing features to iPhone apps. This ViewCon
 Installing
 ---
 
-The easiest way to use CLImageEditor is to copy all the files in the CLImageEditor group (or directory) into your app. Alternatively, you should be able to setup a git submodule and reference the files in your Xcode project.
+The easiest way to use CLImageEditor is to copy all the files in the CLImageEditor group (or directory) into your app. Add the following frameworks to your project (Build Phases > Link Binary With Libraries): Accelerate, CoreGraphics, CoreImage.
 
-Add the following frameworks to your project: CoreGraphics, CoreImage, Accelerate
+##### Or git submodule
+
+Alternatively, you should be able to setup a [git submodule](http://git-scm.com/docs/git-submodule) and reference the files in your Xcode project.
+
+`git submodule add https://github.com/yackle/CLImageEditor.git`
 
 ##### Or CocoaPods
+
+[CocoaPods](http://beta.cocoapods.org/) is a dependency manager for Objective-C projects.
 
 `pod 'CLImageEditor'`
 
