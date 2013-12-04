@@ -7,7 +7,7 @@
 
 #import "CLImageEditor.h"
 
-#import "ViewController/_CLImageEditorViewController.h"
+#import "_CLImageEditorViewController.h"
 
 @interface CLImageEditor ()
 
@@ -16,9 +16,29 @@
 
 @implementation CLImageEditor
 
+- (id)init
+{
+    return [[_CLImageEditorViewController alloc] init];
+}
+
 - (id)initWithImage:(UIImage*)image
 {
-    return [[_CLImageEditorViewController alloc] initWithImage:image];
+    return [self initWithImage:image delegate:nil];
+}
+
+- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate
+{
+    return [[_CLImageEditorViewController alloc] initWithImage:image delegate:delegate];
+}
+
+- (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate
+{
+    return [[_CLImageEditorViewController alloc] initWithDelegate:delegate];
+}
+
+- (void)showInViewController:(UIViewController*)controller withImageView:(UIImageView*)imageView;
+{
+    
 }
 
 @end

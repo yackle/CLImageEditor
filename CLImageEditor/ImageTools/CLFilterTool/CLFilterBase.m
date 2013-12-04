@@ -7,7 +7,7 @@
 
 #import "CLFilterBase.h"
 
-#import "../../Utils/UIDevice+SystemVersion.h"
+#import "UIDevice+SystemVersion.h"
 
 
 @implementation CLFilterBase

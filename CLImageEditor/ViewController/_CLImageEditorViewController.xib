@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="_CLImageEditorViewController">
             <connections>
                 <outlet property="_navigationBar" destination="JCh-Zj-sve" id="T8R-qQ-oUQ"/>
-                <outlet property="imageView" destination="GUt-hG-zmR" id="KuX-AY-FD8"/>
                 <outlet property="menuView" destination="F4n-jl-KSx" id="ReW-tn-Sil"/>
                 <outlet property="scrollView" destination="6gx-ro-Tem" id="unb-Tm-wBE"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -22,12 +21,6 @@
                 <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="6gx-ro-Tem">
                     <rect key="frame" x="0.0" y="65" width="320" height="423"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GUt-hG-zmR">
-                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                    </subviews>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="21" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="txW-X2-yuT"/>

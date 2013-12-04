@@ -48,8 +48,9 @@
 - (void)pushedEditBtn
 {
     if(_imageView.image){
-        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
-        editor.delegate = self;
+        //CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
+        //editor.delegate = self;
+        CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
         
         /*
         NSLog(@"%@", editor.toolInfo);
@@ -65,7 +66,9 @@
         tool.available = NO;
         */
         
-        [self presentViewController:editor animated:YES completion:nil];
+        //[self presentViewController:editor animated:YES completion:nil];
+        
+        [editor showInViewController:self withImageView:_imageView];
     }
     else{
         [self pushedNewBtn];
@@ -170,45 +173,57 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    return _imageView;
+    return _imageView.superview;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    CGFloat Ws = _scrollView.frame.size.width;
+    CGFloat Ws = _scrollView.frame.size.width - _scrollView.contentInset.left - _scrollView.contentInset.right;
     CGFloat Hs = _scrollView.frame.size.height - _scrollView.contentInset.top - _scrollView.contentInset.bottom;
-    CGFloat W = _imageView.image.size.width*_scrollView.zoomScale;
-    CGFloat H = _imageView.image.size.height*_scrollView.zoomScale;
+    CGFloat W = _imageView.superview.frame.size.width;
+    CGFloat H = _imageView.superview.frame.size.height;
     
-    CGRect rct = _imageView.frame;
+    CGRect rct = _imageView.superview.frame;
     rct.origin.x = MAX((Ws-W)/2, 0);
     rct.origin.y = MAX((Hs-H)/2, 0);
-    _imageView.frame = rct;
+    _imageView.superview.frame = rct;
+}
+
+- (void)resetZoomScale
+{
+    CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
+    CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
+    
+    //CGFloat scale = [[UIScreen mainScreen] scale];
+    CGFloat scale = 1;
+    Rw = MAX(Rw, _imageView.image.size.width / (scale * _scrollView.frame.size.width));
+    Rh = MAX(Rh, _imageView.image.size.height / (scale * _scrollView.frame.size.height));
+    
+    _scrollView.contentSize = _imageView.frame.size;
+    _scrollView.minimumZoomScale = 1;
+    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
 }
 
 - (void)resetImageViewFrame
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGRect rct = _imageView.frame;
-        rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
-        _imageView.frame = rct;
-    });
+    CGRect rct = _imageView.bounds;
+    rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
+    _imageView.frame = rct;
+    _imageView.superview.bounds = _imageView.bounds;
 }
 
 - (void)resetZoomScaleWithAnimate:(BOOL)animated
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGFloat Rw = _scrollView.frame.size.width/_imageView.image.size.width;
-        CGFloat Rh = _scrollView.frame.size.height/_imageView.image.size.height;
-        CGFloat ratio = MIN(Rw, Rh);
-        
-        _scrollView.contentSize = _imageView.frame.size;
-        _scrollView.minimumZoomScale = ratio;
-        _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
-        
-        [_scrollView setZoomScale:ratio animated:animated];
-        [self scrollViewDidZoom:_scrollView];
-    });
+    CGFloat Rw = _scrollView.frame.size.width/_imageView.image.size.width;
+    CGFloat Rh = _scrollView.frame.size.height/_imageView.image.size.height;
+    CGFloat ratio = MIN(Rw, Rh);
+    
+    _scrollView.contentSize = _imageView.frame.size;
+    _scrollView.minimumZoomScale = ratio;
+    _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
+    
+    [_scrollView setZoomScale:ratio animated:animated];
+    [self scrollViewDidZoom:_scrollView];
 }
 
 - (void)refreshImageView

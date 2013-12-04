@@ -7,7 +7,6 @@
 
 #import "CLFilterTool.h"
 
-#import "CLClassList.h"
 #import "CLFilterBase.h"
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
@@ -23,16 +22,7 @@
 
 + (NSArray*)subtools
 {
-    NSMutableArray *array = [NSMutableArray array];
-    
-    NSArray *list = [CLClassList subclassesOfClass:[CLFilterBase class]];
-    for(Class subtool in list){
-        CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:subtool];
-        if(info){
-            [array addObject:info];
-        }
-    }
-    return [array copy];
+    return [CLImageToolInfo toolsWithToolClass:[CLFilterBase class]];
 }
 
 + (NSString*)defaultTitle

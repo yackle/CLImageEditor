@@ -36,10 +36,7 @@
     _originalImage = self.editor.imageView.image;
     _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
-    CGFloat minZoomScale = self.editor.scrollView.minimumZoomScale;
-    self.editor.scrollView.maximumZoomScale = 0.95*minZoomScale;
-    self.editor.scrollView.minimumZoomScale = 0.95*minZoomScale;
-    [self.editor.scrollView setZoomScale:self.editor.scrollView.minimumZoomScale animated:YES];
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     [self setupSlider];
 }
@@ -51,7 +48,7 @@
     [_brightnessSlider.superview removeFromSuperview];
     [_contrastSlider.superview removeFromSuperview];
     
-    [self.editor resetZoomScaleWithAnimate:YES];
+    [self.editor resetZoomScaleWithAnimated:YES];
 }
 
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock

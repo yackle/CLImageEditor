@@ -5,28 +5,25 @@
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 
-#import "../CLImageEditor.h"
-
-#import "../Utils/UIDevice+SystemVersion.h"
+#import "CLImageEditor.h"
 
 @interface _CLImageEditorViewController : CLImageEditor
 <UIScrollViewDelegate, UIBarPositioningDelegate>
 {
     IBOutlet __weak UINavigationBar *_navigationBar;
+    IBOutlet __weak UIScrollView *_scrollView;
 }
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, weak) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong) UIImageView  *imageView;
 @property (nonatomic, weak) IBOutlet UIScrollView *menuView;
 
 - (IBAction)pushedCloseBtn:(id)sender;
 - (IBAction)pushedFinishBtn:(id)sender;
 
 
-
-
 - (id)initWithImage:(UIImage*)image;
 
-- (void)resetImageViewFrame;
-- (void)resetZoomScaleWithAnimate:(BOOL)animated;
+
+- (void)fixZoomScaleWithAnimated:(BOOL)animated;
+- (void)resetZoomScaleWithAnimated:(BOOL)animated;
 
 @end

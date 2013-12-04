@@ -8,6 +8,7 @@
 #import "CLImageToolInfo.h"
 
 #import "CLImageToolProtocol.h"
+#import "CLClassList.h"
 
 @interface CLImageToolInfo()
 @property (nonatomic, strong) NSString *toolName;
@@ -28,8 +29,26 @@
         info.subtools = [toolClass subtools];
         return info;
     }
-    
     return nil;
+}
+
++ (NSArray*)toolsWithToolClass:(Class<CLImageToolProtocol>)toolClass
+{
+    NSMutableArray *array = [NSMutableArray array];
+    
+    CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:toolClass];
+    if(info){
+        [array addObject:info];
+    }
+    
+    NSArray *list = [CLClassList subclassesOfClass:toolClass];
+    for(Class subtool in list){
+        info = [CLImageToolInfo toolInfoForToolClass:subtool];
+        if(info){
+            [array addObject:info];
+        }
+    }
+    return [array copy];
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key inDictionary:(NSMutableDictionary*)dictionary

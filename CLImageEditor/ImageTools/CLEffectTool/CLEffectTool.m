@@ -10,7 +10,6 @@
 #import "CLEffectBase.h"
 #import "UIImage+Utility.h"
 #import "UIView+Frame.h"
-#import "CLClassList.h"
 #import "UIView+CLImageToolInfo.h"
 
 @interface CLEffectTool()
@@ -30,21 +29,7 @@
 
 + (NSArray*)subtools
 {
-    NSMutableArray *array = [NSMutableArray array];
-    
-    CLImageToolInfo *info = [CLImageToolInfo toolInfoForToolClass:[CLEffectBase class]];
-    if(info){
-        [array addObject:info];
-    }
-    
-    NSArray *list = [CLClassList subclassesOfClass:[CLEffectBase class]];
-    for(Class subtool in list){
-        info = [CLImageToolInfo toolInfoForToolClass:subtool];
-        if(info){
-            [array addObject:info];
-        }
-    }
-    return [array copy];
+    return [CLImageToolInfo toolsWithToolClass:[CLEffectBase class]];
 }
 
 + (NSString*)defaultTitle
@@ -64,10 +49,7 @@
     _originalImage = self.editor.imageView.image;
     _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
-    CGFloat minZoomScale = self.editor.scrollView.minimumZoomScale;
-    self.editor.scrollView.maximumZoomScale = 0.95*minZoomScale;
-    self.editor.scrollView.minimumZoomScale = 0.95*minZoomScale;
-    [self.editor.scrollView setZoomScale:self.editor.scrollView.minimumZoomScale animated:YES];
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
     _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
@@ -88,7 +70,7 @@
     [self.selectedEffect cleanup];
     [_indicatorView removeFromSuperview];
     
-    [self.editor resetZoomScaleWithAnimate:YES];
+    [self.editor resetZoomScaleWithAnimated:YES];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
@@ -184,7 +166,7 @@
         _selectedMenu.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
         
         Class effectClass = NSClassFromString(_selectedMenu.toolInfo.toolName);
-        self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.scrollView imageViewFrame:self.editor.imageView.frame toolInfo:_selectedMenu.toolInfo];
+        self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.imageView.superview imageViewFrame:self.editor.imageView.frame toolInfo:_selectedMenu.toolInfo];
     }
 }
 

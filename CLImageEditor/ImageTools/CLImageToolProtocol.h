@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "UIDevice+SystemVersion.h"
+
 @protocol CLImageToolProtocol
 
 @required
