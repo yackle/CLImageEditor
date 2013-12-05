@@ -52,7 +52,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"Crop";
+    return NSLocalizedStringWithDefaultValue(@"CLClippingTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Crop", @"");
 }
 
 + (BOOL)isAvailable
@@ -617,7 +617,7 @@
 - (NSString*)description
 {
     if(_longSide==0 || _shortSide==0){
-        return @"Custom";
+        return NSLocalizedStringWithDefaultValue(@"CLClippingTool_ItemMenuCustom", nil, [CLImageEditorTheme bundle], @"Custom", @"");
     }
     
     if(self.isLandscape){

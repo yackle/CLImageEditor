@@ -57,7 +57,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"ToneCurve";
+    return NSLocalizedStringWithDefaultValue(@"CLToneCurveTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"ToneCurve", @"");
 }
 
 + (BOOL)isAvailable
@@ -87,14 +87,13 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(_tonecurveView.right + 20, 15, 30, 30);
     [btn addTarget:self action:@selector(pushedHideBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"CLImageEditor.bundle/%@/arrow.png", [self class]]] forState:UIControlStateNormal];
+    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/arrow.png", [self class]]] forState:UIControlStateNormal];
     [_menuContainer addSubview:btn];
-    
     
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(_tonecurveView.right + 20, _tonecurveView.bottom - 30, 30, 30);
     [btn addTarget:self action:@selector(pushedResetBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"CLImageEditor.bundle/%@/reset.png", [self class]]] forState:UIControlStateNormal];
+    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/reset.png", [self class]]] forState:UIControlStateNormal];
     [_menuContainer addSubview:btn];
     
     _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuContainer.top);

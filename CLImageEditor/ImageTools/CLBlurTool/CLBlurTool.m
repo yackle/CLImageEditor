@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 
 + (NSString*)defaultTitle
 {
-    return @"Blur & Focus";
+    return NSLocalizedStringWithDefaultValue(@"CLBlurEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Blur & Focus", @"");
 }
 
 + (BOOL)isAvailable
@@ -143,9 +143,9 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     CGFloat x = 0;
     
     NSArray *_menu = @[
-                       @{@"title":@"Normal", @"icon":[NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon_normal.png", [self class]]},
-                       @{@"title":@"Circle", @"icon":[NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon_circle.png", [self class]]},
-                       @{@"title":@"Band", @"icon":[NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon_band.png", [self class]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLBlurEffect_MenuItemNormal", nil, [CLImageEditorTheme bundle], @"Normal", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon_normal.png", [self class]]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLBlurEffect_MenuItemCircle", nil, [CLImageEditorTheme bundle], @"Cirlcle", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon_circle.png", [self class]]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLBlurEffect_MenuItemBand", nil, [CLImageEditorTheme bundle], @"Band", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon_band.png", [self class]]]},
     ];
     
     NSInteger tag = 0;
@@ -156,7 +156,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
         UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
         iconView.clipsToBounds = YES;
         iconView.layer.cornerRadius = 2;
-        iconView.image = [UIImage imageNamed:obj[@"icon"]];
+        iconView.image = obj[@"icon"];
         [view addSubview:iconView];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
@@ -319,7 +319,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     frame.origin.x *= ratio;
     frame.origin.y *= ratio;
     
-    UIImage *mask = [UIImage imageNamed:@"CLImageEditor.bundle/CLBlurTool/circle.png"];
+    UIImage *mask = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/circle.png", [self class]]];
     UIGraphicsBeginImageContext(image.size);
     {
         CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext() , [[UIColor whiteColor] CGColor]);
@@ -334,7 +334,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 
 - (UIImage*)bandBlurImage:(UIImage*)image withBlurImage:(UIImage*)blurImage
 {
-    UIImage *mask = [UIImage imageNamed:@"CLImageEditor.bundle/CLBlurTool/band.png"];
+    UIImage *mask = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/band.png", [self class]]];
     
     UIGraphicsBeginImageContext(image.size);
     {

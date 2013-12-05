@@ -21,7 +21,7 @@
 
 + (NSString*)defaultIconImagePath
 {
-    return [NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon.png", NSStringFromClass([self class])];
+    return [NSString stringWithFormat:@"%@.bundle/%@/icon.png", [CLImageEditorTheme bundleName], NSStringFromClass([self class])];
 }
 
 + (CGFloat)defaultDockedNumber

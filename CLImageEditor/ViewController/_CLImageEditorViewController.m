@@ -7,6 +7,7 @@
 
 #import "_CLImageEditorViewController.h"
 
+#import "CLImageEditorTheme.h"
 #import "CLImageToolBase.h"
 #import "UIView+Frame.h"
 #import "UIImage+Utility.h"
@@ -301,7 +302,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"Edit";
+    return NSLocalizedStringWithDefaultValue(@"CLImageEditor_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Edit", @"");
 }
 
 + (BOOL)isAvailable
@@ -467,8 +468,8 @@
     
     if(self.currentTool){
         UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
-        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
-        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
+        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"CLImageEditor_OKBtnTitle", nil, [CLImageEditorTheme bundle], @"OK", @"") style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
+        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"CLImageEditor_BackBtnTitle", nil, [CLImageEditorTheme bundle], @"Back", @"") style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
         [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
     }
     else{

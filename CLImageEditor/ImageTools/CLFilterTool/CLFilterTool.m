@@ -27,7 +27,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"Filter";
+    return NSLocalizedStringWithDefaultValue(@"CLFilterTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Filter", @"");
 }
 
 + (BOOL)isAvailable

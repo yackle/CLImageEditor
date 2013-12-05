@@ -64,20 +64,20 @@
     if(defaultFilterInfo==nil){
         defaultFilterInfo =
         @{
-            @"CLDefaultEmptyFilter"     : @{@"name":@"CLDefaultEmptyFilter",     @"title":@"None",       @"version":@(0.0), @"dockedNum":@(0.0)},
-            @"CLDefaultLinearFilter"    : @{@"name":@"CISRGBToneCurveToLinear",  @"title":@"Linear",     @"version":@(7.0), @"dockedNum":@(1.0)},
-            @"CLDefaultVignetteFilter"  : @{@"name":@"CIVignetteEffect",         @"title":@"Vignette",   @"version":@(7.0), @"dockedNum":@(2.0)},
-            @"CLDefaultInstantFilter"   : @{@"name":@"CIPhotoEffectInstant",     @"title":@"Instant",    @"version":@(7.0), @"dockedNum":@(3.0)},
-            @"CLDefaultProcessFilter"   : @{@"name":@"CIPhotoEffectProcess",     @"title":@"Process",    @"version":@(7.0), @"dockedNum":@(4.0)},
-            @"CLDefaultTransferFilter"  : @{@"name":@"CIPhotoEffectTransfer",    @"title":@"Transfer",   @"version":@(7.0), @"dockedNum":@(5.0)},
-            @"CLDefaultSepiaFilter"     : @{@"name":@"CISepiaTone",              @"title":@"Sepia",      @"version":@(5.0), @"dockedNum":@(6.0)},
-            @"CLDefaultFilter"          : @{@"name":@"CIPhotoEffectChrome",      @"title":@"Chrome",     @"version":@(7.0), @"dockedNum":@(7.0)},
-            @"CLDefaultChromeFilter"    : @{@"name":@"CIPhotoEffectFade",        @"title":@"Fade",       @"version":@(7.0), @"dockedNum":@(8.0)},
-            @"CLDefaultCurveFilter"     : @{@"name":@"CILinearToSRGBToneCurve",  @"title":@"Curve",      @"version":@(7.0), @"dockedNum":@(9.0)},
-            @"CLDefaultTonalFilter"     : @{@"name":@"CIPhotoEffectTonal",       @"title":@"Tonal",      @"version":@(7.0), @"dockedNum":@(10.0)},
-            @"CLDefaultNoirFilter"      : @{@"name":@"CIPhotoEffectNoir",        @"title":@"Noir",       @"version":@(7.0), @"dockedNum":@(11.0)},
-            @"CLDefaultMonoFilter"      : @{@"name":@"CIPhotoEffectMono",        @"title":@"Mono",       @"version":@(7.0), @"dockedNum":@(12.0)},
-            @"CLDefaultInvertFilter"    : @{@"name":@"CIColorInvert",            @"title":@"Invert",     @"version":@(6.0), @"dockedNum":@(13.0)},
+            @"CLDefaultEmptyFilter"     : @{@"name":@"CLDefaultEmptyFilter",     @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultEmptyFilter_DefaultTitle",    nil, [CLImageEditorTheme bundle], @"None", @""),       @"version":@(0.0), @"dockedNum":@(0.0)},
+            @"CLDefaultLinearFilter"    : @{@"name":@"CISRGBToneCurveToLinear",  @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultLinearFilter_DefaultTitle",   nil, [CLImageEditorTheme bundle], @"Linear", @""),     @"version":@(7.0), @"dockedNum":@(1.0)},
+            @"CLDefaultVignetteFilter"  : @{@"name":@"CIVignetteEffect",         @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultVignetteFilter_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Vignette", @""),   @"version":@(7.0), @"dockedNum":@(2.0)},
+            @"CLDefaultInstantFilter"   : @{@"name":@"CIPhotoEffectInstant",     @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultInstantFilter_DefaultTitle",  nil, [CLImageEditorTheme bundle], @"Instant", @""),    @"version":@(7.0), @"dockedNum":@(3.0)},
+            @"CLDefaultProcessFilter"   : @{@"name":@"CIPhotoEffectProcess",     @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultProcessFilter_DefaultTitle",  nil, [CLImageEditorTheme bundle], @"Process", @""),    @"version":@(7.0), @"dockedNum":@(4.0)},
+            @"CLDefaultTransferFilter"  : @{@"name":@"CIPhotoEffectTransfer",    @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultTransferFilter_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Transfer", @""),   @"version":@(7.0), @"dockedNum":@(5.0)},
+            @"CLDefaultSepiaFilter"     : @{@"name":@"CISepiaTone",              @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultSepiaFilter_DefaultTitle",    nil, [CLImageEditorTheme bundle], @"Sepia", @""),      @"version":@(5.0), @"dockedNum":@(6.0)},
+            @"CLDefaultChromeFilter"    : @{@"name":@"CIPhotoEffectChrome",      @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultChromeFilter_DefaultTitle",   nil, [CLImageEditorTheme bundle], @"Chrome", @""),     @"version":@(7.0), @"dockedNum":@(7.0)},
+            @"CLDefaultFadeFilter"      : @{@"name":@"CIPhotoEffectFade",        @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultFadeFilter_DefaultTitle",     nil, [CLImageEditorTheme bundle], @"Fade", @""),       @"version":@(7.0), @"dockedNum":@(8.0)},
+            @"CLDefaultCurveFilter"     : @{@"name":@"CILinearToSRGBToneCurve",  @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultCurveFilter_DefaultTitle",    nil, [CLImageEditorTheme bundle], @"Curve", @""),      @"version":@(7.0), @"dockedNum":@(9.0)},
+            @"CLDefaultTonalFilter"     : @{@"name":@"CIPhotoEffectTonal",       @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultTonalFilter_DefaultTitle",    nil, [CLImageEditorTheme bundle], @"Tonal", @""),      @"version":@(7.0), @"dockedNum":@(10.0)},
+            @"CLDefaultNoirFilter"      : @{@"name":@"CIPhotoEffectNoir",        @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultNoirFilter_DefaultTitle",     nil, [CLImageEditorTheme bundle], @"Noir", @""),       @"version":@(7.0), @"dockedNum":@(11.0)},
+            @"CLDefaultMonoFilter"      : @{@"name":@"CIPhotoEffectMono",        @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultMonoFilter_DefaultTitle",     nil, [CLImageEditorTheme bundle], @"Mono", @""),       @"version":@(7.0), @"dockedNum":@(12.0)},
+            @"CLDefaultInvertFilter"    : @{@"name":@"CIColorInvert",            @"title":NSLocalizedStringWithDefaultValue(@"CLDefaultInvertFilter_DefaultTitle",   nil, [CLImageEditorTheme bundle], @"Invert", @""),     @"version":@(6.0), @"dockedNum":@(13.0)},
         };
     }
     return defaultFilterInfo;
@@ -184,14 +184,14 @@
 @implementation CLDefaultSepiaFilter
 @end
 
-@interface CLDefaultFilter : CLDefaultEmptyFilter
-@end
-@implementation CLDefaultFilter
-@end
-
 @interface CLDefaultChromeFilter : CLDefaultEmptyFilter
 @end
 @implementation CLDefaultChromeFilter
+@end
+
+@interface CLDefaultFadeFilter : CLDefaultEmptyFilter
+@end
+@implementation CLDefaultFadeFilter
 @end
 
 @interface CLDefaultCurveFilter : CLDefaultEmptyFilter

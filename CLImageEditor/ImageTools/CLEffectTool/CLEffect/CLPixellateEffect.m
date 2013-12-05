@@ -20,7 +20,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"Pixelate";
+    return NSLocalizedStringWithDefaultValue(@"CLPixellateEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Pixelate", @"");
 }
 
 + (BOOL)isAvailable

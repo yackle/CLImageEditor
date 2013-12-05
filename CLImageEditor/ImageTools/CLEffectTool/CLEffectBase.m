@@ -13,7 +13,7 @@
 
 + (NSString*)defaultIconImagePath
 {
-    return [NSString stringWithFormat:@"CLImageEditor.bundle/CLEffectTool/%@.png", NSStringFromClass([self class])];
+    return [NSString stringWithFormat:@"%@.bundle/CLEffectTool/%@.png", [CLImageEditorTheme bundleName], NSStringFromClass([self class])];
 }
 
 + (CGFloat)defaultDockedNumber
@@ -40,7 +40,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"None";
+    return NSLocalizedStringWithDefaultValue(@"CLEffectBase_DefaultTitle", nil, [CLImageEditorTheme bundle], @"None", @"");
 }
 
 + (BOOL)isAvailable

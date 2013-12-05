@@ -22,7 +22,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"Highlight";
+    return NSLocalizedStringWithDefaultValue(@"CLHighlightSadowEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Highlight", @"");
 }
 
 + (BOOL)isAvailable

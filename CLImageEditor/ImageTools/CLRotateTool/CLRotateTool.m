@@ -38,7 +38,7 @@
 
 + (NSString*)defaultTitle
 {
-    return @"Rotate";
+    return NSLocalizedStringWithDefaultValue(@"CLRotateTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Rotate", @"");
 }
 
 + (BOOL)isAvailable
@@ -124,9 +124,9 @@
     CGFloat x = 0;
     
     NSArray *_menu = @[
-                       @{@"title":@"", @"icon":[NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon_rotate.png", [self class]]},
-                       @{@"title":@"", @"icon":[NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon_flip1.png", [self class]]},
-                       @{@"title":@"", @"icon":[NSString stringWithFormat:@"CLImageEditor.bundle/%@/icon_flip2.png", [self class]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemRotateTitle", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon_rotate.png", [self class]]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle1", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon_flip1.png", [self class]]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle2", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon_flip2.png", [self class]]]},
                        ];
     
     NSInteger tag = 0;
@@ -136,7 +136,7 @@
         
         UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
         iconView.clipsToBounds = YES;
-        iconView.image = [UIImage imageNamed:obj[@"icon"]];
+        iconView.image = obj[@"icon"];
         [view addSubview:iconView];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
