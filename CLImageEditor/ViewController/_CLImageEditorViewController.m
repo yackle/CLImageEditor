@@ -352,11 +352,14 @@
 
 - (void)resetImageViewFrame
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGRect rct = _imageView.frame;
-        rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
-        _imageView.frame = rct;
-    });
+    CGAffineTransform transform = _imageView.transform;
+    _imageView.transform = CGAffineTransformIdentity;
+    
+    CGRect rct = _imageView.frame;
+    rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
+    _imageView.frame = rct;
+    
+    _imageView.transform = transform;
 }
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated
@@ -369,27 +372,23 @@
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGFloat Rw = _scrollView.frame.size.width/_imageView.image.size.width;
-        CGFloat Rh = _scrollView.frame.size.height/_imageView.image.size.height;
-        CGFloat ratio = MIN(Rw, Rh);
-        
-        _scrollView.contentSize = _imageView.frame.size;
-        _scrollView.minimumZoomScale = ratio;
-        _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
-        
-        [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
-    });
+    CGFloat Rw = _scrollView.frame.size.width/_imageView.image.size.width;
+    CGFloat Rh = _scrollView.frame.size.height/_imageView.image.size.height;
+    CGFloat ratio = MIN(Rw, Rh);
+    
+    _scrollView.contentSize = _imageView.frame.size;
+    _scrollView.minimumZoomScale = ratio;
+    _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
+    
+    [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
 }
 
 - (void)refreshImageView
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _imageView.image = _originalImage;
-        
-        [self resetImageViewFrame];
-        [self resetZoomScaleWithAnimated:NO];
-    });
+    _imageView.image = _originalImage;
+    
+    [self resetImageViewFrame];
+    [self resetZoomScaleWithAnimated:NO];
 }
 
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar

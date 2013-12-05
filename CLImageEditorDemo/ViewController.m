@@ -48,9 +48,9 @@
 - (void)pushedEditBtn
 {
     if(_imageView.image){
-        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
-        editor.delegate = self;
-        //CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
+        //CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
+        //editor.delegate = self;
+        CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
         
         /*
         NSLog(@"%@", editor.toolInfo);
@@ -66,9 +66,9 @@
         tool.available = NO;
         */
         
-        [self presentViewController:editor animated:YES completion:nil];
+        //[self presentViewController:editor animated:YES completion:nil];
         
-        //[editor showInViewController:self withImageView:_imageView];
+        [editor showInViewController:self withImageView:_imageView];
     }
     else{
         [self pushedNewBtn];

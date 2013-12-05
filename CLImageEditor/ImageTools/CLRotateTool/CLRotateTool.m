@@ -83,8 +83,8 @@
     [_rotateSlider.superview removeFromSuperview];
     [_gridView removeFromSuperview];
     
-    self.editor.imageView.layer.transform = _initialTransform;
-    [self.editor resetZoomScaleWithAnimated:YES];
+    //self.editor.imageView.layer.transform = _initialTransform;
+    [self.editor resetZoomScaleWithAnimated:NO];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
