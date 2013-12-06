@@ -352,14 +352,9 @@
 
 - (void)resetImageViewFrame
 {
-    CGAffineTransform transform = _imageView.transform;
-    _imageView.transform = CGAffineTransformIdentity;
-    
     CGRect rct = _imageView.frame;
     rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
     _imageView.frame = rct;
-    
-    _imageView.transform = transform;
 }
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated

@@ -8,7 +8,7 @@
 #import "CLRotateTool.h"
 
 #import "UIView+Frame.h"
-
+#import "UIImage+Utility.h"
 
 
 
@@ -27,10 +27,12 @@
 {
     UISlider *_rotateSlider;
     UIScrollView *_menuScroll;
-    CATransform3D _initialTransform;
     CGRect _initialRect;
     
+    BOOL _executed;
+    
     CLRotatePanel *_gridView;
+    UIImageView *_rotateImageView;
     
     NSInteger _flipState1;
     NSInteger _flipState2;
@@ -48,9 +50,10 @@
 
 - (void)setup
 {
+    _executed = NO;
+    
     [self.editor fixZoomScaleWithAnimated:YES];
     
-    _initialTransform = self.editor.imageView.layer.transform;
     _initialRect = self.editor.imageView.frame;
     
     _flipState1 = 0;
@@ -75,6 +78,12 @@
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
                          _menuScroll.transform = CGAffineTransformIdentity;
+                     }
+                     completion:^(BOOL finished) {
+                         _rotateImageView = [[UIImageView alloc] initWithFrame:_initialRect];
+                         _rotateImageView.image = self.editor.imageView.image;
+                         [_gridView.superview insertSubview:_rotateImageView belowSubview:_gridView];
+                         self.editor.imageView.hidden = YES;
                      }];
 }
 
@@ -83,15 +92,27 @@
     [_rotateSlider.superview removeFromSuperview];
     [_gridView removeFromSuperview];
     
-    //self.editor.imageView.layer.transform = _initialTransform;
+    if(_executed){
+        [self.editor resetZoomScaleWithAnimated:NO];
+        [self.editor fixZoomScaleWithAnimated:NO];
+        
+        _rotateImageView.transform = CGAffineTransformIdentity;
+        _rotateImageView.frame = self.editor.imageView.frame;
+        _rotateImageView.image = self.editor.imageView.image;
+    }
     [self.editor resetZoomScaleWithAnimated:NO];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
                          _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
+                         
+                         _rotateImageView.transform = CGAffineTransformIdentity;
+                         _rotateImageView.frame = self.editor.imageView.frame;
                      }
                      completion:^(BOOL finished) {
                          [_menuScroll removeFromSuperview];
+                         [_rotateImageView removeFromSuperview];
+                         self.editor.imageView.hidden = NO;
                      }];
 }
 
@@ -111,6 +132,7 @@
         UIImage *image = [self buildImage:self.editor.imageView.image];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            _executed = YES;
             completionBlock(image, nil, nil);
         });
     });
@@ -238,7 +260,7 @@
 
 - (void)rotateStateDidChange
 {
-    CATransform3D transform = [self rotateTransform:_initialTransform clockwise:YES];
+    CATransform3D transform = [self rotateTransform:CATransform3DIdentity clockwise:YES];
     
     CGFloat arg = _rotateSlider.value*M_PI;
     CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
@@ -249,9 +271,9 @@
     CGFloat scale = MIN(Rw, Rh) * 0.95;
     
     transform = CATransform3DScale(transform, scale, scale, 1);
-    self.editor.imageView.layer.transform = transform;
+    _rotateImageView.layer.transform = transform;
     
-    _gridView.gridRect = self.editor.imageView.frame;
+    _gridView.gridRect = _rotateImageView.frame;
 }
 
 - (UIImage*)buildImage:(UIImage*)image
