@@ -7,10 +7,6 @@
 
 #import "CLEffectTool.h"
 
-#import "CLEffectBase.h"
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
-#import "UIView+CLImageToolInfo.h"
 
 @interface CLEffectTool()
 @property (nonatomic, strong) UIView *selectedMenu;
@@ -84,10 +80,7 @@
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-        _indicatorView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-        _indicatorView.layer.cornerRadius = 5;
-        _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        _indicatorView = [CLImageEditorTheme indicatorView];
         _indicatorView.center = self.editor.view.center;
         [self.editor.view addSubview:_indicatorView];
         [_indicatorView startAnimating];
@@ -127,7 +120,8 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
         label.backgroundColor = [UIColor clearColor];
         label.text = info.title;
-        label.font = [UIFont systemFontOfSize:10];
+        label.textColor = [CLImageEditorTheme toolbarTextColor];
+        label.font = [CLImageEditorTheme toolbarTextFont];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
         
@@ -163,7 +157,7 @@
     if(selectedMenu != _selectedMenu){
         _selectedMenu.backgroundColor = [UIColor clearColor];
         _selectedMenu = selectedMenu;
-        _selectedMenu.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
+        _selectedMenu.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
         
         Class effectClass = NSClassFromString(_selectedMenu.toolInfo.toolName);
         self.selectedEffect = [[effectClass alloc] initWithSuperView:self.editor.imageView.superview imageViewFrame:self.editor.imageView.frame toolInfo:_selectedMenu.toolInfo];

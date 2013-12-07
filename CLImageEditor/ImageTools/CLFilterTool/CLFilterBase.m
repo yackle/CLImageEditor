@@ -7,9 +7,6 @@
 
 #import "CLFilterBase.h"
 
-#import "UIDevice+SystemVersion.h"
-
-
 @implementation CLFilterBase
 
 + (NSString*)defaultIconImagePath

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #import "_CLImageEditorViewController.h"
-#import "CLImageToolProtocol.h"
+#import "CLImageToolSettings.h"
 
 
 static const CGFloat kCLImageToolAnimationDuration = 0.3;

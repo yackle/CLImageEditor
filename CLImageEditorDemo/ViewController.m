@@ -11,7 +11,7 @@
 #import "CLImageEditor.h"
 
 @interface ViewController ()
-<CLImageEditorDelegate>
+<CLImageEditorDelegate, CLImageEditorThemeDelegate>
 @end
 
 @implementation ViewController
@@ -48,9 +48,9 @@
 - (void)pushedEditBtn
 {
     if(_imageView.image){
-        //CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
-        //editor.delegate = self;
-        CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
+        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
+        editor.delegate = self;
+        //CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
         
         /*
         NSLog(@"%@", editor.toolInfo);

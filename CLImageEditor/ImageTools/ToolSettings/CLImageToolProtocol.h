@@ -7,9 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "UIDevice+SystemVersion.h"
-#import "CLImageEditorTheme.h"
-
 @protocol CLImageToolProtocol
 
 @required
@@ -18,6 +15,5 @@
 + (NSString*)defaultTitle;
 + (BOOL)isAvailable;
 + (NSArray*)subtools;
-
 
 @end

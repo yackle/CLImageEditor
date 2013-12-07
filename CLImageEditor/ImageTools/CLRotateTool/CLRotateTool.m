@@ -7,9 +7,6 @@
 
 #import "CLRotateTool.h"
 
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
-
 
 
 @interface CLRotatePanel : UIView
@@ -119,10 +116,7 @@
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-        indicator.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-        indicator.layer.cornerRadius = 5;
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        UIActivityIndicatorView *indicator = [CLImageEditorTheme indicatorView];
         indicator.center = CGPointMake(_gridView.width/2, _gridView.height/2);
         [_gridView addSubview:indicator];
         [indicator startAnimating];
@@ -164,7 +158,8 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
         label.backgroundColor = [UIColor clearColor];
         label.text = obj[@"title"];
-        label.font = [UIFont systemFontOfSize:10];
+        label.textColor = [CLImageEditorTheme toolbarTextColor];
+        label.font = [CLImageEditorTheme toolbarTextFont];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
         

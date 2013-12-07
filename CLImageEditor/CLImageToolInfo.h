@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol CLImageToolProtocol;
-
 @interface CLImageToolInfo : NSObject
 
 @property (nonatomic, readonly) NSString *toolName;
@@ -19,9 +17,6 @@
 @property (nonatomic, readonly) UIImage  *iconImage;
 @property (nonatomic, readonly) NSArray  *subtools;
 
-
-+ (CLImageToolInfo*)toolInfoForToolClass:(Class<CLImageToolProtocol>)toolClass;
-+ (NSArray*)toolsWithToolClass:(Class<CLImageToolProtocol>)toolClass;
 
 - (NSString*)toolTreeDescription;
 - (NSArray*)sortedSubtools;

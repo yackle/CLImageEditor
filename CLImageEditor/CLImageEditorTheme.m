@@ -43,32 +43,13 @@ static CLImageEditorTheme *_sharedInstance = nil;
     self = [super init];
     if (self) {
         self.bundleName = @"CLImageEditor";
+        self.backgroundColor = [UIColor whiteColor];
+        self.toolbarColor = [UIColor colorWithWhite:1 alpha:0.8];
+        self.toolbarTextColor = [UIColor blackColor];
+        self.toolbarSelectedButtonColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
+        self.toolbarTextFont = [UIFont systemFontOfSize:10];
     }
     return self;
-}
-
-#pragma mark- instance methods
-
-- (NSBundle*)bundle
-{
-    return [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:self.bundleName ofType:@"bundle"]];
-}
-
-#pragma mark- class methods
-
-+ (NSString*)bundleName
-{
-    return self.theme.bundleName;
-}
-
-+ (NSBundle*)bundle
-{
-    return self.theme.bundle;
-}
-
-+ (UIImage*)imageNamed:(NSString *)path
-{
-    return [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", self.bundleName, path]];
 }
 
 @end

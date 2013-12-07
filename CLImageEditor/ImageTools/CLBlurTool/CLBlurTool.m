@@ -7,10 +7,6 @@
 
 #import "CLBlurTool.h"
 
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
-
-
 typedef NS_ENUM(NSUInteger, CLBlurType)
 {
     kCLBlurTypeNormal = 0,
@@ -116,10 +112,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-        indicator.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-        indicator.layer.cornerRadius = 5;
-        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        UIActivityIndicatorView *indicator = [CLImageEditorTheme indicatorView];
         indicator.center = CGPointMake(_handlerView.width/2, _handlerView.height/2);
         [_handlerView addSubview:indicator];
         [indicator startAnimating];
@@ -162,7 +155,8 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
         label.backgroundColor = [UIColor clearColor];
         label.text = obj[@"title"];
-        label.font = [UIFont systemFontOfSize:10];
+        label.textColor = [CLImageEditorTheme toolbarTextColor];
+        label.font = [CLImageEditorTheme toolbarTextFont];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
         
@@ -184,7 +178,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     if(selectedMenu != _selectedMenu){
         _selectedMenu.backgroundColor = [UIColor clearColor];
         _selectedMenu = selectedMenu;
-        _selectedMenu.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
+        _selectedMenu.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
     }
 }
 
