@@ -7,9 +7,6 @@
 
 #import "CLAdjustmentTool.h"
 
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
-
 @implementation CLAdjustmentTool
 {
     UIImage *_originalImage;
@@ -54,10 +51,7 @@
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-        _indicatorView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-        _indicatorView.layer.cornerRadius = 5;
-        _indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        _indicatorView = [CLImageEditorTheme indicatorView];
         _indicatorView.center = self.editor.view.center;
         [self.editor.view addSubview:_indicatorView];
         [_indicatorView startAnimating];

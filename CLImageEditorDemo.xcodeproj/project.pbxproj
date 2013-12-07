@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD317A8B1852F602005F2526 /* CLImageEditorTheme+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = AD317A8A1852F602005F2526 /* CLImageEditorTheme+Private.m */; };
+		AD317A8E1852F61D005F2526 /* UIView+CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AD317A8D1852F61D005F2526 /* UIView+CLImageToolInfo.m */; };
+		AD317A911852F670005F2526 /* CLImageToolInfo+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = AD317A901852F670005F2526 /* CLImageToolInfo+Private.m */; };
 		AD5C1E0418350DC400790989 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0318350DC400790989 /* Foundation.framework */; };
 		AD5C1E0618350DC400790989 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0518350DC400790989 /* CoreGraphics.framework */; };
 		AD5C1E0818350DC400790989 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD5C1E0718350DC400790989 /* UIKit.framework */; };
@@ -46,12 +49,19 @@
 		AD85D68718457388003106A3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68618457388003106A3 /* Accelerate.framework */; };
 		AD85D68918457394003106A3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68818457394003106A3 /* CoreImage.framework */; };
 		ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */; };
-		ADFC0AA91844BC86003AE9C3 /* UIView+CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */; };
 		ADFC0AAF1844C6BC003AE9C3 /* CLFilterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0AAE1844C6BC003AE9C3 /* CLFilterBase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AD13E67C1850F7C8009B12AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AD317A891852F602005F2526 /* CLImageEditorTheme+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLImageEditorTheme+Private.h"; path = "ToolSettings/CLImageEditorTheme+Private.h"; sourceTree = "<group>"; };
+		AD317A8A1852F602005F2526 /* CLImageEditorTheme+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLImageEditorTheme+Private.m"; path = "ToolSettings/CLImageEditorTheme+Private.m"; sourceTree = "<group>"; };
+		AD317A8C1852F61D005F2526 /* UIView+CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CLImageToolInfo.h"; path = "ToolSettings/UIView+CLImageToolInfo.h"; sourceTree = "<group>"; };
+		AD317A8D1852F61D005F2526 /* UIView+CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CLImageToolInfo.m"; path = "ToolSettings/UIView+CLImageToolInfo.m"; sourceTree = "<group>"; };
+		AD317A8F1852F670005F2526 /* CLImageToolInfo+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLImageToolInfo+Private.h"; path = "ToolSettings/CLImageToolInfo+Private.h"; sourceTree = "<group>"; };
+		AD317A901852F670005F2526 /* CLImageToolInfo+Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLImageToolInfo+Private.m"; path = "ToolSettings/CLImageToolInfo+Private.m"; sourceTree = "<group>"; };
+		AD317A921852F759005F2526 /* CLImageToolProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CLImageToolProtocol.h; path = ToolSettings/CLImageToolProtocol.h; sourceTree = "<group>"; };
+		AD317A941852F8BB005F2526 /* CLImageToolSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CLImageToolSettings.h; path = ToolSettings/CLImageToolSettings.h; sourceTree = "<group>"; };
 		AD5C1E0018350DC400790989 /* CLImageEditorDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLImageEditorDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5C1E0318350DC400790989 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AD5C1E0518350DC400790989 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,11 +130,8 @@
 		AD7319CD1850B8D500F262DF /* CLImageEditorTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageEditorTheme.m; sourceTree = "<group>"; };
 		AD85D68618457388003106A3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		AD85D68818457394003106A3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		ADFC0A9C18447376003AE9C3 /* CLImageToolProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLImageToolProtocol.h; sourceTree = "<group>"; };
 		ADFC0A9D1844881F003AE9C3 /* CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageToolInfo.h; sourceTree = "<group>"; };
 		ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageToolInfo.m; sourceTree = "<group>"; };
-		ADFC0AA71844BC86003AE9C3 /* UIView+CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CLImageToolInfo.h"; path = "UIComponents/UIView+CLImageToolInfo.h"; sourceTree = "<group>"; };
-		ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CLImageToolInfo.m"; path = "UIComponents/UIView+CLImageToolInfo.m"; sourceTree = "<group>"; };
 		ADFC0AAD1844C6BC003AE9C3 /* CLFilterBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFilterBase.h; sourceTree = "<group>"; };
 		ADFC0AAE1844C6BC003AE9C3 /* CLFilterBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLFilterBase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +152,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD317A881852F5DF005F2526 /* ToolSettings */ = {
+			isa = PBXGroup;
+			children = (
+				AD317A941852F8BB005F2526 /* CLImageToolSettings.h */,
+				AD317A921852F759005F2526 /* CLImageToolProtocol.h */,
+				AD317A8F1852F670005F2526 /* CLImageToolInfo+Private.h */,
+				AD317A901852F670005F2526 /* CLImageToolInfo+Private.m */,
+				AD317A891852F602005F2526 /* CLImageEditorTheme+Private.h */,
+				AD317A8A1852F602005F2526 /* CLImageEditorTheme+Private.m */,
+				AD317A8C1852F61D005F2526 /* UIView+CLImageToolInfo.h */,
+				AD317A8D1852F61D005F2526 /* UIView+CLImageToolInfo.m */,
+			);
+			name = ToolSettings;
+			sourceTree = "<group>";
+		};
 		AD5C1DF718350DC400790989 = {
 			isa = PBXGroup;
 			children = (
@@ -222,10 +244,9 @@
 		AD5C1E8F183510C200790989 /* ImageTools */ = {
 			isa = PBXGroup;
 			children = (
-				ADFC0A9C18447376003AE9C3 /* CLImageToolProtocol.h */,
+				AD317A881852F5DF005F2526 /* ToolSettings */,
 				AD5C1EB0183510C200790989 /* CLImageToolBase.h */,
 				AD5C1EB1183510C200790989 /* CLImageToolBase.m */,
-				ADFC0AA61844BC6E003AE9C3 /* UIComponents */,
 				AD5C1EAD183510C200790989 /* CLFilterTool */,
 				AD5C1E90183510C200790989 /* CLAdjustmentTool */,
 				AD5C1E99183510C200790989 /* CLEffectTool */,
@@ -353,15 +374,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		ADFC0AA61844BC6E003AE9C3 /* UIComponents */ = {
-			isa = PBXGroup;
-			children = (
-				ADFC0AA71844BC86003AE9C3 /* UIView+CLImageToolInfo.h */,
-				ADFC0AA81844BC86003AE9C3 /* UIView+CLImageToolInfo.m */,
-			);
-			name = UIComponents;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -442,16 +454,18 @@
 				AD5C1EDE183510C200790989 /* UIDevice+SystemVersion.m in Sources */,
 				AD5C1E1418350DC400790989 /* AppDelegate.m in Sources */,
 				AD5C1ECB183510C200790989 /* CLAdjustmentTool.m in Sources */,
-				ADFC0AA91844BC86003AE9C3 /* UIView+CLImageToolInfo.m in Sources */,
 				AD5C1E1018350DC400790989 /* main.m in Sources */,
 				ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */,
 				AD5C1EDA183510C200790989 /* CLRotateTool.m in Sources */,
 				AD5C1ED0183510C200790989 /* CLHighlightShadowEffect.m in Sources */,
 				AD5C1ED2183510C200790989 /* CLPixellateEffect.m in Sources */,
 				AD5C1ECD183510C200790989 /* CLClippingTool.m in Sources */,
+				AD317A8B1852F602005F2526 /* CLImageEditorTheme+Private.m in Sources */,
+				AD317A8E1852F61D005F2526 /* UIView+CLImageToolInfo.m in Sources */,
 				AD5C1ECA183510C200790989 /* CLImageEditor.m in Sources */,
 				AD5C1EDB183510C200790989 /* CLToneCurveTool.m in Sources */,
 				AD5C1EE0183510C200790989 /* UIView+Frame.m in Sources */,
+				AD317A911852F670005F2526 /* CLImageToolInfo+Private.m in Sources */,
 				AD5C1ECC183510C200790989 /* CLBlurTool.m in Sources */,
 				AD5C1EDD183510C200790989 /* CLSplineInterpolator.m in Sources */,
 				AD5C1EE1183510C200790989 /* _CLImageEditorViewController.m in Sources */,

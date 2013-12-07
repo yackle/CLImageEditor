@@ -7,12 +7,7 @@
 
 #import "_CLImageEditorViewController.h"
 
-#import "CLImageEditorTheme.h"
 #import "CLImageToolBase.h"
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
-#import "UIView+CLImageToolInfo.h"
-#import "UIDevice+SystemVersion.h"
 
 
 #pragma mark- _CLViewState
@@ -84,7 +79,7 @@
 {
     self = [self initWithNibName:@"_CLImageEditorViewController" bundle:nil];
     if (self){
-        self.toolInfo  = [CLImageToolInfo toolInfoForToolClass:[self class]];
+        self.toolInfo = [CLImageToolInfo toolInfoForToolClass:[self class]];
     }
     return self;
 }
@@ -135,6 +130,7 @@
     [super viewDidLoad];
     
     self.title = self.toolInfo.title;
+    self.view.backgroundColor = self.theme.backgroundColor;
     
     if([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]){
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -144,7 +140,7 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
-    _menuView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    _menuView.backgroundColor = [CLImageEditorTheme toolbarColor];
     
     if(self.navigationController!=nil){
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
@@ -337,7 +333,8 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
         label.backgroundColor = [UIColor clearColor];
         label.text = info.title;
-        label.font = [UIFont systemFontOfSize:10];
+        label.textColor = [CLImageEditorTheme toolbarTextColor];
+        label.font = [CLImageEditorTheme toolbarTextFont];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
         

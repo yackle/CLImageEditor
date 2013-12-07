@@ -8,9 +8,6 @@
 #import "CLFilterTool.h"
 
 #import "CLFilterBase.h"
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
-#import "UIView+CLImageToolInfo.h"
 
 
 @implementation CLFilterTool
@@ -95,7 +92,8 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
         label.backgroundColor = [UIColor clearColor];
         label.text = info.title;
-        label.font = [UIFont systemFontOfSize:10];
+        label.textColor = [CLImageEditorTheme toolbarTextColor];
+        label.font = [CLImageEditorTheme toolbarTextFont];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
         

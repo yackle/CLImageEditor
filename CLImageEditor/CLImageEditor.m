@@ -41,5 +41,10 @@
     
 }
 
+- (CLImageEditorTheme*)theme
+{
+    return [CLImageEditorTheme theme];
+}
+
 @end
 

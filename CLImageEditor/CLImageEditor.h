@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 #import "CLImageToolInfo.h"
+#import "CLImageEditorTheme.h"
 
 @protocol CLImageEditorDelegate;
 
@@ -16,6 +17,7 @@
     
 }
 @property (nonatomic, weak) id<CLImageEditorDelegate> delegate;
+@property (nonatomic, readonly) CLImageEditorTheme *theme;
 @property (nonatomic, readonly) CLImageToolInfo *toolInfo;
 
 - (id)initWithImage:(UIImage*)image;

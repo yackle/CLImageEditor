@@ -7,17 +7,25 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol CLImageEditorThemeDelegate;
+
 @interface CLImageEditorTheme : NSObject
 
+@property (nonatomic, weak) id<CLImageEditorThemeDelegate> delegate;
 @property (nonatomic, strong) NSString *bundleName;
-
-- (NSBundle*)bundle;
-
-
+@property (nonatomic, strong) UIColor  *backgroundColor;
+@property (nonatomic, strong) UIColor  *toolbarColor;
+@property (nonatomic, strong) UIColor  *toolbarTextColor;
+@property (nonatomic, strong) UIColor  *toolbarSelectedButtonColor;
+@property (nonatomic, strong) UIFont   *toolbarTextFont;
 
 + (CLImageEditorTheme*)theme;
-+ (NSString*)bundleName;
-+ (NSBundle*)bundle;
-+ (UIImage*)imageNamed:(NSString*)path;
+
+@end
+
+
+@protocol CLImageEditorThemeDelegate <NSObject>
+@optional
+- (UIActivityIndicatorView*)imageEditorThemeActivityIndicatorView;
 
 @end

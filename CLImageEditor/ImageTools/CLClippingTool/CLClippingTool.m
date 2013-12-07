@@ -7,10 +7,6 @@
 
 #import "CLClippingTool.h"
 
-#import "UIImage+Utility.h"
-#import "UIView+Frame.h"
-
-
 @interface CLRatio : NSObject
 @property (nonatomic, assign) BOOL isLandscape;
 @property (nonatomic, readonly) CGFloat ratio;
@@ -82,7 +78,7 @@
     btn.frame = CGRectMake(0, 0, 40, 40);
     btn.center = CGPointMake(btnPanel.width/2, btnPanel.height/2 - 10);
     [btn addTarget:self action:@selector(pushedRotateBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[UIImage imageNamed:@"CLImageEditor.bundle/CLClippingTool/rotate_btn.png"] forState:UIControlStateNormal];
+    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/rotate_btn.png", [self class]]] forState:UIControlStateNormal];
     btn.adjustsImageWhenHighlighted = YES;
     [btnPanel addSubview:btn];
     
@@ -192,7 +188,7 @@
     if(selectedMenu != _selectedMenu){
         _selectedMenu.backgroundColor = [UIColor clearColor];
         _selectedMenu = selectedMenu;
-        _selectedMenu.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
+        _selectedMenu.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
     }
 }
 
@@ -661,7 +657,8 @@
         
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, frame.size.width-10, frame.size.width, 15)];
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.font = [UIFont systemFontOfSize:10];
+        _titleLabel.textColor = [CLImageEditorTheme toolbarTextColor];
+        _titleLabel.font = [CLImageEditorTheme toolbarTextFont];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleLabel];
     }
