@@ -60,7 +60,6 @@
     return [NSString stringWithFormat:@"\n%@", [self toolTreeDescriptionWithSpace:@""]];
 }
 
-
 - (UIImage*)iconImage
 {
     return [UIImage imageNamed:self.iconImagePath];

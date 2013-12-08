@@ -244,9 +244,9 @@
 		AD5C1E8F183510C200790989 /* ImageTools */ = {
 			isa = PBXGroup;
 			children = (
-				AD317A881852F5DF005F2526 /* ToolSettings */,
 				AD5C1EB0183510C200790989 /* CLImageToolBase.h */,
 				AD5C1EB1183510C200790989 /* CLImageToolBase.m */,
+				AD317A881852F5DF005F2526 /* ToolSettings */,
 				AD5C1EAD183510C200790989 /* CLFilterTool */,
 				AD5C1E90183510C200790989 /* CLAdjustmentTool */,
 				AD5C1E99183510C200790989 /* CLEffectTool */,

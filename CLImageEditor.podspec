@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'Dev' do |dev|
     dev.dependency 'CLImageEditor/Core'
-    dev.public_header_files = 'CLImageEditor/*/*.h', 'CLImageEditor/ImageTools/CLFilterTool/CLFilterBase.h', 'CLImageEditor/ImageTools/CLEffectTool/CLEffectBase.h'
+    dev.public_header_files = 'CLImageEditor/*/*.h', 'CLImageEditor/ImageTools/ToolSettings/*.h', 'CLImageEditor/ImageTools/CLFilterTool/CLFilterBase.h', 'CLImageEditor/ImageTools/CLEffectTool/CLEffectBase.h'
   end
   
 end
