@@ -15,9 +15,8 @@
 @end
 
 
-@interface CLRatioMenuItem : UIView
+@interface CLRatioMenuItem : CLToolbarMenuItem
 @property (nonatomic, strong) CLRatio *ratio;
-- (id)initWithFrame:(CGRect)frame iconImage:(UIImage*)iconImage;
 - (void)changeOrientation;
 @end
 
@@ -146,11 +145,9 @@
     for(CLRatio *ratio in array){
         ratio.isLandscape = (self.editor.imageView.image.size.width > self.editor.imageView.image.size.height);
         
-        CLRatioMenuItem *view = [[CLRatioMenuItem alloc] initWithFrame:CGRectMake(x, 0, W, _menuScroll.height) iconImage:iconImage];
+        CLRatioMenuItem *view = [[CLRatioMenuItem alloc] initWithFrame:CGRectMake(x, 0, W, _menuScroll.height) target:self action:@selector(tappedMenu:) toolInfo:nil];
+        view.iconImage = iconImage;
         view.ratio = ratio;
-        
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMenu:)];
-        [view addGestureRecognizer:gesture];
         
         [_menuScroll addSubview:view];
         x += W;
@@ -638,32 +635,6 @@
 
 
 @implementation CLRatioMenuItem
-{
-    UIImageView *_iconView;
-    UILabel *_titleLabel;
-}
-
-- (id)initWithFrame:(CGRect)frame iconImage:(UIImage *)iconImage
-{
-    self = [super initWithFrame:frame];
-    if(self){
-        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
-        _iconView.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
-        _iconView.image = iconImage;
-        _iconView.clipsToBounds = YES;
-        _iconView.contentMode = UIViewContentModeScaleAspectFill;
-        _iconView.layer.cornerRadius = 3;
-        [self addSubview:_iconView];
-        
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, frame.size.width-10, frame.size.width, 15)];
-        _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.textColor = [CLImageEditorTheme toolbarTextColor];
-        _titleLabel.font = [CLImageEditorTheme toolbarTextFont];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_titleLabel];
-    }
-    return self;
-}
 
 - (void)setRatio:(CLRatio *)ratio
 {

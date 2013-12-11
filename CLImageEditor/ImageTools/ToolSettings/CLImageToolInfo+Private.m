@@ -28,6 +28,8 @@
         info.dockedNumber = [toolClass defaultDockedNumber];
         info.iconImagePath = [toolClass defaultIconImagePath];
         info.subtools = [toolClass subtools];
+        info.optionalInfo = [[toolClass optionalInfo] mutableCopy];
+        
         return info;
     }
     return nil;

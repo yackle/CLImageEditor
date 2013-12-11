@@ -80,36 +80,14 @@
             continue;
         }
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, W, W)];
-        view.toolInfo = info;
-        
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
-        iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 5;
-        iconView.contentMode = UIViewContentModeScaleAspectFill;
-        [view addSubview:iconView];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
-        label.backgroundColor = [UIColor clearColor];
-        label.text = info.title;
-        label.textColor = [CLImageEditorTheme toolbarTextColor];
-        label.font = [CLImageEditorTheme toolbarTextFont];
-        label.textAlignment = NSTextAlignmentCenter;
-        [view addSubview:label];
-        
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedFilterPanel:)];
-        [view addGestureRecognizer:gesture];
-        
+        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, _menuScroll.height) target:self action:@selector(tappedFilterPanel:) toolInfo:info];
         [_menuScroll addSubview:view];
         x += W;
         
-        if(info.iconImagePath){
-            iconView.image = info.iconImage;
-        }
-        else{
+        if(view.iconImage==nil){
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 UIImage *iconImage = [self filteredImage:iconThumnail withToolInfo:info];
-                [iconView performSelectorOnMainThread:@selector(setImage:) withObject:iconImage waitUntilDone:NO];
+                [view performSelectorOnMainThread:@selector(setIconImage:) withObject:iconImage waitUntilDone:NO];
             });
         }
     }

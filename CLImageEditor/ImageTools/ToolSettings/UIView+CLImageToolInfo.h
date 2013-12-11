@@ -12,5 +12,6 @@
 @interface UIView (CLImageToolInfo)
 
 @property (nonatomic, strong) CLImageToolInfo *toolInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 @end

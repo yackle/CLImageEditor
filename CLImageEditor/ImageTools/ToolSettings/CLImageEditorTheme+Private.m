@@ -79,4 +79,9 @@
     return indicatorView;
 }
 
++ (CLToolbarMenuItem*)menuItemWithFrame:(CGRect)frame target:(id)target action:(SEL)action toolInfo:(CLImageToolInfo*)toolInfo;
+{
+    return [[CLToolbarMenuItem alloc] initWithFrame:frame target:target action:action toolInfo:toolInfo];
+}
+
 @end

@@ -15,5 +15,6 @@
 + (NSString*)defaultTitle;
 + (BOOL)isAvailable;
 + (NSArray*)subtools;
++ (NSDictionary*)optionalInfo;
 
 @end
