@@ -30,10 +30,10 @@ Pod::Spec.new do |s|
     dev.public_header_files = 'CLImageEditor/*/*.h', 'CLImageEditor/ImageTools/ToolSettings/*.h', 'CLImageEditor/ImageTools/CLFilterTool/CLFilterBase.h', 'CLImageEditor/ImageTools/CLEffectTool/CLEffectBase.h'
   end
   
-  s.subspec 'StikerTool' do |sub|
+  s.subspec 'CLStickerTool' do |sub|
     sub.dependency 'CLImageEditor/Core'
-    sub.source_files  = 'OptionalImageTools/CLStikerTool/*.{h,m,mm}'
-    sub.private_header_files = 'OptionalImageTools/CLStikerTool/**.h'
+    sub.source_files  = 'OptionalImageTools/CLStickerTool/*.{h,m,mm}'
+    sub.private_header_files = 'OptionalImageTools/CLStickerTool/**.h'
   end
   
 end
