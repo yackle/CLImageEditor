@@ -252,14 +252,19 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 
 - (void)initGestures
 {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap:)];
-    [self addGestureRecognizer:tap];
-    
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-    [self addGestureRecognizer:pan];
-    
-    pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(circleViewDidPan:)];
-    [_circleView addGestureRecognizer:pan];
+    _imageView.userInteractionEnabled = YES;
+    [_imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap:)]];
+    [_imageView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)]];
+    [_circleView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(circleViewDidPan:)]];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView* view= [super hitTest:point withEvent:event];
+    if(view==self){
+        return nil;
+    }
+    return view;
 }
 
 - (UIImageView*)imageView
