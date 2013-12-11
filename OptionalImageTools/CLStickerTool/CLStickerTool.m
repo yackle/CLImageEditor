@@ -1,16 +1,14 @@
 //
-//  CLFilterTool.m
+//  CLStickerTool.m
 //
-//  Created by sho yakushiji on 2013/10/19.
+//  Created by sho yakushiji on 2013/12/11.
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 
-#import "CLFilterTool.h"
+#import "CLStickerTool.h"
 
-#import "CLFilterBase.h"
+@implementation CLStickerTool
 
-
-@implementation CLFilterTool
 {
     UIImage *_originalImage;
     
@@ -19,12 +17,12 @@
 
 + (NSArray*)subtools
 {
-    return [CLImageToolInfo toolsWithToolClass:[CLFilterBase class]];
+    return nil;
 }
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLFilterTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Filter", @"");
+    return NSLocalizedStringWithDefaultValue(@"CLStickerTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Sticker", @"");
 }
 
 + (BOOL)isAvailable
@@ -32,16 +30,32 @@
     return ([UIDevice iosVersion] >= 5.0);
 }
 
+#pragma mark- optional info
+
++ (NSString*)defaultStickerPath
+{
+    return [[[CLImageEditorTheme bundle] bundlePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/stickers", NSStringFromClass(self)]];
+}
+
++ (NSDictionary*)optionalInfo
+{
+    return @{@"stickerPath":[self defaultStickerPath]};
+}
+
+#pragma mark- implementation
+
 - (void)setup
 {
     _originalImage = self.editor.imageView.image;
+    
+    [self.editor fixZoomScaleWithAnimated:YES];
     
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
     _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
     _menuScroll.showsHorizontalScrollIndicator = NO;
     [self.editor.view addSubview:_menuScroll];
     
-    [self setFilterMenu];
+    [self setStickerMenu];
     
     _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
@@ -52,6 +66,8 @@
 
 - (void)cleanup
 {
+    [self.editor resetZoomScaleWithAnimated:YES];
+    
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
                          _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
@@ -66,35 +82,28 @@
     completionBlock(self.editor.imageView.image, nil, nil);
 }
 
-#pragma mark- 
+#pragma mark-
 
-- (void)setFilterMenu
+- (void)setStickerMenu
 {
     CGFloat W = 70;
     CGFloat x = 0;
-    
-    UIImage *iconThumnail = [_originalImage aspectFill:CGSizeMake(50, 50)];
     
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
             continue;
         }
+        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, _menuScroll.height) target:self action:@selector(tappedStickerPanel:) toolInfo:nil];
+        view.title = @"test";
+        //view.iconImage = ;
         
-        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, _menuScroll.height) target:self action:@selector(tappedFilterPanel:) toolInfo:info];
         [_menuScroll addSubview:view];
         x += W;
-        
-        if(view.iconImage==nil){
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *iconImage = [self filteredImage:iconThumnail withToolInfo:info];
-                [view performSelectorOnMainThread:@selector(setIconImage:) withObject:iconImage waitUntilDone:NO];
-            });
-        }
     }
     _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);
 }
 
-- (void)tappedFilterPanel:(UITapGestureRecognizer*)sender
+- (void)tappedStickerPanel:(UITapGestureRecognizer*)sender
 {
     UIView *view = sender.view;
     
@@ -104,22 +113,6 @@
                          view.alpha = 1;
                      }
      ];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_originalImage withToolInfo:view.toolInfo];
-        [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
-    });
-}
-
-- (UIImage*)filteredImage:(UIImage*)image withToolInfo:(CLImageToolInfo*)info
-{
-    @autoreleasepool {
-        Class filterClass = NSClassFromString(info.toolName);
-        if([(Class)filterClass conformsToProtocol:@protocol(CLFilterBaseProtocol)]){
-            return [filterClass applyFilter:image];
-        }
-        return nil;
-    }
 }
 
 @end

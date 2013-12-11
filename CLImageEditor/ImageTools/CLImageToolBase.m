@@ -55,6 +55,11 @@
     return NO;
 }
 
++ (NSDictionary*)optionalInfo
+{
+    return nil;
+}
+
 #pragma mark-
 
 - (void)setup

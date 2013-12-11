@@ -311,36 +311,25 @@
     return [CLImageToolInfo toolsWithToolClass:[CLImageToolBase class]];
 }
 
++ (NSDictionary*)optionalInfo
+{
+    return nil;
+}
+
 #pragma mark- 
 
 - (void)setMenuView
 {
     CGFloat x = 0;
     CGFloat W = 70;
+    CGFloat H = _menuView.height;
     
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
             continue;
         }
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, W, W)];
-        view.toolInfo = info;
-        
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
-        iconView.image = info.iconImage;
-        [view addSubview:iconView];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
-        label.backgroundColor = [UIColor clearColor];
-        label.text = info.title;
-        label.textColor = [CLImageEditorTheme toolbarTextColor];
-        label.font = [CLImageEditorTheme toolbarTextFont];
-        label.textAlignment = NSTextAlignmentCenter;
-        [view addSubview:label];
-        
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedMenuView:)];
-        [view addGestureRecognizer:gesture];
-        
+        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedMenuView:) toolInfo:info];
         [_menuView addSubview:view];
         x += W;
     }

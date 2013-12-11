@@ -7,7 +7,7 @@
 
 #import "CLImageEditorTheme.h"
 
-#import "UIView+CLImageToolInfo.h"
+#import "CLToolbarMenuItem.h"
 
 @interface CLImageEditorTheme (Private)
 
@@ -23,5 +23,6 @@
 + (UIFont*)toolbarTextFont;
 
 + (UIActivityIndicatorView*)indicatorView;
++ (CLToolbarMenuItem*)menuItemWithFrame:(CGRect)frame target:(id)target action:(SEL)action toolInfo:(CLImageToolInfo*)toolInfo;
 
 @end

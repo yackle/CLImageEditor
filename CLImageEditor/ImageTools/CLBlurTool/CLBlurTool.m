@@ -133,6 +133,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 - (void)setBlurMenu
 {
     CGFloat W = 70;
+    CGFloat H = _menuScroll.height;
     CGFloat x = 0;
     
     NSArray *_menu = @[
@@ -143,25 +144,10 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     
     NSInteger tag = 0;
     for(NSDictionary *obj in _menu){
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, W, _menuScroll.height)];
+        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedBlurMenu:) toolInfo:nil];
         view.tag = tag++;
-        
-        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 50, 50)];
-        iconView.clipsToBounds = YES;
-        iconView.layer.cornerRadius = 2;
-        iconView.image = obj[@"icon"];
-        [view addSubview:iconView];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, W-10, W, 15)];
-        label.backgroundColor = [UIColor clearColor];
-        label.text = obj[@"title"];
-        label.textColor = [CLImageEditorTheme toolbarTextColor];
-        label.font = [CLImageEditorTheme toolbarTextFont];
-        label.textAlignment = NSTextAlignmentCenter;
-        [view addSubview:label];
-        
-        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedBlurMenu:)];
-        [view addGestureRecognizer:gesture];
+        view.title = obj[@"title"];
+        view.iconImage = obj[@"icon"];
         
         if(self.selectedMenu==nil){
             self.selectedMenu = view;

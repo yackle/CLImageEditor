@@ -48,6 +48,11 @@
     return YES;
 }
 
++ (NSDictionary*)optionalInfo
+{
+    return nil;
+}
+
 #pragma mark-
 
 - (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame toolInfo:(CLImageToolInfo*)info
