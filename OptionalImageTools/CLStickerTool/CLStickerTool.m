@@ -45,6 +45,11 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
     return ([UIDevice iosVersion] >= 5.0);
 }
 
++ (CGFloat)defaultDockedNumber
+{
+    return 7;
+}
+
 #pragma mark- optional info
 
 + (NSString*)defaultStickerPath
@@ -236,7 +241,6 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
         _circleView.borderColor = [UIColor blackColor];
         _circleView.borderWidth = 5;
         [self addSubview:_circleView];
-        
         
         _scale = 1;
         _arg = 0;

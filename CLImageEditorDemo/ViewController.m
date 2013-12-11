@@ -66,9 +66,8 @@
         tool.available = NO;
         */
         
-        //[self presentViewController:editor animated:YES completion:nil];
-        
-        [editor showInViewController:self withImageView:_imageView];
+        [self presentViewController:editor animated:YES completion:nil];
+        //[editor showInViewController:self withImageView:_imageView];
     }
     else{
         [self pushedNewBtn];
@@ -189,7 +188,17 @@
     _imageView.superview.frame = rct;
 }
 
-- (void)resetZoomScale
+- (void)resetImageViewFrame
+{
+    CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
+    CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
+    CGFloat W = ratio * size.width;
+    CGFloat H = ratio * size.height;
+    _imageView.frame = CGRectMake(0, 0, W, H);
+    _imageView.superview.bounds = _imageView.bounds;
+}
+
+- (void)resetZoomScaleWithAnimate:(BOOL)animated
 {
     CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
     CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
@@ -202,27 +211,8 @@
     _scrollView.contentSize = _imageView.frame.size;
     _scrollView.minimumZoomScale = 1;
     _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
-}
-
-- (void)resetImageViewFrame
-{
-    CGRect rct = _imageView.bounds;
-    rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
-    _imageView.frame = rct;
-    _imageView.superview.bounds = _imageView.bounds;
-}
-
-- (void)resetZoomScaleWithAnimate:(BOOL)animated
-{
-    CGFloat Rw = _scrollView.frame.size.width/_imageView.image.size.width;
-    CGFloat Rh = _scrollView.frame.size.height/_imageView.image.size.height;
-    CGFloat ratio = MIN(Rw, Rh);
     
-    _scrollView.contentSize = _imageView.frame.size;
-    _scrollView.minimumZoomScale = ratio;
-    _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
-    
-    [_scrollView setZoomScale:ratio animated:animated];
+    [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
     [self scrollViewDidZoom:_scrollView];
 }
 
