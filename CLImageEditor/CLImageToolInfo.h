@@ -16,7 +16,7 @@
 @property (nonatomic, strong)   NSString *iconImagePath;
 @property (nonatomic, readonly) UIImage  *iconImage;
 @property (nonatomic, readonly) NSArray  *subtools;
-@property (nonatomic, strong) NSDictionary *optionalInfo;
+@property (nonatomic, strong) NSMutableDictionary *optionalInfo;
 
 
 - (NSString*)toolTreeDescription;

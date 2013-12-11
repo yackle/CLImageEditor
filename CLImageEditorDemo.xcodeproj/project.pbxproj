@@ -50,6 +50,7 @@
 		AD85D68918457394003106A3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68818457394003106A3 /* CoreImage.framework */; };
 		AD877C1118581AF500661D12 /* CLStickerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD877C1018581AF500661D12 /* CLStickerTool.m */; };
 		AD877C141858270200661D12 /* CLToolbarMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AD877C131858270200661D12 /* CLToolbarMenuItem.m */; };
+		AD877C171858534900661D12 /* CLCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD877C161858534900661D12 /* CLCircleView.m */; };
 		ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */; };
 		ADFC0AAF1844C6BC003AE9C3 /* CLFilterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFC0AAE1844C6BC003AE9C3 /* CLFilterBase.m */; };
 /* End PBXBuildFile section */
@@ -136,6 +137,8 @@
 		AD877C1018581AF500661D12 /* CLStickerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLStickerTool.m; path = OptionalImageTools/CLStickerTool/CLStickerTool.m; sourceTree = "<group>"; };
 		AD877C121858270200661D12 /* CLToolbarMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLToolbarMenuItem.h; path = ToolSettings/CLToolbarMenuItem.h; sourceTree = "<group>"; };
 		AD877C131858270200661D12 /* CLToolbarMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLToolbarMenuItem.m; path = ToolSettings/CLToolbarMenuItem.m; sourceTree = "<group>"; };
+		AD877C151858534900661D12 /* CLCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLCircleView.h; path = ToolSettings/CLCircleView.h; sourceTree = "<group>"; };
+		AD877C161858534900661D12 /* CLCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLCircleView.m; path = ToolSettings/CLCircleView.m; sourceTree = "<group>"; };
 		ADFC0A9D1844881F003AE9C3 /* CLImageToolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageToolInfo.h; sourceTree = "<group>"; };
 		ADFC0A9E1844881F003AE9C3 /* CLImageToolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageToolInfo.m; sourceTree = "<group>"; };
 		ADFC0AAD1844C6BC003AE9C3 /* CLFilterBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLFilterBase.h; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				AD317A8D1852F61D005F2526 /* UIView+CLImageToolInfo.m */,
 				AD877C121858270200661D12 /* CLToolbarMenuItem.h */,
 				AD877C131858270200661D12 /* CLToolbarMenuItem.m */,
+				AD877C151858534900661D12 /* CLCircleView.h */,
+				AD877C161858534900661D12 /* CLCircleView.m */,
 			);
 			name = ToolSettings;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 				AD5C1E1018350DC400790989 /* main.m in Sources */,
 				ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */,
 				AD5C1EDA183510C200790989 /* CLRotateTool.m in Sources */,
+				AD877C171858534900661D12 /* CLCircleView.m in Sources */,
 				AD5C1ED0183510C200790989 /* CLHighlightShadowEffect.m in Sources */,
 				AD5C1ED2183510C200790989 /* CLPixellateEffect.m in Sources */,
 				AD5C1ECD183510C200790989 /* CLClippingTool.m in Sources */,
