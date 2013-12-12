@@ -177,6 +177,9 @@
     if(self.initialImageViewState){
         [self expropriateImageView];
     }
+    else{
+        [self refreshImageView];
+    }
 }
 
 #pragma mark- View transition
@@ -338,9 +341,11 @@
 
 - (void)resetImageViewFrame
 {
-    CGRect rct = _imageView.frame;
-    rct.size = CGSizeMake(_scrollView.zoomScale*_imageView.image.size.width, _scrollView.zoomScale*_imageView.image.size.height);
-    _imageView.frame = rct;
+    CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
+    CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
+    CGFloat W = ratio * size.width * _scrollView.zoomScale;
+    CGFloat H = ratio * size.height * _scrollView.zoomScale;
+    _imageView.frame = CGRectMake((_scrollView.width-W)/2, (_scrollView.height-H)/2, W, H);
 }
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated
@@ -353,13 +358,17 @@
 
 - (void)resetZoomScaleWithAnimated:(BOOL)animated
 {
-    CGFloat Rw = _scrollView.frame.size.width/_imageView.image.size.width;
-    CGFloat Rh = _scrollView.frame.size.height/_imageView.image.size.height;
-    CGFloat ratio = MIN(Rw, Rh);
+    CGFloat Rw = _scrollView.frame.size.width / _imageView.frame.size.width;
+    CGFloat Rh = _scrollView.frame.size.height / _imageView.frame.size.height;
+    
+    //CGFloat scale = [[UIScreen mainScreen] scale];
+    CGFloat scale = 1;
+    Rw = MAX(Rw, _imageView.image.size.width / (scale * _scrollView.frame.size.width));
+    Rh = MAX(Rh, _imageView.image.size.height / (scale * _scrollView.frame.size.height));
     
     _scrollView.contentSize = _imageView.frame.size;
-    _scrollView.minimumZoomScale = ratio;
-    _scrollView.maximumZoomScale = MAX(ratio/240, 1/ratio);
+    _scrollView.minimumZoomScale = 1;
+    _scrollView.maximumZoomScale = MAX(MAX(Rw, Rh), 1);
     
     [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
 }
@@ -562,10 +571,10 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    CGFloat Ws = _scrollView.frame.size.width;
+    CGFloat Ws = _scrollView.frame.size.width - _scrollView.contentInset.left - _scrollView.contentInset.right;
     CGFloat Hs = _scrollView.frame.size.height - _scrollView.contentInset.top - _scrollView.contentInset.bottom;
-    CGFloat W = _originalImage.size.width*_scrollView.zoomScale;
-    CGFloat H = _originalImage.size.height*_scrollView.zoomScale;
+    CGFloat W = _imageView.frame.size.width;
+    CGFloat H = _imageView.frame.size.height;
     
     CGRect rct = _imageView.frame;
     rct.origin.x = MAX((Ws-W)/2, 0);
