@@ -47,7 +47,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 
 + (CGFloat)defaultDockedNumber
 {
-    return -1;
+    return 5.5;
 }
 
 #pragma mark- optional info
