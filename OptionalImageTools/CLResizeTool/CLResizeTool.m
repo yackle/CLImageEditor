@@ -98,6 +98,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     if(limit==nil){ limit = [self.class defaultLimitSize]; }
     
     _resizePanel = [[_CLResizePanel alloc] initWithFrame:self.editor.imageView.superview.frame originalSize:_originalImage.size];
+    _resizePanel.backgroundColor = [[CLImageEditorTheme toolbarColor] colorWithAlphaComponent:0.4];
     [_resizePanel setLimitSize:limit.floatValue];
     [self.editor.view addSubview:_resizePanel];
     
