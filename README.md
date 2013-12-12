@@ -12,6 +12,8 @@ Installing
 
 The easiest way to use CLImageEditor is to copy all the files in the CLImageEditor group (or directory) into your app. Add the following frameworks to your project (Build Phases > Link Binary With Libraries): Accelerate, CoreGraphics, CoreImage.
 
+And optional tools are in OptionalImageTools. You might want to add as needed.
+
 ##### Or git submodule
 
 Alternatively, you should be able to setup a [git submodule](http://git-scm.com/docs/git-submodule) and reference the files in your Xcode project.
@@ -23,6 +25,21 @@ Alternatively, you should be able to setup a [git submodule](http://git-scm.com/
 [CocoaPods](http://beta.cocoapods.org/) is a dependency manager for Objective-C projects.
 
 `pod 'CLImageEditor'`
+
+or
+
+`pod 'CLImageEditor/AllTools'`
+
+By specifying AllTools subspec, all image tools including optional tools are installed.
+
+#### Optional Image Tools
+
+There are the following optional tools.
+
+`pod 'CLImageEditor/ResizeTool'`
+
+`pod 'CLImageEditor/StickerTool'`
+
 
 
 Usage
@@ -114,7 +131,7 @@ tool.dockedNumber = -1;  // Bring to top
 //tool.iconImagePath = @"test.png";
 ```
 
-* `dockedNumber` determine the menu item order. Note that it is simply used as a key for sorting.
+* `dockedNumber` determines the menu item order. Note that it is simply used as a key for sorting.
 
 The list of tool names can be confirmed with the following code.
 
