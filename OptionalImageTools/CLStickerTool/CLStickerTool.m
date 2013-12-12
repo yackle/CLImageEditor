@@ -21,7 +21,6 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 
 
 @implementation CLStickerTool
-
 {
     UIImage *_originalImage;
     
@@ -212,6 +211,8 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
         [activeView setAvtive:NO];
         activeView = view;
         [activeView setAvtive:YES];
+        
+        [activeView.superview bringSubviewToFront:activeView];
     }
 }
 
@@ -227,7 +228,7 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
         [self addSubview:_imageView];
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_deleteButton setImage:[CLImageEditorTheme imageNamed:@"CLStickerTool/delete_icon.png"] forState:UIControlStateNormal];
+        [_deleteButton setImage:[CLImageEditorTheme imageNamed:@"CLStickerTool/btn_delete.png"] forState:UIControlStateNormal];
         _deleteButton.frame = CGRectMake(0, 0, 32, 32);
         _deleteButton.center = _imageView.frame.origin;
         [_deleteButton addTarget:self action:@selector(pushedDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -252,14 +253,19 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 
 - (void)initGestures
 {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap:)];
-    [self addGestureRecognizer:tap];
-    
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
-    [self addGestureRecognizer:pan];
-    
-    pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(circleViewDidPan:)];
-    [_circleView addGestureRecognizer:pan];
+    _imageView.userInteractionEnabled = YES;
+    [_imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTap:)]];
+    [_imageView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)]];
+    [_circleView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(circleViewDidPan:)]];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView* view= [super hitTest:point withEvent:event];
+    if(view==self){
+        return nil;
+    }
+    return view;
 }
 
 - (UIImageView*)imageView

@@ -30,10 +30,22 @@ Pod::Spec.new do |s|
     dev.public_header_files = 'CLImageEditor/*/*.h', 'CLImageEditor/ImageTools/ToolSettings/*.h', 'CLImageEditor/ImageTools/CLFilterTool/CLFilterBase.h', 'CLImageEditor/ImageTools/CLEffectTool/CLEffectBase.h'
   end
   
+  s.subspec 'AllTools' do |all|
+    all.dependency 'CLImageEditor/Core'
+    all.dependency 'CLImageEditor/StickerTool'
+    all.dependency 'CLImageEditor/ResizeTool'
+  end
+  
   s.subspec 'StickerTool' do |sub|
     sub.dependency 'CLImageEditor/Core'
     sub.source_files  = 'OptionalImageTools/CLStickerTool/*.{h,m,mm}'
     sub.private_header_files = 'OptionalImageTools/CLStickerTool/**.h'
+  end
+  
+  s.subspec 'ResizeTool' do |sub|
+    sub.dependency 'CLImageEditor/Core'
+    sub.source_files  = 'OptionalImageTools/CLResizeTool/*.{h,m,mm}'
+    sub.private_header_files = 'OptionalImageTools/CLResizeTool/**.h'
   end
   
 end
