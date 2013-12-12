@@ -280,12 +280,14 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     
     CGFloat y = 0;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, _infoPanel.width-20, 30)];
+    label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextOriginalSize", nil, [CLImageEditorTheme bundle], @"Original Image Size:", @"");
     [_infoPanel addSubview:label];
     y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, y, _infoPanel.width-20, 50)];
+    label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:30];
     label.text = [NSString stringWithFormat:@"%ld x %ld", (long)_originalSize.width, (long)_originalSize.height];
     label.textAlignment = NSTextAlignmentCenter;
@@ -293,12 +295,14 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, _infoPanel.height/2, _infoPanel.width-20, 30)];
+    label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextNewSize", nil, [CLImageEditorTheme bundle], @"New Image Size:", @"");
     [_infoPanel addSubview:label];
     y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, y, _infoPanel.width-20, 50)];
+    label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:30];
     label.text = @"x";
     label.textAlignment = NSTextAlignmentCenter;
