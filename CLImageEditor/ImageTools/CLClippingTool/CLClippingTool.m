@@ -77,7 +77,7 @@
     btn.frame = CGRectMake(0, 0, 40, 40);
     btn.center = CGPointMake(btnPanel.width/2, btnPanel.height/2 - 10);
     [btn addTarget:self action:@selector(pushedRotateBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/rotate_btn.png", [self class]]] forState:UIControlStateNormal];
+    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_rotate.png", [self class]]] forState:UIControlStateNormal];
     btn.adjustsImageWhenHighlighted = YES;
     [btnPanel addSubview:btn];
     
