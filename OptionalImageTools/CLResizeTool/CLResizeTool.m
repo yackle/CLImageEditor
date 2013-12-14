@@ -139,6 +139,11 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
                 completionBlock(image, nil, nil);
             });
         }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(nil, nil, nil);
+            });
+        }
     });
 }
 
@@ -371,7 +376,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     width = MIN(width, _limitSize);
     
     if(width>0){
-        CGFloat height = width * _originalSize.height / _originalSize.width;
+        CGFloat height = MAX(1, width * _originalSize.height / _originalSize.width);
         
         if(height>_limitSize){
             [self setImageHeight:_limitSize];
@@ -391,7 +396,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     height = MIN(height, _limitSize);
     
     if(height>0){
-        CGFloat width = height * _originalSize.width / _originalSize.height;
+        CGFloat width = MAX(1, height * _originalSize.width / _originalSize.height);
         
         if(width>_limitSize){
             [self setImageWidth:_limitSize];
