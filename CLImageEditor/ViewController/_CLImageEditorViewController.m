@@ -524,8 +524,8 @@
             _imageView.image = image;
             
             [self resetImageViewFrame];
+            self.currentTool = nil;
         }
-        self.currentTool = nil;
         self.view.userInteractionEnabled = YES;
     }];
 }
