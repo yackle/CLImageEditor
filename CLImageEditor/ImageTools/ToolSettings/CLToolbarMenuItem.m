@@ -69,6 +69,12 @@
     _iconView.image = iconImage;
 }
 
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    self.alpha = (userInteractionEnabled) ? 1 : 0.3;
+}
+
 - (void)setToolInfo:(CLImageToolInfo *)toolInfo
 {
     [super setToolInfo:toolInfo];
