@@ -498,6 +498,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 - (void)fontPickerView:(CLFontPickerView *)pickerView didSelectFont:(UIFont *)font
 {
     self.selectedTextView.font = font;
+    [self.selectedTextView sizeToFitWithMaxWidth:0.8*_workingView.width lineHeight:0.2*_workingView.height];
 }
 
 #pragma mark- UITextView delegate
@@ -636,7 +637,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     self.transform = CGAffineTransformIdentity;
     _label.transform = CGAffineTransformIdentity;
     
-    CGSize size = [_label sizeThatFits:CGSizeMake(width / (10/200.0), FLT_MAX)];
+    CGSize size = [_label sizeThatFits:CGSizeMake(width / (15/200.0), FLT_MAX)];
     _label.frame = CGRectMake(16, 16, size.width, size.height);
     
     CGFloat viewW = (_label.width + 32);
@@ -681,17 +682,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 
 - (void)setFont:(UIFont *)font
 {
-    CGFloat width = _label.width;
-    
     _label.font = [font fontWithSize:200];
-    
-    self.transform = CGAffineTransformIdentity;
-    _label.transform = CGAffineTransformIdentity;
-    
-    CGSize size = [_label sizeThatFits:CGSizeMake(FLT_MAX, FLT_MAX)];
-    _label.frame = CGRectMake(16, 16, size.width, size.height);
-    
-    [self setScale:(width/_label.width)];
 }
 
 - (UIFont*)font
@@ -790,7 +781,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     CGFloat arg = atan2(p.y, p.x);
     
     _arg   = _initialArg + arg - tmpA;
-    [self setScale:MAX(_initialScale * R / tmpR, 20/200.0)];
+    [self setScale:MAX(_initialScale * R / tmpR, 15/200.0)];
 }
 
 @end

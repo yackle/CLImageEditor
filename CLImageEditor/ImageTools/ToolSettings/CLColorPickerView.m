@@ -71,7 +71,7 @@
 
 - (UISlider*)defaultSliderWithWidth:(CGFloat)width
 {
-    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, 34)];
     slider.value = 1;
     
     slider.maximumTrackTintColor = [UIColor clearColor];
