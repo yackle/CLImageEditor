@@ -17,7 +17,8 @@
 
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) UIImage *iconImage;
+@property (nonatomic, assign) BOOL selected;
 
-- (id)initWithFrame:(CGRect)frame target:(id)target action:(SEL)action toolInfo:(CLImageToolInfo*)toolInfo;
+ - (id)initWithFrame:(CGRect)frame target:(id)target action:(SEL)action toolInfo:(CLImageToolInfo*)toolInfo;
 
 @end

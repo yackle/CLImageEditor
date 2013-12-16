@@ -88,5 +88,18 @@
     }
 }
 
+- (void)setSelected:(BOOL)selected
+{
+    if(selected != _selected){
+        _selected = selected;
+        if(selected){
+            self.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
+        }
+        else{
+            self.backgroundColor = [UIColor clearColor];
+        }
+    }
+}
+
 @end
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD0BEFCD185EDCB0005779FD /* CLTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0BEFCC185EDCB0005779FD /* CLTextLabel.m */; };
 		AD280D20185DA48B001D7DBB /* CLTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD280D1F185DA48B001D7DBB /* CLTextTool.m */; };
 		AD280D23185DFCF2001D7DBB /* CLColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD280D22185DFCF2001D7DBB /* CLColorPickerView.m */; };
 		AD280D2A185DFD36001D7DBB /* CLFontPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD280D25185DFD36001D7DBB /* CLFontPickerView.m */; };
@@ -62,6 +63,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD0BEFCB185EDCB0005779FD /* CLTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTextLabel.h; path = OptionalImageTools/CLTextTool/CLTextLabel.h; sourceTree = "<group>"; };
+		AD0BEFCC185EDCB0005779FD /* CLTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLTextLabel.m; path = OptionalImageTools/CLTextTool/CLTextLabel.m; sourceTree = "<group>"; };
 		AD13E67C1850F7C8009B12AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD280D1E185DA48B001D7DBB /* CLTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLTextTool.h; path = OptionalImageTools/CLTextTool/CLTextTool.h; sourceTree = "<group>"; };
 		AD280D1F185DA48B001D7DBB /* CLTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLTextTool.m; path = OptionalImageTools/CLTextTool/CLTextTool.m; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				AD280D27185DFD36001D7DBB /* CLPickerDrum.m */,
 				AD280D28185DFD36001D7DBB /* CLPickerView.h */,
 				AD280D29185DFD36001D7DBB /* CLPickerView.m */,
+				AD0BEFCB185EDCB0005779FD /* CLTextLabel.h */,
+				AD0BEFCC185EDCB0005779FD /* CLTextLabel.m */,
 			);
 			name = CLTextTool;
 			sourceTree = "<group>";
@@ -538,6 +543,7 @@
 				AD5C1E1418350DC400790989 /* AppDelegate.m in Sources */,
 				AD5C1ECB183510C200790989 /* CLAdjustmentTool.m in Sources */,
 				AD5C1E1018350DC400790989 /* main.m in Sources */,
+				AD0BEFCD185EDCB0005779FD /* CLTextLabel.m in Sources */,
 				ADFC0A9F1844881F003AE9C3 /* CLImageToolInfo.m in Sources */,
 				AD5C1EDA183510C200790989 /* CLRotateTool.m in Sources */,
 				AD877C171858534900661D12 /* CLCircleView.m in Sources */,
