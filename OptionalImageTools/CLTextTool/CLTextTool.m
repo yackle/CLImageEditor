@@ -12,6 +12,8 @@
 #import "CLFontPickerView.h"
 #import "CLTextLabel.h"
 
+#import "CLTextSettingView.h"
+
 static NSString* const CLTextViewActiveViewDidChangeNotification = @"CLTextViewActiveViewDidChangeNotificationString";
 static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActiveViewDidTapNotificationString";
 
@@ -40,7 +42,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 
 
 @interface CLTextTool()
-<CLColorPickerViewDelegate, CLFontPickerViewDelegate, UITextViewDelegate>
+<CLColorPickerViewDelegate, CLFontPickerViewDelegate, UITextViewDelegate, CLTextSettingViewDelegate>
 @property (nonatomic, strong) _CLTextView *selectedTextView;
 @end
 
@@ -50,10 +52,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     
     UIView *_workingView;
     
-    UIView *_pickerView;
-    UITextView *_textView;
-    CLColorPickerView *_colorPickerView;
-    CLFontPickerView *_fontPickerView;
+    CLTextSettingView *_settingView;
     
     CLToolbarMenuItem *_textBtn;
     CLToolbarMenuItem *_colorBtn;
@@ -95,8 +94,6 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     [self.editor fixZoomScaleWithAnimated:YES];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeTextViewDidChange:) name:CLTextViewActiveViewDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeTextViewDidTap:) name:CLTextViewActiveViewDidTapNotification object:nil];
     
@@ -109,38 +106,19 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     _workingView.clipsToBounds = YES;
     [self.editor.view addSubview:_workingView];
     
-    _pickerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.editor.view.width, 180)];
-    _pickerView.top = _menuScroll.top - _pickerView.height;
-    _pickerView.backgroundColor = self.editor.menuView.backgroundColor;
-    _pickerView.hidden = YES;
-    [self.editor.view addSubview:_pickerView];
-    
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 0, _pickerView.width-42, 80)];
-    _textView.delegate = self;
-    _textView.backgroundColor = [UIColor clearColor];
-    _textView.hidden = YES;
-    [_pickerView addSubview:_textView];
-    
-    _colorPickerView = [CLColorPickerView new];
-    _colorPickerView.delegate = self;
-    _colorPickerView.center = CGPointMake(_pickerView.width/2, _pickerView.height/2);
-    _colorPickerView.hidden = YES;
-    [_pickerView addSubview:_colorPickerView];
-    
-    _fontPickerView = [[CLFontPickerView alloc] initWithFrame:_pickerView.bounds];
-    _fontPickerView.delegate = self;
-    _fontPickerView.center = _colorPickerView.center;
-    _fontPickerView.sizeComponentHidden = YES;
-    _fontPickerView.foregroundColor = self.editor.menuView.backgroundColor;
-    _fontPickerView.hidden = YES;
-    _fontPickerView.textColor = [CLImageEditorTheme toolbarTextColor];
-    [_pickerView addSubview:_fontPickerView];
+    _settingView = [[CLTextSettingView alloc] initWithFrame:CGRectMake(0, 0, self.editor.view.width, 180)];
+    _settingView.top = _menuScroll.top - _settingView.height;
+    _settingView.backgroundColor = [CLImageEditorTheme toolbarColor];
+    _settingView.textColor = [CLImageEditorTheme toolbarTextColor];
+    _settingView.fontPickerForegroundColor = _settingView.backgroundColor;
+    _settingView.delegate = self;
+    [self.editor.view addSubview:_settingView];
     
     UIButton *okButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [okButton setImage:[CLImageEditorTheme imageNamed:@"CLTextTool/btn_delete.png"] forState:UIControlStateNormal];
-    okButton.frame = CGRectMake(_pickerView.width-32, 0, 32, 32);
+    okButton.frame = CGRectMake(_settingView.width-32, 0, 32, 32);
     [okButton addTarget:self action:@selector(pushedButton:) forControlEvents:UIControlEventTouchUpInside];
-    [_pickerView addSubview:okButton];
+    [_settingView addSubview:okButton];
     
     [self setMenu];
     
@@ -159,9 +137,9 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [_pickerView endEditing:YES];
+    [_settingView endEditing:YES];
+    [_settingView removeFromSuperview];
     [_workingView removeFromSuperview];
-    [_pickerView removeFromSuperview];
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
@@ -204,39 +182,36 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     return tmp;
 }
 
+- (void)setMenuBtnEnabled:(BOOL)enabled
+{
+    _textBtn.userInteractionEnabled =
+    _colorBtn.userInteractionEnabled =
+    _fontBtn.userInteractionEnabled =
+    _alignLeftBtn.userInteractionEnabled =
+    _alignCenterBtn.userInteractionEnabled =
+    _alignRightBtn.userInteractionEnabled = enabled;
+}
+
 - (void)setSelectedTextView:(_CLTextView *)selectedTextView
 {
     if(selectedTextView != _selectedTextView){
         _selectedTextView = selectedTextView;
     }
     
+    [self setMenuBtnEnabled:(_selectedTextView!=nil)];
+    
     if(_selectedTextView==nil){
-        [self hidePickerPanel];
+        [self hideSettingView];
         
-        _textBtn.userInteractionEnabled = NO;
-        _colorBtn.userInteractionEnabled = NO;
-        _fontBtn.userInteractionEnabled = NO;;
-        _alignLeftBtn.userInteractionEnabled = NO;
-        _alignCenterBtn.userInteractionEnabled = NO;
-        _alignRightBtn.userInteractionEnabled = NO;
-        
-        _colorBtn.iconView.backgroundColor = _colorPickerView.color;
+        _colorBtn.iconView.backgroundColor = _settingView.selectedColor;
         _alignLeftBtn.selected = _alignCenterBtn.selected = _alignRightBtn.selected = NO;
     }
     else{
-        _textBtn.userInteractionEnabled = YES;
-        _colorBtn.userInteractionEnabled = YES;
-        _fontBtn.userInteractionEnabled = YES;
-        _alignLeftBtn.userInteractionEnabled = YES;
-        _alignCenterBtn.userInteractionEnabled = YES;
-        _alignRightBtn.userInteractionEnabled = YES;
-        
         _colorBtn.iconView.backgroundColor = selectedTextView.color;
         
-        _textView.text = selectedTextView.text;
-        _colorPickerView.color = selectedTextView.color;
-        _fontPickerView.font = selectedTextView.font;
-        
+        _settingView.selectedText = selectedTextView.text;
+        _settingView.selectedColor = selectedTextView.color;
+        _settingView.selectedFont = selectedTextView.font;
         [self setTextAlignment:selectedTextView.textAlignment];
     }
 }
@@ -248,7 +223,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 
 - (void)activeTextViewDidTap:(NSNotification*)notification
 {
-    [self showTextView];
+    [self beginTextEditting];
 }
 
 - (void)setMenu
@@ -312,18 +287,9 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
             [self addNewText];
             break;
         case 1:
-            if(_textView.hidden){
-                [self showTextView];
-            }
-            else{
-                [self hidePickerPanel];
-            }
-            break;
         case 2:
-            [self showColorPicker];
-            break;
         case 3:
-            [self showFontPicker];
+            [self showSettingViewWithMenuIndex:view.tag-1];
             break;
         case 4:
             [self setTextAlignment:NSTextAlignmentLeft];
@@ -347,8 +313,8 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 - (void)addNewText
 {
     _CLTextView *view = [_CLTextView new];
-    view.color = _colorPickerView.color;
-    view.font = _fontPickerView.font;
+    view.color = _settingView.selectedColor;
+    view.font = _settingView.selectedFont;
     
     CGFloat ratio = MIN( (0.8 * _workingView.width) / view.width, (0.2 * _workingView.height) / view.height);
     [view setScale:ratio];
@@ -357,69 +323,30 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     [_workingView addSubview:view];
     [_CLTextView setActiveTextView:view];
     
-    [self showTextView];
+    [self beginTextEditting];
 }
 
-- (void)hidePickerPanel
+- (void)hideSettingView
 {
-    [_pickerView endEditing:YES];
-    
-    _pickerView.hidden = YES;
-    _textView.hidden = YES;
-    _colorPickerView.hidden = YES;
-    _fontPickerView.hidden = YES;
-    
-    _textBtn.selected = NO;
-    _colorBtn.selected = NO;
-    _fontBtn.selected = NO;
+    [_settingView endEditing:YES];
+    _settingView.hidden = YES;
 }
 
-- (void)showTextView
+- (void)showSettingViewWithMenuIndex:(NSInteger)index
 {
-    _pickerView.hidden = NO;
-    _textView.hidden = NO;
-    _colorPickerView.hidden = YES;
-    _fontPickerView.hidden = YES;
-    
-    _textBtn.selected = YES;
-    _colorBtn.selected = NO;
-    _fontBtn.selected = NO;
-    
-    [_textView becomeFirstResponder];
-}
-
-- (void)showColorPicker
-{
-    if(_colorPickerView.hidden){
-        _pickerView.hidden = NO;
-        _textView.hidden = YES;
-        _colorPickerView.hidden = NO;
-        _fontPickerView.hidden = YES;
-        
-        _textBtn.selected = NO;
-        _colorBtn.selected = YES;
-        _fontBtn.selected = NO;
+    if(_settingView.hidden){
+        _settingView.hidden = NO;
+        [_settingView showSettingMenuWithIndex:index animated:NO];
     }
     else{
-        [self hidePickerPanel];
+        [_settingView showSettingMenuWithIndex:index animated:YES];
     }
 }
 
-- (void)showFontPicker
+- (void)beginTextEditting
 {
-    if(_fontPickerView.hidden){
-        _pickerView.hidden = NO;
-        _textView.hidden = YES;
-        _colorPickerView.hidden = YES;
-        _fontPickerView.hidden = NO;
-        
-        _textBtn.selected = NO;
-        _colorBtn.selected = NO;
-        _fontBtn.selected = YES;
-    }
-    else{
-        [self hidePickerPanel];
-    }
+    [self showSettingViewWithMenuIndex:0];
+    [_settingView becomeFirstResponder];
 }
 
 - (void)setTextAlignment:(NSTextAlignment)alignment
@@ -444,78 +371,32 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 
 - (void)pushedButton:(UIButton*)button
 {
-    if(_textView.isFirstResponder){
-        [_textView resignFirstResponder];
+    if(_settingView.isFirstResponder){
+        [_settingView resignFirstResponder];
     }
     else{
-        [self hidePickerPanel];
+        [self hideSettingView];
     }
 }
 
-#pragma mark - keyboard events
+#pragma mark- Setting view delegate
 
-- (void)keyBoardWillShow:(NSNotification *)notificatioin
+- (void)textSettingView:(CLTextSettingView *)settingView didChangeText:(NSString *)text
 {
-    [self keyBoardWillChange:notificatioin withTextViewHeight:80];
-    [_textView scrollRangeToVisible:_textView.selectedRange];
-}
-
-- (void)keyBoardWillHide:(NSNotification *)notificatioin
-{
-    [self keyBoardWillChange:notificatioin withTextViewHeight:_pickerView.height - 20];
-}
-
-- (void)keyBoardWillChange:(NSNotification *)notificatioin withTextViewHeight:(CGFloat)height
-{
-    CGRect keyboardFrame = [[notificatioin.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    keyboardFrame = [_pickerView.superview convertRect:keyboardFrame fromView:_pickerView.window];
-    
-    UIViewAnimationCurve animationCurve = [[notificatioin.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    double duration = [[notificatioin.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    [UIView animateWithDuration:duration
-                          delay:0
-                        options:UIViewAnimationOptionBeginFromCurrentState | (animationCurve<<16)
-                     animations:^{
-                         _textView.height = height;
-                         _pickerView.top = MIN(_menuScroll.top - _pickerView.height, keyboardFrame.origin.y - _textView.height);
-                     } completion:^(BOOL finished) {
-                         
-                     }
-     ];
-}
-
-#pragma mark- Color picker delegate
-
-- (void)colorPickerView:(CLColorPickerView *)picker colorDidChange:(UIColor *)color
-{
-    _colorBtn.iconView.backgroundColor = color;
-    self.selectedTextView.color = color;
-}
-
-#pragma mark- Font picker delegate
-
-- (void)fontPickerView:(CLFontPickerView *)pickerView didSelectFont:(UIFont *)font
-{
-    self.selectedTextView.font = font;
+    // set text
+    self.selectedTextView.text = text;
     [self.selectedTextView sizeToFitWithMaxWidth:0.8*_workingView.width lineHeight:0.2*_workingView.height];
 }
 
-#pragma mark- UITextView delegate
-
-- (void)textViewDidChange:(UITextView*)textView
+- (void)textSettingView:(CLTextSettingView *)settingView didChangeTextColor:(UIColor *)textColor
 {
-    NSRange selection = textView.selectedRange;
-    if(selection.location+selection.length == textView.text.length && [textView.text characterAtIndex:textView.text.length-1] == '\n') {
-        [textView layoutSubviews];
-        [textView scrollRectToVisible:CGRectMake(0, textView.contentSize.height - 1, 1, 1) animated:YES];
-    }
-    else {
-        [textView scrollRangeToVisible:textView.selectedRange];
-    }
-    
-    // set text
-    self.selectedTextView.text = textView.text;
+    _colorBtn.iconView.backgroundColor = textColor;
+    self.selectedTextView.color = textColor;
+}
+
+- (void)textSettingView:(CLTextSettingView *)settingView didChangeFont:(UIFont *)font
+{
+    self.selectedTextView.font = font;
     [self.selectedTextView sizeToFitWithMaxWidth:0.8*_workingView.width lineHeight:0.2*_workingView.height];
 }
 
