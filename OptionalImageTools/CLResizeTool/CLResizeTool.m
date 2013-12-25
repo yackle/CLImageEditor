@@ -139,6 +139,11 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
                 completionBlock(image, nil, nil);
             });
         }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(nil, nil, nil);
+            });
+        }
     });
 }
 
@@ -239,6 +244,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     CGFloat _limitSize;
     UITextField *_fieldW;
     UITextField *_fieldH;
+    
+    UIButton *_chainBtn;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -300,13 +307,22 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextNewSize", nil, [CLImageEditorTheme bundle], @"New Image Size:", @"");
     [_infoPanel addSubview:label];
     y = label.bottom;
-    
+    /*
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, y, _infoPanel.width-20, 50)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:30];
     label.text = @"x";
     label.textAlignment = NSTextAlignmentCenter;
     [_infoPanel addSubview:label];
+    */
+    _chainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _chainBtn.frame = CGRectMake(0, 0, 35, 35);
+    _chainBtn.center = CGPointMake(label.center.x, y + 25);
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:@"CLResizeTool/btn_chain_off.png"] forState:UIControlStateNormal];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:@"CLResizeTool/btn_chain_on.png"] forState:UIControlStateSelected];
+    [_chainBtn addTarget:self action:@selector(chainBtnDidPush:) forControlEvents:UIControlEventTouchUpInside];
+    _chainBtn.selected = YES;
+    [_infoPanel addSubview:_chainBtn];
     
     _fieldW = [[UITextField alloc] initWithFrame:CGRectMake(30, y+5, 100, 40)];
     _fieldW.font = [font fontWithSize:30];
@@ -334,6 +350,20 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 - (void)viewDidTap:(UITapGestureRecognizer*)sender
 {
     [self endEditing:YES];
+}
+
+- (void)chainBtnDidPush:(UIButton*)sender
+{
+    sender.selected = !sender.selected;
+    
+    CGFloat W = _fieldW.text.floatValue;
+    CGFloat H = _fieldH.text.floatValue;
+    if(W>H){
+        [self setImageWidth:W];
+    }
+    else{
+        [self setImageHeight:H];
+    }
 }
 
 #pragma mark - keyboard events
@@ -370,19 +400,24 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 {
     width = MIN(width, _limitSize);
     
-    if(width>0){
-        CGFloat height = width * _originalSize.height / _originalSize.width;
-        
-        if(height>_limitSize){
-            [self setImageHeight:_limitSize];
+    if(_chainBtn.selected){
+        if(width>0){
+            CGFloat height = MAX(1, width * _originalSize.height / _originalSize.width);
+            
+            if(height>_limitSize){
+                [self setImageHeight:_limitSize];
+            }
+            else{
+                _fieldW.text = [NSString stringWithFormat:@"%ld", (long)width];
+                _fieldH.text = [NSString stringWithFormat:@"%ld", (long)height];
+            }
         }
         else{
-            _fieldW.text = [NSString stringWithFormat:@"%ld", (long)width];
-            _fieldH.text = [NSString stringWithFormat:@"%ld", (long)height];
+            _fieldH.text = @"";
         }
     }
-    else{
-        _fieldH.text = @"";
+    else if(width>0){
+        _fieldW.text = [NSString stringWithFormat:@"%ld", (long)width];
     }
 }
 
@@ -390,20 +425,24 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 {
     height = MIN(height, _limitSize);
     
-    if(height>0){
-        CGFloat width = height * _originalSize.width / _originalSize.height;
-        
-        if(width>_limitSize){
-            [self setImageWidth:_limitSize];
+    if(_chainBtn.selected){
+        if(height>0){
+            CGFloat width = MAX(1, height * _originalSize.width / _originalSize.height);
+            
+            if(width>_limitSize){
+                [self setImageWidth:_limitSize];
+            }
+            else{
+                _fieldW.text = [NSString stringWithFormat:@"%ld", (long)width];
+                _fieldH.text = [NSString stringWithFormat:@"%ld", (long)height];
+            }
         }
         else{
-            _fieldW.text = [NSString stringWithFormat:@"%ld", (long)width];
-            _fieldH.text = [NSString stringWithFormat:@"%ld", (long)height];
+            _fieldW.text = @"";
         }
-        
     }
-    else{
-        _fieldW.text = @"";
+    else if(height>0){
+        _fieldH.text = [NSString stringWithFormat:@"%ld", (long)height];
     }
 }
 

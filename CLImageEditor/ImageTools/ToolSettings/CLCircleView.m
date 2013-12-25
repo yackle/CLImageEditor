@@ -42,4 +42,28 @@
     CGContextStrokeEllipseInRect(context, rct);
 }
 
+- (void)setColor:(UIColor *)color
+{
+    if(color != _color){
+        _color = color;
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setBorderColor:(UIColor *)borderColor
+{
+    if(borderColor != _borderColor){
+        _borderColor = borderColor;
+        [self setNeedsDisplay];
+    }
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth
+{
+    if(borderWidth != _borderWidth){
+        _borderWidth = borderWidth;
+        [self setNeedsDisplay];
+    }
+}
+
 @end

@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CLImageEditor"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "CLImageEditor provides basic image editing features to iPhone apps."
 
   s.homepage     = "https://github.com/yackle/CLImageEditor"
@@ -34,6 +34,7 @@ Pod::Spec.new do |s|
     all.dependency 'CLImageEditor/Core'
     all.dependency 'CLImageEditor/StickerTool'
     all.dependency 'CLImageEditor/ResizeTool'
+    all.dependency 'CLImageEditor/TextTool'
   end
   
   s.subspec 'StickerTool' do |sub|
@@ -46,6 +47,12 @@ Pod::Spec.new do |s|
     sub.dependency 'CLImageEditor/Core'
     sub.source_files  = 'OptionalImageTools/CLResizeTool/*.{h,m,mm}'
     sub.private_header_files = 'OptionalImageTools/CLResizeTool/**.h'
+  end
+  
+  s.subspec 'TextTool' do |sub|
+    sub.dependency 'CLImageEditor/Core'
+    sub.source_files  = 'OptionalImageTools/CLTextTool/*.{h,m,mm}'
+    sub.private_header_files = 'OptionalImageTools/CLTextTool/**.h'
   end
   
 end
