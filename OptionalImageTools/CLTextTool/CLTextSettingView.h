@@ -13,7 +13,9 @@
 
 @property (nonatomic, weak) id<CLTextSettingViewDelegate> delegate;
 @property (nonatomic, strong) NSString *selectedText;
-@property (nonatomic, strong) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *selectedFillColor;
+@property (nonatomic, strong) UIColor *selectedBorderColor;
+@property (nonatomic, assign) CGFloat selectedBorderWidth;
 @property (nonatomic, strong) UIFont *selectedFont;
 
 
@@ -29,7 +31,9 @@
 @protocol CLTextSettingViewDelegate <NSObject>
 @optional
 - (void)textSettingView:(CLTextSettingView*)settingView didChangeText:(NSString*)text;
-- (void)textSettingView:(CLTextSettingView*)settingView didChangeTextColor:(UIColor*)textColor;
+- (void)textSettingView:(CLTextSettingView*)settingView didChangeFillColor:(UIColor*)fillColor;
+- (void)textSettingView:(CLTextSettingView*)settingView didChangeBorderColor:(UIColor*)borderColor;
+- (void)textSettingView:(CLTextSettingView*)settingView didChangeBorderWidth:(CGFloat)borderWidth;
 - (void)textSettingView:(CLTextSettingView*)settingView didChangeFont:(UIFont*)font;
 
 @end

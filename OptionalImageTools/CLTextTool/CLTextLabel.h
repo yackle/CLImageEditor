@@ -9,7 +9,7 @@
 
 @interface CLTextLabel : UILabel
 
-@property (nonatomic, assign) UIColor *outlineColor;
+@property (nonatomic, strong) UIColor *outlineColor;
 @property (nonatomic, assign) CGFloat outlineWidth;
 
 @end

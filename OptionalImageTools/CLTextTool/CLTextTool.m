@@ -21,7 +21,9 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 @interface _CLTextView : UIView
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) UIFont *font;
-@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *fillColor;
+@property (nonatomic, strong) UIColor *borderColor;
+@property (nonatomic, assign) CGFloat borderWidth;
 @property (nonatomic, assign) NSTextAlignment textAlignment;
 
 + (void)setActiveTextView:(_CLTextView*)view;
@@ -203,14 +205,18 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     if(_selectedTextView==nil){
         [self hideSettingView];
         
-        _colorBtn.iconView.backgroundColor = _settingView.selectedColor;
+        _colorBtn.iconView.backgroundColor = _settingView.selectedFillColor;
         _alignLeftBtn.selected = _alignCenterBtn.selected = _alignRightBtn.selected = NO;
     }
     else{
-        _colorBtn.iconView.backgroundColor = selectedTextView.color;
+        _colorBtn.iconView.backgroundColor = selectedTextView.fillColor;
+        _colorBtn.iconView.layer.borderColor = selectedTextView.borderColor.CGColor;
+        _colorBtn.iconView.layer.borderWidth = MAX(2, 10*selectedTextView.borderWidth);
         
         _settingView.selectedText = selectedTextView.text;
-        _settingView.selectedColor = selectedTextView.color;
+        _settingView.selectedFillColor = selectedTextView.fillColor;
+        _settingView.selectedBorderColor = selectedTextView.borderColor;
+        _settingView.selectedBorderWidth = selectedTextView.borderWidth;
         _settingView.selectedFont = selectedTextView.font;
         [self setTextAlignment:selectedTextView.textAlignment];
     }
@@ -313,7 +319,9 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 - (void)addNewText
 {
     _CLTextView *view = [_CLTextView new];
-    view.color = _settingView.selectedColor;
+    view.fillColor = _settingView.selectedFillColor;
+    view.borderColor = _settingView.selectedBorderColor;
+    view.borderWidth = _settingView.selectedBorderWidth;
     view.font = _settingView.selectedFont;
     
     CGFloat ratio = MIN( (0.8 * _workingView.width) / view.width, (0.2 * _workingView.height) / view.height);
@@ -388,10 +396,22 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     [self.selectedTextView sizeToFitWithMaxWidth:0.8*_workingView.width lineHeight:0.2*_workingView.height];
 }
 
-- (void)textSettingView:(CLTextSettingView *)settingView didChangeTextColor:(UIColor *)textColor
+- (void)textSettingView:(CLTextSettingView*)settingView didChangeFillColor:(UIColor*)fillColor
 {
-    _colorBtn.iconView.backgroundColor = textColor;
-    self.selectedTextView.color = textColor;
+    _colorBtn.iconView.backgroundColor = fillColor;
+    self.selectedTextView.fillColor = fillColor;
+}
+
+- (void)textSettingView:(CLTextSettingView*)settingView didChangeBorderColor:(UIColor*)borderColor
+{
+    _colorBtn.iconView.layer.borderColor = borderColor.CGColor;
+    self.selectedTextView.borderColor = borderColor;
+}
+
+- (void)textSettingView:(CLTextSettingView*)settingView didChangeBorderWidth:(CGFloat)borderWidth
+{
+    _colorBtn.iconView.layer.borderWidth = MAX(2, 10*borderWidth);
+    self.selectedTextView.borderWidth = borderWidth;
 }
 
 - (void)textSettingView:(CLTextSettingView *)settingView didChangeFont:(UIFont *)font
@@ -551,14 +571,34 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     _label.layer.cornerRadius = 3/_scale;
 }
 
-- (void)setColor:(UIColor *)color
+- (void)setFillColor:(UIColor *)fillColor
 {
-    _label.textColor = color;
+    _label.textColor = fillColor;
 }
 
-- (UIColor*)color
+- (UIColor*)fillColor
 {
     return _label.textColor;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor
+{
+    _label.outlineColor = borderColor;
+}
+
+- (UIColor*)borderColor
+{
+    return _label.outlineColor;
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth
+{
+    _label.outlineWidth = borderWidth;
+}
+
+- (CGFloat)borderWidth
+{
+    return _label.outlineWidth;
 }
 
 - (void)setFont:(UIFont *)font
