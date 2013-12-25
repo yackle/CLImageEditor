@@ -33,8 +33,8 @@
                        @"CLAdjustmentTool",
                        @"CLEffectTool",
                        @"CLBlurTool",
-                       @"CLClippingTool",
                        @"CLRotateTool",
+                       @"CLClippingTool",
                        @"CLToneCurveTool",
                        ];
     return [tools indexOfObject:NSStringFromClass(self)];
