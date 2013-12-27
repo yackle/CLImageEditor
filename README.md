@@ -40,6 +40,8 @@ There are the following optional tools.
 
 `pod 'CLImageEditor/StickerTool'`
 
+`pod 'CLImageEditor/TextTool'`
+
 
 
 Usage
