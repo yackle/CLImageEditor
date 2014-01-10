@@ -80,8 +80,8 @@
     CFDataRef m_DataRef = CGDataProviderCopyData(CGImageGetDataProvider(inImage));
     UInt8 * m_PixelBuf = (UInt8 *) CFDataGetBytePtr(m_DataRef);
     
-    size_t width = CGImageGetWidth(inImage);
-    size_t height = CGImageGetHeight(inImage);
+    int width  = (int)CGImageGetWidth(inImage);
+    int height = (int)CGImageGetHeight(inImage);
     
     BOOL breakOut = NO;
     for (int x = 0;breakOut==NO && x < width; ++x) {
