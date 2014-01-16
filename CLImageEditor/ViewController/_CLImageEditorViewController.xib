@@ -21,7 +21,7 @@
                 <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="6gx-ro-Tem">
                     <rect key="frame" x="0.0" y="64" width="320" height="424"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="21" maxX="0.0" maxY="0.0"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="txW-X2-yuT"/>
                     </connections>
