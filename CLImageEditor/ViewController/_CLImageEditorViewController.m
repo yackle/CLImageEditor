@@ -171,6 +171,7 @@
     _bgView.backgroundColor = self.view.backgroundColor;
     self.view.backgroundColor = [self.view.backgroundColor colorWithAlphaComponent:0];
     
+    self.targetImageView.hidden = YES;
     _imageView.hidden = YES;
     _bgView.alpha = 0;
     _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
@@ -193,6 +194,7 @@
                          _menuView.transform = CGAffineTransformIdentity;
                      }
                      completion:^(BOOL finished) {
+                         self.targetImageView.hidden = NO;
                          _imageView.hidden = NO;
                          [animateView removeFromSuperview];
                      }
