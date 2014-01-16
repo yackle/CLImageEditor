@@ -11,7 +11,7 @@
 #import "CLImageEditor.h"
 
 @interface ViewController ()
-<CLImageEditorDelegate, CLImageEditorThemeDelegate>
+<CLImageEditorDelegate, CLImageEditorTransitionDelegate, CLImageEditorThemeDelegate>
 @end
 
 @implementation ViewController
@@ -48,8 +48,7 @@
 - (void)pushedEditBtn
 {
     if(_imageView.image){
-        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image];
-        editor.delegate = self;
+        CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image delegate:self];
         //CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
         
         /*
@@ -116,6 +115,11 @@
     [self refreshImageView];
     
     [editor dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageEditor:(CLImageEditor *)editor willDismissWithImageView:(UIImageView *)imageView canceled:(BOOL)canceled
+{
+    [self refreshImageView];
 }
 
 #pragma mark- Tapbar delegate

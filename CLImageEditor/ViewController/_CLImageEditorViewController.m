@@ -10,54 +10,15 @@
 #import "CLImageToolBase.h"
 
 
-#pragma mark- _CLViewState
-
-@interface _CLImageViewState : NSObject
-
-@property (nonatomic, strong) UIView *superview;
-@property (nonatomic, assign) CGRect frame;
-@property (nonatomic, assign) BOOL userInteratctionEnabled;
-@property (nonatomic, assign) CGAffineTransform transform;
-@property (nonatomic, assign) UIImage *image;
-
-@end
-
-
-@implementation _CLImageViewState
-
-- (id)initWithImageView:(UIImageView*)view
-{
-    self = [super init];
-    if(self){
-        [self setStateWithImageView:view];
-    }
-    return self;
-}
-
-- (void)setStateWithImageView:(UIImageView*)view
-{
-    CGAffineTransform trans = view.transform;
-    view.transform = CGAffineTransformIdentity;
-    
-    self.superview = view.superview;
-    self.frame     = view.frame;
-    self.transform = trans;
-    self.userInteratctionEnabled = view.userInteractionEnabled;
-    self.image = view.image;
-    
-    view.transform = trans;
-}
-
-@end
-
-
 #pragma mark- _CLImageEditorViewController
+
 @interface _CLImageEditorViewController()
 <CLImageToolProtocol>
 @property (nonatomic, strong) CLImageToolBase *currentTool;
 @property (nonatomic, strong, readwrite) CLImageToolInfo *toolInfo;
-@property (nonatomic, strong) _CLImageViewState *initialImageViewState;
+@property (nonatomic, strong) UIImageView *targetImageView;
 @end
+
 
 @implementation _CLImageEditorViewController
 {
@@ -110,19 +71,16 @@
 
 - (void)showInViewController:(UIViewController*)controller withImageView:(UIImageView*)imageView;
 {
-    [_imageView removeFromSuperview];
-    _imageView = nil;
-    
     _originalImage = imageView.image;
     
-    _imageView = imageView;
-    self.initialImageViewState = [[_CLImageViewState alloc] initWithImageView:imageView];
+    self.targetImageView = imageView;
     
     [controller addChildViewController:self];
     [self didMoveToParentViewController:controller];
     
     self.view.frame = controller.view.bounds;
     [controller.view addSubview:self.view];
+    [self refreshImageView];
 }
 
 - (void)viewDidLoad
@@ -174,7 +132,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if(self.initialImageViewState){
+    if(self.targetImageView){
         [self expropriateImageView];
     }
     else{
@@ -184,12 +142,28 @@
 
 #pragma mark- View transition
 
+- (void)copyImageViewInfo:(UIImageView*)fromView toView:(UIImageView*)toView
+{
+    CGAffineTransform transform = fromView.transform;
+    fromView.transform = CGAffineTransformIdentity;
+    
+    toView.transform = CGAffineTransformIdentity;
+    toView.frame = [toView.superview convertRect:fromView.frame fromView:fromView.superview];
+    toView.transform = transform;
+    toView.image = fromView.image;
+    toView.contentMode = fromView.contentMode;
+    toView.clipsToBounds = fromView.clipsToBounds;
+    
+    fromView.transform = transform;
+}
+
 - (void)expropriateImageView
 {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     
-    _imageView.frame = [window convertRect:_imageView.frame fromView:_imageView.superview];
-    [window addSubview:_imageView];
+    UIImageView *animateView = [UIImageView new];
+    [window addSubview:animateView];
+    [self copyImageViewInfo:self.targetImageView toView:animateView];
     
     _bgView = [[UIView alloc] initWithFrame:self.view.bounds];
     [self.view insertSubview:_bgView atIndex:0];
@@ -197,13 +171,15 @@
     _bgView.backgroundColor = self.view.backgroundColor;
     self.view.backgroundColor = [self.view.backgroundColor colorWithAlphaComponent:0];
     
+    self.targetImageView.hidden = YES;
+    _imageView.hidden = YES;
     _bgView.alpha = 0;
     _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
     _menuView.transform = CGAffineTransformMakeTranslation(0, self.view.height-_menuView.top);
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _imageView.transform = CGAffineTransformIdentity;
+                         animateView.transform = CGAffineTransformIdentity;
                          
                          CGFloat dy = ([UIDevice iosVersion]<7) ? [UIApplication sharedApplication].statusBarFrame.size.height : 0;
                          
@@ -211,31 +187,37 @@
                          CGFloat ratio = MIN(_scrollView.width / size.width, _scrollView.height / size.height);
                          CGFloat W = ratio * size.width;
                          CGFloat H = ratio * size.height;
-                         _imageView.frame = CGRectMake((_scrollView.width-W)/2 + _scrollView.left, (_scrollView.height-H)/2 + _scrollView.top + dy, W, H);
+                         animateView.frame = CGRectMake((_scrollView.width-W)/2 + _scrollView.left, (_scrollView.height-H)/2 + _scrollView.top + dy, W, H);
                          
                          _bgView.alpha = 1;
                          _navigationBar.transform = CGAffineTransformIdentity;
                          _menuView.transform = CGAffineTransformIdentity;
                      }
                      completion:^(BOOL finished) {
-                         [_scrollView addSubview:_imageView];
-                         [self refreshImageView];
+                         self.targetImageView.hidden = NO;
+                         _imageView.hidden = NO;
+                         [animateView removeFromSuperview];
                      }
      ];
 }
 
 - (void)restoreImageView:(BOOL)canceled
 {
-    if([self.delegate respondsToSelector:@selector(imageEditor:willRestoreImageView:canceled:)]){
-        [self.delegate imageEditor:self willRestoreImageView:_imageView canceled:canceled];
+    if(!canceled){
+        self.targetImageView.image = _imageView.image;
+    }
+    self.targetImageView.hidden = YES;
+    
+    id<CLImageEditorTransitionDelegate> delegate = [self transitionDelegate];
+    if([delegate respondsToSelector:@selector(imageEditor:willDismissWithImageView:canceled:)]){
+        [delegate imageEditor:self willDismissWithImageView:self.targetImageView canceled:canceled];
     }
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     
-    CGRect rct = _imageView.frame;
-    _imageView.transform = CGAffineTransformIdentity;
-    _imageView.frame = [window convertRect:rct fromView:_imageView.superview];
-    [window addSubview:_imageView];
+    UIImageView *animateView = [UIImageView new];
+    [window addSubview:animateView];
+    [self copyImageViewInfo:_imageView toView:animateView];
     
     _menuView.frame = [window convertRect:_menuView.frame fromView:_menuView.superview];
     _navigationBar.frame = [window convertRect:_navigationBar.frame fromView:_navigationBar.superview];
@@ -246,6 +228,7 @@
     self.view.userInteractionEnabled = NO;
     _menuView.userInteractionEnabled = NO;
     _navigationBar.userInteractionEnabled = NO;
+    _imageView.hidden = YES;
     
     [UIView animateWithDuration:0.3
                      animations:^{
@@ -256,15 +239,10 @@
                          _menuView.transform = CGAffineTransformMakeTranslation(0, self.view.height-_menuView.top);
                          _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
                          
-                         _imageView.frame = [window convertRect:self.initialImageViewState.frame fromView:self.initialImageViewState.superview];
-                         _imageView.transform = self.initialImageViewState.transform;
+                         [self copyImageViewInfo:self.targetImageView toView:animateView];
                      }
                      completion:^(BOOL finished) {
-                         _imageView.transform = CGAffineTransformIdentity;
-                         _imageView.frame = self.initialImageViewState.frame;
-                         _imageView.transform = self.initialImageViewState.transform;
-                         [self.initialImageViewState.superview addSubview:_imageView];
-                         
+                         [animateView removeFromSuperview];
                          [_menuView removeFromSuperview];
                          [_navigationBar removeFromSuperview];
                          
@@ -272,14 +250,25 @@
                          [self.view removeFromSuperview];
                          [self removeFromParentViewController];
                          
-                         if([self.delegate respondsToSelector:@selector(imageEditor:didRestoreImageView:canceled:)]){
-                             [self.delegate imageEditor:self didRestoreImageView:_imageView canceled:canceled];
+                         _imageView.hidden = NO;
+                         self.targetImageView.hidden = NO;
+                         
+                         if([delegate respondsToSelector:@selector(imageEditor:didDismissWithImageView:canceled:)]){
+                             [delegate imageEditor:self didDismissWithImageView:self.targetImageView canceled:canceled];
                          }
                      }
      ];
 }
 
 #pragma mark- Properties
+
+- (id<CLImageEditorTransitionDelegate>)transitionDelegate
+{
+    if([self.delegate conformsToProtocol:@protocol(CLImageEditorTransitionDelegate)]){
+        return (id<CLImageEditorTransitionDelegate>)self.delegate;
+    }
+    return nil;
+}
 
 - (void)setTitle:(NSString *)title
 {
@@ -532,7 +521,7 @@
 
 - (void)pushedCloseBtn:(id)sender
 {
-    if(self.initialImageViewState==nil){
+    if(self.targetImageView==nil){
         if([self.delegate respondsToSelector:@selector(imageEditorDidCancel:)]){
             [self.delegate imageEditorDidCancel:self];
         }
@@ -541,14 +530,14 @@
         }
     }
     else{
-        _imageView.image = self.initialImageViewState.image;
+        _imageView.image = self.targetImageView.image;
         [self restoreImageView:YES];
     }
 }
 
 - (void)pushedFinishBtn:(id)sender
 {
-    if(self.initialImageViewState==nil){
+    if(self.targetImageView==nil){
         if([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]){
             [self.delegate imageEditor:self didFinishEdittingWithImage:_originalImage];
         }
