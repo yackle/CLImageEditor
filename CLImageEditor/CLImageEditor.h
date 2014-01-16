@@ -35,7 +35,7 @@
 - (void)imageEditor:(CLImageEditor*)editor didFinishEdittingWithImage:(UIImage*)image;
 - (void)imageEditorDidCancel:(CLImageEditor*)editor;
 
-- (void)imageEditor:(CLImageEditor*)editor willRestoreImageView:(UIImageView*)image canceled:(BOOL)canceled;
-- (void)imageEditor:(CLImageEditor*)editor didRestoreImageView:(UIImageView*)image canceled:(BOOL)canceled;
+- (void)imageEditor:(CLImageEditor*)editor willRestoreImageView:(UIImageView*)imageView canceled:(BOOL)canceled;
+- (void)imageEditor:(CLImageEditor*)editor didRestoreImageView:(UIImageView*)imageView canceled:(BOOL)canceled;
 
 @end
