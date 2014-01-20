@@ -143,12 +143,13 @@ NSLog(@"%@", editor.toolInfo.toolTreeDescription);
 ```
 
 Currently, the tools are:
-`	CLFilterTool
+```
+CLFilterTool
         CLDefaultEmptyFilter
         CLDefaultSepiaFilter
         CLDefaultInvertFilter
-    CLAdjustmentTool
-    CLEffectTool
+CLAdjustmentTool
+CLEffectTool
         CLEffectBase
         CLHueEffect
         CLHighlightShadowEffect
@@ -156,11 +157,11 @@ Currently, the tools are:
         CLGloomEffect
         CLPosterizeEffect
         CLPixellateEffect
-    CLBlurTool
-    CLClippingTool
-    CLRotateTool
-    CLToneCurveTool
-    `
+CLBlurTool
+CLClippingTool
+CLRotateTool
+CLToneCurveTool
+```
 
 License
 ---
