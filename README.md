@@ -142,7 +142,7 @@ NSLog(@"%@", editor.toolInfo);
 NSLog(@"%@", editor.toolInfo.toolTreeDescription);
 ```
 
-Currently, here are the tools are for iOS 7:
+Currently, here are the tools for iOS 7:
 ```
 CLFilterTool
 	CLDefaultEmptyFilter
