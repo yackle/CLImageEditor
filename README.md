@@ -142,25 +142,40 @@ NSLog(@"%@", editor.toolInfo);
 NSLog(@"%@", editor.toolInfo.toolTreeDescription);
 ```
 
-Currently, the tools are:
+Currently, here are the tools for iOS 7:
 ```
 CLFilterTool
-        CLDefaultEmptyFilter
-        CLDefaultSepiaFilter
-        CLDefaultInvertFilter
+	CLDefaultEmptyFilter
+	CLDefaultLinearFilter
+	CLDefaultVignetteFilter
+	CLDefaultInstantFilter
+	CLDefaultProcessFilter
+	CLDefaultTransferFilter
+	CLDefaultSepiaFilter
+	CLDefaultChromeFilter
+	CLDefaultFadeFilter
+	CLDefaultCurveFilter
+	CLDefaultTonalFilter
+	CLDefaultNoirFilter
+	CLDefaultMonoFilter
+	CLDefaultInvertFilter    
 CLAdjustmentTool
 CLEffectTool
-        CLEffectBase
-        CLHueEffect
-        CLHighlightShadowEffect
-        CLBloomEffect
-        CLGloomEffect
-        CLPosterizeEffect
-        CLPixellateEffect
+	CLEffectBase
+	CLSpotEffect
+	CLHueEffect
+	CLHighlightShadowEffect
+	CLBloomEffect
+	CLGloomEffect
+	CLPosterizeEffect
+	CLPixellateEffect
 CLBlurTool
-CLClippingTool
 CLRotateTool
+CLClippingTool
+CLResizeTool
 CLToneCurveTool
+CLStickerTool
+CLTextTool
 ```
 
 License
