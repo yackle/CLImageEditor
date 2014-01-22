@@ -184,10 +184,12 @@
                          CGFloat dy = ([UIDevice iosVersion]<7) ? [UIApplication sharedApplication].statusBarFrame.size.height : 0;
                          
                          CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
-                         CGFloat ratio = MIN(_scrollView.width / size.width, _scrollView.height / size.height);
-                         CGFloat W = ratio * size.width;
-                         CGFloat H = ratio * size.height;
-                         animateView.frame = CGRectMake((_scrollView.width-W)/2 + _scrollView.left, (_scrollView.height-H)/2 + _scrollView.top + dy, W, H);
+                         if(size.width>0 && size.height>0){
+                             CGFloat ratio = MIN(_scrollView.width / size.width, _scrollView.height / size.height);
+                             CGFloat W = ratio * size.width;
+                             CGFloat H = ratio * size.height;
+                             animateView.frame = CGRectMake((_scrollView.width-W)/2 + _scrollView.left, (_scrollView.height-H)/2 + _scrollView.top + dy, W, H);
+                         }
                          
                          _bgView.alpha = 1;
                          _navigationBar.transform = CGAffineTransformIdentity;
@@ -331,10 +333,12 @@
 - (void)resetImageViewFrame
 {
     CGSize size = (_imageView.image) ? _imageView.image.size : _imageView.frame.size;
-    CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
-    CGFloat W = ratio * size.width * _scrollView.zoomScale;
-    CGFloat H = ratio * size.height * _scrollView.zoomScale;
-    _imageView.frame = CGRectMake((_scrollView.width-W)/2, (_scrollView.height-H)/2, W, H);
+    if(size.width>0 && size.height>0){
+        CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
+        CGFloat W = ratio * size.width * _scrollView.zoomScale;
+        CGFloat H = ratio * size.height * _scrollView.zoomScale;
+        _imageView.frame = CGRectMake((_scrollView.width-W)/2, (_scrollView.height-H)/2, W, H);
+    }
 }
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated
