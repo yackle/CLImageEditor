@@ -133,6 +133,22 @@ tool.dockedNumber = -1;  // Bring to top
 //tool.iconImagePath = @"test.png";
 ```
 
+Customizing the clipping tool is a little different:
+
+``` objc
+NSArray *ratios = @[
+                    @{@"value1":@0, @"value2":@0,       @"titleFormat":@"Custom"}, // if either value is zero, free form is set.
+                    @{@"value1":@1, @"value2":@1,       @"titleFormat":@"%.1f : %.1f"},
+                    @{@"value1":@1, @"value2":@1.618,   @"titleFormat":@"%g : %g"},
+                    @{@"value1":@2, @"value2":@3},
+                    @{@"value1":@3, @"value2":@2},
+                    ];
+
+CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLClippingTool" recursive:NO];
+tool.optionalInfo[@"ratios"] = ratios;
+tool.optionalInfo[@"swapButtonHidden"] = @YES;
+```
+
 * `dockedNumber` determines the menu item order. Note that it is simply used as a key for sorting.
 
 The list of tool names can be confirmed with the following code.
