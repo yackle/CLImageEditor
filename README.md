@@ -22,7 +22,7 @@ Alternatively, you should be able to setup a [git submodule](http://git-scm.com/
 
 ##### Or CocoaPods
 
-[CocoaPods](http://beta.cocoapods.org/) is a dependency manager for Objective-C projects.
+[CocoaPods](http://cocoapods.org/) is a dependency manager for Objective-C projects.
 
 `pod 'CLImageEditor'`
 
