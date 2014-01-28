@@ -1,0 +1,4 @@
+
+platform :ios, '5.1'
+
+pod 'CLImageEditor/AllTools', :path => '../../'

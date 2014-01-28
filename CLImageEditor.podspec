@@ -35,6 +35,7 @@ Pod::Spec.new do |s|
     all.dependency 'CLImageEditor/StickerTool'
     all.dependency 'CLImageEditor/ResizeTool'
     all.dependency 'CLImageEditor/TextTool'
+    all.dependency 'CLImageEditor/CLGPUImageFilters'
   end
   
   s.subspec 'StickerTool' do |sub|
@@ -55,4 +56,10 @@ Pod::Spec.new do |s|
     sub.private_header_files = 'OptionalImageTools/CLTextTool/**.h'
   end
   
+  s.subspec 'CLGPUImageFilters' do |sub|
+    sub.dependency 'GPUImage'
+    sub.dependency 'CLImageEditor/Core'
+    sub.source_files  = 'OptionalImageTools/CLGPUImageFilters/*.{h,m,mm}'
+    sub.private_header_files = 'OptionalImageTools/CLGPUImageFilters/**.h'
+  end
 end
