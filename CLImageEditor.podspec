@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
     all.dependency 'CLImageEditor/StickerTool'
     all.dependency 'CLImageEditor/ResizeTool'
     all.dependency 'CLImageEditor/TextTool'
-    all.dependency 'CLImageEditor/CLGPUImageFilters'
+    #all.dependency 'CLImageEditor/CLGPUImageFilters'
   end
   
   s.subspec 'StickerTool' do |sub|

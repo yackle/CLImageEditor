@@ -8,7 +8,6 @@
 #if __has_include("GPUImage.h")
 
 #import "CLFilterBase.h"
-#import "GPUImage.h"
 
 @interface CLGPUImageVignetteFilter : CLFilterBase
 

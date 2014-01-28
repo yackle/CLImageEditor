@@ -9,6 +9,8 @@
 
 #import "CLGPUImageVignetteFilter.h"
 
+#import "GPUImage.h"
+
 @implementation CLGPUImageVignetteFilter
 
 + (CGFloat)defaultDockedNumber

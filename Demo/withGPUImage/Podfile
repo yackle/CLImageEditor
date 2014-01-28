@@ -2,3 +2,4 @@
 platform :ios, '5.1'
 
 pod 'CLImageEditor/AllTools', :path => '../../'
+pod 'CLImageEditor/CLGPUImageFilters', :path => '../../'
