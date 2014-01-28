@@ -4,7 +4,7 @@ CLImageEditor
 CLImageEditor provides basic image editing features to iPhone apps. This ViewController is simple to use, and is also possible to incorporate as part of the UIImagePickerController easily.
 
 
-![sample](Demo/Simple/CLImageEditorDemo/sample.jpg)
+![sample](Demo/CLImageEditorDemo/CLImageEditorDemo/sample.jpg)
 
 
 Installing
