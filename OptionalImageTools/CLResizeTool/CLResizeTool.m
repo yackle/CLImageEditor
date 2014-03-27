@@ -299,7 +299,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     label.text = [NSString stringWithFormat:@"%ld x %ld", (long)_originalSize.width, (long)_originalSize.height];
     label.textAlignment = NSTextAlignmentCenter;
     [_infoPanel addSubview:label];
-    y = label.bottom;
+    //y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, _infoPanel.height/2, _infoPanel.width-20, 30)];
     label.backgroundColor = [UIColor clearColor];
