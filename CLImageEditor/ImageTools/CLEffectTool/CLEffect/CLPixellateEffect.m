@@ -75,7 +75,7 @@
 
 - (CGRect)clippingRectForTransparentSpace:(CGImageRef)inImage
 {
-    CGFloat left, right, top, bottom;
+    CGFloat left=0, right=0, top=0, bottom=0;
     
     CFDataRef m_DataRef = CGDataProviderCopyData(CGImageGetDataProvider(inImage));
     UInt8 * m_PixelBuf = (UInt8 *) CFDataGetBytePtr(m_DataRef);
