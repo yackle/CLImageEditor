@@ -75,7 +75,7 @@
         
         a = b = c = d = NULL;
         
-        if(dataNum==0){
+        if(dataNum<=0){
             return nil;
         }
         
