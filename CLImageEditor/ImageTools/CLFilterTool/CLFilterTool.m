@@ -96,6 +96,11 @@
 
 - (void)tappedFilterPanel:(UITapGestureRecognizer*)sender
 {
+    static BOOL inProgress = NO;
+    
+    if(inProgress){ return; }
+    inProgress = YES;
+    
     UIView *view = sender.view;
     
     view.alpha = 0.2;
@@ -108,6 +113,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage *image = [self filteredImage:_originalImage withToolInfo:view.toolInfo];
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
+        inProgress = NO;
     });
 }
 

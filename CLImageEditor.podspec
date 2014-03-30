@@ -56,10 +56,10 @@ Pod::Spec.new do |s|
     sub.private_header_files = 'OptionalImageTools/CLTextTool/**.h'
   end
   
-  s.subspec 'CLGPUImageFilters' do |sub|
-    sub.dependency 'GPUImage'
-    sub.dependency 'CLImageEditor/Core'
-    sub.source_files  = 'OptionalImageTools/CLGPUImageFilters/*.{h,m,mm}'
-    sub.private_header_files = 'OptionalImageTools/CLGPUImageFilters/**.h'
-  end
+  #s.subspec 'CLGPUImageFilters' do |sub|
+  #  sub.dependency 'GPUImage'
+  #  sub.dependency 'CLImageEditor/Core'
+  #  sub.source_files  = 'OptionalImageTools/CLGPUImageFilters/*.{h,m,mm}'
+  #  sub.private_header_files = 'OptionalImageTools/CLGPUImageFilters/**.h'
+  #end
 end
