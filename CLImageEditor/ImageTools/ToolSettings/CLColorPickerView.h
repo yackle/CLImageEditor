@@ -14,10 +14,10 @@
 @property (nonatomic, weak) id<CLColorPickerViewDelegate> delegate;
 @property (nonatomic, strong) UIColor *color;
 
-@property (nonatomic, readonly) CGFloat hue;
-@property (nonatomic, readonly) CGFloat saturation;
-@property (nonatomic, readonly) CGFloat brightness;
-@property (nonatomic, readonly) CGFloat alpha;
+@property (nonatomic, readonly) CGFloat hueComponent;
+@property (nonatomic, readonly) CGFloat saturationComponent;
+@property (nonatomic, readonly) CGFloat brightnessComponent;
+@property (nonatomic, readonly) CGFloat alphaComponent;
 
 - (void)setColorWithHue:(CGFloat)hue saturation:(CGFloat)saturation brightness:(CGFloat)brightness alpha:(CGFloat)alpha;
 

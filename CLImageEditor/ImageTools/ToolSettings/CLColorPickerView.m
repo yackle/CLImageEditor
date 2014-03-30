@@ -140,22 +140,22 @@
     return _hueCircle.color;
 }
 
-- (CGFloat)hue
+- (CGFloat)hueComponent
 {
     return _hueCircle.hue;
 }
 
-- (CGFloat)saturation
+- (CGFloat)saturationComponent
 {
     return _saturationSlider.value;
 }
 
-- (CGFloat)brightness
+- (CGFloat)brightnessComponent
 {
     return _hueCircle.brightness;
 }
 
-- (CGFloat)alpha
+- (CGFloat)alphaComponent
 {
     return _alphaSlider.value;
 }
