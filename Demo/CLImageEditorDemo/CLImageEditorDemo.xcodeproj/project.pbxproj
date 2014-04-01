@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AD1D2C6B1897538900752339 /* CLGPUImageVignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */; };
+		AD29BB5D18EA471A0084D3D6 /* CLEmoticonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD29BB5C18EA471A0084D3D6 /* CLEmoticonTool.m */; };
 		AD5A03401897528000347C57 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD5A02DC1897528000347C57 /* CLImageEditor.bundle */; };
 		AD5A03411897528000347C57 /* CLImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A02DE1897528000347C57 /* CLImageEditor.m */; };
 		AD5A03421897528000347C57 /* CLImageEditorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A02E01897528000347C57 /* CLImageEditorTheme.m */; };
@@ -68,6 +69,8 @@
 		AD13E67C1850F7C8009B12AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1D2C691897538900752339 /* CLGPUImageVignetteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLGPUImageVignetteFilter.h; path = CLGPUImageFilters/CLGPUImageVignetteFilter.h; sourceTree = "<group>"; };
 		AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLGPUImageVignetteFilter.m; path = CLGPUImageFilters/CLGPUImageVignetteFilter.m; sourceTree = "<group>"; };
+		AD29BB5B18EA471A0084D3D6 /* CLEmoticonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEmoticonTool.h; sourceTree = "<group>"; };
+		AD29BB5C18EA471A0084D3D6 /* CLEmoticonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEmoticonTool.m; sourceTree = "<group>"; };
 		AD5A02DC1897528000347C57 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		AD5A02DD1897528000347C57 /* CLImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageEditor.h; sourceTree = "<group>"; };
 		AD5A02DE1897528000347C57 /* CLImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageEditor.m; sourceTree = "<group>"; };
@@ -195,6 +198,15 @@
 				AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */,
 			);
 			name = CLGPUImageFilters;
+			sourceTree = "<group>";
+		};
+		AD29BB5A18EA471A0084D3D6 /* CLEmoticonTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD29BB5B18EA471A0084D3D6 /* CLEmoticonTool.h */,
+				AD29BB5C18EA471A0084D3D6 /* CLEmoticonTool.m */,
+			);
+			path = CLEmoticonTool;
 			sourceTree = "<group>";
 		};
 		AD5A02DB1897528000347C57 /* CLImageEditor */ = {
@@ -372,6 +384,7 @@
 		AD5A032C1897528000347C57 /* OptionalImageTools */ = {
 			isa = PBXGroup;
 			children = (
+				AD29BB5A18EA471A0084D3D6 /* CLEmoticonTool */,
 				AD1D2C681897532100752339 /* CLGPUImageFilters */,
 				AD5A032D1897528000347C57 /* CLResizeTool */,
 				AD5A03301897528000347C57 /* CLStickerTool */,
@@ -571,6 +584,7 @@
 				AD1D2C6B1897538900752339 /* CLGPUImageVignetteFilter.m in Sources */,
 				AD5A035C1897528000347C57 /* CLSplineInterpolator.m in Sources */,
 				AD5A034B1897528000347C57 /* CLPixellateEffect.m in Sources */,
+				AD29BB5D18EA471A0084D3D6 /* CLEmoticonTool.m in Sources */,
 				AD5A035A1897528000347C57 /* UIView+CLImageToolInfo.m in Sources */,
 				AD5A03511897528000347C57 /* CLFilterTool.m in Sources */,
 				AD5A03421897528000347C57 /* CLImageEditorTheme.m in Sources */,
