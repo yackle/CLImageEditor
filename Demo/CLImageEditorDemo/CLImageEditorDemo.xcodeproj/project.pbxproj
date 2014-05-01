@@ -42,7 +42,6 @@
 		AD5A035E1897528000347C57 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A03251897528000347C57 /* UIImage+Utility.m */; };
 		AD5A035F1897528000347C57 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A03271897528000347C57 /* UIView+Frame.m */; };
 		AD5A03601897528000347C57 /* _CLImageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A032A1897528000347C57 /* _CLImageEditorViewController.m */; };
-		AD5A03611897528000347C57 /* _CLImageEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD5A032B1897528000347C57 /* _CLImageEditorViewController.xib */; };
 		AD5A03621897528000347C57 /* CLResizeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A032F1897528000347C57 /* CLResizeTool.m */; };
 		AD5A03631897528000347C57 /* CLStickerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A03321897528000347C57 /* CLStickerTool.m */; };
 		AD5A03641897528000347C57 /* CLFontPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A03351897528000347C57 /* CLFontPickerView.m */; };
@@ -138,7 +137,6 @@
 		AD5A03271897528000347C57 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		AD5A03291897528000347C57 /* _CLImageEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CLImageEditorViewController.h; sourceTree = "<group>"; };
 		AD5A032A1897528000347C57 /* _CLImageEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CLImageEditorViewController.m; sourceTree = "<group>"; };
-		AD5A032B1897528000347C57 /* _CLImageEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _CLImageEditorViewController.xib; sourceTree = "<group>"; };
 		AD5A032E1897528000347C57 /* CLResizeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLResizeTool.h; sourceTree = "<group>"; };
 		AD5A032F1897528000347C57 /* CLResizeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLResizeTool.m; sourceTree = "<group>"; };
 		AD5A03311897528000347C57 /* CLStickerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLStickerTool.h; sourceTree = "<group>"; };
@@ -376,7 +374,6 @@
 			children = (
 				AD5A03291897528000347C57 /* _CLImageEditorViewController.h */,
 				AD5A032A1897528000347C57 /* _CLImageEditorViewController.m */,
-				AD5A032B1897528000347C57 /* _CLImageEditorViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -544,7 +541,6 @@
 			files = (
 				AD5C1E1C18350DC400790989 /* Images.xcassets in Resources */,
 				AD5C1E0E18350DC400790989 /* InfoPlist.strings in Resources */,
-				AD5A03611897528000347C57 /* _CLImageEditorViewController.xib in Resources */,
 				AD5A03401897528000347C57 /* CLImageEditor.bundle in Resources */,
 				AD5C1E1718350DC400790989 /* Main.storyboard in Resources */,
 				AD5C1E8A18350F1800790989 /* default.jpg in Resources */,
