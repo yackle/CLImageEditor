@@ -145,11 +145,11 @@
             if(self.navigationController.navigationBar.translucent){
                 y = self.navigationController.navigationBar.bottom;
             }
+            y = ([UIDevice iosVersion] < 7) ? y-20 : y;
         }
         else{
             y = _navigationBar.bottom;
         }
-        y = ([UIDevice iosVersion] < 7) ? y-20 : y;
         
         imageScroll.top = y;
         imageScroll.height = self.view.height - imageScroll.top - _menuView.height;
