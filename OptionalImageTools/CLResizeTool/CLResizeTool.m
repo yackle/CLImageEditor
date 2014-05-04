@@ -91,7 +91,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     
     _switchBtn = [CLImageEditorTheme menuItemWithFrame:CGRectMake(0, 0, 70, btnPanel.height) target:self action:@selector(pushedSwitchBtn:) toolInfo:nil];
     _switchBtn.tag = 0;
-    _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_width.png", [self class]]];
+	
+    _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_width.png"];
     [btnPanel addSubview:_switchBtn];
     
     NSNumber *limit = self.toolInfo.optionalInfo[kCLResizeToolLimitSize];
@@ -193,11 +194,11 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 {
     if(_switchBtn.tag==0){
         _switchBtn.tag = 1;
-        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_height.png", [self class]]];
+        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_height.png"];
     }
     else{
         _switchBtn.tag = 0;
-        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_width.png", [self class]]];
+        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_width.png"];
     }
     
     _switchBtn.alpha = 0.2;
@@ -287,6 +288,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     
     CGFloat y = 0;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, _infoPanel.width-20, 30)];
+	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextOriginalSize", nil, [CLImageEditorTheme bundle], @"Original Image Size:", @"");
@@ -294,6 +296,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, y, _infoPanel.width-20, 50)];
+	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:30];
     label.text = [NSString stringWithFormat:@"%ld x %ld", (long)_originalSize.width, (long)_originalSize.height];
@@ -302,6 +305,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     //y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, _infoPanel.height/2, _infoPanel.width-20, 30)];
+	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextNewSize", nil, [CLImageEditorTheme bundle], @"New Image Size:", @"");
@@ -318,13 +322,15 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _chainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _chainBtn.frame = CGRectMake(0, 0, 35, 35);
     _chainBtn.center = CGPointMake(label.center.x, y + 25);
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:@"CLResizeTool/btn_chain_off.png"] forState:UIControlStateNormal];
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:@"CLResizeTool/btn_chain_on.png"] forState:UIControlStateSelected];
+	
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
     [_chainBtn addTarget:self action:@selector(chainBtnDidPush:) forControlEvents:UIControlEventTouchUpInside];
     _chainBtn.selected = YES;
     [_infoPanel addSubview:_chainBtn];
     
     _fieldW = [[UITextField alloc] initWithFrame:CGRectMake(30, y+5, 100, 40)];
+	[_fieldW setTextColor:[CLImageEditorTheme toolbarTextColor]];
     _fieldW.font = [font fontWithSize:30];
     _fieldW.textAlignment = NSTextAlignmentCenter;
     _fieldW.keyboardType = UIKeyboardTypeNumberPad;
@@ -335,6 +341,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     [_infoPanel addSubview:_fieldW];
     
     _fieldH = [[UITextField alloc] initWithFrame:CGRectMake(_infoPanel.center.x + 10, y+5, 100, 40)];
+	[_fieldH setTextColor:[CLImageEditorTheme toolbarTextColor]];
     _fieldH.font = [font fontWithSize:30];
     _fieldH.textAlignment = NSTextAlignmentCenter;
     _fieldH.keyboardType = UIKeyboardTypeNumberPad;

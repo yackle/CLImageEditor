@@ -85,13 +85,15 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(_tonecurveView.right + 20, 15, 30, 30);
     [btn addTarget:self action:@selector(pushedHideBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_arrow.png", [self class]]] forState:UIControlStateNormal];
+	
+    [btn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_arrow.png"] forState:UIControlStateNormal];
     [_menuContainer addSubview:btn];
     
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(_tonecurveView.right + 20, _tonecurveView.bottom - 30, 30, 30);
     [btn addTarget:self action:@selector(pushedResetBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_reset.png", [self class]]] forState:UIControlStateNormal];
+	
+    [btn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_reset.png"] forState:UIControlStateNormal];
     [_menuContainer addSubview:btn];
     
     _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuContainer.top);
