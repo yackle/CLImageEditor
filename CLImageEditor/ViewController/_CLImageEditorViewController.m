@@ -99,9 +99,16 @@
     }
     
     _menuView.backgroundColor = [CLImageEditorTheme toolbarColor];
+	
+	[_navigationBar setBarTintColor:self.theme.toolbarColor];
+	[_navigationBar	   setTintColor:self.theme.toolbarTextColor];
+	
+	_navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: self.theme.toolbarTextColor};
     
     if(self.navigationController!=nil){
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+																							   target:self
+																							   action:@selector(pushedFinishBtn:)];
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         
         _navigationBar.hidden = YES;
