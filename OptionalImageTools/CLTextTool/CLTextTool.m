@@ -117,7 +117,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     [self.editor.view addSubview:_settingView];
     
     UIButton *okButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [okButton setImage:[CLImageEditorTheme imageNamed:@"CLTextTool/btn_delete.png"] forState:UIControlStateNormal];
+    [okButton setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_delete.png"] forState:UIControlStateNormal];
     okButton.frame = CGRectMake(_settingView.width-32, 0, 32, 32);
     [okButton addTarget:self action:@selector(pushedButton:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:okButton];
@@ -239,13 +239,24 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     CGFloat x = 0;
     
     NSArray *_menu = @[
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemNew", nil, [CLImageEditorTheme bundle], @"New", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_add.png", [self class]]]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemText", nil, [CLImageEditorTheme bundle], @"Text", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/icon.png", [self class]]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemNew", nil, [CLImageEditorTheme bundle], @"New", @""), @"icon":[CLImageEditorTheme imageNamed:[self class]
+																																												image:@"btn_add.png"]},
+					   
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemText", nil, [CLImageEditorTheme bundle], @"Text", @""), @"icon":[CLImageEditorTheme imageNamed:[self class]
+																																												  image:@"icon.png"]},
                        @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemColor", nil, [CLImageEditorTheme bundle], @"Color", @"")},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemFont", nil, [CLImageEditorTheme bundle], @"Font", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_font.png", [self class]]]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignLeft", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_align_left.png", [self class]]]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignCenter", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_align_center.png", [self class]]]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignRight", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_align_right.png", [self class]]]},
+					   
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemFont", nil, [CLImageEditorTheme bundle], @"Font", @""), @"icon":[CLImageEditorTheme imageNamed:[self class]
+																																												  image:@"btn_font.png"]},
+					   
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignLeft", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[self class]
+																																													image:@"btn_align_left.png"]},
+					   
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignCenter", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[self class]
+																																													  image:@"btn_align_center.png"]},
+					   
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignRight", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[self class]
+																																													 image:@"btn_align_right.png"]},
                        ];
     
     NSInteger tag = 0;
@@ -463,6 +474,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
     self = [super initWithFrame:CGRectMake(0, 0, 132, 132)];
     if(self){
         _label = [[CLTextLabel alloc] init];
+		[_label setTextColor:[CLImageEditorTheme toolbarTextColor]];
         _label.numberOfLines = 0;
         _label.backgroundColor = [UIColor clearColor];
         _label.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -479,7 +491,7 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
         self.frame = CGRectMake(0, 0, size.width + 32, size.height + 32);
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_deleteButton setImage:[CLImageEditorTheme imageNamed:@"CLTextTool/btn_delete.png"] forState:UIControlStateNormal];
+        [_deleteButton setImage:[CLImageEditorTheme imageNamed:[CLTextTool class] image:@"btn_delete.png"] forState:UIControlStateNormal];
         _deleteButton.frame = CGRectMake(0, 0, 32, 32);
         _deleteButton.center = _label.frame.origin;
         [_deleteButton addTarget:self action:@selector(pushedDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];
