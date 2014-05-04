@@ -31,16 +31,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.toolInfo = [CLImageToolInfo toolInfoForToolClass:[self class]];
+        // Custom initialization
     }
     return self;
 }
 
 - (id)init
 {
-    self = [self initWithNibName:nil bundle:nil];
+    self = [self initWithNibName:@"_CLImageEditorViewController" bundle:nil];
     if (self){
-        
+        self.toolInfo = [CLImageToolInfo toolInfoForToolClass:[self class]];
     }
     return self;
 }
@@ -69,98 +69,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_navigationBar removeFromSuperview];
-}
-
-#pragma mark- Custom initialization
-
-- (void)initNavigationBar
-{
-    if(_navigationBar==nil){
-        UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
-        navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
-        navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
-        
-        CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : 20;
-        
-        UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, 44)];
-        [navigationBar pushNavigationItem:navigationItem animated:NO];
-        navigationBar.delegate = self;
-        
-        if(self.navigationController){
-            navigationBar.frame = self.navigationController.navigationBar.frame;
-            [self.navigationController.view addSubview:navigationBar];
-        }
-        else{
-            [self.view addSubview:navigationBar];
-        }
-        _navigationBar = navigationBar;
-    }
-    
-    if(self.navigationController!=nil){
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        
-        _navigationBar.hidden = YES;
-        [_navigationBar popNavigationItemAnimated:NO];
-    }
-    else{
-        _navigationBar.topItem.title = self.title;
-    }
-    
-    if([UIDevice iosVersion] < 7){
-        _navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    }
-}
-
-- (void)initMenuScrollView
-{
-    if(self.menuView==nil){
-        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
-        menuScroll.top = self.view.height - menuScroll.height;
-        menuScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-        menuScroll.showsHorizontalScrollIndicator = NO;
-        menuScroll.showsVerticalScrollIndicator = NO;
-        
-        [self.view addSubview:menuScroll];
-        self.menuView = menuScroll;
-    }
-    self.menuView.backgroundColor = [CLImageEditorTheme toolbarColor];
-}
-
-- (void)initImageScrollView
-{
-    if(_scrollView==nil){
-        UIScrollView *imageScroll = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-        imageScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        imageScroll.showsHorizontalScrollIndicator = NO;
-        imageScroll.showsVerticalScrollIndicator = NO;
-        imageScroll.delegate = self;
-        imageScroll.clipsToBounds = NO;
-        
-        CGFloat y = 0;
-        if(self.navigationController){
-            if(self.navigationController.navigationBar.translucent){
-                y = self.navigationController.navigationBar.bottom;
-            }
-            y = ([UIDevice iosVersion] < 7) ? y-20 : y;
-        }
-        else{
-            y = _navigationBar.bottom;
-        }
-        
-        imageScroll.top = y;
-        imageScroll.height = self.view.height - imageScroll.top - _menuView.height;
-        
-        [self.view insertSubview:imageScroll atIndex:0];
-        _scrollView = imageScroll;
-    }
-}
-
-#pragma mark-
-
 - (void)showInViewController:(UIViewController*)controller withImageView:(UIImageView*)imageView;
 {
     _originalImage = imageView.image;
@@ -180,9 +88,7 @@
     [super viewDidLoad];
     
     self.title = self.toolInfo.title;
-    self.view.clipsToBounds = YES;
     self.view.backgroundColor = self.theme.backgroundColor;
-    self.navigationController.view.backgroundColor = self.view.backgroundColor;
     
     if([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]){
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -192,9 +98,29 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
-    [self initNavigationBar];
-    [self initMenuScrollView];
-    [self initImageScrollView];
+    _menuView.backgroundColor = [CLImageEditorTheme toolbarColor];
+	
+	[_navigationBar setBarTintColor:self.theme.toolbarColor];
+	[_navigationBar	   setTintColor:self.theme.toolbarTextColor];
+	
+	_navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: self.theme.toolbarTextColor};
+    
+    if(self.navigationController!=nil){
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+																							   target:self
+																							   action:@selector(pushedFinishBtn:)];
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        
+        _navigationBar.hidden = YES;
+        [_navigationBar popNavigationItemAnimated:NO];
+    }
+    else{
+        _navigationBar.topItem.title = self.title;
+    }
+    
+    if([UIDevice iosVersion] < 7){
+        _navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    }
     
     [self setMenuView];
     
@@ -505,7 +431,7 @@
         return;
     }
     
-    //[self.navigationController setNavigationBarHidden:editting animated:YES];
+    [self.navigationController setNavigationBarHidden:editting animated:YES];
     
     if(editting){
         _navigationBar.hidden = NO;
@@ -513,7 +439,6 @@
         
         [UIView animateWithDuration:kCLImageToolAnimationDuration
                          animations:^{
-                             self.navigationController.navigationBar.transform = CGAffineTransformMakeTranslation(0, -self.navigationController.navigationBar.height-20);
                              _navigationBar.transform = CGAffineTransformIdentity;
                          }
          ];
@@ -521,7 +446,6 @@
     else{
         [UIView animateWithDuration:kCLImageToolAnimationDuration
                          animations:^{
-                             self.navigationController.navigationBar.transform = CGAffineTransformIdentity;
                              _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
                          }
                          completion:^(BOOL finished) {

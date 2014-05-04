@@ -28,9 +28,11 @@
     return self.theme.bundle;
 }
 
-+ (UIImage*)imageNamed:(NSString *)path
++ (UIImage*)imageNamed:(Class)path image:(NSString*)image
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", self.bundleName, path]];
+	CLImageEditorTheme *theme = [CLImageEditorTheme theme];
+	
+    return [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@/%@/%@", self.bundleName, path, theme.toolIconColor, image]];
 }
 
 #pragma mark color settings
