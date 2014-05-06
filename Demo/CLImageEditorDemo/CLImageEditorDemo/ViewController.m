@@ -20,16 +20,16 @@
 {
     [super viewDidLoad];
 	
-	/** Set a black theme rather than a white one
-	
-	[[CLImageEditorTheme theme] setBackgroundColor:[UIColor blackColor]];
-	
-	[[CLImageEditorTheme theme] setToolbarColor:[UIColor blackColor]];
+    //Set a black theme rather than a white one
+	/*
+    [[CLImageEditorTheme theme] setBackgroundColor:[UIColor blackColor]];
+	[[CLImageEditorTheme theme] setToolbarColor:[[UIColor blackColor] colorWithAlphaComponent:0.8]];
 	[[CLImageEditorTheme theme] setToolbarTextColor:[UIColor whiteColor]];
 	[[CLImageEditorTheme theme] setToolIconColor:@"white"];
-    
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    */
     [self refreshImageView];
-	*/
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,8 +59,6 @@
     if(_imageView.image){
         CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image delegate:self];
         //CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
-		
-		[[[editor navigationController] navigationBar] setBackgroundColor:[UIColor blackColor]];
         
         /*
         NSLog(@"%@", editor.toolInfo);

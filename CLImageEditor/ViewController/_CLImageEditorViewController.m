@@ -113,11 +113,6 @@
     if([UIDevice iosVersion] < 7){
         _navigationBar.barStyle = UIBarStyleBlackTranslucent;
     }
-    
-	[_navigationBar setBarTintColor:self.theme.toolbarColor];
-	[_navigationBar	   setTintColor:self.theme.toolbarTextColor];
-	
-	_navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: self.theme.toolbarTextColor};
 }
 
 - (void)initMenuScrollView
