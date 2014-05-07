@@ -13,7 +13,7 @@
 
 + (NSString*)bundleName;
 + (NSBundle*)bundle;
-+ (UIImage*)imageNamed:(NSString*)path;
++ (UIImage*)imageNamed:(Class)path image:(NSString*)image;
 
 + (UIColor*)backgroundColor;
 + (UIColor*)toolbarColor;

@@ -226,7 +226,8 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
         [self addSubview:_imageView];
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_deleteButton setImage:[CLImageEditorTheme imageNamed:@"CLStickerTool/btn_delete.png"] forState:UIControlStateNormal];
+		
+        [_deleteButton setImage:[CLImageEditorTheme imageNamed:[CLStickerTool class] image:@"btn_delete.png"] forState:UIControlStateNormal];
         _deleteButton.frame = CGRectMake(0, 0, 32, 32);
         _deleteButton.center = _imageView.frame.origin;
         [_deleteButton addTarget:self action:@selector(pushedDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];
