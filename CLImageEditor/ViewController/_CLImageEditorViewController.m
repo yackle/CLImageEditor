@@ -78,6 +78,9 @@
 
 - (void)initNavigationBar
 {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     if(_navigationBar==nil){
         UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
         navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
@@ -100,9 +103,6 @@
     }
     
     if(self.navigationController!=nil){
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        
         _navigationBar.hidden = YES;
         [_navigationBar popNavigationItemAnimated:NO];
     }
