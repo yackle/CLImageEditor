@@ -419,9 +419,7 @@
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
         
-        if(W != _imageView.width || H != _imageView.height){
-            _imageView.frame = CGRectMake((_scrollView.width-W)/2, (_scrollView.height-H)/2, W, H);
-        }
+        _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
     }
 }
 
@@ -507,8 +505,6 @@
     if(self.navigationController==nil){
         return;
     }
-    
-    //[self.navigationController setNavigationBarHidden:editting animated:YES];
     
     if(editting){
         _navigationBar.hidden = NO;
