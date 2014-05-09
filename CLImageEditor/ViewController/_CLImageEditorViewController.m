@@ -79,21 +79,20 @@
 - (void)initNavigationBar
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     if(_navigationBar==nil){
         UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
         navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
         navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
         
-        CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : 20;
+        CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : [UIApplication sharedApplication].statusBarFrame.size.height;
         
         UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, 44)];
         [navigationBar pushNavigationItem:navigationItem animated:NO];
         navigationBar.delegate = self;
         
         if(self.navigationController){
-            navigationBar.frame = self.navigationController.navigationBar.frame;
             [self.navigationController.view addSubview:navigationBar];
         }
         else{
@@ -103,6 +102,7 @@
     }
     
     if(self.navigationController!=nil){
+        _navigationBar.frame  = self.navigationController.navigationBar.frame;
         _navigationBar.hidden = YES;
         [_navigationBar popNavigationItemAnimated:NO];
     }
@@ -145,7 +145,7 @@
             if(self.navigationController.navigationBar.translucent){
                 y = self.navigationController.navigationBar.bottom;
             }
-            y = ([UIDevice iosVersion] < 7) ? y-20 : y;
+            y = ([UIDevice iosVersion] < 7) ? y-[UIApplication sharedApplication].statusBarFrame.size.height : y;
         }
         else{
             y = _navigationBar.bottom;
@@ -418,7 +418,8 @@
         CGFloat ratio = MIN(_scrollView.frame.size.width / size.width, _scrollView.frame.size.height / size.height);
         CGFloat W = ratio * size.width * _scrollView.zoomScale;
         CGFloat H = ratio * size.height * _scrollView.zoomScale;
-        _imageView.frame = CGRectMake((_scrollView.width-W)/2, (_scrollView.height-H)/2, W, H);
+        
+        _imageView.frame = CGRectMake(MAX(0, (_scrollView.width-W)/2), MAX(0, (_scrollView.height-H)/2), W, H);
     }
 }
 
@@ -504,8 +505,6 @@
     if(self.navigationController==nil){
         return;
     }
-    
-    //[self.navigationController setNavigationBarHidden:editting animated:YES];
     
     if(editting){
         _navigationBar.hidden = NO;
