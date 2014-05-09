@@ -86,7 +86,7 @@
         navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
         navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
         
-        CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : 20;
+        CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : [UIApplication sharedApplication].statusBarFrame.size.height;
         
         UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, 44)];
         [navigationBar pushNavigationItem:navigationItem animated:NO];
@@ -145,7 +145,7 @@
             if(self.navigationController.navigationBar.translucent){
                 y = self.navigationController.navigationBar.bottom;
             }
-            y = ([UIDevice iosVersion] < 7) ? y-20 : y;
+            y = ([UIDevice iosVersion] < 7) ? y-[UIApplication sharedApplication].statusBarFrame.size.height : y;
         }
         else{
             y = _navigationBar.bottom;
