@@ -79,7 +79,7 @@
 - (void)initNavigationBar
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     if(_navigationBar==nil){
         UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
@@ -93,7 +93,6 @@
         navigationBar.delegate = self;
         
         if(self.navigationController){
-            navigationBar.frame = self.navigationController.navigationBar.frame;
             [self.navigationController.view addSubview:navigationBar];
         }
         else{
@@ -103,6 +102,7 @@
     }
     
     if(self.navigationController!=nil){
+        _navigationBar.frame  = self.navigationController.navigationBar.frame;
         _navigationBar.hidden = YES;
         [_navigationBar popNavigationItemAnimated:NO];
     }
