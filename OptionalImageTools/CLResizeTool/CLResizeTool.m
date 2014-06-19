@@ -158,14 +158,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     label.font = [UIFont boldSystemFontOfSize:30];
     label.minimumScaleFactor = 0.5;
     
-    if([[[CLImageEditorTheme theme] toolIconColor] isEqualToString:@"white"]){
-        label.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
-        label.textColor = [UIColor colorWithWhite:0 alpha:1];
-    }
-    else{
-        label.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
-        label.textColor = [UIColor colorWithWhite:1 alpha:1];
-    }
+    label.backgroundColor = [[CLImageEditorTheme theme] toolbarTextColor];
+    label.textColor = [[CLImageEditorTheme theme] toolbarColor];
     
     UIGraphicsBeginImageContext(label.frame.size);
     [label.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -341,7 +335,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _fieldW.font = [font fontWithSize:30];
     _fieldW.textAlignment = NSTextAlignmentCenter;
     _fieldW.keyboardType = UIKeyboardTypeNumberPad;
-    _fieldW.borderStyle = UITextBorderStyleLine;
+    _fieldW.layer.borderWidth = 1;
+    _fieldW.layer.borderColor = [[[CLImageEditorTheme theme] toolbarTextColor] CGColor];
     _fieldW.text = [NSString stringWithFormat:@"%ld", (long)_originalSize.width];
     _fieldW.delegate = self;
     [_fieldW addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -352,7 +347,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _fieldH.font = [font fontWithSize:30];
     _fieldH.textAlignment = NSTextAlignmentCenter;
     _fieldH.keyboardType = UIKeyboardTypeNumberPad;
-    _fieldH.borderStyle = UITextBorderStyleLine;
+    _fieldH.layer.borderWidth = 1;
+    _fieldH.layer.borderColor = _fieldW.layer.borderColor;
     _fieldH.text = [NSString stringWithFormat:@"%ld", (long)_originalSize.height];
     _fieldH.delegate = self;
     [_fieldH addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
