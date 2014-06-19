@@ -323,8 +323,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _chainBtn.frame = CGRectMake(0, 0, 35, 35);
     _chainBtn.center = CGPointMake(label.center.x, y + 25);
 	
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
     [_chainBtn addTarget:self action:@selector(chainBtnDidPush:) forControlEvents:UIControlEventTouchUpInside];
     _chainBtn.selected = YES;
     [_infoPanel addSubview:_chainBtn];
