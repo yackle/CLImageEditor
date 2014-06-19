@@ -153,12 +153,19 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 - (UIImage*)imageWithString:(NSString*)str
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    label.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
-    label.textColor = [UIColor colorWithWhite:1 alpha:1];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = str;
     label.font = [UIFont boldSystemFontOfSize:30];
     label.minimumScaleFactor = 0.5;
+    
+    if([[[CLImageEditorTheme theme] toolIconColor] isEqualToString:@"white"]){
+        label.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+        label.textColor = [UIColor colorWithWhite:0 alpha:1];
+    }
+    else{
+        label.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
+        label.textColor = [UIColor colorWithWhite:1 alpha:1];
+    }
     
     UIGraphicsBeginImageContext(label.frame.size);
     [label.layer renderInContext:UIGraphicsGetCurrentContext()];
