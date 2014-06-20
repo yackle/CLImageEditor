@@ -34,15 +34,6 @@ static NSString* const CLTextViewActiveViewDidTapNotification = @"CLTextViewActi
 
 
 
-@interface CLToolbarMenuItem(Private)
-- (UIImageView*)iconView;
-@end
-
-@implementation CLToolbarMenuItem(Private)
-- (UIImageView*)iconView{ return _iconView; }
-@end
-
-
 @interface CLTextTool()
 <CLColorPickerViewDelegate, CLFontPickerViewDelegate, UITextViewDelegate, CLTextSettingViewDelegate>
 @property (nonatomic, strong) _CLTextView *selectedTextView;

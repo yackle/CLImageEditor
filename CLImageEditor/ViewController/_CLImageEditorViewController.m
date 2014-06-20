@@ -359,6 +359,11 @@
     self.toolInfo.title = title;
 }
 
+- (UIScrollView*)scrollView
+{
+    return _scrollView;
+}
+
 #pragma mark- ImageTool setting
 
 + (NSString*)defaultIconImagePath

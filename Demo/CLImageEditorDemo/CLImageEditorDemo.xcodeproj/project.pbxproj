@@ -62,6 +62,7 @@
 		AD5C1E8A18350F1800790989 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E8918350F1800790989 /* default.jpg */; };
 		AD85D68718457388003106A3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68618457388003106A3 /* Accelerate.framework */; };
 		AD85D68918457394003106A3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68818457394003106A3 /* CoreImage.framework */; };
+		ADD4A0211953C29D0033DFEE /* CLDrawTool.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD4A0201953C29D0033DFEE /* CLDrawTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +172,8 @@
 		AD5C1E8918350F1800790989 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		AD85D68618457388003106A3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		AD85D68818457394003106A3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		ADD4A01F1953C29D0033DFEE /* CLDrawTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDrawTool.h; sourceTree = "<group>"; };
+		ADD4A0201953C29D0033DFEE /* CLDrawTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDrawTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +384,7 @@
 		AD5A032C1897528000347C57 /* OptionalImageTools */ = {
 			isa = PBXGroup;
 			children = (
+				ADD4A01E1953C2720033DFEE /* CLDrawTool */,
 				AD29BB5A18EA471A0084D3D6 /* CLEmoticonTool */,
 				AD1D2C681897532100752339 /* CLGPUImageFilters */,
 				AD5A032D1897528000347C57 /* CLResizeTool */,
@@ -486,6 +490,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		ADD4A01E1953C2720033DFEE /* CLDrawTool */ = {
+			isa = PBXGroup;
+			children = (
+				ADD4A01F1953C29D0033DFEE /* CLDrawTool.h */,
+				ADD4A0201953C29D0033DFEE /* CLDrawTool.m */,
+			);
+			path = CLDrawTool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -588,6 +601,7 @@
 				AD5A03561897528000347C57 /* CLColorPickerView.m in Sources */,
 				AD5A03691897528000347C57 /* CLTextTool.m in Sources */,
 				AD5A035D1897528000347C57 /* UIDevice+SystemVersion.m in Sources */,
+				ADD4A0211953C29D0033DFEE /* CLDrawTool.m in Sources */,
 				AD5A03681897528000347C57 /* CLTextSettingView.m in Sources */,
 				AD5A03591897528000347C57 /* CLToolbarMenuItem.m in Sources */,
 				AD5A03541897528000347C57 /* CLToneCurveTool.m in Sources */,

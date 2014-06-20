@@ -59,6 +59,11 @@
     _titleLabel.text = title;
 }
 
+- (UIImageView*)iconView
+{
+    return _iconView;
+}
+
 - (UIImage*)iconImage
 {
     return _iconView.image;
