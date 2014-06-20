@@ -194,9 +194,9 @@
     
     self.centerContentIndex = _centerContentIndex;
     
-    int marginNum = ceil((self.height-_VIEW_HEIGHT)/(2*_VIEW_HEIGHT));
+    NSInteger marginNum = ceil((self.height-_VIEW_HEIGHT)/(2*_VIEW_HEIGHT));
     _VIEW_NUM = 2*marginNum + 3;
-    int centerIndex = _VIEW_NUM/2;
+    NSInteger centerIndex = _VIEW_NUM/2;
     
     _scrollView.contentOffset = CGPointMake(0, _VIEW_HEIGHT*MAX_SCROLLABLE_VIEWS/2);
     _scrollView.contentSize   = CGSizeMake(0, _VIEW_HEIGHT*MAX_SCROLLABLE_VIEWS);
