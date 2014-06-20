@@ -185,7 +185,7 @@
     CGAffineTransform transform = _saturationSlider.transform;
     _saturationSlider.transform = CGAffineTransformIdentity;
     
-    UIGraphicsBeginImageContext(_saturationSlider.frame.size);
+    UIGraphicsBeginImageContextWithOptions(_saturationSlider.frame.size, NO, 0.0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -238,7 +238,7 @@
     CGAffineTransform transform = _alphaSlider.transform;
     _alphaSlider.transform = CGAffineTransformIdentity;
     
-    UIGraphicsBeginImageContext(_alphaSlider.frame.size);
+    UIGraphicsBeginImageContextWithOptions(_alphaSlider.frame.size, NO, 0.0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     

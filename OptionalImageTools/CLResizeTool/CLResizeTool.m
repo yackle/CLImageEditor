@@ -161,7 +161,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     label.backgroundColor = [[CLImageEditorTheme theme] toolbarTextColor];
     label.textColor = [[CLImageEditorTheme theme] toolbarColor];
     
-    UIGraphicsBeginImageContext(label.frame.size);
+    UIGraphicsBeginImageContextWithOptions(label.frame.size, NO, 0.0);
     [label.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
