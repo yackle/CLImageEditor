@@ -40,7 +40,7 @@
 
 + (CGFloat)defaultDockedNumber
 {
-    return -1;
+    return 4.5;
 }
 
 #pragma mark- implementation
@@ -287,7 +287,9 @@
         _prevDraggingPosition = currentDraggingPosition;
     }
     
-    [self drawLine:_prevDraggingPosition to:currentDraggingPosition];
+    if(sender.state != UIGestureRecognizerStateEnded){
+        [self drawLine:_prevDraggingPosition to:currentDraggingPosition];
+    }
     _prevDraggingPosition = currentDraggingPosition;
 }
 
