@@ -282,8 +282,6 @@
 - (void)drawingViewDidPan:(UIPanGestureRecognizer*)sender
 {
     CGPoint currentDraggingPosition = [sender locationInView:_drawingView];
-    //currentDraggingPosition.x *= _originalImageSize.width / _drawingView.width;
-    //currentDraggingPosition.y *= _originalImageSize.height / _drawingView.height;
     
     if(sender.state == UIGestureRecognizerStateBegan){
         _prevDraggingPosition = currentDraggingPosition;
