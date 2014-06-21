@@ -52,7 +52,7 @@
     
     _drawingView = [[UIImageView alloc] initWithFrame:self.editor.imageView.bounds];
     
-    _grayImage = [[self.editor.imageView.image resize:CGSizeMake(_drawingView.width, _drawingView.height)] grayScaleImage];
+    _grayImage = [[self.editor.imageView.image resize:CGSizeMake(_drawingView.width*2, _drawingView.height*2)] grayScaleImage];
     _drawingView.image = _grayImage;
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
