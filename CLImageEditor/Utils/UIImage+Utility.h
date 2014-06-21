@@ -14,6 +14,8 @@
 
 - (UIImage*)deepCopy;
 
+- (UIImage*)grayScaleImage;
+
 - (UIImage*)resize:(CGSize)size;
 - (UIImage*)aspectFit:(CGSize)size;
 - (UIImage*)aspectFill:(CGSize)size;
