@@ -42,6 +42,8 @@ There are the following optional tools.
 
 `pod 'CLImageEditor/TextTool'`
 
+`pod 'CLImageEditor/SplashTool'`
+
 
 
 Usage
