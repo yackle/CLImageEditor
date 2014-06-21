@@ -41,6 +41,9 @@
 "CLDefaultInvertFilter_DefaultTitle" = "Invert";
 
 /* No comment provided by engineer. */
+"CLDrawTool_DefaultTitle" = "Draw";
+
+/* No comment provided by engineer. */
 "CLAdjustmentTool_DefaultTitle" = "Регулировка";
 
 /* No comment provided by engineer. */

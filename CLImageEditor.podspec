@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CLImageEditor"
-  s.version      = "0.0.9"
+  s.version      = "0.1.0"
   s.summary      = "CLImageEditor provides basic image editing features to iPhone apps."
 
   s.homepage     = "https://github.com/yackle/CLImageEditor"
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |core|
     core.source_files  = 'CLImageEditor/*.{h,m,mm}', 'CLImageEditor/**/*.{h,m,mm}'
     core.public_header_files = 'CLImageEditor/*.h'
-    core.resources = "CLImageEditor/*.bundle", "CLImageEditor/ViewController/*.xib"
+    core.resources = "CLImageEditor/*.bundle"
   end
   
   s.subspec 'Dev' do |dev|
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
     all.dependency 'CLImageEditor/EmoticonTool'
     all.dependency 'CLImageEditor/ResizeTool'
     all.dependency 'CLImageEditor/TextTool'
-    #all.dependency 'CLImageEditor/CLGPUImageFilters'
+    all.dependency 'CLImageEditor/SplashTool'
   end
   
   s.subspec 'StickerTool' do |sub|
@@ -63,10 +63,10 @@ Pod::Spec.new do |s|
     sub.private_header_files = 'OptionalImageTools/CLTextTool/**.h'
   end
   
-  #s.subspec 'CLGPUImageFilters' do |sub|
-  #  sub.dependency 'GPUImage'
-  #  sub.dependency 'CLImageEditor/Core'
-  #  sub.source_files  = 'OptionalImageTools/CLGPUImageFilters/*.{h,m,mm}'
-  #  sub.private_header_files = 'OptionalImageTools/CLGPUImageFilters/**.h'
-  #end
+  s.subspec 'SplashTool' do |sub|
+    sub.dependency 'CLImageEditor/Core'
+    sub.source_files  = 'OptionalImageTools/CLSplashTool/*.{h,m,mm}'
+    sub.private_header_files = 'OptionalImageTools/CLSplashTool/**.h'
+  end
+  
 end

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AD1D2C6B1897538900752339 /* CLGPUImageVignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */; };
 		AD29BB5D18EA471A0084D3D6 /* CLEmoticonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD29BB5C18EA471A0084D3D6 /* CLEmoticonTool.m */; };
+		AD359C321954FB4D00B763CF /* CLSplashTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD359C311954FB4D00B763CF /* CLSplashTool.m */; };
 		AD5A03401897528000347C57 /* CLImageEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD5A02DC1897528000347C57 /* CLImageEditor.bundle */; };
 		AD5A03411897528000347C57 /* CLImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A02DE1897528000347C57 /* CLImageEditor.m */; };
 		AD5A03421897528000347C57 /* CLImageEditorTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5A02E01897528000347C57 /* CLImageEditorTheme.m */; };
@@ -60,6 +61,7 @@
 		AD5C1E1A18350DC400790989 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD5C1E1918350DC400790989 /* ViewController.m */; };
 		AD5C1E1C18350DC400790989 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E1B18350DC400790989 /* Images.xcassets */; };
 		AD5C1E8A18350F1800790989 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AD5C1E8918350F1800790989 /* default.jpg */; };
+		AD7B1DBA19546130007C3BBC /* CLDrawTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7B1DB919546130007C3BBC /* CLDrawTool.m */; };
 		AD85D68718457388003106A3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68618457388003106A3 /* Accelerate.framework */; };
 		AD85D68918457394003106A3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD85D68818457394003106A3 /* CoreImage.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,8 @@
 		AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLGPUImageVignetteFilter.m; path = CLGPUImageFilters/CLGPUImageVignetteFilter.m; sourceTree = "<group>"; };
 		AD29BB5B18EA471A0084D3D6 /* CLEmoticonTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEmoticonTool.h; sourceTree = "<group>"; };
 		AD29BB5C18EA471A0084D3D6 /* CLEmoticonTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLEmoticonTool.m; sourceTree = "<group>"; };
+		AD359C301954FB4D00B763CF /* CLSplashTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSplashTool.h; sourceTree = "<group>"; };
+		AD359C311954FB4D00B763CF /* CLSplashTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSplashTool.m; sourceTree = "<group>"; };
 		AD5A02DC1897528000347C57 /* CLImageEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLImageEditor.bundle; sourceTree = "<group>"; };
 		AD5A02DD1897528000347C57 /* CLImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLImageEditor.h; sourceTree = "<group>"; };
 		AD5A02DE1897528000347C57 /* CLImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLImageEditor.m; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		AD5C1E1B18350DC400790989 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AD5C1E2218350DC400790989 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AD5C1E8918350F1800790989 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
+		AD7B1DB819546130007C3BBC /* CLDrawTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLDrawTool.h; sourceTree = "<group>"; };
+		AD7B1DB919546130007C3BBC /* CLDrawTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLDrawTool.m; sourceTree = "<group>"; };
 		AD85D68618457388003106A3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		AD85D68818457394003106A3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -207,6 +213,15 @@
 			path = CLEmoticonTool;
 			sourceTree = "<group>";
 		};
+		AD359C2F1954FB2200B763CF /* CLSplashTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD359C301954FB4D00B763CF /* CLSplashTool.h */,
+				AD359C311954FB4D00B763CF /* CLSplashTool.m */,
+			);
+			path = CLSplashTool;
+			sourceTree = "<group>";
+		};
 		AD5A02DB1897528000347C57 /* CLImageEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,13 +243,14 @@
 		AD5A02E31897528000347C57 /* ImageTools */ = {
 			isa = PBXGroup;
 			children = (
+				AD5A03061897528000347C57 /* CLImageToolBase.h */,
+				AD5A03071897528000347C57 /* CLImageToolBase.m */,
 				AD5A02E41897528000347C57 /* CLAdjustmentTool */,
 				AD5A02E71897528000347C57 /* CLBlurTool */,
 				AD5A02EA1897528000347C57 /* CLClippingTool */,
+				AD7B1DB719546130007C3BBC /* CLDrawTool */,
 				AD5A02ED1897528000347C57 /* CLEffectTool */,
 				AD5A03011897528000347C57 /* CLFilterTool */,
-				AD5A03061897528000347C57 /* CLImageToolBase.h */,
-				AD5A03071897528000347C57 /* CLImageToolBase.m */,
 				AD5A03081897528000347C57 /* CLRotateTool */,
 				AD5A030B1897528000347C57 /* CLToneCurveTool */,
 				AD5A030E1897528000347C57 /* ToolSettings */,
@@ -381,6 +397,7 @@
 		AD5A032C1897528000347C57 /* OptionalImageTools */ = {
 			isa = PBXGroup;
 			children = (
+				AD359C2F1954FB2200B763CF /* CLSplashTool */,
 				AD29BB5A18EA471A0084D3D6 /* CLEmoticonTool */,
 				AD1D2C681897532100752339 /* CLGPUImageFilters */,
 				AD5A032D1897528000347C57 /* CLResizeTool */,
@@ -486,6 +503,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AD7B1DB719546130007C3BBC /* CLDrawTool */ = {
+			isa = PBXGroup;
+			children = (
+				AD7B1DB819546130007C3BBC /* CLDrawTool.h */,
+				AD7B1DB919546130007C3BBC /* CLDrawTool.m */,
+			);
+			path = CLDrawTool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -588,6 +614,8 @@
 				AD5A03561897528000347C57 /* CLColorPickerView.m in Sources */,
 				AD5A03691897528000347C57 /* CLTextTool.m in Sources */,
 				AD5A035D1897528000347C57 /* UIDevice+SystemVersion.m in Sources */,
+				AD7B1DBA19546130007C3BBC /* CLDrawTool.m in Sources */,
+				AD359C321954FB4D00B763CF /* CLSplashTool.m in Sources */,
 				AD5A03681897528000347C57 /* CLTextSettingView.m in Sources */,
 				AD5A03591897528000347C57 /* CLToolbarMenuItem.m in Sources */,
 				AD5A03541897528000347C57 /* CLToneCurveTool.m in Sources */,

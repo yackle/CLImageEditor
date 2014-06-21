@@ -153,14 +153,15 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 - (UIImage*)imageWithString:(NSString*)str
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    label.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
-    label.textColor = [UIColor colorWithWhite:1 alpha:1];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = str;
     label.font = [UIFont boldSystemFontOfSize:30];
     label.minimumScaleFactor = 0.5;
     
-    UIGraphicsBeginImageContext(label.frame.size);
+    label.backgroundColor = [[CLImageEditorTheme theme] toolbarTextColor];
+    label.textColor = [[CLImageEditorTheme theme] toolbarColor];
+    
+    UIGraphicsBeginImageContextWithOptions(label.frame.size, NO, 0.0);
     [label.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -323,8 +324,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _chainBtn.frame = CGRectMake(0, 0, 35, 35);
     _chainBtn.center = CGPointMake(label.center.x, y + 25);
 	
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
     [_chainBtn addTarget:self action:@selector(chainBtnDidPush:) forControlEvents:UIControlEventTouchUpInside];
     _chainBtn.selected = YES;
     [_infoPanel addSubview:_chainBtn];
@@ -334,7 +335,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _fieldW.font = [font fontWithSize:30];
     _fieldW.textAlignment = NSTextAlignmentCenter;
     _fieldW.keyboardType = UIKeyboardTypeNumberPad;
-    _fieldW.borderStyle = UITextBorderStyleLine;
+    _fieldW.layer.borderWidth = 1;
+    _fieldW.layer.borderColor = [[[CLImageEditorTheme theme] toolbarTextColor] CGColor];
     _fieldW.text = [NSString stringWithFormat:@"%ld", (long)_originalSize.width];
     _fieldW.delegate = self;
     [_fieldW addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -345,7 +347,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _fieldH.font = [font fontWithSize:30];
     _fieldH.textAlignment = NSTextAlignmentCenter;
     _fieldH.keyboardType = UIKeyboardTypeNumberPad;
-    _fieldH.borderStyle = UITextBorderStyleLine;
+    _fieldH.layer.borderWidth = 1;
+    _fieldH.layer.borderColor = _fieldW.layer.borderColor;
     _fieldH.text = [NSString stringWithFormat:@"%ld", (long)_originalSize.height];
     _fieldH.delegate = self;
     [_fieldH addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];

@@ -168,7 +168,7 @@
     if([self.delegate respondsToSelector:@selector(pickerView:titleForRow:forComponent:)]){
         return [self.delegate pickerView:self titleForRow:row forComponent:pickerDrum.tag];
     }
-    return [NSString stringWithFormat:@"%d - %d", pickerDrum.tag, row];
+    return [NSString stringWithFormat:@"%ld - %ld", (long)pickerDrum.tag, (long)row];
 }
 
 - (void)pickerDrum:(CLPickerDrum *)pickerDrum didSelectRow:(NSInteger)row
