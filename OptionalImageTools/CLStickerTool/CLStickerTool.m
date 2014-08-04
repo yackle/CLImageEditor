@@ -171,7 +171,7 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 
 - (UIImage*)buildImage:(UIImage*)image
 {
-    UIGraphicsBeginImageContext(image.size);
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     
     [image drawAtPoint:CGPointZero];
     

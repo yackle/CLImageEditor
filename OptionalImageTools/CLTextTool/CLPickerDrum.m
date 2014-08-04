@@ -92,7 +92,7 @@
 
 - (UIImage*)foregroundImage
 {
-    UIGraphicsBeginImageContext(self.frame.size);
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     

@@ -172,7 +172,7 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
 
 - (UIImage*)buildImage:(UIImage*)image
 {
-    UIGraphicsBeginImageContext(image.size);
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     
     [image drawAtPoint:CGPointZero];
     
