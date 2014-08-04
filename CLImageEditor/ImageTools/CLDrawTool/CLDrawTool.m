@@ -324,7 +324,7 @@
 
 - (UIImage*)buildImage
 {
-    UIGraphicsBeginImageContext(_originalImageSize);
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, 0.0);
     
     [self.editor.imageView.image drawAtPoint:CGPointZero];
     [_drawingView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
