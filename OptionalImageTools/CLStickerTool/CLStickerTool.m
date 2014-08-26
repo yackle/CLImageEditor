@@ -11,11 +11,11 @@
 
 static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 
-
 @interface _CLStickerView : UIView
 + (void)setActiveStickerView:(_CLStickerView*)view;
 - (UIImageView*)imageView;
 - (id)initWithImage:(UIImage *)image;
+- (void)setScale:(CGFloat)scale;
 @end
 
 
@@ -154,8 +154,7 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
     if(filePath){
         _CLStickerView *view = [[_CLStickerView alloc] initWithImage:[UIImage imageWithContentsOfFile:filePath]];
         CGFloat ratio = MIN( (0.5 * _workingView.width) / view.width, (0.5 * _workingView.height) / view.height);
-        view.width  = ratio * view.width + view.imageView.frame.origin.x;
-        view.height = ratio * view.height + view.imageView.frame.origin.y;
+        [view setScale:ratio];
         view.center = CGPointMake(_workingView.width/2, _workingView.height/2);
         
         [_workingView addSubview:view];
@@ -172,7 +171,7 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 
 - (UIImage*)buildImage:(UIImage*)image
 {
-    UIGraphicsBeginImageContext(image.size);
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     
     [image drawAtPoint:CGPointZero];
     
@@ -221,14 +220,14 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
     self = [super initWithFrame:CGRectMake(0, 0, image.size.width+32, image.size.height+32)];
     if(self){
         _imageView = [[UIImageView alloc] initWithImage:image];
-        _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _imageView.layer.borderColor = [[UIColor blackColor] CGColor];
         _imageView.layer.cornerRadius = 3;
         _imageView.center = self.center;
         [self addSubview:_imageView];
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_deleteButton setImage:[CLImageEditorTheme imageNamed:@"CLStickerTool/btn_delete.png"] forState:UIControlStateNormal];
+		
+        [_deleteButton setImage:[CLImageEditorTheme imageNamed:[CLStickerTool class] image:@"btn_delete.png"] forState:UIControlStateNormal];
         _deleteButton.frame = CGRectMake(0, 0, 32, 32);
         _deleteButton.center = _imageView.frame.origin;
         [_deleteButton addTarget:self action:@selector(pushedDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -305,7 +304,30 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
 {
     _deleteButton.hidden = !active;
     _circleView.hidden = !active;
-    _imageView.layer.borderWidth = (active) ? 1 : 0;
+    _imageView.layer.borderWidth = (active) ? 1/_scale : 0;
+}
+
+- (void)setScale:(CGFloat)scale
+{
+    _scale = scale;
+    
+    self.transform = CGAffineTransformIdentity;
+    
+    _imageView.transform = CGAffineTransformMakeScale(_scale, _scale);
+    
+    CGRect rct = self.frame;
+    rct.origin.x += (rct.size.width - (_imageView.width + 32)) / 2;
+    rct.origin.y += (rct.size.height - (_imageView.height + 32)) / 2;
+    rct.size.width  = _imageView.width + 32;
+    rct.size.height = _imageView.height + 32;
+    self.frame = rct;
+    
+    _imageView.center = CGPointMake(rct.size.width/2, rct.size.height/2);
+    
+    self.transform = CGAffineTransformMakeRotation(_arg);
+    
+    _imageView.layer.borderWidth = 1/_scale;
+    _imageView.layer.cornerRadius = 3/_scale;
 }
 
 - (void)viewDidTap:(UITapGestureRecognizer*)sender
@@ -346,17 +368,8 @@ static NSString* const kCLStickerToolStickerPathKey = @"stickerPath";
     CGFloat R = sqrt(p.x*p.x + p.y*p.y);
     CGFloat arg = atan2(p.y, p.x);
     
-    _scale = MAX(_initialScale * R / tmpR, 0.2);
     _arg   = _initialArg + arg - tmpA;
-    
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform, _scale, _scale);
-    transform = CGAffineTransformRotate(transform, _arg);
-    self.transform = transform;
-    
-    _deleteButton.transform = CGAffineTransformMakeScale(1/_scale, 1/_scale);
-    _circleView.transform = CGAffineTransformMakeScale(1/_scale, 1/_scale);
-    _imageView.layer.borderWidth = 1/_scale;
+    [self setScale:MAX(_initialScale * R / tmpR, 0.2)];
 }
 
 @end

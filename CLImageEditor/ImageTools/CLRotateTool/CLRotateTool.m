@@ -139,11 +139,11 @@
     CGFloat W = 70;
     CGFloat H = _menuScroll.height;
     CGFloat x = 0;
-    
+	
     NSArray *_menu = @[
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemRotateTitle", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_rotate.png", [self class]]]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle1", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_flip1.png", [self class]]]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle2", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_flip2.png", [self class]]]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemRotateTitle", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[self class] image:@"btn_rotate.png"]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle1", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[self class] image:@"btn_flip1.png"]},
+                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle2", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[CLImageEditorTheme imageNamed:[self class] image:@"btn_flip2.png"]},
                        ];
     
     NSInteger tag = 0;

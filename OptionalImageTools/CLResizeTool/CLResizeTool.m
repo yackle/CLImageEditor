@@ -91,7 +91,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     
     _switchBtn = [CLImageEditorTheme menuItemWithFrame:CGRectMake(0, 0, 70, btnPanel.height) target:self action:@selector(pushedSwitchBtn:) toolInfo:nil];
     _switchBtn.tag = 0;
-    _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_width.png", [self class]]];
+	
+    _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_width.png"];
     [btnPanel addSubview:_switchBtn];
     
     NSNumber *limit = self.toolInfo.optionalInfo[kCLResizeToolLimitSize];
@@ -152,14 +153,15 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 - (UIImage*)imageWithString:(NSString*)str
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    label.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
-    label.textColor = [UIColor colorWithWhite:1 alpha:1];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = str;
     label.font = [UIFont boldSystemFontOfSize:30];
     label.minimumScaleFactor = 0.5;
     
-    UIGraphicsBeginImageContext(label.frame.size);
+    label.backgroundColor = [[CLImageEditorTheme theme] toolbarTextColor];
+    label.textColor = [[CLImageEditorTheme theme] toolbarColor];
+    
+    UIGraphicsBeginImageContextWithOptions(label.frame.size, NO, 0.0);
     [label.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -193,11 +195,11 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 {
     if(_switchBtn.tag==0){
         _switchBtn.tag = 1;
-        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_height.png", [self class]]];
+        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_height.png"];
     }
     else{
         _switchBtn.tag = 0;
-        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_width.png", [self class]]];
+        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_width.png"];
     }
     
     _switchBtn.alpha = 0.2;
@@ -287,6 +289,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     
     CGFloat y = 0;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, _infoPanel.width-20, 30)];
+	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextOriginalSize", nil, [CLImageEditorTheme bundle], @"Original Image Size:", @"");
@@ -294,14 +297,16 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, y, _infoPanel.width-20, 50)];
+	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:30];
     label.text = [NSString stringWithFormat:@"%ld x %ld", (long)_originalSize.width, (long)_originalSize.height];
     label.textAlignment = NSTextAlignmentCenter;
     [_infoPanel addSubview:label];
-    y = label.bottom;
+    //y = label.bottom;
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(10, _infoPanel.height/2, _infoPanel.width-20, 30)];
+	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
     label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextNewSize", nil, [CLImageEditorTheme bundle], @"New Image Size:", @"");
@@ -318,27 +323,32 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _chainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _chainBtn.frame = CGRectMake(0, 0, 35, 35);
     _chainBtn.center = CGPointMake(label.center.x, y + 25);
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:@"CLResizeTool/btn_chain_off.png"] forState:UIControlStateNormal];
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:@"CLResizeTool/btn_chain_on.png"] forState:UIControlStateSelected];
+	
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
+    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
     [_chainBtn addTarget:self action:@selector(chainBtnDidPush:) forControlEvents:UIControlEventTouchUpInside];
     _chainBtn.selected = YES;
     [_infoPanel addSubview:_chainBtn];
     
     _fieldW = [[UITextField alloc] initWithFrame:CGRectMake(30, y+5, 100, 40)];
+	[_fieldW setTextColor:[CLImageEditorTheme toolbarTextColor]];
     _fieldW.font = [font fontWithSize:30];
     _fieldW.textAlignment = NSTextAlignmentCenter;
     _fieldW.keyboardType = UIKeyboardTypeNumberPad;
-    _fieldW.borderStyle = UITextBorderStyleLine;
+    _fieldW.layer.borderWidth = 1;
+    _fieldW.layer.borderColor = [[[CLImageEditorTheme theme] toolbarTextColor] CGColor];
     _fieldW.text = [NSString stringWithFormat:@"%ld", (long)_originalSize.width];
     _fieldW.delegate = self;
     [_fieldW addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
     [_infoPanel addSubview:_fieldW];
     
     _fieldH = [[UITextField alloc] initWithFrame:CGRectMake(_infoPanel.center.x + 10, y+5, 100, 40)];
+	[_fieldH setTextColor:[CLImageEditorTheme toolbarTextColor]];
     _fieldH.font = [font fontWithSize:30];
     _fieldH.textAlignment = NSTextAlignmentCenter;
     _fieldH.keyboardType = UIKeyboardTypeNumberPad;
-    _fieldH.borderStyle = UITextBorderStyleLine;
+    _fieldH.layer.borderWidth = 1;
+    _fieldH.layer.borderColor = _fieldW.layer.borderColor;
     _fieldH.text = [NSString stringWithFormat:@"%ld", (long)_originalSize.height];
     _fieldH.delegate = self;
     [_fieldH addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];

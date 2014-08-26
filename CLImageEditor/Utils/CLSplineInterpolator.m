@@ -72,6 +72,13 @@
     self = [super init];
     if(self){
         _dataNum = dataNum;
+        
+        a = b = c = d = NULL;
+        
+        if(dataNum<=0){
+            return nil;
+        }
+        
         a = malloc(dataNum * sizeof(double));
         b = malloc(dataNum * sizeof(double));
         c = malloc(dataNum * sizeof(double));

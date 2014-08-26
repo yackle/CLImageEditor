@@ -1,0 +1,167 @@
+﻿/* No comment provided by engineer. */
+"CLFilterTool_DefaultTitle" = "Фильтры";
+
+/* No comment provided by engineer. */
+"CLDefaultEmptyFilter_DefaultTitle" = "Оригинал";
+
+/* No comment provided by engineer. */
+"CLDefaultLinearFilter_DefaultTitle" = "Linear";
+
+/* No comment provided by engineer. */
+"CLDefaultVignetteFilter_DefaultTitle" = "Vignette";
+
+/* No comment provided by engineer. */
+"CLDefaultInstantFilter_DefaultTitle" = "Instant";
+
+/* No comment provided by engineer. */
+"CLDefaultProcessFilter_DefaultTitle" = "Process";
+
+/* No comment provided by engineer. */
+"CLDefaultTransferFilter_DefaultTitle" = "Transfer";
+
+/* No comment provided by engineer. */
+"CLDefaultSepiaFilter_DefaultTitle" = "Sepia";
+
+/* No comment provided by engineer. */
+"CLDefaultFadeFilter_DefaultTitle" = "Fade";
+
+/* No comment provided by engineer. */
+"CLDefaultCurveFilter_DefaultTitle" = "Curve";
+
+/* No comment provided by engineer. */
+"CLDefaultTonalFilter_DefaultTitle" = "Tonal";
+
+/* No comment provided by engineer. */
+"CLDefaultNoirFilter_DefaultTitle" = "Noir";
+
+/* No comment provided by engineer. */
+"CLDefaultMonoFilter_DefaultTitle" = "Mono";
+
+/* No comment provided by engineer. */
+"CLDefaultInvertFilter_DefaultTitle" = "Invert";
+
+/* No comment provided by engineer. */
+"CLDrawTool_DefaultTitle" = "Draw";
+
+/* No comment provided by engineer. */
+"CLAdjustmentTool_DefaultTitle" = "Регулировка";
+
+/* No comment provided by engineer. */
+"CLEffectTool_DefaultTitle" = "Эффекты";
+
+/* No comment provided by engineer. */
+"CLEffectBase_DefaultTitle" = "Оригинал";
+
+/* No comment provided by engineer. */
+"CLSpotEffect_DefaultTitle" = "Пятно";
+
+/* No comment provided by engineer. */
+"CLHueEffect_DefaultTitle" = "Тонер";
+
+/* No comment provided by engineer. */
+"CLHighlightSadowEffect_DefaultTitle" = "Тени";
+
+/* No comment provided by engineer. */
+"CLBloomEffect_DefaultTitle" = "Выцвет";
+
+/* No comment provided by engineer. */
+"CLGloomEffect_DefaultTitle" = "Мрак";
+
+/* No comment provided by engineer. */
+"CLPosterizeEffect_DefaultTitle" = "Постер";
+
+/* No comment provided by engineer. */
+"CLPixellateEffect_DefaultTitle" = "Пиксели";
+
+/* No comment provided by engineer. */
+"CLBlurEffect_DefaultTitle" = "Размытие";
+
+/* No comment provided by engineer. */
+"CLBlurEffect_MenuItemNormal" = "Полностью";
+
+/* No comment provided by engineer. */
+"CLBlurEffect_MenuItemCircle" = "Фокус";
+
+/* No comment provided by engineer. */
+"CLBlurEffect_MenuItemBand" = "Полоса";
+
+/* No comment provided by engineer. */
+"CLRotateTool_DefaultTitle" = "Повернуть";
+
+/* No comment provided by engineer. */
+"CLClippingTool_DefaultTitle" = "Обрезать";
+
+/* No comment provided by engineer. */
+"CLClippingTool_ItemMenuCustom" = "Вручную";
+
+/* No comment provided by engineer. */
+"CLResizeTool_DefaultTitle" = "Размер";
+
+/* No comment provided by engineer. */
+"CLResizeTool_InfoPanelTextNewSize" = "Новый размер:";
+
+/* No comment provided by engineer. */
+"CLResizeTool_InfoPanelTextOriginalSize" = "Оригинальный размер:";
+
+/* No comment provided by engineer. */
+"CLToneCurveTool_DefaultTitle" = "Кривые";
+
+/* No comment provided by engineer. */
+"CLStickerTool_DefaultTitle" = "Стикеры";
+
+/* No comment provided by engineer. */
+"CLEmoticonTool_DefaultTitle" = "Смайлики";
+
+/* No comment provided by engineer. */
+"CLDefaultChromeFilter_DefaultTitle" = "Хром";
+
+/* No comment provided by engineer. */
+"CLImageEditor_BackBtnTitle" = "Назад";
+
+/* No comment provided by engineer. */
+"CLImageEditor_DefaultTitle" = "Изменить";
+
+/* No comment provided by engineer. */
+"CLImageEditor_OKBtnTitle" = "ОК";
+
+/* No comment provided by engineer. */
+"CLRotateTool_MenuItemFlipTitle1" = "Зеркально";
+
+/* No comment provided by engineer. */
+"CLRotateTool_MenuItemFlipTitle2" = "Вертикально";
+
+/* No comment provided by engineer. */
+"CLRotateTool_MenuItemRotateTitle" = "По часовой";
+
+/* No comment provided by engineer. */
+"CLTextTool_DefaultTitle" = "Текст";
+
+/* No comment provided by engineer. */
+"CLTextTool_EmptyText" = "Текст";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemText" = "Текст";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemAlignLeft" = "Слева";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemAlignCenter" = "По центру";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemAlignRight" = "Справа";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemColor" = "Цвет";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemFont" = "Шрифт";
+
+/* No comment provided by engineer. */
+"CLTextTool_MenuItemNew" = "Новый";
+
+
+
+
+
+/* Переведено специально для зрителей и читалей JailbreakVideo */

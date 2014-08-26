@@ -18,7 +18,7 @@
 
 - (id)init
 {
-    return [[_CLImageEditorViewController alloc] init];
+    return [_CLImageEditorViewController new];
 }
 
 - (id)initWithImage:(UIImage*)image

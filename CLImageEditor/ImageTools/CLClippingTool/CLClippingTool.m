@@ -7,11 +7,21 @@
 
 #import "CLClippingTool.h"
 
+
+static NSString* const kCLClippingToolRatios = @"ratios";
+static NSString* const kCLClippingToolSwapButtonHidden = @"swapButtonHidden";
+static NSString* const kCLClippingToolRatioValue1 = @"value1";
+static NSString* const kCLClippingToolRatioValue2 = @"value2";
+static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
+
+
 @interface CLRatio : NSObject
 @property (nonatomic, assign) BOOL isLandscape;
 @property (nonatomic, readonly) CGFloat ratio;
-- (id)initWithValue1:(NSInteger)value1 value2:(NSInteger)value2;
-- (NSString*)description;
+@property (nonatomic, strong) NSString *titleFormat;
+
+- (id)initWithValue1:(CGFloat)value1 value2:(CGFloat)value2;
+
 @end
 
 
@@ -55,39 +65,73 @@
     return YES;
 }
 
+#pragma mark- optional info
+
++ (NSArray*)defaultPresetRatios
+{
+    return @[
+             @{kCLClippingToolRatioValue1:@0, kCLClippingToolRatioValue2:@0, kCLClippingToolRatioTitleFormat:NSLocalizedStringWithDefaultValue(@"CLClippingTool_ItemMenuCustom", nil, [CLImageEditorTheme bundle], @"Custom", @"")},
+             @{kCLClippingToolRatioValue1:@1, kCLClippingToolRatioValue2:@1, kCLClippingToolRatioTitleFormat:@"%g : %g"},
+             @{kCLClippingToolRatioValue1:@4, kCLClippingToolRatioValue2:@3, kCLClippingToolRatioTitleFormat:@"%g : %g"},
+             @{kCLClippingToolRatioValue1:@3, kCLClippingToolRatioValue2:@2, kCLClippingToolRatioTitleFormat:@"%g : %g"},
+             @{kCLClippingToolRatioValue1:@16, kCLClippingToolRatioValue2:@9, kCLClippingToolRatioTitleFormat:@"%g : %g"},
+             ];
+}
+
++ (NSValue*)defaultSwapButtonHidden
+{
+    return @(NO);
+}
+
++ (NSDictionary*)optionalInfo
+{
+    return @{kCLClippingToolRatios:[self defaultPresetRatios], kCLClippingToolSwapButtonHidden:[self defaultSwapButtonHidden]};
+}
+
+#pragma mark- implementation
+
 - (void)setup
 {
     [self.editor fixZoomScaleWithAnimated:YES];
+    
+    if(!self.toolInfo.optionalInfo){
+        self.toolInfo.optionalInfo = [[self.class optionalInfo] mutableCopy];
+    }
+    
+    BOOL swapBtnHidden = [self.toolInfo.optionalInfo[kCLClippingToolSwapButtonHidden] boolValue];
+    CGFloat buttonWidth = (swapBtnHidden) ? 0 : 70;
     
     _menuContainer = [[UIView alloc] initWithFrame:self.editor.menuView.frame];
     _menuContainer.backgroundColor = self.editor.menuView.backgroundColor;
     [self.editor.view addSubview:_menuContainer];
     
-    _menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, _menuContainer.width - 70, _menuContainer.height)];
+    _menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, _menuContainer.width - buttonWidth, _menuContainer.height)];
     _menuScroll.backgroundColor = [UIColor clearColor];
     _menuScroll.showsHorizontalScrollIndicator = NO;
     _menuScroll.clipsToBounds = NO;
     [_menuContainer addSubview:_menuScroll];
     
-    UIView *btnPanel = [[UIView alloc] initWithFrame:CGRectMake(_menuScroll.right, 0, 70, _menuContainer.height)];
-    btnPanel.backgroundColor = [_menuContainer.backgroundColor colorWithAlphaComponent:0.9];
-    [_menuContainer addSubview:btnPanel];
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 40, 40);
-    btn.center = CGPointMake(btnPanel.width/2, btnPanel.height/2 - 10);
-    [btn addTarget:self action:@selector(pushedRotateBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [btn setImage:[CLImageEditorTheme imageNamed:[NSString stringWithFormat:@"%@/btn_rotate.png", [self class]]] forState:UIControlStateNormal];
-    btn.adjustsImageWhenHighlighted = YES;
-    [btnPanel addSubview:btn];
-    
-    [self setCropMenu];
+    if(!swapBtnHidden){
+        UIView *btnPanel = [[UIView alloc] initWithFrame:CGRectMake(_menuScroll.right, 0, buttonWidth, _menuContainer.height)];
+        btnPanel.backgroundColor = [_menuContainer.backgroundColor colorWithAlphaComponent:0.9];
+        [_menuContainer addSubview:btnPanel];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 0, 40, 40);
+        btn.center = CGPointMake(btnPanel.width/2, btnPanel.height/2 - 10);
+        [btn addTarget:self action:@selector(pushedRotateBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_rotate.png"] forState:UIControlStateNormal];
+        btn.adjustsImageWhenHighlighted = YES;
+        [btnPanel addSubview:btn];
+    }
     
     _gridView = [[CLClippingPanel alloc] initWithSuperview:self.editor.imageView.superview frame:self.editor.imageView.frame];
     _gridView.backgroundColor = [UIColor clearColor];
     _gridView.bgColor = [self.editor.view.backgroundColor colorWithAlphaComponent:0.8];
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
+    
+    [self setCropMenu];
     
     _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
@@ -125,32 +169,40 @@
 
 #pragma mark-
 
-
 - (void)setCropMenu
 {
     CGFloat W = 70;
     CGFloat x = 0;
     
-    NSMutableArray *array = [NSMutableArray array];
-    [array addObject:[[CLRatio alloc] initWithValue1:0 value2:0]];
-    [array addObject:[[CLRatio alloc] initWithValue1:1 value2:1]];
-    [array addObject:[[CLRatio alloc] initWithValue1:4 value2:3]];
-    [array addObject:[[CLRatio alloc] initWithValue1:3 value2:2]];
-    [array addObject:[[CLRatio alloc] initWithValue1:16 value2:9]];
+    NSArray *ratios = self.toolInfo.optionalInfo[kCLClippingToolRatios];
+    BOOL swapBtnHidden = [self.toolInfo.optionalInfo[kCLClippingToolSwapButtonHidden] boolValue];
     
     CGSize  imgSize = self.editor.imageView.image.size;
     CGFloat maxW = MIN(imgSize.width, imgSize.height);
-    UIImage *iconImage = [self.editor.imageView.image resize:CGSizeMake(70 * imgSize.width/maxW, 70 * imgSize.height/maxW)];
+    UIImage *iconImage = [self.editor.imageView.image resize:CGSizeMake(W * imgSize.width/maxW, W * imgSize.height/maxW)];
     
-    for(CLRatio *ratio in array){
-        ratio.isLandscape = (self.editor.imageView.image.size.width > self.editor.imageView.image.size.height);
+    for(NSDictionary *info in ratios){
+        CGFloat val1 = [info[kCLClippingToolRatioValue1] floatValue];
+        CGFloat val2 = [info[kCLClippingToolRatioValue2] floatValue];
+        
+        CLRatio *ratio = [[CLRatio alloc] initWithValue1:val1 value2:val2];
+        ratio.titleFormat = info[kCLClippingToolRatioTitleFormat];
+        
+        if(swapBtnHidden){
+            ratio.isLandscape = (val1 > val2);
+        }
+        else{
+            ratio.isLandscape = (imgSize.width > imgSize.height);
+        }
         
         CLRatioMenuItem *view = [[CLRatioMenuItem alloc] initWithFrame:CGRectMake(x, 0, W, _menuScroll.height) target:self action:@selector(tappedMenu:) toolInfo:nil];
         view.iconImage = iconImage;
         view.ratio = ratio;
         
-        [_menuScroll addSubview:view];
-        x += W;
+        if(ratios.count>1 || !swapBtnHidden){
+            [_menuScroll addSubview:view];
+            x += W;
+        }
         
         if(self.selectedMenu==nil){
             self.selectedMenu = view;
@@ -171,13 +223,6 @@
      ];
     
     self.selectedMenu = view;
-    
-    if(view.ratio.ratio==0){
-        _gridView.clippingRatio = nil;
-    }
-    else{
-        _gridView.clippingRatio = view.ratio;
-    }
 }
 
 - (void)setSelectedMenu:(CLRatioMenuItem *)selectedMenu
@@ -186,6 +231,13 @@
         _selectedMenu.backgroundColor = [UIColor clearColor];
         _selectedMenu = selectedMenu;
         _selectedMenu.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
+        
+        if(selectedMenu.ratio.ratio==0){
+            _gridView.clippingRatio = nil;
+        }
+        else{
+            _gridView.clippingRatio = selectedMenu.ratio;
+        }
     }
 }
 
@@ -593,30 +645,28 @@
 
 @implementation CLRatio
 {
-    NSInteger _longSide;
-    NSInteger _shortSide;
+    CGFloat _longSide;
+    CGFloat _shortSide;
 }
 
-- (id)initWithValue1:(NSInteger)value1 value2:(NSInteger)value2
+- (id)initWithValue1:(CGFloat)value1 value2:(CGFloat)value2
 {
     self = [super init];
     if(self){
-        _longSide  = MAX(labs(value1), labs(value2));
-        _shortSide = MIN(labs(value1), labs(value2));
+        _longSide  = MAX(fabs(value1), fabs(value2));
+        _shortSide = MIN(fabs(value1), fabs(value2));
     }
     return self;
 }
 
 - (NSString*)description
 {
-    if(_longSide==0 || _shortSide==0){
-        return NSLocalizedStringWithDefaultValue(@"CLClippingTool_ItemMenuCustom", nil, [CLImageEditorTheme bundle], @"Custom", @"");
-    }
+    NSString *format = (self.titleFormat) ? self.titleFormat : @"%g : %g";
     
     if(self.isLandscape){
-        return [NSString stringWithFormat:@"%ld : %ld", (long)_longSide, (long)_shortSide];
+        return [NSString stringWithFormat:format, _longSide, _shortSide];
     }
-    return [NSString stringWithFormat:@"%ld : %ld", (long)_shortSide, (long)_longSide];
+    return [NSString stringWithFormat:format, _shortSide, _longSide];
 }
 
 - (CGFloat)ratio

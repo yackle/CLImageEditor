@@ -59,6 +59,11 @@
     _titleLabel.text = title;
 }
 
+- (UIImageView*)iconView
+{
+    return _iconView;
+}
+
 - (UIImage*)iconImage
 {
     return _iconView.image;
@@ -67,6 +72,12 @@
 - (void)setIconImage:(UIImage *)iconImage
 {
     _iconView.image = iconImage;
+}
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    [super setUserInteractionEnabled:userInteractionEnabled];
+    self.alpha = (userInteractionEnabled) ? 1 : 0.3;
 }
 
 - (void)setToolInfo:(CLImageToolInfo *)toolInfo
@@ -79,6 +90,19 @@
     }
     else{
         self.iconImage = nil;
+    }
+}
+
+- (void)setSelected:(BOOL)selected
+{
+    if(selected != _selected){
+        _selected = selected;
+        if(selected){
+            self.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
+        }
+        else{
+            self.backgroundColor = [UIColor clearColor];
+        }
     }
 }
 

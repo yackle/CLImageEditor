@@ -44,6 +44,27 @@
     return [UIImage decode:self];
 }
 
+#pragma mark- GrayScale
+
+- (UIImage*)grayScaleImage
+{
+    CGRect imageRect = CGRectMake(0, 0, self.size.width, self.size.height);
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    CGContextRef context = CGBitmapContextCreate(nil, self.size.width, self.size.height, 8, 0, colorSpace, kCGBitmapByteOrderDefault);
+    
+    CGContextDrawImage(context, imageRect, [self CGImage]);
+    
+    CGImageRef imageRef = CGBitmapContextCreateImage(context);
+    UIImage *newImage = [UIImage imageWithCGImage:imageRef];
+    
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(context);
+    CFRelease(imageRef);
+    
+    return newImage;
+}
+
 #pragma mark- Resizing
 
 - (UIImage*)resize:(CGSize)size
@@ -161,7 +182,7 @@
     
     UIImage *img = nil;
     
-    UIGraphicsBeginImageContext(CGSizeMake(rect.size.width, rect.size.height));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(rect.size.width, rect.size.height), NO, 0.0);
     [self drawAtPoint:origin];
     img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -237,9 +258,11 @@
     }
     
     // convolution
-    error = vImageConvolve_ARGB8888(&inBuffer, &outBuffer, NULL, 0, 0, kernel, boxSize, 1, sum, NULL, kvImageEdgeExtend);
-    error = vImageConvolve_ARGB8888(&outBuffer, &inBuffer, NULL, 0, 0, kernel, 1, boxSize, sum, NULL, kvImageEdgeExtend);
+    error = vImageConvolve_ARGB8888(&inBuffer, &outBuffer, NULL, 0, 0, kernel, boxSize, 1, sum, NULL, kvImageEdgeExtend)?:
+    vImageConvolve_ARGB8888(&outBuffer, &inBuffer, NULL, 0, 0, kernel, 1, boxSize, sum, NULL, kvImageEdgeExtend);
     outBuffer = inBuffer;
+    
+    free(kernel);
     
     if (error) {
         NSLog(@"error from convolution %ld", error);
