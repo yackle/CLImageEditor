@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 @implementation CLBlurTool
 {
     UIImage *_originalImage;
-    UIImage *_thumnailImage;
+    UIImage *_thumbnailImage;
     UIImage *_blurImage;
     
     UISlider *_blurSlider;
@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 {
     _blurType = kCLBlurTypeNormal;
     _originalImage = self.editor.imageView.image;
-    _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
+    _thumbnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
     [self.editor fixZoomScaleWithAnimated:YES];
     
@@ -237,12 +237,12 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 - (void)sliderDidChange:(UISlider*)slider
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        _blurImage = [_thumnailImage gaussBlur:_blurSlider.value];
-        [self buildThumnailImage];
+        _blurImage = [_thumbnailImage gaussBlur:_blurSlider.value];
+        [self buildThumbnailImage];
     });
 }
 
-- (void)buildThumnailImage
+- (void)buildThumbnailImage
 {
     static BOOL inProgress = NO;
     
@@ -251,7 +251,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     inProgress = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self buildResultImage:_thumnailImage withBlurImage:_blurImage];
+        UIImage *image = [self buildResultImage:_thumbnailImage withBlurImage:_blurImage];
         
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
         inProgress = NO;
@@ -391,7 +391,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
             default:
                 break;
         }
-        [self buildThumnailImage];
+        [self buildThumbnailImage];
     }
 }
 
@@ -402,7 +402,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
         {
             CGPoint point = [sender locationInView:_handlerView];
             _circleView.center = point;
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         case kCLBlurTypeBand:
@@ -411,7 +411,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
             point = CGPointMake(point.x-_handlerView.width/2, point.y-_handlerView.height/2);
             point = CGPointMake(point.x*cos(-_bandView.rotation)-point.y*sin(-_bandView.rotation), point.x*sin(-_bandView.rotation)+point.y*cos(-_bandView.rotation));
             _bandView.offset = point.y;
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         default:
@@ -426,7 +426,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
         {
             CGPoint point = [sender locationInView:_handlerView];
             _circleView.center = point;
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         case kCLBlurTypeBand:
@@ -435,7 +435,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
             point = CGPointMake(point.x-_handlerView.width/2, point.y-_handlerView.height/2);
             point = CGPointMake(point.x*cos(-_bandView.rotation)-point.y*sin(-_bandView.rotation), point.x*sin(-_bandView.rotation)+point.y*cos(-_bandView.rotation));
             _bandView.offset = point.y;
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         default:
@@ -461,7 +461,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
             rct.origin.y = initialFrame.origin.y + (initialFrame.size.height-rct.size.height)/2;
             
             _circleView.frame = rct;
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         case kCLBlurTypeBand:
@@ -472,7 +472,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
             }
             
             _bandView.scale = MIN(2, MAX(0.2, initialScale * sender.scale));
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         default:
@@ -491,7 +491,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
             }
             
             _bandView.rotation = MIN(M_PI/2, MAX(-M_PI/2, initialRotation + sender.rotation));
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             break;
         }
         default:

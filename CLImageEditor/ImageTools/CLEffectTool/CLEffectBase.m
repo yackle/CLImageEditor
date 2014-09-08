@@ -69,7 +69,7 @@
     
 }
 
-- (BOOL)needsThumnailPreview
+- (BOOL)needsThumbnailPreview
 {
     return YES;
 }

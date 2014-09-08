@@ -44,7 +44,7 @@
 @implementation CLToneCurveTool
 {
     UIImage *_originalImage;
-    UIImage *_thumnailImage;
+    UIImage *_thumbnailImage;
     
     UIView *_menuContainer;
     CLToneCurveView *_tonecurveView;
@@ -66,9 +66,9 @@
 - (void)setup
 {
     _originalImage = self.editor.imageView.image;
-    _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
+    _thumbnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
-    self.editor.imageView.image = _thumnailImage;
+    self.editor.imageView.image = _thumbnailImage;
     
     _menuContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.editor.view.height-280, self.editor.view.width, 280)];
     _menuContainer.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
@@ -144,7 +144,7 @@
     inProgress = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_thumnailImage];
+        UIImage *image = [self filteredImage:_thumbnailImage];
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
         inProgress = NO;
     });
