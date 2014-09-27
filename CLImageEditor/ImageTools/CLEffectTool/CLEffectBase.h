@@ -24,7 +24,7 @@ static const CGFloat kCLEffectToolAnimationDuration = 0.2;
 - (id)initWithSuperView:(UIView*)superview imageViewFrame:(CGRect)frame toolInfo:(CLImageToolInfo*)info;
 - (void)cleanup;
 
-- (BOOL)needsThumnailPreview;
+- (BOOL)needsThumbnailPreview;
 - (UIImage*)applyEffect:(UIImage*)image;
 
 @end

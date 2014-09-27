@@ -10,7 +10,7 @@
 @implementation CLAdjustmentTool
 {
     UIImage *_originalImage;
-    UIImage *_thumnailImage;
+    UIImage *_thumbnailImage;
     
     UISlider *_saturationSlider;
     UISlider *_brightnessSlider;
@@ -31,7 +31,7 @@
 - (void)setup
 {
     _originalImage = self.editor.imageView.image;
-    _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
+    _thumbnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
     [self.editor fixZoomScaleWithAnimated:YES];
     
@@ -117,7 +117,7 @@
     inProgress = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_thumnailImage];
+        UIImage *image = [self filteredImage:_thumbnailImage];
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
         inProgress = NO;
     });

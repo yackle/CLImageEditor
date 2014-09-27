@@ -17,7 +17,7 @@
 @implementation CLEffectTool
 {
     UIImage *_originalImage;
-    UIImage *_thumnailImage;
+    UIImage *_thumbnailImage;
     
     UIScrollView *_menuScroll;
     UIActivityIndicatorView *_indicatorView;
@@ -43,7 +43,7 @@
 - (void)setup
 {
     _originalImage = self.editor.imageView.image;
-    _thumnailImage = [_originalImage resize:self.editor.imageView.frame.size];
+    _thumbnailImage = [_originalImage resize:self.editor.imageView.frame.size];
     
     [self.editor fixZoomScaleWithAnimated:YES];
     
@@ -153,16 +153,16 @@
         _selectedEffect.delegate = self;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
         });
     }
 }
 
-- (void)buildThumnailImage
+- (void)buildThumbnailImage
 {
     UIImage *image;
-    if(self.selectedEffect.needsThumnailPreview){
-        image = [self.selectedEffect applyEffect:_thumnailImage];
+    if(self.selectedEffect.needsThumbnailPreview){
+        image = [self.selectedEffect applyEffect:_thumbnailImage];
     }
     else{
         image = [self.selectedEffect applyEffect:_originalImage];
@@ -181,7 +181,7 @@
         inProgress = YES;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self buildThumnailImage];
+            [self buildThumbnailImage];
             inProgress = NO;
         });
     }
