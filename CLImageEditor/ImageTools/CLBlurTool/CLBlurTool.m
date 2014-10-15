@@ -279,10 +279,10 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 {
     UIImage *tmp = [image maskedImage:maskImage];
     
-    UIGraphicsBeginImageContext(image.size);
+    UIGraphicsBeginImageContext(blurImage.size);
     {
         [blurImage drawAtPoint:CGPointZero];
-        [tmp drawAtPoint:CGPointZero];
+        [tmp drawInRect:CGRectMake(0, 0, blurImage.size.width, blurImage.size.height)];
         tmp = UIGraphicsGetImageFromCurrentImageContext();
     }
     UIGraphicsEndImageContext();

@@ -70,8 +70,8 @@
     
     [filter setDefaults];
     
-    CGFloat R = MIN(image.size.width, image.size.height) * 0.5 * (_R + 0.1);
-    CIVector *vct = [[CIVector alloc] initWithX:image.size.width * _X Y:image.size.height * (1 - _Y)];
+    CGFloat R = MIN(image.size.width, image.size.height) * image.scale * 0.5 * (_R + 0.1);
+    CIVector *vct = [[CIVector alloc] initWithX:image.size.width * image.scale * _X Y:image.size.height * image.scale * (1 - _Y)];
     [filter setValue:vct forKey:@"inputCenter"];
     [filter setValue:[NSNumber numberWithFloat:R] forKey:@"inputRadius"];
     

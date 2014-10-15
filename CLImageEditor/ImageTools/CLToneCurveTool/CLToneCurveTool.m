@@ -74,7 +74,7 @@
     _menuContainer.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
     [self.editor.view addSubview:_menuContainer];
     
-    _tonecurveView = [[CLToneCurveView alloc] initWithSuperview:_menuContainer frame:CGRectMake(10, 20, 240, 240)];
+    _tonecurveView = [[CLToneCurveView alloc] initWithSuperview:_menuContainer frame:CGRectMake(10, 20, _menuContainer.width-80, 240)];
     _tonecurveView.delegate = self;
     _tonecurveView.backgroundColor = [UIColor clearColor];
     _tonecurveView.gridColor  = [UIColor colorWithWhite:0 alpha:0.2];

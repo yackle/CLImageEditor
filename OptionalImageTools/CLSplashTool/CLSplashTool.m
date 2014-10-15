@@ -262,7 +262,7 @@
 {
     _grayImage = [self.editor.imageView.image grayScaleImage];
     
-    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
     
     [self.editor.imageView.image drawAtPoint:CGPointZero];
     [[_grayImage maskedImage:_maskImage] drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];

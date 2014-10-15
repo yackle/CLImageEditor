@@ -104,7 +104,7 @@
     _radiusSlider.superview.center = CGPointMake(_containerView.width/2, _containerView.height-30);
     
     _intensitySlider = [self sliderWithValue:1 minimumValue:0 maximumValue:1.0];
-    _intensitySlider.superview.center = CGPointMake(300, _radiusSlider.superview.top - 150);
+    _intensitySlider.superview.center = CGPointMake(_containerView.width-20, _radiusSlider.superview.top - 150);
     _intensitySlider.superview.transform = CGAffineTransformMakeRotation(-M_PI * 90 / 180.0f);
 }
 
