@@ -103,7 +103,7 @@
     [_brightnessSlider setThumbImage:[CLImageEditorTheme imageNamed:[self class] image:@"brightness.png"] forState:UIControlStateHighlighted];
     
     _contrastSlider = [self sliderWithValue:1 minimumValue:0.5 maximumValue:1.5 action:@selector(sliderDidChange:)];
-    _contrastSlider.superview.center = CGPointMake(300, _brightnessSlider.superview.center.y);
+    _contrastSlider.superview.center = CGPointMake(self.editor.view.width-20, _brightnessSlider.superview.center.y);
     _contrastSlider.superview.transform = CGAffineTransformMakeRotation(-M_PI * 90 / 180.0f);
     [_contrastSlider setThumbImage:[CLImageEditorTheme imageNamed:[self class] image:@"contrast.png"] forState:UIControlStateNormal];
     [_contrastSlider setThumbImage:[CLImageEditorTheme imageNamed:[self class] image:@"contrast.png"] forState:UIControlStateHighlighted];
