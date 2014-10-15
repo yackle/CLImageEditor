@@ -254,7 +254,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 {
     self = [super initWithFrame:frame];
     if(self){
-        _infoPanel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 180)];
+        _infoPanel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width*0.85, 180)];
         _infoPanel.backgroundColor = [[CLImageEditorTheme toolbarColor] colorWithAlphaComponent:0.9];
         _infoPanel.layer.cornerRadius = 5;
         _infoPanel.center = CGPointMake(self.width/2, self.height/2);
@@ -330,7 +330,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _chainBtn.selected = YES;
     [_infoPanel addSubview:_chainBtn];
     
-    _fieldW = [[UITextField alloc] initWithFrame:CGRectMake(30, y+5, 100, 40)];
+    _fieldW = [[UITextField alloc] initWithFrame:CGRectMake(_chainBtn.left - 110, y+5, 100, 40)];
 	[_fieldW setTextColor:[CLImageEditorTheme toolbarTextColor]];
     _fieldW.font = [font fontWithSize:30];
     _fieldW.textAlignment = NSTextAlignmentCenter;
@@ -342,7 +342,7 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     [_fieldW addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
     [_infoPanel addSubview:_fieldW];
     
-    _fieldH = [[UITextField alloc] initWithFrame:CGRectMake(_infoPanel.center.x + 10, y+5, 100, 40)];
+    _fieldH = [[UITextField alloc] initWithFrame:CGRectMake(_chainBtn.right + 10, y+5, 100, 40)];
 	[_fieldH setTextColor:[CLImageEditorTheme toolbarTextColor]];
     _fieldH.font = [font fontWithSize:30];
     _fieldH.textAlignment = NSTextAlignmentCenter;

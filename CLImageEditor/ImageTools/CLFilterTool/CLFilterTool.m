@@ -73,7 +73,7 @@
     CGFloat W = 70;
     CGFloat x = 0;
     
-    UIImage *iconThumnail = [_originalImage aspectFill:CGSizeMake(50, 50)];
+    UIImage *iconThumbnail = [_originalImage aspectFill:CGSizeMake(50, 50)];
     
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
@@ -86,7 +86,7 @@
         
         if(view.iconImage==nil){
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                UIImage *iconImage = [self filteredImage:iconThumnail withToolInfo:info];
+                UIImage *iconImage = [self filteredImage:iconThumbnail withToolInfo:info];
                 [view performSelectorOnMainThread:@selector(setIconImage:) withObject:iconImage waitUntilDone:NO];
             });
         }

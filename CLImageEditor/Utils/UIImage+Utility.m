@@ -182,7 +182,7 @@
     
     UIImage *img = nil;
     
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(rect.size.width, rect.size.height), NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
     [self drawAtPoint:origin];
     img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -220,7 +220,7 @@
     int boxSize = (int)(blurLevel * 0.1 * MIN(self.size.width, self.size.height));
     boxSize = boxSize - (boxSize % 2) + 1;
     
-    NSData *imageData = UIImageJPEGRepresentation(self, 1);
+    NSData *imageData = UIImageJPEGRepresentation([UIImage decode:self], 1);
     UIImage *tmpImage = [UIImage imageWithData:imageData];
     
     CGImageRef img = tmpImage.CGImage;
