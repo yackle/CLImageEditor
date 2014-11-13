@@ -41,7 +41,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLResizeTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Resize", @"");
+    return [CLImageEditorTheme localizedString:@"CLResizeTool_DefaultTitle" withDefault:@"Resize"];
 }
 
 + (BOOL)isAvailable
@@ -303,7 +303,8 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
 	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
-    label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextOriginalSize", nil, [CLImageEditorTheme bundle], @"Original Image Size:", @"");
+    
+    label.text = [CLImageEditorTheme localizedString:@"CLResizeTool_InfoPanelTextOriginalSize" withDefault:@"Original Image Size:"];
     [_infoPanel addSubview:label];
     y = label.bottom;
     
@@ -320,7 +321,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
 	[label setTextColor:[CLImageEditorTheme toolbarTextColor]];
     label.backgroundColor = [UIColor clearColor];
     label.font = [font fontWithSize:17];
-    label.text = NSLocalizedStringWithDefaultValue(@"CLResizeTool_InfoPanelTextNewSize", nil, [CLImageEditorTheme bundle], @"New Image Size:", @"");
+    label.text = [CLImageEditorTheme localizedString:@"CLResizeTool_InfoPanelTextNewSize" withDefault:@"New Image Size:"];
     [_infoPanel addSubview:label];
     y = label.bottom;
     /*

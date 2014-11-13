@@ -25,7 +25,7 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLAdjustmentTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Adjustment", @"");
+    return [CLImageEditorTheme localizedString:@"CLAdjustmentTool_DefaultTitle" withDefault:@"Adjustment"];
 }
 
 + (BOOL)isAvailable

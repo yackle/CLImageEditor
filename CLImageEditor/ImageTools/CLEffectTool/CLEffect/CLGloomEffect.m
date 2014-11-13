@@ -21,7 +21,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLGloomEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Gloom", @"");
+    return [CLImageEditorTheme localizedString:@"CLGloomEffect_DefaultTitle" withDefault:@"Gloom"];
 }
 
 + (BOOL)isAvailable

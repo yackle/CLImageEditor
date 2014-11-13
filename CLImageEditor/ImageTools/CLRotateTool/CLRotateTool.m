@@ -40,7 +40,7 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLRotateTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Rotate", @"");
+    return [CLImageEditorTheme localizedString:@"CLRotateTool_DefaultTitle" withDefault:@"Rotate"];
 }
 
 + (BOOL)isAvailable
@@ -157,9 +157,9 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     CGFloat x = 0;
 	
     NSArray *_menu = @[
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemRotateTitle", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"btn_rotate.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle1", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[self imageForKey:kCLRotateToolFlipHorizontalIconName defaultImageName:@"btn_flip1.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLRotateTool_MenuItemFlipTitle2", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[self imageForKey:kCLRotateToolFlipVerticalIconName defaultImageName:@"btn_flip2.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemRotateTitle" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"btn_rotate.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle1" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolFlipHorizontalIconName defaultImageName:@"btn_flip1.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle2" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolFlipVerticalIconName defaultImageName:@"btn_flip2.png"]},
                        ];
     
     NSInteger tag = 0;

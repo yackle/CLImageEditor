@@ -33,7 +33,7 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLSplashTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Splash", @"");
+    return [CLImageEditorTheme localizedString:@"CLSplashTool_DefaultTitle" withDefault:@"Splash"];
 }
 
 + (BOOL)isAvailable

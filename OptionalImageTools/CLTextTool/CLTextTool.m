@@ -75,7 +75,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLTextTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Text", @"");
+    return [CLImageEditorTheme localizedString:@"CLTextTool_DefaultTitle" withDefault:@"Text"];
 }
 
 + (BOOL)isAvailable
@@ -256,13 +256,13 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
     CGFloat x = 0;
     
     NSArray *_menu = @[
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemNew", nil, [CLImageEditorTheme bundle], @"New", @""), @"icon":[self imageForKey:kCLTextToolNewTextIconName defaultImageName:@"btn_add.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemText", nil, [CLImageEditorTheme bundle], @"Text", @""), @"icon":[self imageForKey:kCLTextToolEditTextIconName defaultImageName:@"icon.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemColor", nil, [CLImageEditorTheme bundle], @"Color", @"")},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemFont", nil, [CLImageEditorTheme bundle], @"Font", @""), @"icon":[self imageForKey:kCLTextToolFontIconName defaultImageName:@"btn_font.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignLeft", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[self imageForKey:kCLTextToolAlignLeftIconName defaultImageName:@"btn_align_left.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignCenter", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[self imageForKey:kCLTextToolAlignCenterIconName defaultImageName:@"btn_align_center.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLTextTool_MenuItemAlignRight", nil, [CLImageEditorTheme bundle], @" ", @""), @"icon":[self imageForKey:kCLTextToolAlignRightIconName defaultImageName:@"btn_align_right.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemNew" withDefault:@"New"], @"icon":[self imageForKey:kCLTextToolNewTextIconName defaultImageName:@"btn_add.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemText" withDefault:@"Text"], @"icon":[self imageForKey:kCLTextToolEditTextIconName defaultImageName:@"icon.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemColor" withDefault:@"Color"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemFont" withDefault:@"Font"], @"icon":[self imageForKey:kCLTextToolFontIconName defaultImageName:@"btn_font.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemAlignLeft" withDefault:@" "], @"icon":[self imageForKey:kCLTextToolAlignLeftIconName defaultImageName:@"btn_align_left.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemAlignCenter" withDefault:@" "], @"icon":[self imageForKey:kCLTextToolAlignCenterIconName defaultImageName:@"btn_align_center.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLTextTool_MenuItemAlignRight" withDefault:@" "], @"icon":[self imageForKey:kCLTextToolAlignRightIconName defaultImageName:@"btn_align_right.png"]},
                        ];
     
     NSInteger tag = 0;
@@ -335,7 +335,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 
 - (void)addNewText
 {
-    _CLTextView *view = [_CLTextView new];
+    _CLTextView *view = [[_CLTextView alloc] initWithTool:self];
     view.fillColor = _settingView.selectedFillColor;
     view.borderColor = _settingView.selectedBorderColor;
     view.borderWidth = _settingView.selectedBorderWidth;
@@ -643,7 +643,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 {
     if(![text isEqualToString:_text]){
         _text = text;
-        _label.text = (_text.length>0) ? _text : NSLocalizedStringWithDefaultValue(@"CLTextTool_EmptyText", nil, [CLImageEditorTheme bundle], @"Text", @"");
+        _label.text = (_text.length>0) ? _text : [CLImageEditorTheme localizedString:@"CLTextTool_EmptyText" withDefault:@"Text"];
     }
 }
 

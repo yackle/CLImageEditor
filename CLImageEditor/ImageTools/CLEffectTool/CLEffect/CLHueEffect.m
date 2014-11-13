@@ -19,7 +19,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLHueEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Hue", @"");
+    return [CLImageEditorTheme localizedString:@"CLHueEffect_DefaultTitle" withDefault:@"Hue"];
 }
 
 + (BOOL)isAvailable
