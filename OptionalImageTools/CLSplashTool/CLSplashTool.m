@@ -62,8 +62,9 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     _originalImageSize = self.editor.imageView.image.size;
     
     _drawingView = [[UIImageView alloc] initWithFrame:self.editor.imageView.bounds];
+    _drawingView.contentMode = UIViewContentModeScaleAspectFit;
     
-    _grayImage = [[self.editor.imageView.image resize:CGSizeMake(_drawingView.width*2, _drawingView.height*2)] grayScaleImage];
+    _grayImage = [[self.editor.imageView.image aspectFit:CGSizeMake(_drawingView.width*2, _drawingView.height*2)] grayScaleImage];
     _drawingView.image = _grayImage;
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
