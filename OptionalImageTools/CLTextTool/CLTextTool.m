@@ -335,7 +335,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 
 - (void)addNewText
 {
-    _CLTextView *view = [_CLTextView new];
+    _CLTextView *view = [[_CLTextView alloc] initWithTool:self];
     view.fillColor = _settingView.selectedFillColor;
     view.borderColor = _settingView.selectedBorderColor;
     view.borderWidth = _settingView.selectedBorderWidth;
