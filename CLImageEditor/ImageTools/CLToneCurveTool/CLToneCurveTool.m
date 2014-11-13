@@ -9,6 +9,9 @@
 
 #import "CLSplineInterpolator.h"
 
+static NSString* const kCLToneCurveToolArrowIconName = @"arrowIconAssetsName";
+static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
+
 
 @protocol CLToneCurveGridDelegate;
 
@@ -63,6 +66,18 @@
     return ([UIDevice iosVersion] >= 5.0);
 }
 
+#pragma mark- optional info
+
++ (NSDictionary*)optionalInfo
+{
+    return @{
+             kCLToneCurveToolArrowIconName : @"",
+             kCLToneCurveToolResetIconName : @"",
+             };
+}
+
+#pragma mark-
+
 - (void)setup
 {
     _originalImage = self.editor.imageView.image;
@@ -86,14 +101,14 @@
     btn.frame = CGRectMake(_tonecurveView.right + 20, 15, 30, 30);
     [btn addTarget:self action:@selector(pushedHideBtn:) forControlEvents:UIControlEventTouchUpInside];
 	
-    [btn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_arrow.png"] forState:UIControlStateNormal];
+    [btn setImage:[self imageForKey:kCLToneCurveToolArrowIconName defaultImageName:@"btn_arrow.png"] forState:UIControlStateNormal];
     [_menuContainer addSubview:btn];
     
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(_tonecurveView.right + 20, _tonecurveView.bottom - 30, 30, 30);
     [btn addTarget:self action:@selector(pushedResetBtn:) forControlEvents:UIControlEventTouchUpInside];
 	
-    [btn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_reset.png"] forState:UIControlStateNormal];
+    [btn setImage:[self imageForKey:kCLToneCurveToolResetIconName defaultImageName:@"btn_reset.png"] forState:UIControlStateNormal];
     [_menuContainer addSubview:btn];
     
     _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuContainer.top);

@@ -78,4 +78,16 @@
     completionBlock(self.editor.imageView.image, nil, nil);
 }
 
+- (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName
+{
+    NSString *iconName = self.toolInfo.optionalInfo[key];
+    
+    if(iconName.length>0){
+        return [UIImage imageNamed:iconName];
+    }
+    else{
+        return [CLImageEditorTheme imageNamed:[self class] image:defaultImageName];
+    }
+}
+
 @end

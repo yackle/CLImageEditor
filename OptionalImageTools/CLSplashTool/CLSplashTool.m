@@ -7,6 +7,8 @@
 
 #import "CLSplashTool.h"
 
+static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
+
 @implementation CLSplashTool
 {
     UIImageView *_drawingView;
@@ -42,6 +44,15 @@
 + (CGFloat)defaultDockedNumber
 {
     return 4.6;
+}
+
+#pragma mark- optional info
+
++ (NSDictionary*)optionalInfo
+{
+    return @{
+             kCLSplashToolEraserIconName : @"",
+             };
 }
 
 #pragma mark- implementation
@@ -186,7 +197,7 @@
     _strokePreviewBackground.backgroundColor = _strokePreview.backgroundColor;
     
     _eraserIcon = [[UIImageView alloc] initWithFrame:_strokePreview.frame];
-    _eraserIcon.image  =  [CLImageEditorTheme imageNamed:[self class] image:@"btn_eraser.png"];
+    _eraserIcon.image  =  [self imageForKey:kCLSplashToolEraserIconName defaultImageName:@"btn_eraser.png"];
     _eraserIcon.hidden = YES;
     [_menuView addSubview:_eraserIcon];
     
