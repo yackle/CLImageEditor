@@ -60,15 +60,6 @@
         CLImageEditor *editor = [[CLImageEditor alloc] initWithImage:_imageView.image delegate:self];
         //CLImageEditor *editor = [[CLImageEditor alloc] initWithDelegate:self];
         
-        for(CLImageToolInfo *info in editor.toolInfo.subtools){
-            for(NSString *key in info.optionalInfo.allKeys){
-                NSRange searchResult = [key rangeOfString:@"AssetsName"];
-                if(searchResult.location != NSNotFound){
-                    info.optionalInfo[key] = @"save";
-                }
-            }
-        }
-        
         /*
         NSLog(@"%@", editor.toolInfo);
         NSLog(@"%@", editor.toolInfo.toolTreeDescription);
