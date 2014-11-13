@@ -9,10 +9,14 @@
 
 static NSString* const kCLResizeToolPresetSizes = @"presetSizes";
 static NSString* const kCLResizeToolLimitSize = @"limitSize";
+static NSString* const kCLResizeToolHorizontalIconName = @"horizontalIconAssetsName";
+static NSString* const kCLResizeToolVerticalIconName = @"verticalIconAssetsName";
+static NSString* const kCLResizeToolChainOnIconName = @"chainOnIconAssetsName";
+static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName";
 
 @interface _CLResizePanel : UIView
 <UITextFieldDelegate>
-- (id)initWithFrame:(CGRect)frame originalSize:(CGSize)size;
+- (id)initWithFrame:(CGRect)frame originalSize:(CGSize)size tool:(CLResizeTool*)tool;
 - (void)setImageWidth:(CGFloat)width;
 - (void)setImageHeight:(CGFloat)height;
 - (void)setLimitSize:(CGFloat)limit;
@@ -64,7 +68,14 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 
 + (NSDictionary*)optionalInfo
 {
-    return @{kCLResizeToolPresetSizes:[self defaultPresetSizes], kCLResizeToolLimitSize:[self defaultLimitSize]};
+    return @{
+             kCLResizeToolPresetSizes:[self defaultPresetSizes],
+             kCLResizeToolLimitSize:[self defaultLimitSize],
+             kCLResizeToolHorizontalIconName:@"",
+             kCLResizeToolVerticalIconName:@"",
+             kCLResizeToolChainOnIconName:@"",
+             kCLResizeToolChainOffIconName:@"",
+             };
 }
 
 #pragma mark- implementation
@@ -92,13 +103,13 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _switchBtn = [CLImageEditorTheme menuItemWithFrame:CGRectMake(0, 0, 70, btnPanel.height) target:self action:@selector(pushedSwitchBtn:) toolInfo:nil];
     _switchBtn.tag = 0;
 	
-    _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_width.png"];
+    _switchBtn.iconImage = [self imageForKey:kCLResizeToolHorizontalIconName defaultImageName:@"btn_width.png"];
     [btnPanel addSubview:_switchBtn];
     
     NSNumber *limit = self.toolInfo.optionalInfo[kCLResizeToolLimitSize];
     if(limit==nil){ limit = [self.class defaultLimitSize]; }
     
-    _resizePanel = [[_CLResizePanel alloc] initWithFrame:self.editor.imageView.superview.frame originalSize:_originalImage.size];
+    _resizePanel = [[_CLResizePanel alloc] initWithFrame:self.editor.imageView.superview.frame originalSize:_originalImage.size tool:self];
     _resizePanel.backgroundColor = [[CLImageEditorTheme toolbarColor] colorWithAlphaComponent:0.4];
     [_resizePanel setLimitSize:limit.floatValue];
     [self.editor.view addSubview:_resizePanel];
@@ -195,11 +206,11 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
 {
     if(_switchBtn.tag==0){
         _switchBtn.tag = 1;
-        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_height.png"];
+        _switchBtn.iconImage = [self imageForKey:kCLResizeToolVerticalIconName defaultImageName:@"btn_height.png"];
     }
     else{
         _switchBtn.tag = 0;
-        _switchBtn.iconImage = [CLImageEditorTheme imageNamed:[self class] image:@"btn_width.png"];
+        _switchBtn.iconImage = [self imageForKey:kCLResizeToolHorizontalIconName defaultImageName:@"btn_width.png"];
     }
     
     _switchBtn.alpha = 0.2;
@@ -273,17 +284,17 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithFrame:(CGRect)frame originalSize:(CGSize)size;
+- (id)initWithFrame:(CGRect)frame originalSize:(CGSize)size tool:(CLResizeTool *)tool
 {
     self = [self initWithFrame:frame];
     if(self){
         _originalSize = size;
-        [self initInfoPanel];
+        [self initInfoPanelWithTool:tool];
     }
     return self;
 }
 
-- (void)initInfoPanel
+- (void)initInfoPanelWithTool:(CLResizeTool*)tool
 {
     UIFont *font = [CLImageEditorTheme toolbarTextFont];
     
@@ -324,8 +335,8 @@ static NSString* const kCLResizeToolLimitSize = @"limitSize";
     _chainBtn.frame = CGRectMake(0, 0, 35, 35);
     _chainBtn.center = CGPointMake(label.center.x, y + 25);
 	
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_off.png"] forState:UIControlStateNormal];
-    [_chainBtn setImage:[CLImageEditorTheme imageNamed:[CLResizeTool class] image:@"btn_chain_on.png"] forState:UIControlStateSelected];
+    [_chainBtn setImage:[tool imageForKey:kCLResizeToolChainOffIconName defaultImageName:@"btn_chain_off.png"] forState:UIControlStateNormal];
+    [_chainBtn setImage:[tool imageForKey:kCLResizeToolChainOnIconName defaultImageName:@"btn_chain_on.png"] forState:UIControlStateSelected];
     [_chainBtn addTarget:self action:@selector(chainBtnDidPush:) forControlEvents:UIControlEventTouchUpInside];
     _chainBtn.selected = YES;
     [_infoPanel addSubview:_chainBtn];
