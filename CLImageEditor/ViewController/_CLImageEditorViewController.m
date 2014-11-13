@@ -13,7 +13,7 @@
 #pragma mark- _CLImageEditorViewController
 
 @interface _CLImageEditorViewController()
-<CLImageToolProtocol>
+<CLImageToolProtocol, UINavigationBarDelegate>
 @property (nonatomic, strong) CLImageToolBase *currentTool;
 @property (nonatomic, strong, readwrite) CLImageToolInfo *toolInfo;
 @property (nonatomic, strong) UIImageView *targetImageView;
