@@ -34,7 +34,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLSpotEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Spot", @"");
+    return [CLImageEditorTheme localizedString:@"CLSpotEffect_DefaultTitle" withDefault:@"Spot"];
 }
 
 + (BOOL)isAvailable

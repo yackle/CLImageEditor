@@ -58,7 +58,7 @@ static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLToneCurveTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"ToneCurve", @"");
+    return [CLImageEditorTheme localizedString:@"CLToneCurveTool_DefaultTitle" withDefault:@"ToneCurve"];
 }
 
 + (BOOL)isAvailable

@@ -38,7 +38,7 @@ static NSString* const kCLEmoticonToolDeleteIconName = @"deleteIconAssetsName";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLEmoticonTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Emoticons", @"");
+    return [CLImageEditorTheme localizedString:@"CLEmoticonTool_DefaultTitle" withDefault:@"Emoticons"];
 }
 
 + (BOOL)isAvailable

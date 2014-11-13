@@ -40,7 +40,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLEffectBase_DefaultTitle", nil, [CLImageEditorTheme bundle], @"None", @"");
+    return [CLImageEditorTheme localizedString:@"CLEffectBase_DefaultTitle" withDefault:@"None"];
 }
 
 + (BOOL)isAvailable

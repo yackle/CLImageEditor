@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLBlurEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Blur & Focus", @"");
+    return [CLImageEditorTheme localizedString:@"CLBlurEffect_DefaultTitle" withDefault:@"Blur & Focus"];
 }
 
 + (BOOL)isAvailable
@@ -154,9 +154,9 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     CGFloat x = 0;
     
     NSArray *_menu = @[
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLBlurEffect_MenuItemNormal", nil, [CLImageEditorTheme bundle], @"Normal", @""), @"icon":[self imageForKey:kCLBlurToolNormalIconName defaultImageName:@"btn_normal.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLBlurEffect_MenuItemCircle", nil, [CLImageEditorTheme bundle], @"Cirlcle", @""), @"icon":[self imageForKey:kCLBlurToolCircleIconName defaultImageName:@"btn_circle.png"]},
-                       @{@"title":NSLocalizedStringWithDefaultValue(@"CLBlurEffect_MenuItemBand", nil, [CLImageEditorTheme bundle], @"Band", @""), @"icon":[self imageForKey:kCLBlurToolBandIconName defaultImageName:@"btn_band.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemNormal" withDefault:@"Normal"], @"icon":[self imageForKey:kCLBlurToolNormalIconName defaultImageName:@"btn_normal.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemCircle" withDefault:@"Cirlcle"], @"icon":[self imageForKey:kCLBlurToolCircleIconName defaultImageName:@"btn_circle.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemBand" withDefault:@"Band"], @"icon":[self imageForKey:kCLBlurToolBandIconName defaultImageName:@"btn_band.png"]},
     ];
     
     NSInteger tag = 0;

@@ -59,7 +59,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLClippingTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Crop", @"");
+    return [CLImageEditorTheme localizedString:@"CLClippingTool_DefaultTitle" withDefault:@"Crop"];
 }
 
 + (BOOL)isAvailable
@@ -72,7 +72,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 + (NSArray*)defaultPresetRatios
 {
     return @[
-             @{kCLClippingToolRatioValue1:@0, kCLClippingToolRatioValue2:@0, kCLClippingToolRatioTitleFormat:NSLocalizedStringWithDefaultValue(@"CLClippingTool_ItemMenuCustom", nil, [CLImageEditorTheme bundle], @"Custom", @"")},
+             @{kCLClippingToolRatioValue1:@0, kCLClippingToolRatioValue2:@0, kCLClippingToolRatioTitleFormat:[CLImageEditorTheme localizedString:@"CLClippingTool_ItemMenuCustom" withDefault:@"Custom"]},
              @{kCLClippingToolRatioValue1:@1, kCLClippingToolRatioValue2:@1, kCLClippingToolRatioTitleFormat:@"%g : %g"},
              @{kCLClippingToolRatioValue1:@4, kCLClippingToolRatioValue2:@3, kCLClippingToolRatioTitleFormat:@"%g : %g"},
              @{kCLClippingToolRatioValue1:@3, kCLClippingToolRatioValue2:@2, kCLClippingToolRatioTitleFormat:@"%g : %g"},

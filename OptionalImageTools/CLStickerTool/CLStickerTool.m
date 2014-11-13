@@ -37,7 +37,7 @@ static NSString* const kCLStickerToolDeleteIconName = @"deleteIconAssetsName";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLStickerTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Sticker", @"");
+    return [CLImageEditorTheme localizedString:@"CLStickerTool_DefaultTitle" withDefault:@"Sticker"];
 }
 
 + (BOOL)isAvailable

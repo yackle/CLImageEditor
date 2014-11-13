@@ -20,7 +20,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLGPUImageVignetteFilter_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Vignette2", @"");
+    return [CLImageEditorTheme localizedString:@"CLGPUImageVignetteFilter_DefaultTitle" withDefault:@"Vignette2"];
 }
 
 + (BOOL)isAvailable

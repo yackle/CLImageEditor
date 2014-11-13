@@ -30,9 +30,16 @@
 
 + (UIImage*)imageNamed:(Class)path image:(NSString*)image
 {
-	CLImageEditorTheme *theme = [CLImageEditorTheme theme];
-	
+    CLImageEditorTheme *theme = [CLImageEditorTheme theme];
+    
     return [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@/%@/%@", self.bundleName, path, theme.toolIconColor, image]];
+}
+
++ (NSString*)localizedString:(NSString*)key withDefault:defaultValue
+{
+    NSString *str = NSLocalizedString(key, @"");
+    if(![str isEqualToString:key]){ return str; }
+    return NSLocalizedStringWithDefaultValue(key, nil, [CLImageEditorTheme bundle], defaultValue, @"");
 }
 
 #pragma mark color settings

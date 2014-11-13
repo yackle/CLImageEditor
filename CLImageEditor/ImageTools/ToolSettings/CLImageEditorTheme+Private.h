@@ -14,6 +14,7 @@
 + (NSString*)bundleName;
 + (NSBundle*)bundle;
 + (UIImage*)imageNamed:(Class)path image:(NSString*)image;
++ (NSString*)localizedString:(NSString*)key withDefault:defaultValue;
 
 + (UIColor*)backgroundColor;
 + (UIColor*)toolbarColor;

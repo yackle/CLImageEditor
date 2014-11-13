@@ -32,7 +32,7 @@ static NSString* const kCLDrawToolEraserIconName = @"eraserIconAssetsName";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLDrawTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Draw", @"");
+    return [CLImageEditorTheme localizedString:@"CLDrawTool_DefaultTitle" withDefault:@"Draw"];
 }
 
 + (BOOL)isAvailable
