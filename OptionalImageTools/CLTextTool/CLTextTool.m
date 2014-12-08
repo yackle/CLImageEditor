@@ -441,7 +441,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 
 
 
-
+const CGFloat MAX_FONT_SIZE = 50.0;
 
 
 #pragma mark- _CLTextView
@@ -480,13 +480,13 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
     self = [super initWithFrame:CGRectMake(0, 0, 132, 132)];
     if(self){
         _label = [[CLTextLabel alloc] init];
-		[_label setTextColor:[CLImageEditorTheme toolbarTextColor]];
+        [_label setTextColor:[CLImageEditorTheme toolbarTextColor]];
         _label.numberOfLines = 0;
         _label.backgroundColor = [UIColor clearColor];
         _label.layer.borderColor = [[UIColor blackColor] CGColor];
         _label.layer.cornerRadius = 3;
-        _label.font = [UIFont systemFontOfSize:200];
-        _label.minimumScaleFactor = 1/200.0;
+        _label.font = [UIFont systemFontOfSize:MAX_FONT_SIZE];
+        _label.minimumScaleFactor = 1/MAX_FONT_SIZE;
         _label.adjustsFontSizeToFitWidth = YES;
         _label.textAlignment = NSTextAlignmentCenter;
         self.text = @"";
@@ -556,7 +556,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
     self.transform = CGAffineTransformIdentity;
     _label.transform = CGAffineTransformIdentity;
     
-    CGSize size = [_label sizeThatFits:CGSizeMake(width / (15/200.0), FLT_MAX)];
+    CGSize size = [_label sizeThatFits:CGSizeMake(width / (15/MAX_FONT_SIZE), FLT_MAX)];
     _label.frame = CGRectMake(16, 16, size.width, size.height);
     
     CGFloat viewW = (_label.width + 32);
@@ -621,7 +621,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 
 - (void)setFont:(UIFont *)font
 {
-    _label.font = [font fontWithSize:200];
+    _label.font = [font fontWithSize:MAX_FONT_SIZE];
 }
 
 - (UIFont*)font
@@ -720,7 +720,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
     CGFloat arg = atan2(p.y, p.x);
     
     _arg   = _initialArg + arg - tmpA;
-    [self setScale:MAX(_initialScale * R / tmpR, 15/200.0)];
+    [self setScale:MAX(_initialScale * R / tmpR, 15/MAX_FONT_SIZE)];
 }
 
 @end
