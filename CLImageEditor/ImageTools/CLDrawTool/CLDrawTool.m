@@ -335,7 +335,7 @@ static NSString* const kCLDrawToolEraserIconName = @"eraserIconAssetsName";
 
 - (UIImage*)buildImage
 {
-    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
     
     [self.editor.imageView.image drawAtPoint:CGPointZero];
     [_drawingView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
