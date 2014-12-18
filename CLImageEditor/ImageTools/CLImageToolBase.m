@@ -21,7 +21,7 @@
 
 + (NSString*)defaultIconImagePath
 {
-	CLImageEditorTheme *theme = [CLImageEditorTheme theme];
+    CLImageEditorTheme *theme = [CLImageEditorTheme theme];
     return [NSString stringWithFormat:@"%@.bundle/%@/%@/icon.png", [CLImageEditorTheme bundleName], NSStringFromClass([self class]), theme.toolIconColor];
 }
 
