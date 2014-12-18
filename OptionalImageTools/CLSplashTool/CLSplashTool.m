@@ -7,6 +7,8 @@
 
 #import "CLSplashTool.h"
 
+static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
+
 @implementation CLSplashTool
 {
     UIImageView *_drawingView;
@@ -31,7 +33,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLSplashTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Splash", @"");
+    return [CLImageEditorTheme localizedString:@"CLSplashTool_DefaultTitle" withDefault:@"Splash"];
 }
 
 + (BOOL)isAvailable
@@ -44,6 +46,15 @@
     return 4.6;
 }
 
+#pragma mark- optional info
+
++ (NSDictionary*)optionalInfo
+{
+    return @{
+             kCLSplashToolEraserIconName : @"",
+             };
+}
+
 #pragma mark- implementation
 
 - (void)setup
@@ -51,8 +62,9 @@
     _originalImageSize = self.editor.imageView.image.size;
     
     _drawingView = [[UIImageView alloc] initWithFrame:self.editor.imageView.bounds];
+    _drawingView.contentMode = UIViewContentModeScaleAspectFit;
     
-    _grayImage = [[self.editor.imageView.image resize:CGSizeMake(_drawingView.width*2, _drawingView.height*2)] grayScaleImage];
+    _grayImage = [[self.editor.imageView.image aspectFit:CGSizeMake(_drawingView.width*2, _drawingView.height*2)] grayScaleImage];
     _drawingView.image = _grayImage;
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawingViewDidPan:)];
@@ -186,7 +198,7 @@
     _strokePreviewBackground.backgroundColor = _strokePreview.backgroundColor;
     
     _eraserIcon = [[UIImageView alloc] initWithFrame:_strokePreview.frame];
-    _eraserIcon.image  =  [CLImageEditorTheme imageNamed:[self class] image:@"btn_eraser.png"];
+    _eraserIcon.image  =  [self imageForKey:kCLSplashToolEraserIconName defaultImageName:@"btn_eraser.png"];
     _eraserIcon.hidden = YES;
     [_menuView addSubview:_eraserIcon];
     

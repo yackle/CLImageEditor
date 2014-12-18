@@ -11,11 +11,12 @@
 #import "CLCircleView.h"
 
 static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
+static NSString* const kCLEmoticonToolDeleteIconName = @"deleteIconAssetsName";
 
 @interface _CLEmoticonView : UIView
 + (void)setActiveEmoticonView:(_CLEmoticonView*)view;
 - (UIImageView*)imageView;
-- (id)initWithImage:(UIImage *)image;
+- (id)initWithImage:(UIImage *)image tool:(CLEmoticonTool*)tool;
 - (void)setScale:(CGFloat)scale;
 @end
 
@@ -37,7 +38,7 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLEmoticonTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Emoticons", @"");
+    return [CLImageEditorTheme localizedString:@"CLEmoticonTool_DefaultTitle" withDefault:@"Emoticons"];
 }
 
 + (BOOL)isAvailable
@@ -59,7 +60,10 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
 
 + (NSDictionary*)optionalInfo
 {
-    return @{kCLEmoticonToolEmoticonPathKey:[self defaultEmoticonPath]};
+    return @{
+             kCLEmoticonToolEmoticonPathKey:[self defaultEmoticonPath],
+             kCLEmoticonToolDeleteIconName:@"",
+             };
 }
 
 #pragma mark- implementation
@@ -153,7 +157,7 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
     
     NSString *filePath = view.userInfo[@"filePath"];
     if(filePath){
-        _CLEmoticonView *view = [[_CLEmoticonView alloc] initWithImage:[UIImage imageWithContentsOfFile:filePath]];
+        _CLEmoticonView *view = [[_CLEmoticonView alloc] initWithImage:[UIImage imageWithContentsOfFile:filePath] tool:self];
         CGFloat ratio = MIN( (0.5 * _workingView.width) / view.width, (0.5 * _workingView.height) / view.height);
         [view setScale:ratio];
         view.center = CGPointMake(_workingView.width/2, _workingView.height/2);
@@ -172,7 +176,7 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
 
 - (UIImage*)buildImage:(UIImage*)image
 {
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
     
     [image drawAtPoint:CGPointZero];
     
@@ -216,7 +220,7 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
     }
 }
 
-- (id)initWithImage:(UIImage *)image
+- (id)initWithImage:(UIImage *)image tool:(CLEmoticonTool*)tool
 {
     self = [super initWithFrame:CGRectMake(0, 0, image.size.width+32, image.size.height+32)];
     if(self){
@@ -228,7 +232,7 @@ static NSString* const kCLEmoticonToolEmoticonPathKey = @"EmoticonPath";
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		
-        [_deleteButton setImage:[CLImageEditorTheme imageNamed:[CLEmoticonTool class] image:@"btn_delete.png"] forState:UIControlStateNormal];
+        [_deleteButton setImage:[tool imageForKey:kCLEmoticonToolDeleteIconName defaultImageName:@"btn_delete.png"] forState:UIControlStateNormal];
         _deleteButton.frame = CGRectMake(0, 0, 32, 32);
         _deleteButton.center = _imageView.frame.origin;
         [_deleteButton addTarget:self action:@selector(pushedDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];

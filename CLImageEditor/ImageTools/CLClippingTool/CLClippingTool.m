@@ -10,6 +10,8 @@
 
 static NSString* const kCLClippingToolRatios = @"ratios";
 static NSString* const kCLClippingToolSwapButtonHidden = @"swapButtonHidden";
+static NSString* const kCLClippingToolRotateIconName = @"rotateIconAssetsName";
+
 static NSString* const kCLClippingToolRatioValue1 = @"value1";
 static NSString* const kCLClippingToolRatioValue2 = @"value2";
 static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
@@ -57,7 +59,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLClippingTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Crop", @"");
+    return [CLImageEditorTheme localizedString:@"CLClippingTool_DefaultTitle" withDefault:@"Crop"];
 }
 
 + (BOOL)isAvailable
@@ -70,7 +72,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 + (NSArray*)defaultPresetRatios
 {
     return @[
-             @{kCLClippingToolRatioValue1:@0, kCLClippingToolRatioValue2:@0, kCLClippingToolRatioTitleFormat:NSLocalizedStringWithDefaultValue(@"CLClippingTool_ItemMenuCustom", nil, [CLImageEditorTheme bundle], @"Custom", @"")},
+             @{kCLClippingToolRatioValue1:@0, kCLClippingToolRatioValue2:@0, kCLClippingToolRatioTitleFormat:[CLImageEditorTheme localizedString:@"CLClippingTool_ItemMenuCustom" withDefault:@"Custom"]},
              @{kCLClippingToolRatioValue1:@1, kCLClippingToolRatioValue2:@1, kCLClippingToolRatioTitleFormat:@"%g : %g"},
              @{kCLClippingToolRatioValue1:@4, kCLClippingToolRatioValue2:@3, kCLClippingToolRatioTitleFormat:@"%g : %g"},
              @{kCLClippingToolRatioValue1:@3, kCLClippingToolRatioValue2:@2, kCLClippingToolRatioTitleFormat:@"%g : %g"},
@@ -85,7 +87,11 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 
 + (NSDictionary*)optionalInfo
 {
-    return @{kCLClippingToolRatios:[self defaultPresetRatios], kCLClippingToolSwapButtonHidden:[self defaultSwapButtonHidden]};
+    return @{
+             kCLClippingToolRatios:[self defaultPresetRatios],
+             kCLClippingToolSwapButtonHidden:[self defaultSwapButtonHidden],
+             kCLClippingToolRotateIconName:@""
+             };
 }
 
 #pragma mark- implementation
@@ -120,7 +126,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
         btn.frame = CGRectMake(0, 0, 40, 40);
         btn.center = CGPointMake(btnPanel.width/2, btnPanel.height/2 - 10);
         [btn addTarget:self action:@selector(pushedRotateBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setImage:[CLImageEditorTheme imageNamed:[self class] image:@"btn_rotate.png"] forState:UIControlStateNormal];
+        [btn setImage:[self imageForKey:kCLClippingToolRotateIconName defaultImageName:@"btn_rotate.png"] forState:UIControlStateNormal];
         btn.adjustsImageWhenHighlighted = YES;
         [btnPanel addSubview:btn];
     }

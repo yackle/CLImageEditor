@@ -19,7 +19,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLPosterizeEffect_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Posterize", @"");
+    return [CLImageEditorTheme localizedString:@"CLPosterizeEffect_DefaultTitle" withDefault:@"Posterize"];
 }
 
 + (BOOL)isAvailable

@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface CLImageToolInfo : NSObject
 
 @property (nonatomic, readonly) NSString *toolName;

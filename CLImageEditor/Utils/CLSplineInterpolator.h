@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface CLSplineInterpolator : NSObject
 
 - (id)initWithPoints:(NSArray*)points;          // points: array of CIVector

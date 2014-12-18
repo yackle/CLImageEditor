@@ -7,6 +7,8 @@
 
 #import "CLDrawTool.h"
 
+static NSString* const kCLDrawToolEraserIconName = @"eraserIconAssetsName";
+
 @implementation CLDrawTool
 {
     UIImageView *_drawingView;
@@ -30,7 +32,7 @@
 
 + (NSString*)defaultTitle
 {
-    return NSLocalizedStringWithDefaultValue(@"CLDrawTool_DefaultTitle", nil, [CLImageEditorTheme bundle], @"Draw", @"");
+    return [CLImageEditorTheme localizedString:@"CLDrawTool_DefaultTitle" withDefault:@"Draw"];
 }
 
 + (BOOL)isAvailable
@@ -41,6 +43,15 @@
 + (CGFloat)defaultDockedNumber
 {
     return 4.5;
+}
+
+#pragma mark- optional info
+
++ (NSDictionary*)optionalInfo
+{
+    return @{
+             kCLDrawToolEraserIconName : @"",
+             };
 }
 
 #pragma mark- implementation
@@ -240,7 +251,7 @@
     [_menuView insertSubview:_strokePreviewBackground aboveSubview:_strokePreview];
     
     _eraserIcon = [[UIImageView alloc] initWithFrame:_strokePreview.frame];
-    _eraserIcon.image  =  [CLImageEditorTheme imageNamed:[self class] image:@"btn_eraser.png"];
+    _eraserIcon.image  =  [self imageForKey:kCLDrawToolEraserIconName defaultImageName:@"btn_eraser.png"];
     _eraserIcon.hidden = YES;
     [_menuView addSubview:_eraserIcon];
     
@@ -324,7 +335,7 @@
 
 - (UIImage*)buildImage
 {
-    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
     
     [self.editor.imageView.image drawAtPoint:CGPointZero];
     [_drawingView.image drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
