@@ -78,7 +78,7 @@
 
 - (void)initNavigationBar
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:@"Done"] style:UIBarButtonItemStyleDone target:self action:@selector(pushedFinishBtn:)];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     if(_navigationBar==nil){
