@@ -78,9 +78,10 @@
 
 - (void)initNavigationBar
 {
-    NSString *doneBtnTitle = [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:@"Empty"];
     UIBarButtonItem *rightBarButtonItem = nil;
-    if(![doneBtnTitle isEqualToString:@"Empty"]){
+    NSString *doneBtnTitle = [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:nil];
+    
+    if(![doneBtnTitle isEqualToString:@"CLImageEditor_DoneBtnTitle"]){
         rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:doneBtnTitle style:UIBarButtonItemStyleDone target:self action:@selector(pushedFinishBtn:)];
     }
     else{
