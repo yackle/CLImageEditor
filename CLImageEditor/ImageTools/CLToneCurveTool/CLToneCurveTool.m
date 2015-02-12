@@ -179,7 +179,7 @@ static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
     [filter setValue:_tonecurveView.point3 forKey:@"inputPoint3"];
     [filter setValue:_tonecurveView.point4 forKey:@"inputPoint4"];
     
-    CIContext *context = [CIContext contextWithOptions:nil];
+    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
     CGImageRef cgImage = [context createCGImage:outputImage fromRect:[outputImage extent]];
     

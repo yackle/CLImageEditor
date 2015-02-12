@@ -59,7 +59,7 @@
     [filter setValue:[NSNumber numberWithFloat:R] forKey:@"inputRadius"];
     [filter setValue:[NSNumber numberWithFloat:_intensitySlider.value] forKey:@"inputIntensity"];
     
-    CIContext *context = [CIContext contextWithOptions:nil];
+    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
     CGImageRef cgImage = [context createCGImage:outputImage fromRect:[outputImage extent]];
     
