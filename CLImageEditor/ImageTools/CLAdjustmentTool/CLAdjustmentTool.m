@@ -161,7 +161,7 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     CGFloat contrast   = _contrastSlider.value*_contrastSlider.value;
     [filter setValue:[NSNumber numberWithFloat:contrast] forKey:@"inputPower"];
     
-    CIContext *context = [CIContext contextWithOptions:nil];
+    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
     CGImageRef cgImage = [context createCGImage:outputImage fromRect:[outputImage extent]];
     
