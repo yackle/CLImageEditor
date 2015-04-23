@@ -115,7 +115,19 @@
     
     [picker pushViewController:editor animated:YES];
 }
+/*
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if([navigationController isKindOfClass:[UIImagePickerController class]] && [viewController isKindOfClass:[CLImageEditor class]]){
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonDidPush:)];
+    }
+}
 
+- (void)cancelButtonDidPush:(id)sender
+{
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+}
+*/
 #pragma mark- CLImageEditor delegate
 
 - (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
