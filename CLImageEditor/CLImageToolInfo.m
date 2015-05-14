@@ -6,6 +6,7 @@
 //
 
 #import "CLImageToolInfo.h"
+#import "UIImage+Utility.h"
 
 @interface CLImageToolInfo()
 @property (nonatomic, strong) NSString *toolName;
@@ -65,7 +66,7 @@
 
 - (UIImage*)iconImage
 {
-    return [UIImage imageNamed:self.iconImagePath];
+    return [UIImage fastImageWithContentsOfFile:self.iconImagePath];
 }
 
 - (NSString*)toolName

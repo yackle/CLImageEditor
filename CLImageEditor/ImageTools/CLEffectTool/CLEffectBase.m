@@ -13,7 +13,7 @@
 
 + (NSString*)defaultIconImagePath
 {
-    return [NSString stringWithFormat:@"%@.bundle/CLEffectTool/%@.png", [CLImageEditorTheme bundleName], NSStringFromClass([self class])];
+    return [NSString stringWithFormat:@"%@/CLEffectTool/%@.png", CLImageEditorTheme.bundle.bundlePath, NSStringFromClass([self class])];
 }
 
 + (CGFloat)defaultDockedNumber
