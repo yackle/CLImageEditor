@@ -26,6 +26,7 @@
     [[CLImageEditorTheme theme] setToolbarColor:[[UIColor blackColor] colorWithAlphaComponent:0.8]];
     [[CLImageEditorTheme theme] setToolbarTextColor:[UIColor whiteColor]];
     [[CLImageEditorTheme theme] setToolIconColor:@"white"];
+    [[CLImageEditorTheme theme] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     */
