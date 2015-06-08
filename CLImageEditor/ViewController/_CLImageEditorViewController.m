@@ -415,14 +415,27 @@
     CGFloat W = 70;
     CGFloat H = _menuView.height;
     
+    int toolCount = 0;
+    CGFloat padding = 0;
+    for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
+        if(info.available){
+            toolCount++;
+        }
+    }
+    
+    CGFloat diff = _menuView.frame.size.width - toolCount * W;
+    if (0<diff && diff<2*W) {
+        padding = diff/(toolCount+1);
+    }
+    
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
             continue;
         }
         
-        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedMenuView:) toolInfo:info];
+        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x+padding, 0, W, H) target:self action:@selector(tappedMenuView:) toolInfo:info];
         [_menuView addSubview:view];
-        x += W;
+        x += W+padding;
     }
     _menuView.contentSize = CGSizeMake(MAX(x, _menuView.frame.size.width+1), 0);
 }
