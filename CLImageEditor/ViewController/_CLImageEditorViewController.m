@@ -487,6 +487,11 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return [[CLImageEditorTheme theme] statusBarStyle];
+}
+
 #pragma mark- Tool actions
 
 - (void)setCurrentTool:(CLImageToolBase *)currentTool
