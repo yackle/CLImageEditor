@@ -416,15 +416,16 @@
     CGFloat H = _menuView.height;
     
     int toolCount = 0;
-    float padding = 0;
+    CGFloat padding = 0;
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(info.available){
             toolCount++;
         }
     }
     
-    if (toolCount == 4 || toolCount == 5) {
-        padding = ([UIScreen mainScreen].bounds.size.width-(W*toolCount))/(toolCount+1);
+    CGFloat diff = _menuView.frame.size.width - toolCount * W;
+    if (0<diff && diff<2*W) {
+        padding = diff/(toolCount+1);
     }
     
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
