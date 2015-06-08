@@ -132,7 +132,7 @@ CLImageToolInfo *tool = [editor.toolInfo subToolInfoWithToolName:@"CLToneCurveTo
 tool.title = @"TestTitle";
 tool.available = NO;     // if available is set to NO, it is removed from the menu view.
 tool.dockedNumber = -1;  // Bring to top
-//tool.iconImagePath = @"test.png";
+//tool.iconImagePath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"png"];
 ```
 
 * `dockedNumber` determines the menu item order. Note that it is simply used as a key for sorting.
