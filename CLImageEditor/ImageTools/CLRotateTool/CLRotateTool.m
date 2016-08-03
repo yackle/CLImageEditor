@@ -89,7 +89,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
 
-    float sliderMaxima = _fineRotationEnabled ? 0.25 : 1;
+    float sliderMaxima = _fineRotationEnabled ? 0.5 : 1;
     _rotateSlider = [self sliderWithValue:0 minimumValue:-sliderMaxima maximumValue:sliderMaxima];
     _rotateSlider.superview.center = CGPointMake(self.editor.view.width/2, self.editor.menuView.top-30);
     
