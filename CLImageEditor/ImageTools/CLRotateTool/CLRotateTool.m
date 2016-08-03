@@ -36,7 +36,9 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
 
     CLRotatePanel *_gridView;
     UIImageView *_rotateImageView;
-    
+
+    CGFloat _rotationArg;
+    CGFloat _orientation;
     NSInteger _flipState1;
     NSInteger _flipState2;
 }
@@ -59,7 +61,7 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
              kCLRotateToolFlipVerticalIconName : @"",
-             kCLRotateToolFineRotationEnabled : @YES
+             kCLRotateToolFineRotationEnabled : @NO
              };
 }
 
@@ -74,7 +76,8 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
     [self.editor fixZoomScaleWithAnimated:YES];
     
     _initialRect = self.editor.imageView.frame;
-    
+
+    _rotationArg = 0;
     _flipState1 = 0;
     _flipState2 = 0;
     
@@ -194,10 +197,10 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
     switch (sender.view.tag) {
         case 0:
         {
-            CGFloat value = (int)floorf((_rotateSlider.value + 1)*2) + 1;
+            _orientation = (int)floorf((_rotationArg / M_PI + 1) * 2) - 1;
             
-            if(value>4){ value -= 4; }
-            _rotateSlider.value = value / 2 - 1;
+            if(_orientation < 0){ _orientation = 4; }
+            _rotateSlider.value = _fineRotationEnabled ? 0 : (_orientation / 2) - 1;
             
             _gridView.hidden = YES;
             break;
@@ -250,13 +253,13 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
 
 - (CATransform3D)rotateTransform:(CATransform3D)initialTransform clockwise:(BOOL)clockwise
 {
-    CGFloat arg = _rotateSlider.value*M_PI;
+    _rotationArg = _orientation * M_PI_2 + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
     if(!clockwise){
-        arg *= -1;
+        _rotationArg *= -1;
     }
     
     CATransform3D transform = initialTransform;
-    transform = CATransform3DRotate(transform, arg, 0, 0, 1);
+    transform = CATransform3DRotate(transform, _rotationArg, 0, 0, 1);
     transform = CATransform3DRotate(transform, _flipState1*M_PI, 0, 1, 0);
     transform = CATransform3DRotate(transform, _flipState2*M_PI, 1, 0, 0);
     
@@ -267,9 +270,9 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
 {
     CATransform3D transform = [self rotateTransform:CATransform3DIdentity clockwise:YES];
     
-    CGFloat arg = _rotateSlider.value*(_fineRotationEnabled ? M_PI / 4.0 : M_PI);
-    CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
-    CGFloat Hnew = fabs(_initialRect.size.width * sin(arg)) + fabs(_initialRect.size.height * cos(arg));
+    _rotationArg = _orientation * M_PI_2 + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
+    CGFloat Wnew = fabs(_initialRect.size.width * cos(_rotationArg)) + fabs(_initialRect.size.height * sin(_rotationArg));
+    CGFloat Hnew = fabs(_initialRect.size.width * sin(_rotationArg)) + fabs(_initialRect.size.height * cos(_rotationArg));
     
     CGFloat Rw = _gridView.width / Wnew;
     CGFloat Rh = _gridView.height / Hnew;
