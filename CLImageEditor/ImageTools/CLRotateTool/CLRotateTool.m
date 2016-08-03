@@ -61,7 +61,7 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
              kCLRotateToolFlipVerticalIconName : @"",
-             kCLRotateToolFineRotationEnabled : @YES
+             kCLRotateToolFineRotationEnabled : @NO
              };
 }
 
@@ -197,9 +197,12 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
     switch (sender.view.tag) {
         case 0:
         {
-            CGFloat rotation = _fineRotationEnabled ? (_rotationArg / M_PI) : _rotateSlider.value;
-            _orientation = (int)floorf((rotation + 1) * 2) + 1;
-            
+            if (_fineRotationEnabled) {
+                _orientation = _rotateSlider.value < 0 ? _orientation : _orientation  + 1;
+            } else {
+                _orientation = (int)floorf((_rotateSlider.value + 1) * 2) + 1;
+            }
+
             if(_orientation > 4){ _orientation -= 4; }
             _rotateSlider.value = _fineRotationEnabled ? 0 : (_orientation / 2) - 1;
             
