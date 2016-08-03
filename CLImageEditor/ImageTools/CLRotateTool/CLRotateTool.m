@@ -10,6 +10,7 @@
 static NSString* const kCLRotateToolRotateIconName = @"rotateIconAssetsName";
 static NSString* const kCLRotateToolFlipHorizontalIconName = @"flipHorizontalIconAssetsName";
 static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAssetsName";
+static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled";
 static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 
 
@@ -31,10 +32,14 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     CGRect _initialRect;
     
     BOOL _executed;
-    
+
+    BOOL _fineRotationEnabled;
+
     CLRotatePanel *_gridView;
     UIImageView *_rotateImageView;
-    
+
+    CGFloat _rotationArg;
+    CGFloat _orientation;
     NSInteger _flipState1;
     NSInteger _flipState2;
 }
@@ -57,6 +62,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
              kCLRotateToolFlipVerticalIconName : @"",
+             kCLRotateToolFineRotationEnabled : @NO,
              kCLRotateToolCropRotate : @NO
              };
 }
@@ -66,11 +72,14 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 - (void)setup
 {
     _executed = NO;
-    
+
+    _fineRotationEnabled = [self.toolInfo.optionalInfo[kCLRotateToolFineRotationEnabled] boolValue];
+
     [self.editor fixZoomScaleWithAnimated:YES];
     
     _initialRect = self.editor.imageView.frame;
-    
+
+    _rotationArg = 0;
     _flipState1 = 0;
     _flipState2 = 0;
     
@@ -79,8 +88,9 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     _gridView.bgColor = [self.editor.view.backgroundColor colorWithAlphaComponent:0.8];
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
-    
-    _rotateSlider = [self sliderWithValue:0 minimumValue:-1 maximumValue:1];
+
+    float sliderMaxima = _fineRotationEnabled ? 0.5 : 1;
+    _rotateSlider = [self sliderWithValue:0 minimumValue:-sliderMaxima maximumValue:sliderMaxima];
     _rotateSlider.superview.center = CGPointMake(self.editor.view.width/2, self.editor.menuView.top-30);
     
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
@@ -189,10 +199,14 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     switch (sender.view.tag) {
         case 0:
         {
-            CGFloat value = (int)floorf((_rotateSlider.value + 1)*2) + 1;
-            
-            if(value>4){ value -= 4; }
-            _rotateSlider.value = value / 2 - 1;
+            if (_fineRotationEnabled) {
+                _orientation = _rotateSlider.value < 0 ? _orientation : _orientation  + 1;
+            } else {
+                _orientation = (int)floorf((_rotateSlider.value + 1) * 2) + 1;
+            }
+
+            if(_orientation > 4){ _orientation -= 4; }
+            _rotateSlider.value = _fineRotationEnabled ? 0 : (_orientation / 2) - 1;
             
             _gridView.hidden = YES;
             break;
@@ -245,13 +259,14 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 
 - (CATransform3D)rotateTransform:(CATransform3D)initialTransform clockwise:(BOOL)clockwise
 {
-    CGFloat arg = _rotateSlider.value*M_PI;
+    CGFloat orientationOffset = _fineRotationEnabled ? _orientation * M_PI_2 : 0;
+    _rotationArg = orientationOffset + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
     if(!clockwise){
-        arg *= -1;
+        _rotationArg *= -1;
     }
     
     CATransform3D transform = initialTransform;
-    transform = CATransform3DRotate(transform, arg, 0, 0, 1);
+    transform = CATransform3DRotate(transform, _rotationArg, 0, 0, 1);
     transform = CATransform3DRotate(transform, _flipState1*M_PI, 0, 1, 0);
     transform = CATransform3DRotate(transform, _flipState2*M_PI, 1, 0, 0);
     
@@ -261,13 +276,13 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 - (void)rotateStateDidChange
 {
     CATransform3D transform = [self rotateTransform:CATransform3DIdentity clockwise:YES];
-    
-    CGFloat arg = _rotateSlider.value*M_PI;
-    CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
-    CGFloat Hnew = fabs(_initialRect.size.width * sin(arg)) + fabs(_initialRect.size.height * cos(arg));
+
+    CGFloat orientationOffset = _fineRotationEnabled ? _orientation * M_PI_2 : 0;
+    _rotationArg = orientationOffset + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
+    CGFloat Wnew = fabs(_initialRect.size.width * cos(_rotationArg)) + fabs(_initialRect.size.height * sin(_rotationArg));
+    CGFloat Hnew = fabs(_initialRect.size.width * sin(_rotationArg)) + fabs(_initialRect.size.height * cos(_rotationArg));
 
     BOOL cropRotateEnabled = [self.toolInfo.optionalInfo[kCLRotateToolCropRotate] boolValue];
-
     CGFloat Rw = _gridView.width / Wnew;
     CGFloat Rh = _gridView.height / Hnew;
     CGFloat scale = MIN(Rw, Rh) * 0.95;
