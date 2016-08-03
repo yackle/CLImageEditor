@@ -16,7 +16,9 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
 {
     UIImage *_originalImage;
     UIImage *_thumbnailImage;
-    
+
+    UIScrollView *_menuScroll;
+
     UISlider *_saturationSlider;
     UISlider *_brightnessSlider;
     UISlider *_contrastSlider;
@@ -41,6 +43,22 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     [self.editor fixZoomScaleWithAnimated:YES];
     
     [self setupSlider];
+
+    _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
+    _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
+    _menuScroll.showsHorizontalScrollIndicator = NO;
+    _menuScroll.scrollEnabled = NO;
+    [self.editor.view addSubview:_menuScroll];
+    [self setMenu];
+
+    _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
+    [UIView animateWithDuration:kCLImageToolAnimationDuration
+                     animations:^{
+                         _menuScroll.transform = CGAffineTransformIdentity;
+                     }
+                     completion:^(BOOL finished) {
+                     }];
+
 }
 
 - (void)cleanup
@@ -51,6 +69,13 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     [_contrastSlider.superview removeFromSuperview];
     
     [self.editor resetZoomScaleWithAnimated:YES];
+    [UIView animateWithDuration:kCLImageToolAnimationDuration
+                     animations:^{
+                         _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
+                     }
+                     completion:^(BOOL finished) {
+                         [_menuScroll removeFromSuperview];
+                     }];
 }
 
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
@@ -83,6 +108,69 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
 }
 
 #pragma mark-
+
+- (void)setMenu
+{
+    CGFloat W = 70;
+    CGFloat H = _menuScroll.height;
+
+    NSArray *_menu = @[
+                       @{@"title":@"Brightness",
+                         @"icon":[self imageForKey:kCLAdjustmentToolBrightnessIconName defaultImageName:@"brightness.png"]},
+                       @{@"title":@"Contrast",
+                         @"icon":[self imageForKey:kCLAdjustmentToolContrastIconName defaultImageName:@"contrast.png"]},
+                       @{@"title":@"Saturation",
+                         @"icon":[self imageForKey:kCLAdjustmentToolSaturationIconName defaultImageName:@"saturation.png"]},
+                       ];
+
+    NSInteger tag = 0;
+    CGFloat padding = (_menuScroll.frame.size.width - _menu.count * W) / (_menu.count + 1);
+    CGFloat x = padding;
+
+    for(NSDictionary *obj in _menu){
+        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedMenu:) toolInfo:nil];
+        view.tag = tag++;
+        view.iconImage = obj[@"icon"];
+        view.title = obj[@"title"];
+
+        [_menuScroll addSubview:view];
+        x += W+padding;
+    }
+    _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);
+}
+
+- (void)tappedMenu:(UITapGestureRecognizer*)sender
+{
+    sender.view.alpha = 0.2;
+    [UIView animateWithDuration:kCLImageToolAnimationDuration
+                     animations:^{
+                         sender.view.alpha = 1;
+                     }
+     ];
+
+    [self displaySlider:sender.view.tag];
+}
+
+- (void)displaySlider:(NSInteger)tag
+{
+    _brightnessSlider.superview.hidden = YES;
+    _contrastSlider.superview.hidden = YES;
+    _saturationSlider.superview.hidden = YES;
+
+    switch (tag) {
+        case 0:
+            _brightnessSlider.superview.hidden = NO;
+            break;
+        case 1:
+            _contrastSlider.superview.hidden = NO;
+            break;
+        case 2:
+            _saturationSlider.superview.hidden = NO;
+            break;
+        default:
+            break;
+    }
+}
 
 - (UISlider*)sliderWithValue:(CGFloat)value minimumValue:(CGFloat)min maximumValue:(CGFloat)max action:(SEL)action
 {
@@ -119,14 +207,14 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     [self setIconForSlider:_saturationSlider withKey:kCLAdjustmentToolSaturationIconName defaultIconName:@"saturation.png"];
     
     _brightnessSlider = [self sliderWithValue:0 minimumValue:-1 maximumValue:1 action:@selector(sliderDidChange:)];
-    _brightnessSlider.superview.center = CGPointMake(20, _saturationSlider.superview.top - 150);
-    _brightnessSlider.superview.transform = CGAffineTransformMakeRotation(-M_PI * 90 / 180.0f);
+    _brightnessSlider.superview.center = CGPointMake(self.editor.view.width/2, self.editor.menuView.top-30);
     [self setIconForSlider:_brightnessSlider withKey:kCLAdjustmentToolBrightnessIconName defaultIconName:@"brightness.png"];
     
     _contrastSlider = [self sliderWithValue:1 minimumValue:0.5 maximumValue:1.5 action:@selector(sliderDidChange:)];
-    _contrastSlider.superview.center = CGPointMake(self.editor.view.width-20, _brightnessSlider.superview.center.y);
-    _contrastSlider.superview.transform = CGAffineTransformMakeRotation(-M_PI * 90 / 180.0f);
+    _contrastSlider.superview.center = CGPointMake(self.editor.view.width/2, self.editor.menuView.top-30);
     [self setIconForSlider:_contrastSlider withKey:kCLAdjustmentToolContrastIconName defaultIconName:@"contrast.png"];
+
+    [self displaySlider:0];
 }
 
 - (void)sliderDidChange:(UISlider*)sender
