@@ -30,6 +30,9 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     */
+
+    [[CLImageEditorTheme theme] setToolbarHeight:60];
+
     [self refreshImageView];
 }
 
