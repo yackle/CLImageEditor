@@ -61,7 +61,7 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
              kCLRotateToolFlipVerticalIconName : @"",
-             kCLRotateToolFineRotationEnabled : @NO
+             kCLRotateToolFineRotationEnabled : @YES
              };
 }
 
@@ -197,9 +197,10 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
     switch (sender.view.tag) {
         case 0:
         {
-            _orientation = (int)floorf((_rotationArg / M_PI + 1) * 2) - 1;
+            CGFloat rotation = _fineRotationEnabled ? (_rotationArg / M_PI) : _rotateSlider.value;
+            _orientation = (int)floorf((rotation + 1) * 2) + 1;
             
-            if(_orientation < 0){ _orientation = 4; }
+            if(_orientation > 4){ _orientation -= 4; }
             _rotateSlider.value = _fineRotationEnabled ? 0 : (_orientation / 2) - 1;
             
             _gridView.hidden = YES;
@@ -253,7 +254,8 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
 
 - (CATransform3D)rotateTransform:(CATransform3D)initialTransform clockwise:(BOOL)clockwise
 {
-    _rotationArg = _orientation * M_PI_2 + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
+    CGFloat orientationOffset = _fineRotationEnabled ? _orientation * M_PI_2 : 0;
+    _rotationArg = orientationOffset + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
     if(!clockwise){
         _rotationArg *= -1;
     }
@@ -269,8 +271,9 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
 - (void)rotateStateDidChange
 {
     CATransform3D transform = [self rotateTransform:CATransform3DIdentity clockwise:YES];
-    
-    _rotationArg = _orientation * M_PI_2 + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
+
+    CGFloat orientationOffset = _fineRotationEnabled ? _orientation * M_PI_2 : 0;
+    _rotationArg = orientationOffset + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
     CGFloat Wnew = fabs(_initialRect.size.width * cos(_rotationArg)) + fabs(_initialRect.size.height * sin(_rotationArg));
     CGFloat Hnew = fabs(_initialRect.size.width * sin(_rotationArg)) + fabs(_initialRect.size.height * cos(_rotationArg));
     
