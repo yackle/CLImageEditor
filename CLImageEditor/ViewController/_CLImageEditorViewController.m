@@ -93,7 +93,12 @@
     
     if(_navigationBar==nil){
         UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
-        navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
+        if (self.theme.navigationCancelButtonText) {
+            navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:self.theme.navigationCancelButtonText style:UIBarButtonItemStylePlain target:self action:@selector(pushedCloseBtn:)];
+        } else {
+            navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
+        }
+
         navigationItem.rightBarButtonItem = rightBarButtonItem;
         
         CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : MIN([UIApplication sharedApplication].statusBarFrame.size.height, [UIApplication sharedApplication].statusBarFrame.size.width);
@@ -101,7 +106,11 @@
         UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, 44)];
         [navigationBar pushNavigationItem:navigationItem animated:NO];
         navigationBar.delegate = self;
-        
+
+        if(self.theme.navigationTextColor) {
+            navigationBar.tintColor = self.theme.navigationTextColor;
+        }
+
         if(self.navigationController){
             [self.navigationController.view addSubview:navigationBar];
         }
@@ -109,8 +118,30 @@
             [self.view addSubview:navigationBar];
         }
         _navigationBar = navigationBar;
+
+        if (self.theme.navigationTitleColor || self.theme.navigationTitleFont) {
+            NSMutableDictionary *textAttributes = @{}.mutableCopy;
+
+            if (self.theme.navigationTitleColor) {
+                textAttributes[NSForegroundColorAttributeName] = self.theme.navigationTitleColor;
+            }
+
+            if (self.theme.navigationTitleFont) {
+                textAttributes[NSFontAttributeName] = self.theme.navigationTitleFont;
+            }
+            
+            _navigationBar.titleTextAttributes = textAttributes;
+        }
     }
-    
+
+
+    if (self.theme.navigationButtonsFont) {
+        [_navigationBar.topItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                forState:UIControlStateNormal];
+        [_navigationBar.topItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                forState:UIControlStateNormal];
+    }
+
     if(self.navigationController!=nil){
         _navigationBar.frame  = self.navigationController.navigationBar.frame;
         _navigationBar.hidden = YES;

@@ -19,7 +19,8 @@
 @property (nonatomic, strong) NSString *navigationCancelButtonText;
 @property (nonatomic, strong) NSString *navigationBackButtonText;
 @property (nonatomic, strong) NSString *navigationApplyButtonText;
-@property (nonatomic, strong) UIFont *navigationFont;
+@property (nonatomic, strong) UIFont *navigationButtonsFont;
+@property (nonatomic, strong) UIFont *navigationTitleFont;
 @property (nonatomic, strong) UIColor *navigationTextColor;
 @property (nonatomic, strong) UIColor *navigationTitleColor;
 @property (nonatomic, strong) NSString *toolIconColor;
