@@ -79,7 +79,7 @@
 - (void)initNavigationBar
 {
     UIBarButtonItem *rightBarButtonItem = nil;
-    NSString *doneBtnTitle = [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:nil];
+    NSString *doneBtnTitle = self.theme.navigationDoneButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:nil];
     
     if(![doneBtnTitle isEqualToString:@"CLImageEditor_DoneBtnTitle"]){
         rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:doneBtnTitle style:UIBarButtonItemStyleDone target:self action:@selector(pushedFinishBtn:)];
@@ -576,8 +576,10 @@
     
     if(self.currentTool){
         UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
-        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_OKBtnTitle" withDefault:@"OK"] style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
-        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"] style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
+        NSString *okButtonTitle = self.theme.navigationApplyButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_OKBtnTitle" withDefault:@"OK"];
+        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:okButtonTitle style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
+        NSString *backButtontTitle = self.theme.navigationBackButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"];
+        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:backButtontTitle style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
         
         [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
     }

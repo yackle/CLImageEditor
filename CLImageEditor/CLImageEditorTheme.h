@@ -15,6 +15,13 @@
 @property (nonatomic, strong) NSString *bundleName;
 @property (nonatomic, strong) UIColor  *backgroundColor;
 @property (nonatomic, strong) UIColor  *toolbarColor;
+@property (nonatomic, strong) NSString *navigationDoneButtonText;
+@property (nonatomic, strong) NSString *navigationCancelButtonText;
+@property (nonatomic, strong) NSString *navigationBackButtonText;
+@property (nonatomic, strong) NSString *navigationApplyButtonText;
+@property (nonatomic, strong) UIFont *navigationFont;
+@property (nonatomic, strong) UIColor *navigationTextColor;
+@property (nonatomic, strong) UIColor *navigationTitleColor;
 @property (nonatomic, strong) NSString *toolIconColor;
 @property (nonatomic, strong) UIColor  *toolbarTextColor;
 @property (nonatomic, strong) UIColor  *toolbarSelectedButtonColor;
