@@ -107,6 +107,10 @@
         [navigationBar pushNavigationItem:navigationItem animated:NO];
         navigationBar.delegate = self;
 
+        if (self.theme.toolbarColor) {
+            navigationBar.backgroundColor = self.theme.toolbarColor;
+        }
+
         if(self.theme.navigationTextColor) {
             navigationBar.tintColor = self.theme.navigationTextColor;
         }
@@ -617,8 +621,15 @@
         item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:okButtonTitle style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
         NSString *backButtontTitle = self.theme.navigationBackButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"];
         item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:backButtontTitle style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
-        
+
         [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
+
+        if (self.theme.navigationButtonsFont) {
+            [_navigationBar.topItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                    forState:UIControlStateNormal];
+            [_navigationBar.topItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                     forState:UIControlStateNormal];
+        }
     }
     else{
         [_navigationBar popNavigationItemAnimated:(self.navigationController==nil)];
