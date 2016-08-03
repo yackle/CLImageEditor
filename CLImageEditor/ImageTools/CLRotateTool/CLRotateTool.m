@@ -11,6 +11,7 @@ static NSString* const kCLRotateToolRotateIconName = @"rotateIconAssetsName";
 static NSString* const kCLRotateToolFlipHorizontalIconName = @"flipHorizontalIconAssetsName";
 static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAssetsName";
 static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled";
+static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 
 
 @interface CLRotatePanel : UIView
@@ -61,7 +62,8 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
              kCLRotateToolFlipVerticalIconName : @"",
-             kCLRotateToolFineRotationEnabled : @NO
+             kCLRotateToolFineRotationEnabled : @NO,
+             kCLRotateToolCropRotate : @NO
              };
 }
 
@@ -279,24 +281,31 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
     _rotationArg = orientationOffset + _rotateSlider.value*(_fineRotationEnabled ? M_PI_4 : M_PI);
     CGFloat Wnew = fabs(_initialRect.size.width * cos(_rotationArg)) + fabs(_initialRect.size.height * sin(_rotationArg));
     CGFloat Hnew = fabs(_initialRect.size.width * sin(_rotationArg)) + fabs(_initialRect.size.height * cos(_rotationArg));
-    
+
+    BOOL cropRotateEnabled = [self.toolInfo.optionalInfo[kCLRotateToolCropRotate] boolValue];
     CGFloat Rw = _gridView.width / Wnew;
     CGFloat Rh = _gridView.height / Hnew;
     CGFloat scale = MIN(Rw, Rh) * 0.95;
+    if (cropRotateEnabled) {
+        Rw = _initialRect.size.width / Wnew;
+        Rh = _initialRect.size.height / Hnew;
+        scale = 1 / MIN(Rw, Rh);
+    }
+
     
     transform = CATransform3DScale(transform, scale, scale, 1);
     _rotateImageView.layer.transform = transform;
-    
-    _gridView.gridRect = _rotateImageView.frame;
+
+    if (!cropRotateEnabled) {
+        _gridView.gridRect = _rotateImageView.frame;
+    }
 }
 
 - (UIImage*)buildImage:(UIImage*)image
 {
     CIImage *ciImage = [[CIImage alloc] initWithImage:image];
     CIFilter *filter = [CIFilter filterWithName:@"CIAffineTransform" keysAndValues:kCIInputImageKey, ciImage, nil];
-    
-    //NSLog(@"%@", [filter attributes]);
-    
+
     [filter setDefaults];
     CGAffineTransform transform = CATransform3DGetAffineTransform([self rotateTransform:CATransform3DIdentity clockwise:NO]);
     [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
@@ -309,8 +318,35 @@ static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled"
     UIImage *result = [UIImage imageWithCGImage:cgImage];
     
     CGImageRelease(cgImage);
-    
+
+    BOOL cropRotateEnabled = [self.toolInfo.optionalInfo[kCLRotateToolCropRotate] boolValue];
+    if (cropRotateEnabled) {
+        result = [self cropAdjustImage:result];
+    }
+
     return result;
+}
+
+- (UIImage *)cropAdjustImage:(UIImage *)image
+{
+    CGFloat arg = _rotateSlider.value*M_PI;
+    CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
+    CGFloat Hnew = fabs(_initialRect.size.width * sin(arg)) + fabs(_initialRect.size.height * cos(arg));
+
+    CGFloat Rw = _initialRect.size.width / Wnew;
+    CGFloat Rh = _initialRect.size.height / Hnew;
+    CGFloat scale = MIN(Rw, Rh);
+
+    CGSize originalFrame = self.editor.imageView.image.size;
+    CGFloat finalW = originalFrame.width * scale;
+    CGFloat finalH = originalFrame.height * scale;
+
+    CGFloat deltaX = (image.size.width - finalW) / 2.0;
+    CGFloat deltaY = (image.size.height - finalH) / 2.0;
+    CGRect newFrame = CGRectMake(deltaX, deltaY, finalW, finalH);
+    UIImage *croppedImage = [image crop:newFrame];
+
+    return croppedImage;
 }
 
 @end
