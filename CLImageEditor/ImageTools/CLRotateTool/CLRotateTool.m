@@ -10,6 +10,7 @@
 static NSString* const kCLRotateToolRotateIconName = @"rotateIconAssetsName";
 static NSString* const kCLRotateToolFlipHorizontalIconName = @"flipHorizontalIconAssetsName";
 static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAssetsName";
+static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled";
 
 
 @interface CLRotatePanel : UIView
@@ -30,7 +31,9 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     CGRect _initialRect;
     
     BOOL _executed;
-    
+
+    BOOL _fineRotationEnabled;
+
     CLRotatePanel *_gridView;
     UIImageView *_rotateImageView;
     
@@ -55,7 +58,8 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     return @{
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
-             kCLRotateToolFlipVerticalIconName : @""
+             kCLRotateToolFlipVerticalIconName : @"",
+             kCLRotateToolFineRotationEnabled : @YES
              };
 }
 
@@ -64,7 +68,9 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 - (void)setup
 {
     _executed = NO;
-    
+
+    _fineRotationEnabled = [self.toolInfo.optionalInfo[kCLRotateToolFineRotationEnabled] boolValue];
+
     [self.editor fixZoomScaleWithAnimated:YES];
     
     _initialRect = self.editor.imageView.frame;
@@ -77,8 +83,9 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     _gridView.bgColor = [self.editor.view.backgroundColor colorWithAlphaComponent:0.8];
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
-    
-    _rotateSlider = [self sliderWithValue:0 minimumValue:-1 maximumValue:1];
+
+    float sliderMaxima = _fineRotationEnabled ? 0.25 : 1;
+    _rotateSlider = [self sliderWithValue:0 minimumValue:-sliderMaxima maximumValue:sliderMaxima];
     _rotateSlider.superview.center = CGPointMake(self.editor.view.width/2, self.editor.menuView.top-30);
     
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
@@ -260,7 +267,7 @@ static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 {
     CATransform3D transform = [self rotateTransform:CATransform3DIdentity clockwise:YES];
     
-    CGFloat arg = _rotateSlider.value*M_PI;
+    CGFloat arg = _rotateSlider.value*(_fineRotationEnabled ? M_PI / 4.0 : M_PI);
     CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
     CGFloat Hnew = fabs(_initialRect.size.width * sin(arg)) + fabs(_initialRect.size.height * cos(arg));
     
