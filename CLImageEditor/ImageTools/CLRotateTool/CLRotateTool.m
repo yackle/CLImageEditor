@@ -329,9 +329,9 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 
 - (UIImage *)cropAdjustImage:(UIImage *)image
 {
-    CGFloat arg = _rotateSlider.value*M_PI;
     CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
-    CGFloat Hnew = fabs(_initialRect.size.width * sin(arg)) + fabs(_initialRect.size.height * cos(arg));
+    CGFloat Wnew = fabs(_initialRect.size.width * cos(_rotationArg)) + fabs(_initialRect.size.height * sin(_rotationArg));
+    CGFloat Hnew = fabs(_initialRect.size.width * sin(_rotationArg)) + fabs(_initialRect.size.height * cos(_rotationArg));
 
     CGFloat Rw = _initialRect.size.width / Wnew;
     CGFloat Rh = _initialRect.size.height / Hnew;
