@@ -96,6 +96,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
     _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
     _menuScroll.showsHorizontalScrollIndicator = NO;
+    _menuScroll.scrollEnabled = NO;
     [self.editor.view addSubview:_menuScroll];
     [self setMenu];
     
@@ -166,8 +167,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 {
     CGFloat W = 70;
     CGFloat H = _menuScroll.height;
-    CGFloat x = 0;
-	
+
     NSArray *_menu = @[
                        @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemRotateTitle" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"btn_rotate.png"]},
                        @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle1" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolFlipHorizontalIconName defaultImageName:@"btn_flip1.png"]},
@@ -175,6 +175,9 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
                        ];
     
     NSInteger tag = 0;
+    CGFloat padding = (_menuScroll.frame.size.width - _menu.count * W) / (_menu.count + 1);
+    CGFloat x = padding;
+
     for(NSDictionary *obj in _menu){
         CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedMenu:) toolInfo:nil];
         view.tag = tag++;
@@ -182,7 +185,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
         view.title = obj[@"title"];
         
         [_menuScroll addSubview:view];
-        x += W;
+        x += W+padding;
     }
     _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);
 }
