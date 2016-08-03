@@ -458,6 +458,12 @@
     if (0<diff && diff<2*W) {
         padding = diff/(toolCount+1);
     }
+
+    if (_menuView.frame.size.width > toolCount * W + (toolCount + 1) * padding) {
+
+        padding = (_menuView.frame.size.width - toolCount * W) / (toolCount + 1);
+        _menuView.scrollEnabled = NO;
+    }
     
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
