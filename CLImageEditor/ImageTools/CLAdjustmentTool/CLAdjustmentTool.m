@@ -198,9 +198,12 @@ static NSString* const kCLAdjustmentToolContrastImage = @"contrastIconImage";
 
 - (void)setIconForSlider:(UISlider*)slider withKey:(NSString*)key defaultIconName:(NSString*)defaultIconName
 {
-    UIImage *icon = [self imageForKey:key defaultImageName:defaultIconName];
-    [slider setThumbImage:icon forState:UIControlStateNormal];
-    [slider setThumbImage:icon forState:UIControlStateHighlighted];
+    if (!self.toolInfo.optionalInfo[[key stringByReplacingOccurrencesOfString:@"AssetsName" withString:@"Image"]]) {
+        UIImage *icon = [self imageForKey:key defaultImageName:defaultIconName];
+
+        [slider setThumbImage:icon forState:UIControlStateNormal];
+        [slider setThumbImage:icon forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)setupSlider
