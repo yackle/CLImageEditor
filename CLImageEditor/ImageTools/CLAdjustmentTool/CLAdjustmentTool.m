@@ -135,6 +135,9 @@ static NSString* const kCLAdjustmentToolContrastImage = @"contrastIconImage";
         view.tag = tag++;
         view.iconImage = obj[@"icon"];
         view.title = obj[@"title"];
+        if (tag == 0) {
+            [view setSelected:YES];
+        }
 
         [_menuScroll addSubview:view];
         x += W+padding;
@@ -150,6 +153,12 @@ static NSString* const kCLAdjustmentToolContrastImage = @"contrastIconImage";
                          sender.view.alpha = 1;
                      }
      ];
+
+    for (CLToolbarMenuItem *item in _menuScroll.subviews) {
+        if ([item respondsToSelector:@selector(setSelected:)]) {
+            [item setSelected:item == sender.view];
+        }
+    }
 
     [self displaySlider:sender.view.tag];
 }

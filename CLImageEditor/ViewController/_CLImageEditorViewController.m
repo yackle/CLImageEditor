@@ -622,14 +622,14 @@
         NSString *backButtontTitle = self.theme.navigationBackButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"];
         item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:backButtontTitle style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
 
-        [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
-
         if (self.theme.navigationButtonsFont) {
-            [_navigationBar.topItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+            [item.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
                                                                     forState:UIControlStateNormal];
-            [_navigationBar.topItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+            [item.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
                                                                      forState:UIControlStateNormal];
         }
+
+        [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
     }
     else{
         [_navigationBar popNavigationItemAnimated:(self.navigationController==nil)];

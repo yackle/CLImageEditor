@@ -20,14 +20,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         CGFloat W = frame.size.width;
-        
-        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, W-20, W-20)];
+        CGFloat H = frame.size.height;
+        CGFloat vPad = 5;
+
+        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, vPad * 2, W-20, H - (15 + vPad * 4))];
         _iconView.clipsToBounds = YES;
         _iconView.layer.cornerRadius = 5;
-        _iconView.contentMode = UIViewContentModeScaleAspectFill;
+        _iconView.contentMode = UIViewContentModeScaleAspectFit;
+        _iconView.tintColor = [CLImageEditorTheme toolbarTextColor];
         [self addSubview:_iconView];
         
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _iconView.bottom + 5, W, 15)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _iconView.bottom + vPad, W, 15)];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.textColor = [CLImageEditorTheme toolbarTextColor];
         _titleLabel.font = [CLImageEditorTheme toolbarTextFont];
@@ -98,10 +101,12 @@
     if(selected != _selected){
         _selected = selected;
         if(selected){
-            self.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
+            _iconView.tintColor = [CLImageEditorTheme toolbarSelectedButtonColor];
+            _titleLabel.textColor = [CLImageEditorTheme toolbarSelectedButtonColor];
         }
         else{
-            self.backgroundColor = [UIColor clearColor];
+            _iconView.tintColor = [CLImageEditorTheme toolbarTextColor];
+            _titleLabel.textColor  = [CLImageEditorTheme toolbarTextColor];
         }
     }
 }
