@@ -7,9 +7,12 @@
 
 #import "CLRotateTool.h"
 
+static NSString* const kCLRotateToolRotateImage = @"rotateIconImage";
 static NSString* const kCLRotateToolRotateIconName = @"rotateIconAssetsName";
 static NSString* const kCLRotateToolFlipHorizontalIconName = @"flipHorizontalIconAssetsName";
 static NSString* const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAssetsName";
+static NSString* const kCLRotateToolFlipHorizontalEnabled = @"flipHorizontalEnabled";
+static NSString* const kCLRotateToolFlipVerticalEnabled = @"flipVerticalEnabled";
 static NSString* const kCLRotateToolFineRotationEnabled = @"fineRotationEnabled";
 static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 
@@ -62,6 +65,8 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
              kCLRotateToolRotateIconName : @"",
              kCLRotateToolFlipHorizontalIconName : @"",
              kCLRotateToolFlipVerticalIconName : @"",
+             kCLRotateToolFlipHorizontalEnabled : @YES,
+             kCLRotateToolFlipVerticalEnabled : @YES,
              kCLRotateToolFineRotationEnabled : @NO,
              kCLRotateToolCropRotate : @NO
              };
@@ -96,6 +101,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
     _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
     _menuScroll.showsHorizontalScrollIndicator = NO;
+    _menuScroll.scrollEnabled = NO;
     [self.editor.view addSubview:_menuScroll];
     [self setMenu];
     
@@ -166,15 +172,25 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 {
     CGFloat W = 70;
     CGFloat H = _menuScroll.height;
-    CGFloat x = 0;
-	
-    NSArray *_menu = @[
-                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemRotateTitle" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"btn_rotate.png"]},
-                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle1" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolFlipHorizontalIconName defaultImageName:@"btn_flip1.png"]},
-                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle2" withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolFlipVerticalIconName defaultImageName:@"btn_flip2.png"]},
-                       ];
+
+    NSMutableArray *_menu = @[@{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemRotateTitle" withDefault:@" "],
+                                @"icon":self.toolInfo.optionalInfo[kCLRotateToolRotateImage] ?:
+                                [self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"btn_rotate.png"]}].mutableCopy;
+
+    if ([self.toolInfo.optionalInfo[kCLRotateToolFlipHorizontalEnabled] boolValue]) {
+        [_menu addObject:@{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle1" withDefault:@" "],
+                           @"icon":[self imageForKey:kCLRotateToolFlipHorizontalIconName defaultImageName:@"btn_flip1.png"]}];
+    }
+
+    if ([self.toolInfo.optionalInfo[kCLRotateToolFlipVerticalEnabled] boolValue]) {
+        [_menu addObject:@{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle2" withDefault:@" "],
+                           @"icon":[self imageForKey:kCLRotateToolFlipVerticalIconName defaultImageName:@"btn_flip2.png"]}];
+    }
     
     NSInteger tag = 0;
+    CGFloat padding = (_menuScroll.frame.size.width - _menu.count * W) / (_menu.count + 1);
+    CGFloat x = padding;
+
     for(NSDictionary *obj in _menu){
         CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedMenu:) toolInfo:nil];
         view.tag = tag++;
@@ -182,7 +198,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
         view.title = obj[@"title"];
         
         [_menuScroll addSubview:view];
-        x += W;
+        x += W+padding;
     }
     _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);
 }
