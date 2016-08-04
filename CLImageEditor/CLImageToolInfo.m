@@ -66,7 +66,7 @@
 
 - (UIImage*)iconImage
 {
-    return [UIImage fastImageWithContentsOfFile:self.iconImagePath];
+    return _iconImage ?: [UIImage fastImageWithContentsOfFile:self.iconImagePath];
 }
 
 - (NSString*)toolName

@@ -79,7 +79,7 @@
 - (void)initNavigationBar
 {
     UIBarButtonItem *rightBarButtonItem = nil;
-    NSString *doneBtnTitle = [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:nil];
+    NSString *doneBtnTitle = self.theme.navigationDoneButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:nil];
     
     if(![doneBtnTitle isEqualToString:@"CLImageEditor_DoneBtnTitle"]){
         rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:doneBtnTitle style:UIBarButtonItemStyleDone target:self action:@selector(pushedFinishBtn:)];
@@ -93,7 +93,12 @@
     
     if(_navigationBar==nil){
         UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
-        navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
+        if (self.theme.navigationCancelButtonText) {
+            navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:self.theme.navigationCancelButtonText style:UIBarButtonItemStylePlain target:self action:@selector(pushedCloseBtn:)];
+        } else {
+            navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
+        }
+
         navigationItem.rightBarButtonItem = rightBarButtonItem;
         
         CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : MIN([UIApplication sharedApplication].statusBarFrame.size.height, [UIApplication sharedApplication].statusBarFrame.size.width);
@@ -101,7 +106,15 @@
         UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, 44)];
         [navigationBar pushNavigationItem:navigationItem animated:NO];
         navigationBar.delegate = self;
-        
+
+        if (self.theme.toolbarColor) {
+            navigationBar.backgroundColor = self.theme.toolbarColor;
+        }
+
+        if(self.theme.navigationTextColor) {
+            navigationBar.tintColor = self.theme.navigationTextColor;
+        }
+
         if(self.navigationController){
             [self.navigationController.view addSubview:navigationBar];
         }
@@ -109,8 +122,30 @@
             [self.view addSubview:navigationBar];
         }
         _navigationBar = navigationBar;
+
+        if (self.theme.navigationTitleColor || self.theme.navigationTitleFont) {
+            NSMutableDictionary *textAttributes = @{}.mutableCopy;
+
+            if (self.theme.navigationTitleColor) {
+                textAttributes[NSForegroundColorAttributeName] = self.theme.navigationTitleColor;
+            }
+
+            if (self.theme.navigationTitleFont) {
+                textAttributes[NSFontAttributeName] = self.theme.navigationTitleFont;
+            }
+            
+            _navigationBar.titleTextAttributes = textAttributes;
+        }
     }
-    
+
+
+    if (self.theme.navigationButtonsFont) {
+        [_navigationBar.topItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                forState:UIControlStateNormal];
+        [_navigationBar.topItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                forState:UIControlStateNormal];
+    }
+
     if(self.navigationController!=nil){
         _navigationBar.frame  = self.navigationController.navigationBar.frame;
         _navigationBar.hidden = YES;
@@ -128,7 +163,7 @@
 - (void)initMenuScrollView
 {
     if(self.menuView==nil){
-        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
+        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.theme.toolbarHeight)];
         menuScroll.top = self.view.height - menuScroll.height;
         menuScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         menuScroll.showsHorizontalScrollIndicator = NO;
@@ -427,6 +462,12 @@
     if (0<diff && diff<2*W) {
         padding = diff/(toolCount+1);
     }
+
+    if (_menuView.frame.size.width > toolCount * W + (toolCount + 1) * padding) {
+
+        padding = (_menuView.frame.size.width - toolCount * W) / (toolCount + 1);
+        _menuView.scrollEnabled = NO;
+    }
     
     for(CLImageToolInfo *info in self.toolInfo.sortedSubtools){
         if(!info.available){
@@ -576,9 +617,18 @@
     
     if(self.currentTool){
         UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
-        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_OKBtnTitle" withDefault:@"OK"] style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
-        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"] style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
-        
+        NSString *okButtonTitle = self.theme.navigationApplyButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_OKBtnTitle" withDefault:@"OK"];
+        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:okButtonTitle style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
+        NSString *backButtontTitle = self.theme.navigationBackButtonText ?: [CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"];
+        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:backButtontTitle style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
+
+        if (self.theme.navigationButtonsFont) {
+            [item.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                    forState:UIControlStateNormal];
+            [item.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName : self.theme.navigationButtonsFont}
+                                                                     forState:UIControlStateNormal];
+        }
+
         [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
     }
     else{
