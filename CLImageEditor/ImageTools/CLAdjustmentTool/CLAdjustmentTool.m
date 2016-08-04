@@ -135,11 +135,12 @@ static NSString* const kCLAdjustmentToolContrastImage = @"contrastIconImage";
         view.tag = tag++;
         view.iconImage = obj[@"icon"];
         view.title = obj[@"title"];
-        if (tag == 0) {
+
+        [_menuScroll addSubview:view];
+        if (tag == 1) {
             [view setSelected:YES];
         }
 
-        [_menuScroll addSubview:view];
         x += W+padding;
     }
     _menuScroll.contentSize = CGSizeMake(MAX(x, _menuScroll.frame.size.width+1), 0);

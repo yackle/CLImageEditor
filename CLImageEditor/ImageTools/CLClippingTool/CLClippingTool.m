@@ -177,7 +177,7 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 
 - (void)setCropMenu
 {
-    CGFloat W = 70;
+    CGFloat W = 90;
     CGFloat x = 0;
     
     NSArray *ratios = self.toolInfo.optionalInfo[kCLClippingToolRatios];
@@ -234,9 +234,9 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 - (void)setSelectedMenu:(CLRatioMenuItem *)selectedMenu
 {
     if(selectedMenu != _selectedMenu){
-        _selectedMenu.backgroundColor = [UIColor clearColor];
+        [_selectedMenu setSelected:NO];
         _selectedMenu = selectedMenu;
-        _selectedMenu.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
+        [_selectedMenu setSelected:YES];
         
         if(selectedMenu.ratio.ratio==0){
             _gridView.clippingRatio = nil;
@@ -702,24 +702,27 @@ static NSString* const kCLClippingToolRatioTitleFormat = @"titleFormat";
 
 - (void)refreshViews
 {
+    _iconView.contentMode = UIViewContentModeScaleAspectFill;
     _titleLabel.text = [_ratio description];
     
     CGPoint center = _iconView.center;
+    CGFloat base = MIN(_iconView.frame.size.width, _iconView.frame.size.height);
+
     CGFloat W, H;
     if(_ratio.ratio!=0){
         if(_ratio.isLandscape){
-            W = 50;
-            H = 50*_ratio.ratio;
+            W = base;
+            H = base*_ratio.ratio;
         }
         else{
-            W = 50/_ratio.ratio;
-            H = 50;
+            W = base/_ratio.ratio;
+            H = base;
         }
     }
     else{
         CGFloat maxW  = MAX(_iconView.image.size.width, _iconView.image.size.height);
-        W = 50 * _iconView.image.size.width / maxW;
-        H = 50 * _iconView.image.size.height / maxW;
+        W = base * _iconView.image.size.width / maxW;
+        H = base * _iconView.image.size.height / maxW;
     }
     _iconView.frame = CGRectMake(center.x-W/2, center.y-H/2, W, H);
 }
