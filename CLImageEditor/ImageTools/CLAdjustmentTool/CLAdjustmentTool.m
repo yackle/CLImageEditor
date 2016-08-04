@@ -10,6 +10,9 @@
 static NSString* const kCLAdjustmentToolSaturationIconName = @"saturationIconAssetsName";
 static NSString* const kCLAdjustmentToolBrightnessIconName = @"brightnessIconAssetsName";
 static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsName";
+static NSString* const kCLAdjustmentToolSaturationImage = @"saturationIconImage";
+static NSString* const kCLAdjustmentToolBrightnessImage = @"brightnessIconImage";
+static NSString* const kCLAdjustmentToolContrastImage = @"contrastIconImage";
 
 
 @implementation CLAdjustmentTool
@@ -116,11 +119,11 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
 
     NSArray *_menu = @[
                        @{@"title":@"Brightness",
-                         @"icon":[self imageForKey:kCLAdjustmentToolBrightnessIconName defaultImageName:@"brightness.png"]},
+                         @"icon":self.toolInfo.optionalInfo[kCLAdjustmentToolBrightnessImage] ?: [self imageForKey:kCLAdjustmentToolBrightnessIconName defaultImageName:@"brightness.png"]},
                        @{@"title":@"Contrast",
-                         @"icon":[self imageForKey:kCLAdjustmentToolContrastIconName defaultImageName:@"contrast.png"]},
+                         @"icon":self.toolInfo.optionalInfo[kCLAdjustmentToolContrastImage] ?: [self imageForKey:kCLAdjustmentToolContrastIconName defaultImageName:@"contrast.png"]},
                        @{@"title":@"Saturation",
-                         @"icon":[self imageForKey:kCLAdjustmentToolSaturationIconName defaultImageName:@"saturation.png"]},
+                         @"icon":self.toolInfo.optionalInfo[kCLAdjustmentToolSaturationImage] ?: [self imageForKey:kCLAdjustmentToolSaturationIconName defaultImageName:@"saturation.png"]},
                        ];
 
     NSInteger tag = 0;
