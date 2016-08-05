@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CLImageToolSettings.h"
+#import "../ToolSettings/CLImageToolSettings.h"
 
 
 static const CGFloat kCLEffectToolAnimationDuration = 0.2;
