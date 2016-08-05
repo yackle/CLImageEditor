@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CLImageToolSettings.h"
+#import "../ToolSettings/CLImageToolSettings.h"
 
 @protocol CLFilterBaseProtocol <NSObject>
 

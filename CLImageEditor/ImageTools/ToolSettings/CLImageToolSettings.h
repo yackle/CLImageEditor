@@ -5,9 +5,9 @@
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 
-#import "UIDevice+SystemVersion.h"
-#import "UIView+Frame.h"
-#import "UIImage+Utility.h"
+#import "../../Utils/UIDevice+SystemVersion.h"
+#import "../../Utils/UIView+Frame.h"
+#import "../../Utils/UIImage+Utility.h"
 
 #import "CLImageToolProtocol.h"
 #import "CLImageEditorTheme+Private.h"
