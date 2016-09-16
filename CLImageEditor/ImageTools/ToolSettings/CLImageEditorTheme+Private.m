@@ -64,7 +64,7 @@
 
 + (UIColor*)navBarColor
 {
-    return self.theme.toolbarColor;
+    return self.theme.navBarColor;
 }
 
 + (UIColor*)toolbarColor
