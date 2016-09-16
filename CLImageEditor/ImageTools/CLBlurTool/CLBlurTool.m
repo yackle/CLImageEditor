@@ -155,7 +155,7 @@ typedef NS_ENUM(NSUInteger, CLBlurType)
     
     NSArray *_menu = @[
                        @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemNormal" withDefault:@"Normal"], @"icon":[self imageForKey:kCLBlurToolNormalIconName defaultImageName:@"btn_normal.png"]},
-                       @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemCircle" withDefault:@"Cirlcle"], @"icon":[self imageForKey:kCLBlurToolCircleIconName defaultImageName:@"btn_circle.png"]},
+                       @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemCircle" withDefault:@"Circle"], @"icon":[self imageForKey:kCLBlurToolCircleIconName defaultImageName:@"btn_circle.png"]},
                        @{@"title":[CLImageEditorTheme localizedString:@"CLBlurEffect_MenuItemBand" withDefault:@"Band"], @"icon":[self imageForKey:kCLBlurToolBandIconName defaultImageName:@"btn_band.png"]},
     ];
     
