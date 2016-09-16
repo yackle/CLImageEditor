@@ -67,6 +67,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     [self customeInit];
 }
 
