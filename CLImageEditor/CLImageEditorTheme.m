@@ -44,6 +44,7 @@ static CLImageEditorTheme *_sharedInstance = nil;
     if (self) {
         self.bundleName                     = @"CLImageEditor";
         self.backgroundColor                = [UIColor whiteColor];
+        self.navBarColor                    = UINavigationBar.appearance.barTintColor;
         self.toolbarColor                   = [UIColor colorWithWhite:1 alpha:0.8];
 		self.toolIconColor                  = @"black";
         self.toolbarTextColor               = [UIColor blackColor];

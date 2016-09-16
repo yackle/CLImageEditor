@@ -14,6 +14,7 @@
 @property (nonatomic, weak) id<CLImageEditorThemeDelegate> delegate;
 @property (nonatomic, strong) NSString *bundleName;
 @property (nonatomic, strong) UIColor  *backgroundColor;
+@property (nonatomic, strong) UIColor  *navBarColor;
 @property (nonatomic, strong) UIColor  *toolbarColor;
 @property (nonatomic, strong) NSString *toolIconColor;
 @property (nonatomic, strong) UIColor  *toolbarTextColor;
