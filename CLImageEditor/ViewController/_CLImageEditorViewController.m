@@ -206,8 +206,6 @@
     [self initMenuScrollView];
     [self initImageScrollView];
     
-    [self setMenuView];
-    
     if(_imageView==nil){
         _imageView = [UIImageView new];
         [_scrollView addSubview:_imageView];
@@ -224,6 +222,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self setMenuView];
     if(self.targetImageView){
         [self expropriateImageView];
     }
