@@ -206,7 +206,7 @@
     [self initMenuScrollView];
     [self initImageScrollView];
     
-    [self resetToolSettings];
+    [self refreshToolSettings];
     
     if(_imageView==nil){
         _imageView = [UIImageView new];
@@ -410,7 +410,7 @@
 
 #pragma mark- 
 
-- (void)resetToolSettings
+- (void)refreshToolSettings
 {
     for(UIView *sub in _menuView.subviews){ [sub removeFromSuperview]; }
     

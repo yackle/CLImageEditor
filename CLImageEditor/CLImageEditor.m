@@ -41,7 +41,7 @@
     
 }
 
-- (void)resetToolSettings
+- (void)refreshToolSettings
 {
     
 }
