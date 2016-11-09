@@ -41,6 +41,11 @@
     
 }
 
+- (void)resetToolSettings
+{
+    
+}
+
 - (CLImageEditorTheme*)theme
 {
     return [CLImageEditorTheme theme];
