@@ -5,7 +5,7 @@
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-#import "CLImageEditorTheme.h"
+#import "../../CLImageEditorTheme.h"
 
 #import "CLToolbarMenuItem.h"
 
