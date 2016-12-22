@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CLImageToolInfo.h"
+#import "../../CLImageToolInfo.h"
 
 @interface UIView (CLImageToolInfo)
 

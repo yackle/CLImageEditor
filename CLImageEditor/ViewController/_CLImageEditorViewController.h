@@ -5,7 +5,7 @@
 //  Copyright (c) 2013年 CALACULU. All rights reserved.
 //
 
-#import "CLImageEditor.h"
+#import "../CLImageEditor.h"
 
 @interface _CLImageEditorViewController : CLImageEditor
 <UIScrollViewDelegate, UIBarPositioningDelegate>
