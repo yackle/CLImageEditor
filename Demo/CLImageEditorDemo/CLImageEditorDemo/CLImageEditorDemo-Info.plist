@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key> NSPhotoLibraryUsageDescription</key>
-	<string>Access the camera roll to select the photos for editting.</string>
+	<string>Access the camera roll to select the photos for editing.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
