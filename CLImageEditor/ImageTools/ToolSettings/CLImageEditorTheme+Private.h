@@ -17,6 +17,7 @@
 + (NSString*)localizedString:(NSString*)key withDefault:defaultValue;
 
 + (UIColor*)backgroundColor;
++ (UIColor*)navBarColor;
 + (UIColor*)toolbarColor;
 + (UIColor*)toolbarTextColor;
 + (UIColor*)toolbarSelectedButtonColor;
