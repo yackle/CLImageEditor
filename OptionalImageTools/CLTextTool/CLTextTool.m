@@ -246,7 +246,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
 
 - (void)activeTextViewDidTap:(NSNotification*)notification
 {
-    [self beginTextEditting];
+    [self beginTextEditing];
 }
 
 - (void)setMenu
@@ -348,7 +348,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
     [_workingView addSubview:view];
     [_CLTextView setActiveTextView:view];
     
-    [self beginTextEditting];
+    [self beginTextEditing];
 }
 
 - (void)hideSettingView
@@ -368,7 +368,7 @@ static NSString* const kCLTextToolAlignRightIconName = @"alignRightIconAssetsNam
     }
 }
 
-- (void)beginTextEditting
+- (void)beginTextEditing
 {
     [self showSettingViewWithMenuIndex:0];
     [_settingView becomeFirstResponder];
