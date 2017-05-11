@@ -7,7 +7,7 @@
 
 #import "CLBlurTool.h"
 
-static NSString* const kCLBlurToolNormalIconName = @"nonrmalIconAssetsName";
+static NSString* const kCLBlurToolNormalIconName = @"normalIconAssetsName";
 static NSString* const kCLBlurToolCircleIconName = @"circleIconAssetsName";
 static NSString* const kCLBlurToolBandIconName = @"bandIconAssetsName";
 

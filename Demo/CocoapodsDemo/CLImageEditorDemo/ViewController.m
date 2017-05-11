@@ -109,7 +109,7 @@
 
 #pragma mark- CLImageEditor delegate
 
-- (void)imageEditor:(CLImageEditor *)editor didFinishEdittingWithImage:(UIImage *)image
+- (void)imageEditor:(CLImageEditor *)editor didFinishEditingWithImage:(UIImage *)image
 {
     _imageView.image = image;
     [self refreshImageView];

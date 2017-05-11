@@ -521,17 +521,17 @@
         _currentTool = currentTool;
         [_currentTool setup];
         
-        [self swapToolBarWithEditting:(_currentTool!=nil)];
+        [self swapToolBarWithEditing:(_currentTool!=nil)];
     }
 }
 
 #pragma mark- Menu actions
 
-- (void)swapMenuViewWithEditting:(BOOL)editting
+- (void)swapMenuViewWithEditing:(BOOL)editing
 {
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         if(editting){
+                         if(editing){
                              _menuView.transform = CGAffineTransformMakeTranslation(0, self.view.height-_menuView.top);
                          }
                          else{
@@ -541,13 +541,13 @@
      ];
 }
 
-- (void)swapNavigationBarWithEditting:(BOOL)editting
+- (void)swapNavigationBarWithEditing:(BOOL)editing
 {
     if(self.navigationController==nil){
         return;
     }
     
-    if(editting){
+    if(editing){
         _navigationBar.hidden = NO;
         _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
         
@@ -572,10 +572,10 @@
     }
 }
 
-- (void)swapToolBarWithEditting:(BOOL)editting
+- (void)swapToolBarWithEditing:(BOOL)editing
 {
-    [self swapMenuViewWithEditting:editting];
-    [self swapNavigationBarWithEditting:editting];
+    [self swapMenuViewWithEditing:editing];
+    [self swapNavigationBarWithEditing:editing];
     
     if(self.currentTool){
         UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
@@ -666,8 +666,14 @@
 - (void)pushedFinishBtn:(id)sender
 {
     if(self.targetImageView==nil){
-        if([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]){
+        if([self.delegate respondsToSelector:@selector(imageEditor:didFinishEditingWithImage:)]){
+            [self.delegate imageEditor:self didFinishEditingWithImage:_originalImage];
+        }
+        else if([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             [self.delegate imageEditor:self didFinishEdittingWithImage:_originalImage];
+#pragma clang diagnostic pop
         }
         else{
             [self dismissViewControllerAnimated:YES completion:nil];
