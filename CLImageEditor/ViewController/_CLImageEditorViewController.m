@@ -669,6 +669,12 @@
         if([self.delegate respondsToSelector:@selector(imageEditor:didFinishEditingWithImage:)]){
             [self.delegate imageEditor:self didFinishEditingWithImage:_originalImage];
         }
+        else if([self.delegate respondsToSelector:@selector(imageEditor:didFinishEdittingWithImage:)]){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            [self.delegate imageEditor:self didFinishEdittingWithImage:_originalImage];
+#pragma clang diagnostic pop
+        }
         else{
             [self dismissViewControllerAnimated:YES completion:nil];
         }

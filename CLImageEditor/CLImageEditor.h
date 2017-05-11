@@ -35,6 +35,7 @@
 
 @protocol CLImageEditorDelegate <NSObject>
 @optional
+- (void)imageEditor:(CLImageEditor*)editor didFinishEdittingWithImage:(UIImage*)image __attribute__ ((deprecated));
 - (void)imageEditor:(CLImageEditor*)editor didFinishEditingWithImage:(UIImage*)image;
 - (void)imageEditorDidCancel:(CLImageEditor*)editor;
 
