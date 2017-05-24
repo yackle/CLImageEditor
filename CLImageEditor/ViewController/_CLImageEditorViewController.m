@@ -12,6 +12,9 @@
 
 #pragma mark- _CLImageEditorViewController
 
+static const CGFloat kNavBarHeight = 44.0f;
+static const CGFloat kMenuBarHeight = 80.0f;
+
 @interface _CLImageEditorViewController()
 <CLImageToolProtocol, UINavigationBarDelegate>
 @property (nonatomic, strong) CLImageToolBase *currentTool;
@@ -98,15 +101,17 @@
         
         CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : MIN([UIApplication sharedApplication].statusBarFrame.size.height, [UIApplication sharedApplication].statusBarFrame.size.width);
         
-        UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, 44)];
+        UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, kNavBarHeight)];
         [navigationBar pushNavigationItem:navigationItem animated:NO];
         navigationBar.delegate = self;
         
         if(self.navigationController){
             [self.navigationController.view addSubview:navigationBar];
+            [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:@(dy) bottom:nil height:@(kNavBarHeight) width:nil parent:self.navigationController.view child:navigationBar peer:nil];
         }
         else{
             [self.view addSubview:navigationBar];
+            [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:@(dy) bottom:nil height:@(kNavBarHeight) width:nil parent:self.view child:navigationBar peer:nil];
         }
         _navigationBar = navigationBar;
     }
@@ -128,7 +133,7 @@
 - (void)initMenuScrollView
 {
     if(self.menuView==nil){
-        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
+        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, kMenuBarHeight)];
         menuScroll.top = self.view.height - menuScroll.height;
         menuScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         menuScroll.showsHorizontalScrollIndicator = NO;
@@ -136,6 +141,7 @@
         
         [self.view addSubview:menuScroll];
         self.menuView = menuScroll;
+        [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:nil bottom:@0 height:@(kMenuBarHeight) width:nil parent:self.view child:menuScroll peer:nil];
     }
     self.menuView.backgroundColor = [CLImageEditorTheme toolbarColor];
 }
@@ -166,7 +172,101 @@
         
         [self.view insertSubview:imageScroll atIndex:0];
         _scrollView = imageScroll;
+        [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:@(y) bottom:@(-_menuView.height) height:nil width:nil parent:self.view child:imageScroll peer:nil];
     }
+}
+
++(NSArray <NSLayoutConstraint *>*)setConstraintsLeading:(NSNumber *)leading
+                                               trailing:(NSNumber *)trailing
+                                                    top:(NSNumber *)top
+                                                 bottom:(NSNumber *)bottom
+                                                 height:(NSNumber *)height
+                                                  width:(NSNumber *)width
+                                                 parent:(UIView *)parent
+                                                  child:(UIView *)child
+                                                   peer:(UIView *)peer
+{
+    NSMutableArray <NSLayoutConstraint *>*constraints = [NSMutableArray new];
+    //Trailing
+    if (trailing) {
+        NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint
+                                                  constraintWithItem:child
+                                                  attribute:NSLayoutAttributeTrailing
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:(peer ?: parent)
+                                                  attribute:NSLayoutAttributeTrailing
+                                                  multiplier:1.0f
+                                                  constant:trailing.floatValue];
+        [parent addConstraint:trailingConstraint];
+        [constraints addObject:trailingConstraint];
+    }
+    //Leading
+    if (leading) {
+        NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint
+                                                 constraintWithItem:child
+                                                 attribute:NSLayoutAttributeLeading
+                                                 relatedBy:NSLayoutRelationEqual
+                                                 toItem:(peer ?: parent)
+                                                 attribute:NSLayoutAttributeLeading
+                                                 multiplier:1.0f
+                                                 constant:leading.floatValue];
+        [parent addConstraint:leadingConstraint];
+        [constraints addObject:leadingConstraint];
+    }
+    //Bottom
+    if (bottom) {
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint
+                                                constraintWithItem:child
+                                                attribute:NSLayoutAttributeBottom
+                                                relatedBy:NSLayoutRelationEqual
+                                                toItem:(peer ?: parent)
+                                                attribute:NSLayoutAttributeBottom
+                                                multiplier:1.0f
+                                                constant:bottom.floatValue];
+        [parent addConstraint:bottomConstraint];
+        [constraints addObject:bottomConstraint];
+    }
+    //Top
+    if (top) {
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint
+                                             constraintWithItem:child
+                                             attribute:NSLayoutAttributeTop
+                                             relatedBy:NSLayoutRelationEqual
+                                             toItem:(peer ?: parent)
+                                             attribute:NSLayoutAttributeTop
+                                             multiplier:1.0f
+                                             constant:top.floatValue];
+        [parent addConstraint:topConstraint];
+        [constraints addObject:topConstraint];
+    }
+    //Height
+    if (height) {
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint
+                                                constraintWithItem:child
+                                                attribute:NSLayoutAttributeHeight
+                                                relatedBy:NSLayoutRelationEqual
+                                                toItem:nil
+                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                multiplier:1.0f
+                                                constant:height.floatValue];
+        [child addConstraint:heightConstraint];
+        [constraints addObject:heightConstraint];
+    }
+    //Width
+    if (width) {
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint
+                                               constraintWithItem:child
+                                               attribute:NSLayoutAttributeWidth
+                                               relatedBy:NSLayoutRelationEqual
+                                               toItem:nil
+                                               attribute:NSLayoutAttributeNotAnAttribute
+                                               multiplier:1.0f
+                                               constant:width.floatValue];
+        [child addConstraint:widthConstraint];
+        [constraints addObject:widthConstraint];
+    }
+    child.translatesAutoresizingMaskIntoConstraints = NO;
+    return constraints;
 }
 
 #pragma mark-
@@ -495,7 +595,7 @@
 
 - (BOOL)shouldAutorotate
 {
-    return NO;
+    return (_currentTool == nil);
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 90000
@@ -504,7 +604,17 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 #endif
 {
-    return UIInterfaceOrientationMaskPortrait;
+    return (_currentTool == nil
+            ? UIInterfaceOrientationMaskAll
+            : (UIInterfaceOrientationMask)[UIApplication sharedApplication].statusBarOrientation);
+}
+
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self resetImageViewFrame];
+    [self refreshToolSettings];
+    [self scrollViewDidZoom:_scrollView];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
