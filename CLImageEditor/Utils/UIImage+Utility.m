@@ -72,7 +72,10 @@
     int W = size.width;
     int H = size.height;
     
-    CGImageRef   imageRef   = self.CGImage;
+    CGImageRef   imageRef   = self.CGImage;  // If the image is CIImage backed, then imageRef would be nil
+    if (!imageRef) {
+        imageRef = [[CIContext context] createCGImage:self.CIImage fromRect:[self.CIImage extent]];
+    }
     CGColorSpaceRef colorSpaceInfo = CGImageGetColorSpace(imageRef);
     
     
@@ -126,7 +129,10 @@
     int W0 = self.size.width;
     int H0 = self.size.height;
     
-    CGImageRef   imageRef = self.CGImage;
+    CGImageRef   imageRef = self.CGImage;  // If the image is CIImage backed, then imageRef would be nil
+    if (!imageRef) {
+        imageRef = [[CIContext context] createCGImage:self.CIImage fromRect:[self.CIImage extent]];
+    }
     CGColorSpaceRef colorSpaceInfo = CGImageGetColorSpace(imageRef);
     
     CGContextRef bitmap = CGBitmapContextCreate(NULL, W, H, 8, 4*W, colorSpaceInfo, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little);
