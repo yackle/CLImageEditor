@@ -79,7 +79,7 @@ static const CGFloat kMenuBarHeight = 80.0f;
 
 #pragma mark- Custom initialization
 
-- (void)initNavigationBar
+- (UIBarButtonItem*)createDoneButton
 {
     UIBarButtonItem *rightBarButtonItem = nil;
     NSString *doneBtnTitle = [CLImageEditorTheme localizedString:@"CLImageEditor_DoneBtnTitle" withDefault:nil];
@@ -90,14 +90,18 @@ static const CGFloat kMenuBarHeight = 80.0f;
     else{
         rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pushedFinishBtn:)];
     }
-    
-    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    return rightBarButtonItem;
+}
+
+- (void)initNavigationBar
+{
+    self.navigationItem.rightBarButtonItem = [self createDoneButton];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     if(_navigationBar==nil){
         UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
         navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
-        navigationItem.rightBarButtonItem = rightBarButtonItem;
+        navigationItem.rightBarButtonItem = [self createDoneButton];
         
         CGFloat dy = ([UIDevice iosVersion]<7) ? 0 : MIN([UIApplication sharedApplication].statusBarFrame.size.height, [UIApplication sharedApplication].statusBarFrame.size.width);
         
