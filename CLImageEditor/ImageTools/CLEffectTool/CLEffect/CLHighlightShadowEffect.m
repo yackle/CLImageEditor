@@ -56,7 +56,7 @@
     
     [filter setDefaults];
     //[filter setValue:[NSNumber numberWithFloat:_highlightSlider.value] forKey:@"inputHighlightAmount"];
-    [filter setValue:[NSNumber numberWithFloat:_shadowSlider.value] forKey:@"inputShadowAmount"];
+    [filter setValue:[self getShadowValue] forKey:@"inputShadowAmount"];
     //CGFloat R = MAX(image.size.width, image.size.height) * 0.02 * _radiusSlider.value;
     //[filter setValue:[NSNumber numberWithFloat:R] forKey:@"inputRadius"];
     
@@ -69,6 +69,16 @@
     CGImageRelease(cgImage);
     
     return result;
+}
+
+- (NSNumber*)getShadowValue
+{
+    __block NSNumber *value = nil;
+    
+    safe_dispatch_sync_main(^{
+        value = [NSNumber numberWithFloat:_shadowSlider.value];
+    });
+    return value;
 }
 
 #pragma mark-
