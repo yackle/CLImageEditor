@@ -109,8 +109,10 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
 
 - (void)executeWithCompletionBlock:(void (^)(UIImage *, NSError *, NSDictionary *))completionBlock
 {
+    UIImage *backgroundImage = self.editor.imageView.image;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self buildImage];
+        UIImage *image = [self buildImageWithBackgroundImage:backgroundImage];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(image, nil, nil);
@@ -270,13 +272,13 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     UIGraphicsEndImageContext();
 }
 
-- (UIImage*)buildImage
+- (UIImage*)buildImageWithBackgroundImage:(UIImage*)backgroundImage
 {
-    _grayImage = [self.editor.imageView.image grayScaleImage];
+    _grayImage = [backgroundImage grayScaleImage];
     
-    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, self.editor.imageView.image.scale);
+    UIGraphicsBeginImageContextWithOptions(_originalImageSize, NO, backgroundImage.scale);
     
-    [self.editor.imageView.image drawAtPoint:CGPointZero];
+    [backgroundImage drawAtPoint:CGPointZero];
     [[_grayImage maskedImage:_maskImage] drawInRect:CGRectMake(0, 0, _originalImageSize.width, _originalImageSize.height)];
     
     UIImage *tmp = UIGraphicsGetImageFromCurrentImageContext();

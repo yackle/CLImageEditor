@@ -55,9 +55,9 @@
     
     [filter setDefaults];
     
-    CGFloat R = _radiusSlider.value * MIN(image.size.width, image.size.height) * 0.05;
+    CGFloat R = [self getRadius] * MIN(image.size.width, image.size.height) * 0.05;
     [filter setValue:[NSNumber numberWithFloat:R] forKey:@"inputRadius"];
-    [filter setValue:[NSNumber numberWithFloat:_intensitySlider.value] forKey:@"inputIntensity"];
+    [filter setValue:[self getIntensityValue] forKey:@"inputIntensity"];
     
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
@@ -73,6 +73,26 @@
     CGRect rct = CGRectMake(dW, dH, image.size.width, image.size.height);
     
     return [result crop:rct];
+}
+
+- (CGFloat)getRadius
+{
+    __block CGFloat value = 0;
+    
+    safe_dispatch_sync_main(^{
+        value = _radiusSlider.value;
+    });
+    return value;
+}
+
+- (NSNumber*)getIntensityValue
+{
+    __block NSNumber *value = nil;
+    
+    safe_dispatch_sync_main(^{
+        value = [NSNumber numberWithFloat:_intensitySlider.value];
+    });
+    return value;
 }
 
 #pragma mark-

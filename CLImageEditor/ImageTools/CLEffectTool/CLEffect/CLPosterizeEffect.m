@@ -52,7 +52,7 @@
     //NSLog(@"%@", [filter attributes]);
     
     [filter setDefaults];
-    [filter setValue:[NSNumber numberWithFloat:-_levelSlider.value] forKey:@"inputLevels"];
+    [filter setValue:[self getLevelValue] forKey:@"inputLevels"];
     
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
@@ -63,6 +63,16 @@
     CGImageRelease(cgImage);
     
     return result;
+}
+
+- (NSNumber*)getLevelValue
+{
+    __block NSNumber *value = nil;
+    
+    safe_dispatch_sync_main(^{
+        value = [NSNumber numberWithFloat:-_levelSlider.value];
+    });
+    return value;
 }
 
 #pragma mark-
