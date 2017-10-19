@@ -28,3 +28,6 @@
 - (UIImage*)gaussBlur:(CGFloat)blurLevel;       //  {blurLevel | 0 ≤ t ≤ 1}
 
 @end
+
+
+void safe_dispatch_sync_main(DISPATCH_NOESCAPE dispatch_block_t block);

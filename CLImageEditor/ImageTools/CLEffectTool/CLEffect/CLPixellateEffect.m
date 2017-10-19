@@ -54,10 +54,10 @@
     
     [filter setDefaults];
     
-    CGFloat R = MIN(image.size.width, image.size.height) * 0.1 * _radiusSlider.value;
+    CGFloat R = MIN(image.size.width, image.size.height) * 0.1 * [self getRadius];
     CIVector *vct = [[CIVector alloc] initWithX:image.size.width/2 Y:image.size.height/2];
     [filter setValue:vct forKey:@"inputCenter"];
-    [filter setValue:[NSNumber numberWithFloat:R] forKey:@"inputScale"];
+    [filter setValue:[NSNumber numberWithFloat:MAX(R, 0.01)] forKey:@"inputScale"];
     
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
@@ -69,6 +69,16 @@
     CGImageRelease(cgImage);
     
     return [result crop:clippingRect];
+}
+
+- (CGFloat)getRadius
+{
+    __block CGFloat value = 0;
+    
+    safe_dispatch_sync_main(^{
+        value = _radiusSlider.value;
+    });
+    return value;
 }
 
 #pragma mark-

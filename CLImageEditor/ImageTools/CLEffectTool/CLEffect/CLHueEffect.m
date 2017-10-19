@@ -53,7 +53,7 @@
     //NSLog(@"%@", [filter attributes]);
     
     [filter setDefaults];
-    [filter setValue:[NSNumber numberWithFloat:_hueSlider.value] forKey:@"inputAngle"];
+    [filter setValue:[self getHueValue] forKey:@"inputAngle"];
     
     CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(NO)}];
     CIImage *outputImage = [filter outputImage];
@@ -64,6 +64,16 @@
     CGImageRelease(cgImage);
     
     return result;
+}
+
+- (NSNumber*)getHueValue
+{
+    __block NSNumber *value = nil;
+    
+    safe_dispatch_sync_main(^{
+        value = [NSNumber numberWithFloat:_hueSlider.value];
+    });
+    return value;
 }
 
 #pragma mark-
