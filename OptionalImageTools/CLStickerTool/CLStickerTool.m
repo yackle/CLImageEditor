@@ -135,7 +135,9 @@ static NSString* const kCLStickerToolDeleteIconName = @"deleteIconAssetsName";
     NSError *error = nil;
     NSArray *list = [fileManager contentsOfDirectoryAtPath:stickerPath error:&error];
     
-    for(NSString *path in list){
+    NSArray *sortedList = [list sortedArrayUsingSelector:@selector(compare:)]; //sort stickers alphabetically
+    
+    for(NSString *path in sortedList){
         NSString *filePath = [NSString stringWithFormat:@"%@/%@", stickerPath, path];
         UIImage *image = [UIImage imageWithContentsOfFile:filePath];
         if(image){
