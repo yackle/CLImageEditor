@@ -628,6 +628,11 @@ static const CGFloat kMenuBarHeight = 80.0f;
     [self scrollViewDidZoom:_scrollView];
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return [[CLImageEditorTheme theme] statusBarHidden];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return [[CLImageEditorTheme theme] statusBarStyle];
