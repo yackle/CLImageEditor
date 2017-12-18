@@ -615,9 +615,7 @@ static const CGFloat kMenuBarHeight = 80.0f;
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 #endif
 {
-    return (_currentTool == nil
-            ? UIInterfaceOrientationMaskAll
-            : (UIInterfaceOrientationMask)[UIApplication sharedApplication].statusBarOrientation);
+    return UIInterfaceOrientationMaskAll;
 }
 
 -(void)viewDidLayoutSubviews
@@ -626,6 +624,11 @@ static const CGFloat kMenuBarHeight = 80.0f;
     [self resetImageViewFrame];
     [self refreshToolSettings];
     [self scrollViewDidZoom:_scrollView];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return [[CLImageEditorTheme theme] statusBarHidden];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
