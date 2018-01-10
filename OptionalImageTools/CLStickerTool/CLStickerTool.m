@@ -144,6 +144,7 @@ static NSString* const kCLStickerToolDeleteIconName = @"deleteIconAssetsName";
             CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H) target:self action:@selector(tappedStickerPanel:) toolInfo:nil];
             view.iconImage = [image aspectFit:CGSizeMake(50, 50)];
             view.userInfo = @{@"filePath" : filePath};
+            view.iconImageContentMode = UIViewContentModeScaleAspectFit;
             
             [_menuScroll addSubview:view];
             x += W;
