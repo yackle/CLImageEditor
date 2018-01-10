@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) UIImage *iconImage;
+@property (nonatomic, assign) UIViewContentMode iconImageContentMode;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, readonly) UIImageView *iconView;
 
