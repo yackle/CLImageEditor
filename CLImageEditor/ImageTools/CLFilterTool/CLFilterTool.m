@@ -46,7 +46,7 @@
     _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuScroll.transform = CGAffineTransformIdentity;
+                         self->_menuScroll.transform = CGAffineTransformIdentity;
                      }];
 }
 
@@ -54,10 +54,10 @@
 {
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
+                         self->_menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-self->_menuScroll.top);
                      }
                      completion:^(BOOL finished) {
-                         [_menuScroll removeFromSuperview];
+                         [self->_menuScroll removeFromSuperview];
                      }];
 }
 
@@ -111,7 +111,7 @@
      ];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_originalImage withToolInfo:view.toolInfo];
+        UIImage *image = [self filteredImage:self->_originalImage withToolInfo:view.toolInfo];
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
         inProgress = NO;
     });
