@@ -317,7 +317,7 @@
                           delay:0
                         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         _scrollView.contentOffset = CGPointMake(0, _VIEW_HEIGHT*_topContentIndex);
+                         self->_scrollView.contentOffset = CGPointMake(0, self->_VIEW_HEIGHT*self->_topContentIndex);
                      }
                      completion:^(BOOL finished) { }
      ];

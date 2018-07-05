@@ -119,7 +119,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
     _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuContainer.transform = CGAffineTransformIdentity;
+                         self->_menuContainer.transform = CGAffineTransformIdentity;
                      }];
 }
 
@@ -132,10 +132,10 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
+                         self->_menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-self->_menuScroll.top);
                      }
                      completion:^(BOOL finished) {
-                         [_menuContainer removeFromSuperview];
+                         [self->_menuContainer removeFromSuperview];
                      }];
 }
 
@@ -146,7 +146,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         if(size.width>0 && size.height>0){
-            UIImage *image = [_originalImage resize:size];
+            UIImage *image = [self->_originalImage resize:size];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 completionBlock(image, nil, nil);
@@ -217,7 +217,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
     _switchBtn.alpha = 0.2;
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _switchBtn.alpha = 1;
+                         self->_switchBtn.alpha = 1;
                      }
      ];
 }
@@ -404,7 +404,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
                         options:UIViewAnimationOptionBeginFromCurrentState | (animationCurve<<16)
                      animations:^{
                          CGFloat H = MIN(self.height, keyboardFrame.origin.y - self.top);
-                         _infoPanel.center = CGPointMake(_infoPanel.center.x, H/2);
+                         self->_infoPanel.center = CGPointMake(self->_infoPanel.center.x, H/2);
                      } completion:^(BOOL finished) {
                          
                      }
@@ -517,7 +517,7 @@ static NSString* const kCLResizeToolChainOffIconName = @"chainOffIconAssetsName"
     __block CGSize size = CGSizeZero;
     
     safe_dispatch_sync_main(^{
-        size = CGSizeMake(_fieldW.text.floatValue, _fieldH.text.floatValue);
+        size = CGSizeMake(self->_fieldW.text.floatValue, self->_fieldH.text.floatValue);
     });
     return size;
 }

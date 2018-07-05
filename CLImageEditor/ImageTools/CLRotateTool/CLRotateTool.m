@@ -102,12 +102,12 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuScroll.transform = CGAffineTransformIdentity;
+                         self->_menuScroll.transform = CGAffineTransformIdentity;
                      }
                      completion:^(BOOL finished) {
-                         _rotateImageView = [[UIImageView alloc] initWithFrame:_initialRect];
-                         _rotateImageView.image = self.editor.imageView.image;
-                         [_gridView.superview insertSubview:_rotateImageView belowSubview:_gridView];
+                         self->_rotateImageView = [[UIImageView alloc] initWithFrame:self->_initialRect];
+                         self->_rotateImageView.image = self.editor.imageView.image;
+                         [self->_gridView.superview insertSubview:self->_rotateImageView belowSubview:self->_gridView];
                          self.editor.imageView.hidden = YES;
                      }];
 }
@@ -129,14 +129,14 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuScroll.top);
+                         self->_menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-self->_menuScroll.top);
                          
-                         _rotateImageView.transform = CGAffineTransformIdentity;
-                         _rotateImageView.frame = self.editor.imageView.frame;
+                         self->_rotateImageView.transform = CGAffineTransformIdentity;
+                         self->_rotateImageView.frame = self.editor.imageView.frame;
                      }
                      completion:^(BOOL finished) {
-                         [_menuScroll removeFromSuperview];
-                         [_rotateImageView removeFromSuperview];
+                         [self->_menuScroll removeFromSuperview];
+                         [self->_rotateImageView removeFromSuperview];
                          self.editor.imageView.hidden = NO;
                      }];
 }
@@ -145,8 +145,8 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIActivityIndicatorView *indicator = [CLImageEditorTheme indicatorView];
-        indicator.center = CGPointMake(_gridView.width/2, _gridView.height/2);
-        [_gridView addSubview:indicator];
+        indicator.center = CGPointMake(self->_gridView.width/2, self->_gridView.height/2);
+        [self->_gridView addSubview:indicator];
         [indicator startAnimating];
     });
     
@@ -156,7 +156,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
         UIImage *image = [self buildImage:originalImage];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            _executed = YES;
+            self->_executed = YES;
             completionBlock(image, nil, nil);
         });
     });
@@ -228,7 +228,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
                          [self rotateStateDidChange];
                      }
                      completion:^(BOOL finished) {
-                        _gridView.hidden = NO;
+                        self->_gridView.hidden = NO;
                      }
      ];
 }
@@ -263,7 +263,7 @@ static NSString* const kCLRotateToolCropRotate = @"cropRotateEnabled";
 {
     __block CGFloat rotateValue = 0;
     safe_dispatch_sync_main(^{
-        rotateValue = _rotateSlider.value;
+        rotateValue = self->_rotateSlider.value;
     });
     
     CGFloat orientationOffset = _fineRotationEnabled ? _orientation * M_PI_2 : 0;
