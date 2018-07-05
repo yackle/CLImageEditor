@@ -76,7 +76,7 @@
     __block NSNumber *value = nil;
     
     safe_dispatch_sync_main(^{
-        value = [NSNumber numberWithFloat:_shadowSlider.value];
+        value = [NSNumber numberWithFloat:self->_shadowSlider.value];
     });
     return value;
 }

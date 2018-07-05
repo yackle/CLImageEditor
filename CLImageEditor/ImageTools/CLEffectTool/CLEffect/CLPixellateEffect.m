@@ -76,7 +76,7 @@
     __block CGFloat value = 0;
     
     safe_dispatch_sync_main(^{
-        value = _radiusSlider.value;
+        value = self->_radiusSlider.value;
     });
     return value;
 }

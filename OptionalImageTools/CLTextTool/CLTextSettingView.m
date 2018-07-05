@@ -251,8 +251,8 @@
                           delay:0
                         options:UIViewAnimationOptionBeginFromCurrentState | (animationCurve<<16)
                      animations:^{
-                         _textView.height = height;
-                         CGFloat dy = MIN(0, (keyboardFrame.origin.y - _textView.height) - self.top);
+                         self->_textView.height = height;
+                         CGFloat dy = MIN(0, (keyboardFrame.origin.y - self->_textView.height) - self.top);
                          self.transform = CGAffineTransformMakeTranslation(0, dy);
                      } completion:^(BOOL finished) {
                          

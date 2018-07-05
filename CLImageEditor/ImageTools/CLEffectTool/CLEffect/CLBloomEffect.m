@@ -80,7 +80,7 @@
     __block CGFloat value = 0;
     
     safe_dispatch_sync_main(^{
-        value = _radiusSlider.value;
+        value = self->_radiusSlider.value;
     });
     return value;
 }
@@ -90,7 +90,7 @@
     __block NSNumber *value = nil;
     
     safe_dispatch_sync_main(^{
-        value = [NSNumber numberWithFloat:_intensitySlider.value];
+        value = [NSNumber numberWithFloat:self->_intensitySlider.value];
     });
     return value;
 }

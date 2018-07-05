@@ -121,7 +121,7 @@ static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
     _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuContainer.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuContainer.transform = CGAffineTransformIdentity;
+                         self->_menuContainer.transform = CGAffineTransformIdentity;
                      }];
 }
 
@@ -131,24 +131,24 @@ static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuContainer.transform = CGAffineTransformTranslate(_menuContainer.transform, 0, self.editor.view.height-_menuContainer.top);
+                         self->_menuContainer.transform = CGAffineTransformTranslate(self->_menuContainer.transform, 0, self.editor.view.height-self->_menuContainer.top);
                      }
                      completion:^(BOOL finished) {
-                         [_menuContainer removeFromSuperview];
+                         [self->_menuContainer removeFromSuperview];
                      }];
 }
 
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _indicatorView = [CLImageEditorTheme indicatorView];
-        _indicatorView.center = self.editor.view.center;
-        [self.editor.view addSubview:_indicatorView];
-        [_indicatorView startAnimating];
+        self->_indicatorView = [CLImageEditorTheme indicatorView];
+        self->_indicatorView.center = self.editor.view.center;
+        [self.editor.view addSubview:self->_indicatorView];
+        [self->_indicatorView startAnimating];
     });
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_originalImage];
+        UIImage *image = [self filteredImage:self->_originalImage];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(image, nil, nil);
@@ -166,7 +166,7 @@ static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
     inProgress = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_thumbnailImage];
+        UIImage *image = [self filteredImage:self->_thumbnailImage];
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
         inProgress = NO;
     });
@@ -201,15 +201,15 @@ static NSString* const kCLToneCurveToolResetIconName = @"resetIconAssetsName";
 {
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         if(CGAffineTransformIsIdentity(_menuContainer.transform)){
-                             _menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuContainer.top-self.editor.menuView.height);
+                         if(CGAffineTransformIsIdentity(self->_menuContainer.transform)){
+                             self->_menuContainer.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-self->_menuContainer.top-self.editor.menuView.height);
                              sender.transform = CGAffineTransformMakeRotation(M_PI);
-                             _tonecurveView.userInteractionEnabled = NO;
+                             self->_tonecurveView.userInteractionEnabled = NO;
                          }
                          else{
-                             _menuContainer.transform = CGAffineTransformIdentity;
+                             self->_menuContainer.transform = CGAffineTransformIdentity;
                              sender.transform = CGAffineTransformIdentity;
-                             _tonecurveView.userInteractionEnabled = YES;
+                             self->_tonecurveView.userInteractionEnabled = YES;
                          }
                      }
      ];

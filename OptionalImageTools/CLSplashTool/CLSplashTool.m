@@ -88,7 +88,7 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     _menuView.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuView.top);
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuView.transform = CGAffineTransformIdentity;
+                         self->_menuView.transform = CGAffineTransformIdentity;
                      }];
 }
 
@@ -100,10 +100,10 @@ static NSString* const kCLSplashToolEraserIconName = @"eraserIconAssetsName";
     
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
-                         _menuView.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-_menuView.top);
+                         self->_menuView.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height-self->_menuView.top);
                      }
                      completion:^(BOOL finished) {
-                         [_menuView removeFromSuperview];
+                         [self->_menuView removeFromSuperview];
                      }];
 }
 

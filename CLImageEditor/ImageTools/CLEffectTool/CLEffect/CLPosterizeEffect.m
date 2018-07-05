@@ -70,7 +70,7 @@
     __block NSNumber *value = nil;
     
     safe_dispatch_sync_main(^{
-        value = [NSNumber numberWithFloat:-_levelSlider.value];
+        value = [NSNumber numberWithFloat:-self->_levelSlider.value];
     });
     return value;
 }

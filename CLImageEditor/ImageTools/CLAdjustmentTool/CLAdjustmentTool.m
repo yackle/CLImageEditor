@@ -56,10 +56,10 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
 - (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _indicatorView = [CLImageEditorTheme indicatorView];
-        _indicatorView.center = self.editor.view.center;
-        [self.editor.view addSubview:_indicatorView];
-        [_indicatorView startAnimating];
+        self->_indicatorView = [CLImageEditorTheme indicatorView];
+        self->_indicatorView.center = self.editor.view.center;
+        [self.editor.view addSubview:self->_indicatorView];
+        [self->_indicatorView startAnimating];
     });
     
     CGFloat saturation = _saturationSlider.value;
@@ -67,7 +67,7 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     CGFloat contrast   = _contrastSlider.value;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_originalImage saturation:saturation brightness:brightness contrast:contrast];
+        UIImage *image = [self filteredImage:self->_originalImage saturation:saturation brightness:brightness contrast:contrast];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             completionBlock(image, nil, nil);
@@ -145,7 +145,7 @@ static NSString* const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     CGFloat contrast   = _contrastSlider.value;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [self filteredImage:_thumbnailImage saturation:saturation brightness:brightness contrast:contrast];
+        UIImage *image = [self filteredImage:self->_thumbnailImage saturation:saturation brightness:brightness contrast:contrast];
         [self.editor.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
         inProgress = NO;
     });
