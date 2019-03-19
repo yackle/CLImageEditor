@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CLImageEditor_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bP2-PV-XcZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="0bc-iD-Ggn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="afd-XB-KxS">
+                                <rect key="frame" x="10" y="30" width="355" height="355"/>
+                                <color key="backgroundColor" red="0.45249048219999999" green="0.45249048219999999" blue="0.45249048219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="afd-XB-KxS" secondAttribute="height" multiplier="1:1" id="GbS-Na-WU1"/>
+                                </constraints>
+                            </imageView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdQ-gl-Dt1">
+                                <rect key="frame" x="16" y="618" width="343" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="New" image="new" id="fmg-fJ-0LL"/>
+                                    <tabBarItem tag="1" title="Edit" image="edit" id="UD3-rN-rak"/>
+                                    <tabBarItem tag="2" title="Save" image="save" id="gWn-Tr-cpn"/>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="dAh-gV-RZ1"/>
+                                </connections>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="afd-XB-KxS" firstAttribute="top" secondItem="bP2-PV-XcZ" secondAttribute="bottom" constant="10" id="8Xi-Eb-7hg"/>
+                            <constraint firstItem="GdQ-gl-Dt1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MJy-xB-zdp"/>
+                            <constraint firstItem="0bc-iD-Ggn" firstAttribute="top" secondItem="GdQ-gl-Dt1" secondAttribute="bottom" id="Ytj-sd-Cch"/>
+                            <constraint firstAttribute="trailing" secondItem="afd-XB-KxS" secondAttribute="trailing" constant="10" id="bUK-iT-hJs"/>
+                            <constraint firstItem="afd-XB-KxS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="dLo-H1-WbV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GdQ-gl-Dt1" secondAttribute="trailing" id="kUy-UZ-Qaa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="afd-XB-KxS" id="kD0-Ww-qEQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="edit" width="30" height="30"/>
+        <image name="new" width="30" height="30"/>
+        <image name="save" width="30" height="30"/>
+    </resources>
+</document>
