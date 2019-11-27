@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E091534223E1F32003FD3CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E091533223E1F32003FD3CB /* AppDelegate.swift */; };
+		5E091536223E1F32003FD3CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E091535223E1F32003FD3CB /* ViewController.swift */; };
+		5E091539223E1F32003FD3CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E091537223E1F32003FD3CB /* Main.storyboard */; };
+		5E09153B223E1F38003FD3CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E09153A223E1F38003FD3CB /* Assets.xcassets */; };
+		5E09153E223E1F38003FD3CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E09153C223E1F38003FD3CB /* LaunchScreen.storyboard */; };
+		5E09154622407AE9003FD3CB /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E09154522407AE8003FD3CB /* default.jpg */; };
+		DA5EAAC331AC9323AE3FC52C /* Pods_CLImageEditor_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10263656B61574E7B1D0EFD9 /* Pods_CLImageEditor_Swift.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10263656B61574E7B1D0EFD9 /* Pods_CLImageEditor_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLImageEditor_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43037C2B1A6D51706D2D6206 /* Pods-CLImageEditor-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLImageEditor-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLImageEditor-Swift/Pods-CLImageEditor-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		5E091530223E1F32003FD3CB /* CLImageEditor-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CLImageEditor-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E091533223E1F32003FD3CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E091535223E1F32003FD3CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5E091538223E1F32003FD3CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5E09153A223E1F38003FD3CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E09153D223E1F38003FD3CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5E09153F223E1F38003FD3CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E09154522407AE8003FD3CB /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
+		F5BC0282A71D3FB1EEA0EC79 /* Pods-CLImageEditor-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLImageEditor-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLImageEditor-Swift/Pods-CLImageEditor-Swift.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E09152D223E1F32003FD3CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA5EAAC331AC9323AE3FC52C /* Pods_CLImageEditor_Swift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C20D30D523C725F6BD91AC0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10263656B61574E7B1D0EFD9 /* Pods_CLImageEditor_Swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E091527223E1F32003FD3CB = {
+			isa = PBXGroup;
+			children = (
+				5E091532223E1F32003FD3CB /* CLImageEditor-Swift */,
+				5E091531223E1F32003FD3CB /* Products */,
+				FCA01AF594E8DCB97862E2EF /* Pods */,
+				4C20D30D523C725F6BD91AC0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5E091531223E1F32003FD3CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E091530223E1F32003FD3CB /* CLImageEditor-Swift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E091532223E1F32003FD3CB /* CLImageEditor-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				5E091533223E1F32003FD3CB /* AppDelegate.swift */,
+				5E091535223E1F32003FD3CB /* ViewController.swift */,
+				5E091537223E1F32003FD3CB /* Main.storyboard */,
+				5E09153A223E1F38003FD3CB /* Assets.xcassets */,
+				5E09153C223E1F38003FD3CB /* LaunchScreen.storyboard */,
+				5E09154522407AE8003FD3CB /* default.jpg */,
+				5E09153F223E1F38003FD3CB /* Info.plist */,
+			);
+			path = "CLImageEditor-Swift";
+			sourceTree = "<group>";
+		};
+		FCA01AF594E8DCB97862E2EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43037C2B1A6D51706D2D6206 /* Pods-CLImageEditor-Swift.debug.xcconfig */,
+				F5BC0282A71D3FB1EEA0EC79 /* Pods-CLImageEditor-Swift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E09152F223E1F32003FD3CB /* CLImageEditor-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E091542223E1F38003FD3CB /* Build configuration list for PBXNativeTarget "CLImageEditor-Swift" */;
+			buildPhases = (
+				CE31B6F9E5EF2180867037A1 /* [CP] Check Pods Manifest.lock */,
+				5E09152C223E1F32003FD3CB /* Sources */,
+				5E09152D223E1F32003FD3CB /* Frameworks */,
+				5E09152E223E1F32003FD3CB /* Resources */,
+				59B54986F745E42B6456E362 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CLImageEditor-Swift";
+			productName = "CLImageEditor-Swift";
+			productReference = 5E091530223E1F32003FD3CB /* CLImageEditor-Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E091528223E1F32003FD3CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = dirtbag;
+				TargetAttributes = {
+					5E09152F223E1F32003FD3CB = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 5E09152B223E1F32003FD3CB /* Build configuration list for PBXProject "CLImageEditor-Swift" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E091527223E1F32003FD3CB;
+			productRefGroup = 5E091531223E1F32003FD3CB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E09152F223E1F32003FD3CB /* CLImageEditor-Swift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E09152E223E1F32003FD3CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E09153E223E1F38003FD3CB /* LaunchScreen.storyboard in Resources */,
+				5E09153B223E1F38003FD3CB /* Assets.xcassets in Resources */,
+				5E091539223E1F32003FD3CB /* Main.storyboard in Resources */,
+				5E09154622407AE9003FD3CB /* default.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		59B54986F745E42B6456E362 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CLImageEditor-Swift/Pods-CLImageEditor-Swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CLImageEditor/CLImageEditor.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLImageEditor.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLImageEditor-Swift/Pods-CLImageEditor-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE31B6F9E5EF2180867037A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CLImageEditor-Swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E09152C223E1F32003FD3CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E091536223E1F32003FD3CB /* ViewController.swift in Sources */,
+				5E091534223E1F32003FD3CB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5E091537223E1F32003FD3CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E091538223E1F32003FD3CB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5E09153C223E1F38003FD3CB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E09153D223E1F38003FD3CB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5E091540223E1F38003FD3CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5E091541223E1F38003FD3CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E091543223E1F38003FD3CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43037C2B1A6D51706D2D6206 /* Pods-CLImageEditor-Swift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "CLImageEditor-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcgoldricksolutions.udemy.CLImageEditor-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5E091544223E1F38003FD3CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5BC0282A71D3FB1EEA0EC79 /* Pods-CLImageEditor-Swift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "CLImageEditor-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mcgoldricksolutions.udemy.CLImageEditor-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E09152B223E1F32003FD3CB /* Build configuration list for PBXProject "CLImageEditor-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E091540223E1F38003FD3CB /* Debug */,
+				5E091541223E1F38003FD3CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E091542223E1F38003FD3CB /* Build configuration list for PBXNativeTarget "CLImageEditor-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E091543223E1F38003FD3CB /* Debug */,
+				5E091544223E1F38003FD3CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5E091528223E1F32003FD3CB /* Project object */;
+}
