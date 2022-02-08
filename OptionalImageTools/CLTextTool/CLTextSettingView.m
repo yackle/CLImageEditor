@@ -301,7 +301,7 @@
 - (void)textViewDidChange:(UITextView*)textView
 {
     NSRange selection = textView.selectedRange;
-    if(selection.location+selection.length == textView.text.length && [textView.text characterAtIndex:textView.text.length-1] == '\n') {
+    if(selection.location+selection.length == textView.text.length && textView.text.length >= 1 && [textView.text characterAtIndex:textView.text.length-1] == '\n') {
         [textView layoutSubviews];
         [textView scrollRectToVisible:CGRectMake(0, textView.contentSize.height - 1, 1, 1) animated:YES];
     }
