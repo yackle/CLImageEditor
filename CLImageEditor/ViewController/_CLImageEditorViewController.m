@@ -98,45 +98,45 @@ static const CGFloat kMenuBarHeight = 80.0f;
     self.navigationItem.rightBarButtonItem = [self createDoneButton];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
-    if(_navigationBar==nil){
-        UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
-        navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
-        navigationItem.rightBarButtonItem = [self createDoneButton];
-        
-        CGFloat dy = MIN([UIApplication sharedApplication].statusBarFrame.size.height, [UIApplication sharedApplication].statusBarFrame.size.width);
-        
-        UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, kNavBarHeight)];
-        [navigationBar pushNavigationItem:navigationItem animated:NO];
-        navigationBar.delegate = self;
-        
-        if(self.navigationController){
-            [self.navigationController.view addSubview:navigationBar];
-            [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:nil bottom:nil height:@(kNavBarHeight) width:nil parent:self.navigationController.view child:navigationBar peer:nil];
-        }
-        else{
-            [self.view addSubview:navigationBar];
-            if (@available(iOS 11.0, *)) {
-                [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:nil bottom:nil height:@(kNavBarHeight) width:nil parent:self.view child:navigationBar peer:nil];
-                [_CLImageEditorViewController setConstraintsLeading:nil trailing:nil top:@0 bottom:nil height:nil width:nil parent:self.view child:navigationBar peer:self.view.safeAreaLayoutGuide];
-            } else {
-                [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:@(dy) bottom:nil height:@(kNavBarHeight) width:nil parent:self.view child:navigationBar peer:nil];
-            }
-        }
-        _navigationBar = navigationBar;
-    }
+//    if(_navigationBar==nil){
+//        UINavigationItem *navigationItem  = [[UINavigationItem alloc] init];
+//        navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pushedCloseBtn:)];
+//        navigationItem.rightBarButtonItem = [self createDoneButton];
+//
+//        CGFloat dy = MIN([UIApplication sharedApplication].statusBarFrame.size.height, [UIApplication sharedApplication].statusBarFrame.size.width);
+//
+//        UINavigationBar *navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, dy, self.view.width, kNavBarHeight)];
+//        [navigationBar pushNavigationItem:navigationItem animated:NO];
+//        navigationBar.delegate = self;
+//
+//        if(self.navigationController){
+//            [self.navigationController.view addSubview:navigationBar];
+//            [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:nil bottom:nil height:@(kNavBarHeight) width:nil parent:self.navigationController.view child:navigationBar peer:nil];
+//        }
+//        else{
+//            [self.view addSubview:navigationBar];
+//            if (@available(iOS 11.0, *)) {
+//                [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:nil bottom:nil height:@(kNavBarHeight) width:nil parent:self.view child:navigationBar peer:nil];
+//                [_CLImageEditorViewController setConstraintsLeading:nil trailing:nil top:@0 bottom:nil height:nil width:nil parent:self.view child:navigationBar peer:self.view.safeAreaLayoutGuide];
+//            } else {
+//                [_CLImageEditorViewController setConstraintsLeading:@0 trailing:@0 top:@(dy) bottom:nil height:@(kNavBarHeight) width:nil parent:self.view child:navigationBar peer:nil];
+//            }
+//        }
+//        _navigationBar = navigationBar;
+//    }
     
-    if(self.navigationController!=nil){
-        _navigationBar.frame  = self.navigationController.navigationBar.frame;
-        _navigationBar.hidden = YES;
-        [_navigationBar popNavigationItemAnimated:NO];
-    }
-    else{
-        _navigationBar.topItem.title = self.title;
-    }
-    
-    if([UIDevice iosVersion] < 7){
-        _navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    }
+//    if(self.navigationController!=nil){
+//        _navigationBar.frame  = self.navigationController.navigationBar.frame;
+//        _navigationBar.hidden = YES;
+//        [_navigationBar popNavigationItemAnimated:NO];
+//    }
+//    else{
+//        _navigationBar.topItem.title = self.title;
+//    }
+//
+//    if([UIDevice iosVersion] < 7){
+//        _navigationBar.barStyle = UIBarStyleBlackTranslucent;
+//    }
 }
 
 - (void)initMenuScrollView
@@ -658,7 +658,10 @@ static const CGFloat kMenuBarHeight = 80.0f;
         _currentTool = currentTool;
         [_currentTool setup];
         
-        [self swapToolBarWithEditing:(_currentTool!=nil)];
+        [self swapToolBarWithEditing:(_currentTool!=nil)];  // Will Start editing;
+        if([self.delegate respondsToSelector:@selector(imageEditorWillStartEditing:)]){
+            [self.delegate imageEditorWillStartEditing:self];
+        }
     }
 }
 
@@ -683,30 +686,30 @@ static const CGFloat kMenuBarHeight = 80.0f;
     if(self.navigationController==nil){
         return;
     }
-    
-    if(editing){
-        _navigationBar.hidden = NO;
-        _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
-        
-        [UIView animateWithDuration:kCLImageToolAnimationDuration
-                         animations:^{
-                             self.navigationController.navigationBar.transform = CGAffineTransformMakeTranslation(0, -self.navigationController.navigationBar.height-20);
-                             self->_navigationBar.transform = CGAffineTransformIdentity;
-                         }
-         ];
-    }
-    else{
-        [UIView animateWithDuration:kCLImageToolAnimationDuration
-                         animations:^{
-                             self.navigationController.navigationBar.transform = CGAffineTransformIdentity;
-                             self->_navigationBar.transform = CGAffineTransformMakeTranslation(0, -self->_navigationBar.height);
-                         }
-                         completion:^(BOOL finished) {
-                             self->_navigationBar.hidden = YES;
-                             self->_navigationBar.transform = CGAffineTransformIdentity;
-                         }
-         ];
-    }
+    _navigationBar.hidden = YES;
+//    if(editing){
+//        _navigationBar.hidden = NO;
+//        _navigationBar.transform = CGAffineTransformMakeTranslation(0, -_navigationBar.height);
+//
+//        [UIView animateWithDuration:kCLImageToolAnimationDuration
+//                         animations:^{
+//                             self.navigationController.navigationBar.transform = CGAffineTransformMakeTranslation(0, -self.navigationController.navigationBar.height-20);
+//                             self->_navigationBar.transform = CGAffineTransformIdentity;
+//                         }
+//         ];
+//    }
+//    else{
+//        [UIView animateWithDuration:kCLImageToolAnimationDuration
+//                         animations:^{
+//                             self.navigationController.navigationBar.transform = CGAffineTransformIdentity;
+//                             self->_navigationBar.transform = CGAffineTransformMakeTranslation(0, -self->_navigationBar.height);
+//                         }
+//                         completion:^(BOOL finished) {
+//                             self->_navigationBar.hidden = YES;
+//                             self->_navigationBar.transform = CGAffineTransformIdentity;
+//                         }
+//         ];
+//    }
 }
 
 - (void)swapToolBarWithEditing:(BOOL)editing
@@ -714,16 +717,16 @@ static const CGFloat kMenuBarHeight = 80.0f;
     [self swapMenuViewWithEditing:editing];
     [self swapNavigationBarWithEditing:editing];
     
-    if(self.currentTool){
-        UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
-        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_OKBtnTitle" withDefault:@"OK"] style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
-        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"] style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
-        
-        [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
-    }
-    else{
-        [_navigationBar popNavigationItemAnimated:(self.navigationController==nil)];
-    }
+//    if(self.currentTool){
+//        UINavigationItem *item  = [[UINavigationItem alloc] initWithTitle:self.currentTool.toolInfo.title];
+//        item.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_OKBtnTitle" withDefault:@"OK"] style:UIBarButtonItemStyleDone target:self action:@selector(pushedDoneBtn:)];
+//        item.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:[CLImageEditorTheme localizedString:@"CLImageEditor_BackBtnTitle" withDefault:@"Back"] style:UIBarButtonItemStylePlain target:self action:@selector(pushedCancelBtn:)];
+//
+//        [_navigationBar pushNavigationItem:item animated:(self.navigationController==nil)];
+//    }
+//    else{
+//        [_navigationBar popNavigationItemAnimated:(self.navigationController==nil)];
+//    }
 }
 
 - (void)setupToolWithToolInfo:(CLImageToolInfo*)info
@@ -755,12 +758,23 @@ static const CGFloat kMenuBarHeight = 80.0f;
     [self setupToolWithToolInfo:view.toolInfo];
 }
 
+- (void)pushedOkEditingBtn {
+  [self pushedDoneBtn: nil];
+}
+
+- (void)pushedCancelEditingBtn {
+  [self pushedCancelBtn: nil];
+}
+
 - (IBAction)pushedCancelBtn:(id)sender
 {
     _imageView.image = _originalImage;
     [self resetImageViewFrame];
     
     self.currentTool = nil;
+    if([self.delegate respondsToSelector:@selector(imageEditorWillEndEditing::)]){
+        [self.delegate imageEditorWillEndEditing:self :_originalImage];
+    }
 }
 
 - (IBAction)pushedDoneBtn:(id)sender
@@ -781,6 +795,9 @@ static const CGFloat kMenuBarHeight = 80.0f;
             self.currentTool = nil;
         }
         self.view.userInteractionEnabled = YES;
+        if([self.delegate respondsToSelector:@selector(imageEditorWillEndEditing::)]){
+          [self.delegate imageEditorWillEndEditing:self :_originalImage];
+        }
     }];
 }
 

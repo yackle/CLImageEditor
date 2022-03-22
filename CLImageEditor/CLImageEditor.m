@@ -46,10 +46,19 @@
     
 }
 
+- (void)hasFinishedEditing: (BOOL)success
+{
+  _CLImageEditorViewController * vc = (_CLImageEditorViewController *)self;
+  if (success) {
+    [vc pushedOkEditingBtn];
+  } else {
+    [vc pushedCancelEditingBtn];
+  }
+}
+
 - (CLImageEditorTheme*)theme
 {
     return [CLImageEditorTheme theme];
 }
 
 @end
-

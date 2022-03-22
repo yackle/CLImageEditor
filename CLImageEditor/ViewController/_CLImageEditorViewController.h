@@ -26,5 +26,7 @@
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated;
 - (void)resetZoomScaleWithAnimated:(BOOL)animated;
+- (void)pushedOkEditingBtn;
+- (void)pushedCancelEditingBtn;
 
 @end

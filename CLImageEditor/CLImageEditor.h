@@ -28,16 +28,17 @@
 - (void)showInViewController:(UIViewController<CLImageEditorTransitionDelegate>*)controller withImageView:(UIImageView*)imageView;
 
 - (void)refreshToolSettings;
+- (void)hasFinishedEditing: (BOOL)success;
 
 @end
-
-
 
 @protocol CLImageEditorDelegate <NSObject>
 @optional
 - (void)imageEditor:(CLImageEditor*)editor didFinishEdittingWithImage:(UIImage*)image __attribute__ ((deprecated));
 - (void)imageEditor:(CLImageEditor*)editor didFinishEditingWithImage:(UIImage*)image;
 - (void)imageEditorDidCancel:(CLImageEditor*)editor;
+- (void)imageEditorWillStartEditing:(CLImageEditor*)editor;
+- (void)imageEditorWillEndEditing:(CLImageEditor*)editor: (UIImage*)image;
 
 @end
 
@@ -48,4 +49,3 @@
 - (void)imageEditor:(CLImageEditor*)editor didDismissWithImageView:(UIImageView*)imageView canceled:(BOOL)canceled;
 
 @end
-
